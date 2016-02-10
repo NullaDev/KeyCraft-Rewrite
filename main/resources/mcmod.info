@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "modid": "KCRw",
+  "name": "KeyCraft Rewrite Ver.",
+  "description": "A Minecraft mod especially made for V.A.Key lovers.",
+  "version": "version",
+  "mcversion": "mcversion",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Kanbe Kotori", "xfgryujk", "SalimTerryLi"],
+  "credits": "Copyright (c) Nulla Development Group, 2014-2016",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
