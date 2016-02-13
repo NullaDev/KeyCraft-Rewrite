@@ -13,9 +13,9 @@ public class KeyCraft_Rewrite {
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
     public static final String VERSION = "Demo";
     
-    @SidedProxy(clientSide = "org.nulla.kcrw.ClientProxy",
-            	serverSide = "org.nulla.kcrw.CommonProxy")
-    public static CommonProxy proxy;
+    @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
+            	serverSide = "org.nulla.kcrw.KCCommonProxy")
+    public static KCCommonProxy proxy;
  
     @Instance("KeyCraft_Rewrite")
     public static KeyCraft_Rewrite instance;
