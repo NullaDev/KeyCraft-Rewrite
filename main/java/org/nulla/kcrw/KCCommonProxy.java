@@ -17,7 +17,7 @@ public class KCCommonProxy implements IGuiHandler {
 	}
 	 
 	public void init(FMLInitializationEvent event) {
-		// ×¢²áÍøÂçÊÂ¼þ
+		// æ³¨å†Œç½‘ç»œäº‹ä»¶
 		FMLCommonHandler.instance().bus().register(new SkillNetwork.SendSyncPacket());
 		SkillNetwork.channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(SkillNetwork.CHANNEL_STRING);
 		SkillNetwork.channel.register(new SkillNetwork());

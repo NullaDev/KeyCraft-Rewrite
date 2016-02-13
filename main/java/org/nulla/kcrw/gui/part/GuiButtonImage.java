@@ -34,7 +34,7 @@ public class GuiButtonImage extends Gui {
     }
 
     /**
-     * Èç¹ûDisable·µ»Ø0, Ã»ÓĞHover·µ»Ø1, Hover·µ»Ø2¡£
+     * å¦‚æœDisableè¿”å›0, æ²¡æœ‰Hoverè¿”å›1, Hoverè¿”å›2ã€‚
      */
     public int getHoverState(boolean isHovering) {
         byte b0 = 1;
@@ -49,7 +49,7 @@ public class GuiButtonImage extends Gui {
     }
 
     /**
-     * ÔÚÆÁÄ»ÉÏ»æÖÆButton¡£
+     * åœ¨å±å¹•ä¸Šç»˜åˆ¶Buttonã€‚
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.visible) {

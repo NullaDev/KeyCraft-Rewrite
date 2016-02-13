@@ -11,19 +11,19 @@ public class KCUtils {
 	}
 	
 	/** 
-	 * Ö»ÄÜÔÚClient¶ËÓÃ£¬ÒÔ»ñÈ¡Client¶ËµÄÍæ¼ÒĞÅÏ¢£¨ÀıÈçÎ»ÖÃ£©£¬²»»á¸Ä±äServer¶ËĞÅÏ¢¡£
+	 * åªèƒ½åœ¨Clientç«¯ç”¨ï¼Œä»¥è·å–Clientç«¯çš„ç©å®¶ä¿¡æ¯ï¼ˆä¾‹å¦‚ä½ç½®ï¼‰ï¼Œä¸ä¼šæ”¹å˜Serverç«¯ä¿¡æ¯ã€‚
 	 */
 	public static EntityPlayer getPlayerCl() {
 		return getMC().thePlayer;
 	}
 	
 	/** 
-	 * »æÖÆ¿ÉËõ·ÅµÄÎÆÀí¡£<BR/>
-	 * x£¬y´ú±í»æÖÆÔÚÆÁÄ»ÉÏµÄÎ»ÖÃ¡£<BR/>
-	 * u£¬v´ú±íÒª»æÖÆµÄ²¿·ÖÔÚÔ´ËØ²ÄÍ¼ÉÏµÄÎ»ÖÃ¡£<BR/>
-	 * uW£¬vH´ú±íÒª»æÖÆµÄ²¿·ÖÔÚÔ´ËØ²ÄÍ¼ÉÏµÄ´óĞ¡¡£<BR/>
-	 * w£¬h´ú±íÒª»æÖÆµÄ²¿·ÖµÄ´óĞ¡¡£<BR/>
-	 * tW£¬tH´ú±íÔ´ËØ²ÄÍ¼µÄ´óĞ¡£¨Ëõ·ÅÓÃ£©¡£
+	 * ç»˜åˆ¶å¯ç¼©æ”¾çš„çº¹ç†ã€‚<BR/>
+	 * xï¼Œyä»£è¡¨ç»˜åˆ¶åœ¨å±å¹•ä¸Šçš„ä½ç½®ã€‚<BR/>
+	 * uï¼Œvä»£è¡¨è¦ç»˜åˆ¶çš„éƒ¨åˆ†åœ¨æºç´ æå›¾ä¸Šçš„ä½ç½®ã€‚<BR/>
+	 * uWï¼ŒvHä»£è¡¨è¦ç»˜åˆ¶çš„éƒ¨åˆ†åœ¨æºç´ æå›¾ä¸Šçš„å¤§å°ã€‚<BR/>
+	 * wï¼Œhä»£è¡¨è¦ç»˜åˆ¶çš„éƒ¨åˆ†çš„å¤§å°ã€‚<BR/>
+	 * tWï¼ŒtHä»£è¡¨æºç´ æå›¾çš„å¤§å°ï¼ˆç¼©æ”¾ç”¨ï¼‰ã€‚
 	 */
 	public static void drawScaledCustomSizeModalRect(int x, int y, float u, float v, int uWidth, int vHeight, int width, int height, float tileWidth, float tileHeight) {
 	    float f4 = 1.0F / tileWidth;

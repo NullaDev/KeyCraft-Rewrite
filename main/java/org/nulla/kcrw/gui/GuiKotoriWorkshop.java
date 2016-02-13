@@ -38,7 +38,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         
     }
     
-    //≤ª «Override
+    //‰∏çÊòØOverride
 	protected void actionPerformed(GuiButtonImage button) {
 		if (button.equals(btnEnd)) {
 			mc.displayGuiScreen(parentScreen);
