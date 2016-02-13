@@ -22,7 +22,7 @@ public class Skill {
 		Skills.add(this);
 	}
 	
-	// 重载实现使用技能
+	/** 重载实现使用技能 */
 	protected void onUse(EntityPlayer player) {
 		
 	}
@@ -37,8 +37,7 @@ public class Skill {
 	public static void setAuroraPoint(EntityPlayer player, int point) {
 		player.getEntityData().setInteger("AuroraPoint", point < 0 ? 0 : point);
 		if (player instanceof EntityPlayerMP) {
-			// 发同步包
-			//SkillNetwork.channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
+			SkillNetwork.channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 		}
 	}
 	
@@ -51,6 +50,11 @@ public class Skill {
 	public static boolean hasSkill(EntityPlayer player, Skill skill) {
 		return player.getEntityData().getBoolean("Skill" + skill.Name);
 	}
+
+	/** 设置有没有技能 */
+	public static void setSkill(EntityPlayer player, Skill skill, boolean hasSkill) {
+		player.getEntityData().setBoolean("Skill" + skill.Name, hasSkill);
+	}
 	
 	/** 学习技能，如果在服务端会发同步包 */
 	public static void learnSkill(EntityPlayer player, Skill skill) {
@@ -58,10 +62,9 @@ public class Skill {
 		if (getAuroraPoint(player) >= point) {
 			modifyAuroraPoint(player, -point);
 			
-			player.getEntityData().setBoolean("Skill" + skill.Name, true);
+			setSkill(player, skill, true);
 			if (player instanceof EntityPlayerMP) {
-				// 发同步包
-				//SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+				SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 			}
 		}
 	}
@@ -76,8 +79,7 @@ public class Skill {
 	/** 使用技能，如果在客户端会发同步包 */
 	public static void useSkill(EntityPlayer player, Skill skill) {
 		if (player.worldObj.isRemote) {
-			// 发同步包
-			//SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill));
+			SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.id));
 		}
 		
 		skill.onUse(player);
