@@ -7,32 +7,30 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 public class Skill {
 	
+	public static ArrayList<Skill> Skills = new ArrayList<Skill>();
+	
+	/** 在Skills中的索引 */
 	public final int id;
+	/** 用于NBT */
+	public final String Name;
 	public final int AuroraRequired;
 	
-	public Skill(int id, int AuroraRequired) {
-		this.id = id;
+	public Skill(String Name, int AuroraRequired) {
+		this.id = Skills.size();
+		this.Name = Name;
 		this.AuroraRequired = AuroraRequired;
 		Skills.add(this);
 	}
 	
 	// 重载实现使用技能
-	protected void onUse() {
+	protected void onUse(EntityPlayer player) {
 		
 	}
 	
 	
-	public static ArrayList<Skill> Skills = new ArrayList<Skill>();
-	
-	// 测试
-	/*public static final Skill AuroraCognition		= new Skill(000, 0);
-	public static final Skill HuntingRhythm			= new Skill(100, 5);
-	public static final Skill TrapProficient		= new Skill(111, 10);*/
-	
-	
 	/** 取欧若拉点 */
 	public static int getAuroraPoint(EntityPlayer player) {
-		return player.getEntityData().getInteger("uroraPoint");
+		return player.getEntityData().getInteger("AuroraPoint");
 	}
 	
 	/** 设置欧若拉点，如果在服务端会发同步包 */
@@ -51,24 +49,16 @@ public class Skill {
 
 	/** 判断有没有技能 */
 	public static boolean hasSkill(EntityPlayer player, Skill skill) {
-		final String name = String.format("Skill%d", skill.id);
-		return player.getEntityData().getBoolean(name);
+		return player.getEntityData().getBoolean("Skill" + skill.Name);
 	}
 	
 	/** 学习技能，如果在服务端会发同步包 */
 	public static void learnSkill(EntityPlayer player, Skill skill) {
-		learnSkill(player, skill.id);
-	}
-	
-	/** 学习技能，如果在服务端会发同步包 */
-	public static void learnSkill(EntityPlayer player, int skill) {
-		int point = getAuroraRequired(skill);
+		int point = skill.AuroraRequired;
 		if (getAuroraPoint(player) >= point) {
 			modifyAuroraPoint(player, -point);
 			
-			final String name = String.format("Skill%d", skill);
-			player.getEntityData().setBoolean(name, true);
-			
+			player.getEntityData().setBoolean("Skill" + skill.Name, true);
 			if (player instanceof EntityPlayerMP) {
 				// 发同步包
 				//SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
@@ -76,14 +66,11 @@ public class Skill {
 		}
 	}
 	
-	/** 取学习技能需要的欧若拉点 */
-	public static int getAuroraRequired(int skill) {
-		for (Skill i : Skills) {
-			if (i.id == skill) {
-				return i.AuroraRequired;
-			}
+	/** 学习技能，如果在服务端会发同步包 */
+	public static void learnSkill(EntityPlayer player, int skill) {
+		if (0 <= skill && skill < Skills.size()) {
+			learnSkill(player, Skills.get(skill));
 		}
-		return 0x7FFFFFFF;
 	}
 	
 	/** 使用技能，如果在客户端会发同步包 */
@@ -93,7 +80,14 @@ public class Skill {
 			//SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill));
 		}
 		
-		skill.onUse();
+		skill.onUse(player);
+	}
+	
+	/** 使用技能，如果在客户端会发同步包 */
+	public static void useSkill(EntityPlayer player, int skill) {
+		if (0 <= skill && skill < Skills.size()) {
+			useSkill(player, Skills.get(skill));
+		}
 	}
 	
 }
