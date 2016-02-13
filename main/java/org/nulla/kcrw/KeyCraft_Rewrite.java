@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.*;
 @Mod(modid = KeyCraft_Rewrite.MODID, name = KeyCraft_Rewrite.MODNAME, version = KeyCraft_Rewrite.VERSION)
 public class KeyCraft_Rewrite {
 	
-	public static final String MODID = "KCRw";
+	public static final String MODID = "kcrw";
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
     public static final String VERSION = "Demo";
     

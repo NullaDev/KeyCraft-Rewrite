@@ -1,9 +1,22 @@
 package org.nulla.kcrw;
 
+import java.lang.reflect.Field;
+
+import net.minecraft.util.ResourceLocation;
+
 public class KCResources {
 	
-	//在此处增加ResourceLocation，以方便调用和管理
-	
-	//public static ResourceLocation aaaaaa = new ResourceLocation(KeyCraft.MODID, "textures/icons/aaaaaa.png"); 
+	public static ResourceLocation end = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/end.png");
+	public static ResourceLocation baseball = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/baseball.png");
 
+	public static ResourceLocation[] locations = {end, baseball};
+	
+	public static ResourceLocation getLocationFromName(String name) {
+		for (ResourceLocation i: locations) {
+			System.out.println(i.getResourcePath());
+			if (i.getResourcePath().contains(name))
+				return i;
+		}
+		return null;
+	}
 }
