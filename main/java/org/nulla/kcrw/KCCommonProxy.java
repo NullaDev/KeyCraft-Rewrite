@@ -2,13 +2,14 @@ package org.nulla.kcrw;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
+import org.nulla.kcrw.event.HandlerDrawHUD;
 import org.nulla.kcrw.skill.SkillNetwork;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.*;
 
 public class KCCommonProxy implements IGuiHandler {
 
@@ -21,6 +22,8 @@ public class KCCommonProxy implements IGuiHandler {
 		FMLCommonHandler.instance().bus().register(new SkillNetwork.SendSyncPacket());
 		SkillNetwork.channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(SkillNetwork.CHANNEL_STRING);
 		SkillNetwork.channel.register(new SkillNetwork());
+		
+    	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 	}
 	 
 	public void postInit(FMLPostInitializationEvent event) {

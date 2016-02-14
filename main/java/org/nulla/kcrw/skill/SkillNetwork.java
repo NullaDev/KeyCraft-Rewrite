@@ -42,6 +42,8 @@ public class SkillNetwork {
 		/** 服务器玩家登陆处理 */
 		@SubscribeEvent
 		public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+			if (Skill.hasInitialized(event.player))
+				Skill.initializeAuroraPoint(event.player);
 			syncSkills(event.player);
 		}
 		

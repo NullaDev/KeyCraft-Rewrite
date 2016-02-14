@@ -7,6 +7,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 public class Skill {
 	
+	public static final int AURORA_POINT_MAXIMUM = 65535;
+	public static final int INITIAL_AURORA_POINT = 16384;
+	
 	public static ArrayList<Skill> Skills = new ArrayList<Skill>();
 	
 	/** 在Skills中的索引 */
@@ -39,6 +42,23 @@ public class Skill {
 		if (player instanceof EntityPlayerMP) {
 			SkillNetwork.channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 		}
+	}
+	
+	/**
+	 * 初始化欧若拉点数，用于玩家刚出生时。
+	 * false代表已初始化。
+	 */
+	public static void initializeAuroraPoint(EntityPlayer player) {
+		player.getEntityData().setBoolean("initialized", false);;
+		setAuroraPoint(player, INITIAL_AURORA_POINT);
+	}
+	
+	/**
+	 * 判断是否已经初始化欧若拉点数，用于玩家刚出生时。
+	 * return false代表已初始化。
+	 */
+	public static boolean hasInitialized(EntityPlayer player) {
+		return player.getEntityData().getBoolean("initialized");
 	}
 	
 	/** 改变欧若拉点，如果在服务端会发同步包 */
