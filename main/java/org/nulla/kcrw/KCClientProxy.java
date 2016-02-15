@@ -1,7 +1,10 @@
 package org.nulla.kcrw;
 
+import org.nulla.kcrw.event.HandlerKeyInput;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.*;
 
 public class KCClientProxy extends KCCommonProxy {
@@ -13,6 +16,7 @@ public class KCClientProxy extends KCCommonProxy {
 	
 	@Override
 	public void init(FMLInitializationEvent event) {
+		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
 		super.init(event);
 	}
 	

@@ -63,7 +63,8 @@ public class Skill {
 	
 	/** 改变欧若拉点，如果在服务端会发同步包 */
 	public static void modifyAuroraPoint(EntityPlayer player, int point) {
-		setAuroraPoint(player, getAuroraPoint(player) + point);
+		int point_new = Math.min(AURORA_POINT_MAXIMUM, getAuroraPoint(player) + point);
+		setAuroraPoint(player, point_new);
 	}
 
 	/** 判断有没有技能 */
