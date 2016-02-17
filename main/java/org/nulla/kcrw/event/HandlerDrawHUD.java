@@ -1,11 +1,13 @@
 package org.nulla.kcrw.event;
 
+import org.lwjgl.opengl.GL11;
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.skill.Skill;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -23,11 +25,13 @@ public class HandlerDrawHUD {
 	        
 		int length = Math.min(105 *  currentAuroraPoint / MaximumAuroraPoint, 105);
 		
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_inside);
 		KCUtils.drawScaledCustomSizeModalRect(width - length - 15, height + 1, 630 - 6 * length, 0, 6 * length + 90, 120, length + 15, 18, 720, 120);
 		
 		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_outside);
 		KCUtils.drawScaledCustomSizeModalRect(width - 120, height, 0, 0, 720, 120, 120, 20, 720, 120);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		
 		//Gui.drawRect((int)width - 128, (int)height, (int)width, (int)height + 32, 0x7F000000);
 		//Gui.drawRect((int)width - length, (int)height, (int)width, (int)height + 32, 0x7F00FF00);
@@ -39,7 +43,7 @@ public class HandlerDrawHUD {
 		//else if (currentAuroraPoint <= MaximumAuroraPoint * 0.5) {color = 0xFFFF00;}
 		//else if (currentAuroraPoint > MaximumAuroraPoint) {color = 0x00FF00;}
 		fontRenderer.drawStringWithShadow(info, (int)width - 105, (int)height - 3, color);
-		fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦       
+		fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//ï¿½ï¿½Ê¼ï¿½ï¿½×²ï¿½Ñ¼ï¿½       
 		KCUtils.getMC().renderEngine.bindTexture(Gui.icons);
 		
 	}

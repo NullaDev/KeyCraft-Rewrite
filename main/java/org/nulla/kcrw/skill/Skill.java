@@ -28,8 +28,8 @@ public class Skill {
 	}
 	
 	/** 重载实现使用技能 */
-	protected void onUse(EntityPlayer player) {
-		
+	protected boolean onUse(EntityPlayer player) {
+		return false;
 	}
 	
 	
@@ -100,22 +100,23 @@ public class Skill {
 	}
 	
 	/** 使用技能，如果在客户端会发同步包 */
-	public static void useSkill(EntityPlayer player, Skill skill) {
+	public static boolean useSkill(EntityPlayer player, Skill skill) {
 		if (!hasSkill(player, skill)) {
-			return;
+			return false;
 		}
 		
 		if (player.worldObj.isRemote) {
 			SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.id));
 		}
-		skill.onUse(player);
+		return skill.onUse(player);
 	}
 	
 	/** 使用技能，如果在客户端会发同步包 */
-	public static void useSkill(EntityPlayer player, int skill) {
+	public static boolean useSkill(EntityPlayer player, int skill) {
 		if (0 <= skill && skill < Skills.size()) {
-			useSkill(player, Skills.get(skill));
+			return useSkill(player, Skills.get(skill));
 		}
+		return false;
 	}
 	
 }
