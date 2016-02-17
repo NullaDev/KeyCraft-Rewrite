@@ -10,7 +10,9 @@ public class Skill {
 	public static final int AURORA_POINT_MAXIMUM = 65535;
 	public static final int INITIAL_AURORA_POINT = 16384;
 	
+	
 	public static ArrayList<Skill> Skills = new ArrayList<Skill>();
+	
 	
 	/** 在Skills中的索引 */
 	public final int id;
@@ -44,27 +46,22 @@ public class Skill {
 		}
 	}
 	
-	/**
-	 * 初始化欧若拉点数，用于玩家刚出生时。
-	 * false代表已初始化。
-	 */
-	public static void initializeAuroraPoint(EntityPlayer player) {
-		player.getEntityData().setBoolean("initialized", false);;
-		setAuroraPoint(player, INITIAL_AURORA_POINT);
-	}
-	
-	/**
-	 * 判断是否已经初始化欧若拉点数，用于玩家刚出生时。
-	 * return false代表已初始化。
-	 */
-	public static boolean hasInitialized(EntityPlayer player) {
-		return player.getEntityData().getBoolean("initialized");
-	}
-	
 	/** 改变欧若拉点，如果在服务端会发同步包 */
 	public static void modifyAuroraPoint(EntityPlayer player, int point) {
 		int point_new = Math.min(AURORA_POINT_MAXIMUM, getAuroraPoint(player) + point);
 		setAuroraPoint(player, point_new);
+	}
+	
+	/** 初始化欧若拉点数，用于玩家刚出生时 */
+	public static void initializeAuroraPoint(EntityPlayer player) {
+		if (!hasInitialized(player)) {
+			setAuroraPoint(player, INITIAL_AURORA_POINT);
+		}
+	}
+	
+	/** 判断是否已经初始化欧若拉点数，用于玩家刚出生时 */
+	public static boolean hasInitialized(EntityPlayer player) {
+		return player.getEntityData().hasKey("AuroraPoint");
 	}
 
 	/** 判断有没有技能 */
@@ -77,20 +74,25 @@ public class Skill {
 		player.getEntityData().setBoolean("Skill" + skill.Name, hasSkill);
 	}
 	
-	/** 学习技能，如果在服务端会发同步包 */
+	/** 学习技能，会发同步包 */
 	public static void learnSkill(EntityPlayer player, Skill skill) {
 		int point = skill.AuroraRequired;
-		if (getAuroraPoint(player) >= point) {
+		if (getAuroraPoint(player) > point) {
 			modifyAuroraPoint(player, -point);
-			
-			setSkill(player, skill, true);
-			if (player instanceof EntityPlayerMP) {
-				SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+
+			// 客户端发学习技能包
+			if (player.worldObj.isRemote) {
+				SkillNetwork.channel.sendToServer(SkillNetwork.createLearnSkillPacket(skill.id));
 			}
+			setSkill(player, skill, true);
+		}
+		// 服务端发同步技能包
+		if (player instanceof EntityPlayerMP) {
+			SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 		}
 	}
 	
-	/** 学习技能，如果在服务端会发同步包 */
+	/** 学习技能，会发同步包 */
 	public static void learnSkill(EntityPlayer player, int skill) {
 		if (0 <= skill && skill < Skills.size()) {
 			learnSkill(player, Skills.get(skill));
@@ -99,10 +101,13 @@ public class Skill {
 	
 	/** 使用技能，如果在客户端会发同步包 */
 	public static void useSkill(EntityPlayer player, Skill skill) {
+		if (!hasSkill(player, skill)) {
+			return;
+		}
+		
 		if (player.worldObj.isRemote) {
 			SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.id));
 		}
-		
 		skill.onUse(player);
 	}
 	
