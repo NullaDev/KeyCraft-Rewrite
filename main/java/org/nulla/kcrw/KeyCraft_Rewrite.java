@@ -11,7 +11,7 @@ public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
-    public static final String VERSION = "Demo20160217";
+    public static final String VERSION = "Demo20160218";
     
     @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
             	serverSide = "org.nulla.kcrw.KCCommonProxy")
@@ -20,7 +20,7 @@ public class KeyCraft_Rewrite {
     @Instance("KeyCraft_Rewrite")
     public static KeyCraft_Rewrite instance;
     
-    public static CreativeTabs KCCreativeTab = new KCCreativeTab("KCRw");
+    public static CreativeTabs KCCreativeTab = new KCCreativeTab("kcrw");
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

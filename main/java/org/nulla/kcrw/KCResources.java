@@ -10,9 +10,10 @@ public class KCResources {
 	public static ResourceLocation aurora_strip_inside = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/aurora_strip_inside.png");
 	
 	public static ResourceLocation end = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/end.png");
-	public static ResourceLocation baseball = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/baseball.png");
+	public static ResourceLocation bg = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/bg.png");
+	public static ResourceLocation peach_juice = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/peach_juice.png");
 
-	public static ResourceLocation[] locations = {end, baseball};
+	public static ResourceLocation[] locations = {end, peach_juice};
 	
 	public static ResourceLocation getLocationFromName(String name) {
 		for (ResourceLocation i: locations) {
