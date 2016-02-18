@@ -20,7 +20,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-public class SkillNetwork {
+public class SkillNetwork
+{
 	
 	public static final String CHANNEL_STRING = "REWRITE_SKILL_CHANNEL";
 	public static FMLEventChannel channel;
@@ -30,11 +31,14 @@ public class SkillNetwork {
 	public static final int LEARN_SKILL_CODE = 2;
 	public static final int USE_SKILL_CODE = 3;
 	
-	public static class SendSyncPacket {
+	public static class SendSyncPacket
+	{
 		
 		/** 发同步包 */
-		protected static void syncSkills(EntityPlayer player) {
-			if (player instanceof EntityPlayerMP) {
+		private static void syncSkills(EntityPlayer player)
+		{
+			if (player instanceof EntityPlayerMP)
+			{
 				channel.sendTo(createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 				channel.sendTo(createSyncSkillPacket(player), (EntityPlayerMP)player);
 			}
@@ -42,20 +46,23 @@ public class SkillNetwork {
 		
 		/** 服务器玩家登陆处理 */
 		@SubscribeEvent
-		public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+		public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+		{
 			Skill.initializeAuroraPoint(event.player);
 			syncSkills(event.player);
 		}
 		
 		/** 玩家复活处理 */
 		@SubscribeEvent
-		public void onPlayerRespawn(PlayerRespawnEvent event) {
+		public void onPlayerRespawn(PlayerRespawnEvent event)
+		{
 			syncSkills(event.player);
 		}
 		
 		/** 玩家切换世界处理 */
 		@SubscribeEvent
-		public void onPlayerChangeDimension(PlayerChangedDimensionEvent event) {
+		public void onPlayerChangeDimension(PlayerChangedDimensionEvent event)
+		{
 			syncSkills(event.player);
 		}
 		
@@ -64,7 +71,8 @@ public class SkillNetwork {
 		 * 在从末地通关回到主世界时也会调用PlayerEvent.Clone和PlayerRespawnEvent，而不会调用PlayerChangedDimensionEvent
 		 */
 		@SubscribeEvent
-	    public void onClone(PlayerEvent.Clone event) {
+	    public void onClone(PlayerEvent.Clone event)
+		{
 			final EntityPlayer _old = event.original;
 			final EntityPlayer _new = event.entityPlayer;
 
@@ -74,7 +82,8 @@ public class SkillNetwork {
 			
 			// 克隆技能、CD
 			long timeOffset = _new.worldObj.getTotalWorldTime() - _old.worldObj.getTotalWorldTime();
-			for (Skill i : Skills.Skills) {
+			for (Skill i : Skills.AllSkills)
+			{
 				Skill.setSkill(_new, i, Skill.hasSkill(_old, i));
 				Skill.setLastUseTime(_new, i, Skill.getLastUseTime(_old, i) + timeOffset);
 			}
@@ -85,12 +94,15 @@ public class SkillNetwork {
 	
 	/** 服务器封包处理 */
 	@SubscribeEvent
-	public void onServerPacket(ServerCustomPacketEvent event) {
+	public void onServerPacket(ServerCustomPacketEvent event)
+	{
 		EntityPlayerMP player = ((NetHandlerPlayServer)event.handler).playerEntity;
 		
 		ByteBufInputStream stream = new ByteBufInputStream(event.packet.payload());
-		try {
-			switch (stream.readInt()) {
+		try
+		{
+			switch (stream.readInt())
+			{
 			case LEARN_SKILL_CODE:
 	    		Skill.learnSkill(player, stream.readInt());
 				break;
@@ -101,97 +113,122 @@ public class SkillNetwork {
 			}
 			
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
 	
 	/** 客户端封包处理 */
 	@SubscribeEvent
-	public void onClientPacket(ClientCustomPacketEvent event) {
+	public void onClientPacket(ClientCustomPacketEvent event)
+	{
 		EntityPlayer player = KCUtils.getPlayerCl();
 		
 		ByteBufInputStream stream = new ByteBufInputStream(event.packet.payload());
-		try {
-			switch (stream.readInt()) {
+		try
+		{
+			switch (stream.readInt())
+			{
 			case SYNC_AURORA_POINT_CODE:
 				Skill.setAuroraPoint(player, stream.readInt());
 				break;
 				
 			case SYNC_SKILL_CODE:
-				for (int i = 0; i < Skills.Skills.size(); i++) {
-					Skill.setSkill(player, Skills.Skills.get(i), stream.readBoolean());
-					Skill.setLastUseTime(player, Skills.Skills.get(i), stream.readLong());
+				for (int i = 0; i < Skills.AllSkills.size(); i++)
+				{
+					Skill.setSkill(player, Skills.AllSkills.get(i), stream.readBoolean());
+					Skill.setLastUseTime(player, Skills.AllSkills.get(i), stream.readLong());
 				}
 				break;
 			}
 			
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
 	
 	////////////////////////////////// 创建封包用的函数 //////////////////////////////////
 	
-	public static FMLProxyPacket createSyncAuroraPointPacket(EntityPlayer player) {
+	public static FMLProxyPacket createSyncAuroraPointPacket(EntityPlayer player)
+	{
 		ByteBufOutputStream stream = new ByteBufOutputStream(Unpooled.buffer());
 		FMLProxyPacket packet = null;
-		try {
+		try
+		{
 			stream.writeInt(SYNC_AURORA_POINT_CODE);
 			stream.writeInt(Skill.getAuroraPoint(player));
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return packet;
 	}
 	
-	public static FMLProxyPacket createSyncSkillPacket(EntityPlayer player) {
+	public static FMLProxyPacket createSyncSkillPacket(EntityPlayer player)
+	{
 		ByteBufOutputStream stream = new ByteBufOutputStream(Unpooled.buffer());
 		FMLProxyPacket packet = null;
-		try {
+		try
+		{
 			stream.writeInt(SYNC_SKILL_CODE);
-			for (Skill i : Skills.Skills) {
+			for (Skill i : Skills.AllSkills)
+			{
 				stream.writeBoolean(Skill.hasSkill(player, i));
 				stream.writeLong(Skill.getLastUseTime(player, i));
 			}
 
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return packet;
 	}
 	
-	public static FMLProxyPacket createLearnSkillPacket(int skillId) {
+	public static FMLProxyPacket createLearnSkillPacket(int skillId)
+	{
 		ByteBufOutputStream stream = new ByteBufOutputStream(Unpooled.buffer());
 		FMLProxyPacket packet = null;
-		try {
+		try
+		{
 			stream.writeInt(LEARN_SKILL_CODE);
 			stream.writeInt(skillId);
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return packet;
 	}
 	
-	public static FMLProxyPacket createUseSkillPacket(int skillId) {
+	public static FMLProxyPacket createUseSkillPacket(int skillId)
+	{
 		ByteBufOutputStream stream = new ByteBufOutputStream(Unpooled.buffer());
 		FMLProxyPacket packet = null;
-		try {
+		try
+		{
 			stream.writeInt(USE_SKILL_CODE);
 			stream.writeInt(skillId);
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return packet;
