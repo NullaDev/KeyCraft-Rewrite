@@ -25,13 +25,13 @@ public class HandlerDrawHUD {
 	        
 		int length = Math.min(105 *  currentAuroraPoint / MaximumAuroraPoint, 105);
 		
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glEnable(GL11.GL_BLEND);
 		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_inside);
 		KCUtils.drawScaledCustomSizeModalRect(width - length - 15, height + 1, 630 - 6 * length, 0, 6 * length + 90, 120, length + 15, 18, 720, 120);
 		
 		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_outside);
 		KCUtils.drawScaledCustomSizeModalRect(width - 120, height, 0, 0, 720, 120, 120, 20, 720, 120);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
 		
 		//Gui.drawRect((int)width - 128, (int)height, (int)width, (int)height + 32, 0x7F000000);
 		//Gui.drawRect((int)width - length, (int)height, (int)width, (int)height + 32, 0x7F00FF00);

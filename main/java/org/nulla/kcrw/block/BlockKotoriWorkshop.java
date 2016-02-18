@@ -2,6 +2,8 @@ package org.nulla.kcrw.block;
 
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.gui.GuiKotoriWorkshop;
+import org.nulla.kcrw.skill.Skill;
+import org.nulla.kcrw.skill.Skills;
 
 import cpw.mods.fml.relauncher.*;
 import net.minecraft.block.material.Material;
@@ -22,11 +24,13 @@ public class BlockKotoriWorkshop extends BlockKC {
 
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-		if (world.isRemote) {
+		if (!world.isRemote) {
 			return true;
 		}
+		// 测试
+		Skill.useSkill(player, Skills.Test);
 		KCUtils.getMC().displayGuiScreen(new GuiKotoriWorkshop(KCUtils.getMC().currentScreen));
-		return false;
+		return true;
     }
 	
 	@SideOnly(Side.CLIENT)

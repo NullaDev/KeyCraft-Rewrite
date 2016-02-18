@@ -4,21 +4,21 @@ import java.io.IOException;
 
 import org.nulla.kcrw.KCUtils;
 
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.*;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.FMLNetworkEvent.*;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-import io.netty.buffer.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.util.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class SkillNetwork {
 	
@@ -31,6 +31,7 @@ public class SkillNetwork {
 	public static final int USE_SKILL_CODE = 3;
 	
 	public static class SendSyncPacket {
+		
 		/** 发同步包 */
 		protected static void syncSkills(EntityPlayer player) {
 			if (player instanceof EntityPlayerMP) {
@@ -56,6 +57,29 @@ public class SkillNetwork {
 		@SubscribeEvent
 		public void onPlayerChangeDimension(PlayerChangedDimensionEvent event) {
 			syncSkills(event.player);
+		}
+		
+		/**
+		 * 在玩家死亡时将旧玩家的所有Skill以及欧若拉点数克隆给Respawn以后的新玩家
+		 * 在从末地通关回到主世界时也会调用PlayerEvent.Clone和PlayerRespawnEvent，而不会调用PlayerChangedDimensionEvent
+		 */
+		@SubscribeEvent
+	    public void onClone(PlayerEvent.Clone event) {
+			final EntityPlayer _old = event.original;
+			final EntityPlayer _new = event.entityPlayer;
+
+			// 设置新玩家欧若拉点数，切换世界点数不变，死亡减10
+			final int newAuroraPoint = event.wasDeath ? Math.max(Skill.getAuroraPoint(_old) - 10, 0) : Skill.getAuroraPoint(_old);
+			_new.getEntityData().setInteger("AuroraPoint", newAuroraPoint);
+			
+			// 克隆技能、CD
+			long timeOffset = _new.worldObj.getTotalWorldTime() - _old.worldObj.getTotalWorldTime();
+			for (Skill i : Skills.Skills) {
+				Skill.setSkill(_new, i, Skill.hasSkill(_old, i));
+				Skill.setLastUseTime(_new, i, Skill.getLastUseTime(_old, i) + timeOffset);
+			}
+			
+			// 复活或切换世界后同步，@SendSyncPacket.onPlayerRespawn
 		}
 	}
 	
@@ -95,8 +119,9 @@ public class SkillNetwork {
 				break;
 				
 			case SYNC_SKILL_CODE:
-				for (int i = 0; i < Skill.Skills.size(); i++) {
-					Skill.setSkill(player, Skill.Skills.get(i), stream.readBoolean());
+				for (int i = 0; i < Skills.Skills.size(); i++) {
+					Skill.setSkill(player, Skills.Skills.get(i), stream.readBoolean());
+					Skill.setLastUseTime(player, Skills.Skills.get(i), stream.readLong());
 				}
 				break;
 			}
@@ -129,8 +154,9 @@ public class SkillNetwork {
 		FMLProxyPacket packet = null;
 		try {
 			stream.writeInt(SYNC_SKILL_CODE);
-			for (Skill i : Skill.Skills) {
+			for (Skill i : Skills.Skills) {
 				stream.writeBoolean(Skill.hasSkill(player, i));
+				stream.writeLong(Skill.getLastUseTime(player, i));
 			}
 
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
