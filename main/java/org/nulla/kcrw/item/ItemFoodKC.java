@@ -2,6 +2,8 @@ package org.nulla.kcrw.item;
 
 import java.util.List;
 
+import org.nulla.kcrw.KeyCraft_Rewrite;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -18,6 +20,7 @@ public class ItemFoodKC extends ItemFood {
 
 	public ItemFoodKC(int amount) {
 		super(amount, 0.6F, false);	//后两个是干嘛的
+		this.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
 	}
 	
 	public ItemFoodKC setCallback(ICallback callback) {

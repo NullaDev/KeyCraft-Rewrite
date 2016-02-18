@@ -14,8 +14,8 @@ public class GuiButtonImage extends Gui {
     protected ResourceLocation buttonTextures;
     public int width;
     public int height;
-    public int xPosition;
-    public int yPosition;
+    public int posX;
+    public int posY;
     public int id;
     public boolean enabled;
     public boolean visible;
@@ -26,8 +26,8 @@ public class GuiButtonImage extends Gui {
         this.enabled = true;
         this.visible = true;
         this.id = btnID;
-        this.xPosition = btnPosX;
-        this.yPosition = btnPosY;
+        this.posX = btnPosX;
+        this.posY = btnPosY;
         this.width = btnWidth;
         this.height = btnHeight;
         this.buttonTextures = KCResources.getLocationFromName(name);
@@ -55,11 +55,23 @@ public class GuiButtonImage extends Gui {
         if (this.visible) {
         	mc.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.isPointAt = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+            this.isPointAt = mouseX >= posX && mouseY >= posY && mouseX < posX + width && mouseY < posY + height;
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            KCUtils.drawScaledCustomSizeModalRect(this.xPosition, this.yPosition, 0, 0, 64, 64, this.width, this.height, 64, 64);
+            
+            //按钮背景
+            drawRect(posX, posY, posX + width, posY + height, 0xFF8C6238);
+            
+            //按钮边框
+            drawRect(posX, posY, posX + width, posY + 1, 0xFF000000);
+            drawRect(posX, posY, posX + 1, posY + height, 0xFF000000);
+            drawRect(posX + width - 1, posY, posX + width, posY + height, 0xFF000000);
+            drawRect(posX, posY + height -1, posX + width, posY + height, 0xFF000000);
+
+            KCUtils.initDrawerState();
+            
+            KCUtils.drawScaledCustomSizeModalRect(posX, posY, 0, 0, 64, 64, width, height, 64, 64);
             this.mouseDragged(mc, mouseX, mouseY);
         }
         
@@ -80,7 +92,7 @@ public class GuiButtonImage extends Gui {
      * e).
      */
     public boolean mousePressed(Minecraft mc, int p_146116_2_, int p_146116_3_) {
-        return this.enabled && this.visible && p_146116_2_ >= this.xPosition && p_146116_3_ >= this.yPosition && p_146116_2_ < this.xPosition + this.width && p_146116_3_ < this.yPosition + this.height;
+        return this.enabled && this.visible && p_146116_2_ >= posX && p_146116_3_ >= posY && p_146116_2_ < posX + width && p_146116_3_ < posY + height;
     }
 
     public boolean isPointAt() {

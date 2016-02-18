@@ -17,13 +17,13 @@ public class Skill {
 	/** 在Skills中的索引 */
 	public final int id;
 	/** 用于NBT */
-	public final String Name;
-	public final int AuroraRequired;
+	public final String name;
+	public final int auroraRequired;
 	
-	public Skill(String Name, int AuroraRequired) {
+	public Skill(String name, int auroraRequired) {
 		this.id = Skills.size();
-		this.Name = Name;
-		this.AuroraRequired = AuroraRequired;
+		this.name = name;
+		this.auroraRequired = auroraRequired;
 		Skills.add(this);
 	}
 	
@@ -66,17 +66,17 @@ public class Skill {
 
 	/** 判断有没有技能 */
 	public static boolean hasSkill(EntityPlayer player, Skill skill) {
-		return player.getEntityData().getBoolean("Skill" + skill.Name);
+		return player.getEntityData().getBoolean("Skill" + skill.name);
 	}
 
 	/** 设置有没有技能 */
 	public static void setSkill(EntityPlayer player, Skill skill, boolean hasSkill) {
-		player.getEntityData().setBoolean("Skill" + skill.Name, hasSkill);
+		player.getEntityData().setBoolean("Skill" + skill.name, hasSkill);
 	}
 	
 	/** 学习技能，会发同步包 */
 	public static void learnSkill(EntityPlayer player, Skill skill) {
-		int point = skill.AuroraRequired;
+		int point = skill.auroraRequired;
 		if (getAuroraPoint(player) > point) {
 			modifyAuroraPoint(player, -point);
 
@@ -120,3 +120,12 @@ public class Skill {
 	}
 	
 }
+
+class PassiveSkill extends Skill {
+
+	public PassiveSkill(String name, int auroraRequired) {
+		super(name, auroraRequired);
+	}
+	
+}
+
