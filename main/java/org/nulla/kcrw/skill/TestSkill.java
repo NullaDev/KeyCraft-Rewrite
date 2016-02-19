@@ -2,12 +2,12 @@ package org.nulla.kcrw.skill;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+/** 测试用的技能，使用后输出Hello world */
 public class TestSkill extends Skill
 {
-
-	public TestSkill(String Name, int AuroraRequired, int AuroraCost, int cd)
+	public TestSkill(String name, int auroraRequired, int auroraCost, int cd)
 	{
-		super(Name, AuroraRequired, AuroraCost, cd);
+		super(name, auroraRequired, auroraCost, cd);
 	}
 	
 	@Override

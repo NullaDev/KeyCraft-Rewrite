@@ -4,12 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 
+/** 所有技能的基类，提供欧若拉点、技能、CD的接口 */
 public class Skill
 {
-	
-	public static final int AURORA_POINT_MAXIMUM = 65535;
-	public static final int INITIAL_AURORA_POINT = 16384;
-	
+	/*------------------- 技能动态部分开始 -------------------*/
 	
 	/** 在Skills中的索引 */
 	public final int mID;
@@ -38,6 +36,11 @@ public class Skill
 		return false;
 	}
 	
+	/*------------------- 技能动态部分结束 -------------------*/
+	/*------------------- 欧若拉点开始 -------------------*/
+	
+	public static final int MAX_AURORA_POINT = 65535;
+	public static final int INITIAL_AURORA_POINT = 16384;
 	
 	/** 取欧若拉点 */
 	public static int getAuroraPoint(EntityPlayer player)
@@ -50,11 +53,11 @@ public class Skill
 	{
 		if (point < 0)
 			point = 0;
-		else if (point > AURORA_POINT_MAXIMUM)
-			point = AURORA_POINT_MAXIMUM;
+		else if (point > MAX_AURORA_POINT)
+			point = MAX_AURORA_POINT;
 		player.getEntityData().setInteger("AuroraPoint", point);
 		if (player instanceof EntityPlayerMP)
-			SkillNetwork.channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 	}
 	
 	/** 改变欧若拉点，如果在服务端会发同步包 */
@@ -63,20 +66,25 @@ public class Skill
 		setAuroraPoint(player, getAuroraPoint(player) + point);
 	}
 	
-	/** 初始化欧若拉点数，用于玩家刚出生时 */
+	/** 初始化欧若拉点数，用于玩家登陆服务器时，如果已初始化不会重复初始化 */
 	public static void initializeAuroraPoint(EntityPlayer player)
 	{
-		// 测试
-		Skill.learnSkill(player, Skills.Test);
 		if (!hasInitialized(player))
+		{
 			setAuroraPoint(player, INITIAL_AURORA_POINT);
+			// 测试
+			Skill.learnSkill(player, Skills.Test);
+		}
 	}
 	
-	/** 判断是否已经初始化欧若拉点数，用于玩家刚出生时 */
+	/** 判断是否已经初始化欧若拉点数 */
 	public static boolean hasInitialized(EntityPlayer player)
 	{
 		return player.getEntityData().hasKey("AuroraPoint");
 	}
+	
+	/*------------------- 欧若拉点结束 -------------------*/
+	/*------------------- 技能开始 -------------------*/
 
 	/** 判断有没有技能 */
 	public static boolean hasSkill(EntityPlayer player, Skill skill)
@@ -102,12 +110,12 @@ public class Skill
 
 			// 客户端发学习技能包
 			if (player.worldObj.isRemote)
-				SkillNetwork.channel.sendToServer(SkillNetwork.createLearnSkillPacket(skill.mID));
+				SkillNetwork.Channel.sendToServer(SkillNetwork.createLearnSkillPacket(skill.mID));
 			setSkill(player, skill, true);
 		}
 		// 服务端发同步技能包
 		if (player instanceof EntityPlayerMP)
-			SkillNetwork.channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 	}
 	
 	/** 学习技能，会发同步包 */
@@ -128,13 +136,13 @@ public class Skill
 		if (curTime - getLastUseTime(player, skill) < skill.mCD)
 			return false;
 		// 检查欧若拉点
-		if (getAuroraPoint(player) < skill.mAuroraCost)
+		if (getAuroraPoint(player) < skill.mAuroraCost) // 不让欧若拉变为0？
 			return false;
 		modifyAuroraPoint(player, -skill.mAuroraCost);
 		
 		// 客户端发使用技能包
 		if (player.worldObj.isRemote)
-			SkillNetwork.channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.mID));
+			SkillNetwork.Channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.mID));
 		boolean res = skill.onUse(player);
 		
 		// 设置上次使用时间
@@ -151,7 +159,10 @@ public class Skill
 		return false;
 	}
 	
-	/** 取上次使用时间 */
+	/*------------------- 技能结束 -------------------*/
+	/*------------------- CD开始 -------------------*/
+	
+	/** 取上次使用时间，以World.getTotalWorldTime()计算时间 */
 	public static long getLastUseTime(EntityPlayer player, Skill skill)
 	{
 		final String name = "LastTime" + skill.mName;
@@ -161,10 +172,12 @@ public class Skill
 		return nbt.getLong(name);
 	}
 	
-	/** 设置上次使用时间 */
+	/** 设置上次使用时间，以World.getTotalWorldTime()计算时间 */
 	public static void setLastUseTime(EntityPlayer player, Skill skill, long time)
 	{
 		player.getEntityData().setLong("LastTime" + skill.mName, time);
 	}
+	
+	/*------------------- CD结束 -------------------*/
 	
 }

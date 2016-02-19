@@ -51,7 +51,7 @@ public class KCUtils {
 		height *= 0.05;
 		
 		int currentAuroraPoint = Skill.getAuroraPoint(KCUtils.getPlayerCl());
-		int maximumAuroraPoint = Skill.AURORA_POINT_MAXIMUM;
+		int maximumAuroraPoint = Skill.MAX_AURORA_POINT;
 	        
 		int length = Math.min(105 *  currentAuroraPoint / maximumAuroraPoint, 105);
 		
@@ -63,7 +63,7 @@ public class KCUtils {
 		KCUtils.drawScaledCustomSizeModalRect(width - 120, height, 0, 0, 720, 120, 120, 20, 720, 120);
 		GL11.glDisable(GL11.GL_BLEND);
 	        
-		String info = "Aurora: " + Skill.getAuroraPoint(KCUtils.getPlayerCl()) + " / " + Skill.AURORA_POINT_MAXIMUM;
+		String info = "Aurora: " + Skill.getAuroraPoint(KCUtils.getPlayerCl()) + " / " + Skill.MAX_AURORA_POINT;
 		FontRenderer fontRenderer = KCUtils.getMC().fontRenderer;
 		int color = 0x7FFFBF;
 		//if (currentAuroraPoint <= MaximumAuroraPoint * 0.25) {color = 0xFF0000;}

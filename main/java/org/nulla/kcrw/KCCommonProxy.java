@@ -19,9 +19,7 @@ public class KCCommonProxy implements IGuiHandler {
 	 
 	public void init(FMLInitializationEvent event) {
 		// 注册网络事件
-		FMLCommonHandler.instance().bus().register(new SkillNetwork.SendSyncPacket());
-		SkillNetwork.channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(SkillNetwork.CHANNEL_STRING);
-		SkillNetwork.channel.register(new SkillNetwork());
+		SkillNetwork.getInstance().init();
 		
     	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 	}
