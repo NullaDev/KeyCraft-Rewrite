@@ -17,34 +17,25 @@ public class KeyCraft_Rewrite {
             	serverSide = "org.nulla.kcrw.KCCommonProxy")
     public static KCCommonProxy proxy;
  
-    @Instance("KeyCraft_Rewrite")
+    @Instance(MODID)
     public static KeyCraft_Rewrite instance;
     
     public static CreativeTabs KCCreativeTab = new KCCreativeTab("kcrw");
     
+    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
     	proxy.preInit(event);
-    	
-    	KCItems.InitItems();
-    	
-    	KCBlocks.InitBlocks();
-    	    	
     }
     
     @EventHandler
     public void Init(FMLInitializationEvent event) {
-    	
     	proxy.init(event);
-    	
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	
     	proxy.postInit(event);
-    	
     }
 
 }

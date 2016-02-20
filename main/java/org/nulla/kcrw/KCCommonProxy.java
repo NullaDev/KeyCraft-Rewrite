@@ -14,14 +14,13 @@ import cpw.mods.fml.common.network.*;
 public class KCCommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		
+    	KCItems.InitItems();
+    	KCBlocks.InitBlocks();
 	}
 	 
 	public void init(FMLInitializationEvent event) {
 		// 注册网络事件
 		SkillNetwork.getInstance().init();
-		
-    	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 	}
 	 
 	public void postInit(FMLPostInitializationEvent event) {

@@ -1,9 +1,11 @@
 package org.nulla.kcrw;
 
+import org.nulla.kcrw.event.HandlerDrawHUD;
 import org.nulla.kcrw.event.HandlerKeyInput;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.*;
 
@@ -16,8 +18,11 @@ public class KCClientProxy extends KCCommonProxy {
 	
 	@Override
 	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
 		super.init(event);
+		
+		// 注册GUI、用户输入事件
+    	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
+		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
 	}
 	
 	@Override

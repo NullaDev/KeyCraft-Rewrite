@@ -11,9 +11,11 @@ public class HandlerKeyInput {
 	
 	@SubscribeEvent
 	public void keyListener(KeyInputEvent event) {
-		if (Keyboard.getEventKey() == Keyboard.KEY_R) {
-	    	Skill.modifyAuroraPoint(KCUtils.getPlayerCl(), 1000);
-	    }
+		if (Keyboard.getEventKeyState()) {
+			if (Keyboard.getEventKey() == Keyboard.KEY_R) {
+		    	Skill.modifyAuroraPoint(KCUtils.getPlayerCl(), 1000); // 在客户端并没有什么卵用
+		    }
+		}
 	}
 
 }
