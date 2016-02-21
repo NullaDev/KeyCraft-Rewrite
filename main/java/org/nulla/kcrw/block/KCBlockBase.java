@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class BlockKC extends Block {
+public class KCBlockBase extends Block {
 
-	public BlockKC(Material material) {
+	public KCBlockBase(Material material) {
 		super(material);
 		this.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
 	}

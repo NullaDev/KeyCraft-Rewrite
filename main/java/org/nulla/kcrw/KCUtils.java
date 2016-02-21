@@ -71,7 +71,7 @@ public class KCUtils {
 		//else if (currentAuroraPoint > MaximumAuroraPoint) {color = 0x00FF00;}
 		fontRenderer.drawStringWithShadow(info, (int)width - 105, (int)height - 3, color);
 		initDrawerState();
-		KCUtils.getMC().renderEngine.bindTexture(Gui.icons);
+		getMC().renderEngine.bindTexture(Gui.icons);
 	}
 	
 	/** 
@@ -80,6 +80,30 @@ public class KCUtils {
 	public static void initDrawerState() {
 		FontRenderer fontRenderer = getMC().fontRenderer;
 		fontRenderer.drawString("", 0, 0, 0xFFFFFF);
+	}
+	
+	/** 
+	 * 绘制HUD上的技能格。<BR/>
+	 * width，height代表屏幕的宽高。
+	 */
+	public static void drawSkill(int width, int height) {
+		
+		width *= 0.8;
+		int height0 = (int) (height * 0.35);
+		int height1 = (int) (height * 0.5);
+		int height2 = (int) (height * 0.65);
+		int height3 = (int) (height * 0.8);
+			
+		GL11.glEnable(GL11.GL_BLEND);
+		//KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_outside);
+		KCUtils.drawScaledCustomSizeModalRect(width, height0, 0, 0, 64, 64, 32, 32, 64, 64);
+		KCUtils.drawScaledCustomSizeModalRect(width, height1, 0, 0, 64, 64, 32, 32, 64, 64);
+		KCUtils.drawScaledCustomSizeModalRect(width, height2, 0, 0, 64, 64, 32, 32, 64, 64);
+		KCUtils.drawScaledCustomSizeModalRect(width, height3, 0, 0, 64, 64, 32, 32, 64, 64);
+
+		GL11.glDisable(GL11.GL_BLEND);
+		initDrawerState();
+		getMC().renderEngine.bindTexture(Gui.icons);
 	}
 
 

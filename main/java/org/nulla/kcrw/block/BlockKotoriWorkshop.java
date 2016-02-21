@@ -2,8 +2,7 @@ package org.nulla.kcrw.block;
 
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.gui.GuiKotoriWorkshop;
-import org.nulla.kcrw.skill.Skill;
-import org.nulla.kcrw.skill.Skills;
+import org.nulla.kcrw.skill.*;
 
 import cpw.mods.fml.relauncher.*;
 import net.minecraft.block.material.Material;
@@ -13,7 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockKotoriWorkshop extends BlockKC {
+public class BlockKotoriWorkshop extends KCBlockBase {
 
 	private IIcon blockIconTop;
 	private IIcon blockIconFront;
