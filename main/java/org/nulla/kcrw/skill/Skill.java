@@ -102,13 +102,12 @@ public abstract class Skill {
 		
 		// 放进技能槽
 		for (int i = 0; i < SKILL_SLOT_SIZE; i++) {
-			boolean flag = true;
-			if (getSkillInSlot(player, i) == null && flag) {
+			if (getSkillInSlot(player, i) == null) {
 				setSkillInSlot(player, i, skill);
 				// 客户端发学习技能包
 				if (player.worldObj.isRemote)
 					SkillNetwork.Channel.sendToServer(SkillNetwork.createSyncSkillSlotPacket(player));
-				flag = false;
+				return;
 			}
 		}
 	}

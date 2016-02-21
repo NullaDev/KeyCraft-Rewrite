@@ -108,7 +108,7 @@ public class KCUtils {
 		Skill skillinslot[] = new Skill[4];
 		
 		for (int i = 0; i < 4; i++) {
-			skillinslot[i] = Skill.getSkillInSlot(getPlayerCl(), 0);
+			skillinslot[i] = Skill.getSkillInSlot(getPlayerCl(), i);
 			if (skillinslot[i] != null) {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
