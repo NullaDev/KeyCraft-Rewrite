@@ -29,9 +29,7 @@ public abstract class Skill {
 	}
 	
 	/** 重载实现使用技能 */
-	protected boolean onUse(EntityPlayer player) {
-		return false;
-	}
+	protected abstract boolean onUse(EntityPlayer player);
 	
 	/*------------------- 技能动态部分结束 -------------------*/
 	/*------------------- 欧若拉点开始 -------------------*/
@@ -87,12 +85,12 @@ public abstract class Skill {
 		player.getEntityData().setBoolean("Skill" + skill.mName, hasSkill);
 	}
 	
-	/** 学习技能，会发同步包 */
+	/** 学习技能，会发同步包，如果技能槽还有空位就塞进去 */
 	public static void learnSkill(EntityPlayer player, Skill skill) {
 		if (hasSkill(player, skill))
 			return;
 		
-		if (getAuroraPoint(player) > skill.mAuroraRequired) {	// 不让欧若拉变为0
+		if (getAuroraPoint(player) > skill.mAuroraRequired) { // 不让欧若拉变为0
 			modifyAuroraPoint(player, -skill.mAuroraRequired);
 
 			// 客户端发学习技能包
@@ -103,18 +101,19 @@ public abstract class Skill {
 		// 服务端发同步技能包
 		if (player instanceof EntityPlayerMP)
 			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+		
+		// 放进技能槽
+		for (int i = 0; i < SKILL_SLOT_SIZE; i++)
+			if (getSkillInSlot(player, i) == null) {
+				setSkillInSlot(player, i, skill);
+				break;
+			}
 	}
 	
-	/** 学习技能，会发同步包，如果技能格还有空位就塞进去 */
+	/** 学习技能，会发同步包，如果技能槽还有空位就塞进去 */
 	public static void learnSkill(EntityPlayer player, int skill) {
 		if (0 <= skill && skill < Skills.AllSkills.size()) {
 			learnSkill(player, Skills.AllSkills.get(skill));
-			for (int i=0; i<4; i++) {
-				if (getSkillInGrid(player, i) == null) {
-					setSkillInGrid(player, i, Skills.AllSkills.get(skill));
-					return;
-				}
-			}
 		}
 	}
 	
@@ -150,22 +149,30 @@ public abstract class Skill {
 		return false;
 	}
 	
-	/** 把技能放进HUD上的技能格里 */
-	public static void setSkillInGrid(EntityPlayer player, int pos, Skill skill) {
-		final String name = "skillgrid" + pos;
+	/*------------------- 技能结束 -------------------*/
+	/*------------------- 技能槽开始 -------------------*/
+	
+	public static final int SKILL_SLOT_SIZE = 4;
+	
+	/** 把技能放进技能槽里 */
+	public static void setSkillInSlot(EntityPlayer player, int pos, Skill skill) {
+		final String name = "SkillSlot" + Integer.toString(pos);
 		player.getEntityData().setInteger(name, skill.mID);
 	}
 	
-	/** 取出HUD上的技能格里对应的技能 */
-	public static Skill getSkillInGrid(EntityPlayer player, int pos) {
-		final String name = "skillgrid" + pos;
-		if (player.getEntityData().hasKey(name))
+	/** 取出技能槽里对应的技能 */
+	public static Skill getSkillInSlot(EntityPlayer player, int pos) {
+		final String name = "SkillSlot" + Integer.toString(pos);
+		final NBTTagCompound nbt = player.getEntityData();
+		if (!nbt.hasKey(name))
 			return null;
-		int skillid = player.getEntityData().getInteger(name);
-		return Skills.AllSkills.get(skillid);
+		int skill = nbt.getInteger(name);
+		if (0 <= skill && skill < Skills.AllSkills.size())
+			return Skills.AllSkills.get(skill);
+		return null;
 	}
 	
-	/*------------------- 技能结束 -------------------*/
+	/*------------------- 技能槽结束 -------------------*/
 	/*------------------- CD开始 -------------------*/
 	
 	/** 取上次使用时间，以World.getTotalWorldTime()计算时间 */
