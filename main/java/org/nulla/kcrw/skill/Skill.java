@@ -62,8 +62,6 @@ public abstract class Skill {
 	public static void initializeAuroraPoint(EntityPlayer player) {
 		if (!hasInitialized(player)) {
 			setAuroraPoint(player, INITIAL_AURORA_POINT);
-			// 测试
-			Skill.learnSkill(player, Skills.Test);
 		}
 	}
 	
@@ -103,11 +101,16 @@ public abstract class Skill {
 			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 		
 		// 放进技能槽
-		for (int i = 0; i < SKILL_SLOT_SIZE; i++)
-			if (getSkillInSlot(player, i) == null) {
+		for (int i = 0; i < SKILL_SLOT_SIZE; i++) {
+			boolean flag = true;
+			if (getSkillInSlot(player, i) == null && flag) {
 				setSkillInSlot(player, i, skill);
-				break;
+				// 客户端发学习技能包
+				if (player.worldObj.isRemote)
+					SkillNetwork.Channel.sendToServer(SkillNetwork.createSyncSkillSlotPacket(player));
+				flag = false;
 			}
+		}
 	}
 	
 	/** 学习技能，会发同步包，如果技能槽还有空位就塞进去 */
@@ -119,6 +122,9 @@ public abstract class Skill {
 	
 	/** 使用技能，如果在客户端会发同步包 */
 	public static boolean useSkill(EntityPlayer player, Skill skill) {
+		// 检查技能是不是null
+		if (skill == null)
+			return false;
 		// 检查拥有技能
 		if (!hasSkill(player, skill))
 			return false;

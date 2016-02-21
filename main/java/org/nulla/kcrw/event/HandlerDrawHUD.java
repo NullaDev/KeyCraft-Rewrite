@@ -14,6 +14,7 @@ public class HandlerDrawHUD {
 		int height = event.resolution.getScaledHeight();
 		
 		KCUtils.drawAuroraStrip(width, height);
+		KCUtils.drawSkill(width, height);
 	}
 
 }

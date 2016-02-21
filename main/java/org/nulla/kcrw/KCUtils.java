@@ -1,5 +1,6 @@
 package org.nulla.kcrw;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.nulla.kcrw.skill.Skill;
 
@@ -20,6 +21,14 @@ public class KCUtils {
 	public static EntityPlayer getPlayerCl() {
 		return getMC().thePlayer;
 	}
+	
+	public static boolean isShiftKeyDown() {
+        return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
+    }
+	
+	public static boolean isCtrlKeyDown() {
+        return Minecraft.isRunningOnMac ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
+    }
 	
 	/** 
 	 * 绘制可缩放的纹理。<BR/>
@@ -83,23 +92,30 @@ public class KCUtils {
 	}
 	
 	/** 
-	 * 绘制HUD上的技能格。<BR/>
+	 * 绘制HUD上的技能槽。<BR/>
 	 * width，height代表屏幕的宽高。
 	 */
 	public static void drawSkill(int width, int height) {
 		
-		width *= 0.8;
-		int height0 = (int) (height * 0.35);
-		int height1 = (int) (height * 0.5);
-		int height2 = (int) (height * 0.65);
-		int height3 = (int) (height * 0.8);
+		int widthToDraw = (int) (0.9 * width);
+		int heightToDraw[] = new int[4];
+		heightToDraw[0] = (int) (height * 0.2);
+		heightToDraw[1] = (int) (height * 0.35);
+		heightToDraw[2] = (int) (height * 0.5);
+		heightToDraw[3] = (int) (height * 0.65);
 			
 		GL11.glEnable(GL11.GL_BLEND);
-		//KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_outside);
-		KCUtils.drawScaledCustomSizeModalRect(width, height0, 0, 0, 64, 64, 32, 32, 64, 64);
-		KCUtils.drawScaledCustomSizeModalRect(width, height1, 0, 0, 64, 64, 32, 32, 64, 64);
-		KCUtils.drawScaledCustomSizeModalRect(width, height2, 0, 0, 64, 64, 32, 32, 64, 64);
-		KCUtils.drawScaledCustomSizeModalRect(width, height3, 0, 0, 64, 64, 32, 32, 64, 64);
+		Skill skillinslot[] = new Skill[4];
+		
+		for (int i = 0; i < 4; i++) {
+			skillinslot[i] = Skill.getSkillInSlot(getPlayerCl(), 0);
+			if (skillinslot[i] != null) {
+				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
+				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+			}
+			KCUtils.getMC().getTextureManager().bindTexture(KCResources.icon_empty_skill_slot);
+			KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+		}		
 
 		GL11.glDisable(GL11.GL_BLEND);
 		initDrawerState();

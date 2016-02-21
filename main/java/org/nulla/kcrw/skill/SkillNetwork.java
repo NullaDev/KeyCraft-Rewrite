@@ -54,6 +54,7 @@ public class SkillNetwork
 		{
 			Channel.sendTo(createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 			Channel.sendTo(createSyncSkillPacket(player), (EntityPlayerMP)player);
+			Channel.sendTo(createSyncSkillSlotPacket(player), (EntityPlayerMP)player);
 		}
 	}
 	
@@ -110,6 +111,7 @@ public class SkillNetwork
 	public static final int SYNC_SKILL_CODE = 1;
 	public static final int LEARN_SKILL_CODE = 2;
 	public static final int USE_SKILL_CODE = 3;
+	public static final int SYNC_SLOT_CODE = 4;
 	
 	/** 服务器封包处理，学习技能、使用技能 */
 	@SubscribeEvent
@@ -243,6 +245,29 @@ public class SkillNetwork
 		{
 			stream.writeInt(USE_SKILL_CODE);
 			stream.writeInt(skillId);
+			
+			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
+			stream.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return packet;
+	}
+	
+	public static FMLProxyPacket createSyncSkillSlotPacket(EntityPlayer player)
+	{
+		ByteBufOutputStream stream = new ByteBufOutputStream(Unpooled.buffer());
+		FMLProxyPacket packet = null;
+		try
+		{
+			stream.writeInt(SYNC_SLOT_CODE);
+			for (int i = 0; i < 4; i++)
+				if (Skill.getSkillInSlot(player, i) != null)
+					stream.writeInt(Skill.getSkillInSlot(player, i).mID);
+				else
+					stream.writeInt(-1);
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();

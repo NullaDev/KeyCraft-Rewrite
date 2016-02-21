@@ -21,7 +21,7 @@ public class KCItems {
     		.setCallback(new ItemFoodKC.ICallback() {
 				@Override
 				public void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
-    				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20, -1));					
+    				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20));					
 				}
 				@Override
 				public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {

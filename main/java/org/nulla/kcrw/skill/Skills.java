@@ -8,5 +8,6 @@ public class Skills
 	public static final ArrayList<Skill> AllSkills = new ArrayList<Skill>();
 	
 	public static final TestSkill Test = new TestSkill("Test", 1, 1, 10 * 20);
+	public static final SkillSpeedUp SkillSpeedUp = new SkillSpeedUp();
 	
 }
