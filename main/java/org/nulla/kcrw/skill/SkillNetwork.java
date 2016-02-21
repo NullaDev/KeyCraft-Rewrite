@@ -47,14 +47,14 @@ public class SkillNetwork
 	
 	/*------------------- 事件处理开始 -------------------*/
 	
-	/** 同步欧若拉点、技能的辅助函数 */
-	private void syncSkills(EntityPlayer player)
+	/** 服务器同步欧若拉点、技能的辅助函数 */
+	private void syncSkills(EntityPlayerMP player)
 	{
 		if (player instanceof EntityPlayerMP)
 		{
-			Channel.sendTo(createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
-			Channel.sendTo(createSyncSkillPacket(player), (EntityPlayerMP)player);
-			Channel.sendTo(createSyncSkillSlotPacket(player), (EntityPlayerMP)player);
+			Channel.sendTo(createSyncAuroraPointPacket(player), player);
+			Channel.sendTo(createSyncSkillPacket(player), player);
+			Channel.sendTo(createSyncSkillSlotPacket(player), player);
 		}
 	}
 	
@@ -63,21 +63,21 @@ public class SkillNetwork
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
 		Skill.initializeAuroraPoint(event.player);
-		syncSkills(event.player);
+		syncSkills((EntityPlayerMP)event.player);
 	}
 	
-	/** 玩家复活处理，同步 */
+	/** 服务器玩家复活处理，同步 */
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent event)
 	{
-		syncSkills(event.player);
+		syncSkills((EntityPlayerMP)event.player);
 	}
 		
-	/** 玩家切换世界处理，同步  */
+	/** 服务器玩家切换世界处理，同步  */
 	@SubscribeEvent
 	public void onPlayerChangeDimension(PlayerChangedDimensionEvent event)
 	{
-		syncSkills(event.player);
+		syncSkills((EntityPlayerMP)event.player);
 	}
 	
 	/**
@@ -101,6 +101,10 @@ public class SkillNetwork
 			Skill.setLastUseTime(_new, i, Skill.getLastUseTime(_old, i));
 		}
 		
+		// 克隆技能槽
+		for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
+			Skill.setSkillInSlot(_new, i, Skill.getSkillInSlot(_old, i), false);
+		
 		// 复活或切换世界后同步，@SendSyncPacket.onPlayerRespawn
 	}
 	
@@ -111,7 +115,7 @@ public class SkillNetwork
 	public static final int SYNC_SKILL_CODE = 1;
 	public static final int LEARN_SKILL_CODE = 2;
 	public static final int USE_SKILL_CODE = 3;
-	public static final int SYNC_SLOT_CODE = 4;
+	public static final int SYNC_SKILL_SLOT_CODE = 4;
 	
 	/** 服务器封包处理，学习技能、使用技能 */
 	@SubscribeEvent
@@ -130,6 +134,11 @@ public class SkillNetwork
 				
 			case USE_SKILL_CODE:
 				Skill.useSkill(player, stream.readInt());
+				break;
+				
+			case SYNC_SKILL_SLOT_CODE:
+				for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
+					Skill.setSkillInSlot(player, i, stream.readInt(), false);
 				break;
 			}
 			
@@ -162,6 +171,11 @@ public class SkillNetwork
 					Skill.setSkill(player, Skills.AllSkills.get(i), stream.readBoolean());
 					Skill.setLastUseTime(player, Skills.AllSkills.get(i), stream.readLong());
 				}
+				break;
+				
+			case SYNC_SKILL_SLOT_CODE:
+				for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
+					Skill.setSkillInSlot(player, i, stream.readInt(), false);
 				break;
 			}
 			
@@ -262,12 +276,15 @@ public class SkillNetwork
 		FMLProxyPacket packet = null;
 		try
 		{
-			stream.writeInt(SYNC_SLOT_CODE);
-			for (int i = 0; i < 4; i++)
-				if (Skill.getSkillInSlot(player, i) != null)
-					stream.writeInt(Skill.getSkillInSlot(player, i).mID);
+			stream.writeInt(SYNC_SKILL_SLOT_CODE);
+			for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
+			{
+				Skill skill = Skill.getSkillInSlot(player, i);
+				if (skill != null)
+					stream.writeInt(skill.mID);
 				else
 					stream.writeInt(-1);
+			}
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();

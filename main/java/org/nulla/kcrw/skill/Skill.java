@@ -103,11 +103,8 @@ public abstract class Skill {
 		// 放进技能槽
 		for (int i = 0; i < SKILL_SLOT_SIZE; i++) {
 			if (getSkillInSlot(player, i) == null) {
-				setSkillInSlot(player, i, skill);
-				// 客户端发学习技能包
-				if (player.worldObj.isRemote)
-					SkillNetwork.Channel.sendToServer(SkillNetwork.createSyncSkillSlotPacket(player));
-				return;
+				setSkillInSlot(player, i, skill, true);
+				break;
 			}
 		}
 	}
@@ -134,16 +131,18 @@ public abstract class Skill {
 		// 检查欧若拉点
 		if (getAuroraPoint(player) < skill.mAuroraCost) // 不让欧若拉变为0？
 			return false;
-		modifyAuroraPoint(player, -skill.mAuroraCost);
 		
 		// 客户端发使用技能包
 		if (player.worldObj.isRemote)
 			SkillNetwork.Channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.mID));
 		boolean res = skill.onUse(player);
 		
-		// 设置上次使用时间
-		if (res)
+		if (res) {
+			// 设置上次使用时间
 			setLastUseTime(player, skill, curTime);
+			// 减欧若拉点
+			modifyAuroraPoint(player, -skill.mAuroraCost);
+		}
 		return res;
 	}
 	
@@ -159,12 +158,6 @@ public abstract class Skill {
 	
 	public static final int SKILL_SLOT_SIZE = 4;
 	
-	/** 把技能放进技能槽里 */
-	public static void setSkillInSlot(EntityPlayer player, int pos, Skill skill) {
-		final String name = "SkillSlot" + Integer.toString(pos);
-		player.getEntityData().setInteger(name, skill.mID);
-	}
-	
 	/** 取出技能槽里对应的技能 */
 	public static Skill getSkillInSlot(EntityPlayer player, int pos) {
 		final String name = "SkillSlot" + Integer.toString(pos);
@@ -175,6 +168,27 @@ public abstract class Skill {
 		if (0 <= skill && skill < Skills.AllSkills.size())
 			return Skills.AllSkills.get(skill);
 		return null;
+	}
+	
+	/** 把技能放进技能槽里 */
+	public static void setSkillInSlot(EntityPlayer player, int pos, Skill skill, boolean shouldSync) {
+		final String name = "SkillSlot" + Integer.toString(pos);
+		player.getEntityData().setInteger(name, skill != null ? skill.mID : -1);
+		
+		if (shouldSync) {
+			if (player instanceof EntityPlayerMP)
+				SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillSlotPacket(player), (EntityPlayerMP)player);
+			else
+				SkillNetwork.Channel.sendToServer(SkillNetwork.createSyncSkillSlotPacket(player));
+		}
+	}
+	
+	/** 把技能放进技能槽里 */
+	public static void setSkillInSlot(EntityPlayer player, int pos, int skill, boolean shouldSync) {
+		if (0 <= skill && skill < Skills.AllSkills.size())
+			setSkillInSlot(player, pos, Skills.AllSkills.get(skill), shouldSync);
+		else
+			setSkillInSlot(player, pos, null, shouldSync);
 	}
 	
 	/*------------------- 技能槽结束 -------------------*/

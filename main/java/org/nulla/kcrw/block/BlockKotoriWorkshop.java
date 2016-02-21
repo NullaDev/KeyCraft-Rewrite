@@ -26,8 +26,6 @@ public class BlockKotoriWorkshop extends KCBlockBase {
 		if (!world.isRemote) {
 			return true;
 		}
-		// 测试
-		Skill.useSkill(player, Skills.Test);
 		KCUtils.getMC().displayGuiScreen(new GuiKotoriWorkshop(KCUtils.getMC().currentScreen));
 		return true;
     }

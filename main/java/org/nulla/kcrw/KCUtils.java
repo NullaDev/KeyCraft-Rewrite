@@ -105,9 +105,9 @@ public class KCUtils {
 		heightToDraw[3] = (int) (height * 0.65);
 			
 		GL11.glEnable(GL11.GL_BLEND);
-		Skill skillinslot[] = new Skill[4];
+		Skill skillinslot[] = new Skill[Skill.SKILL_SLOT_SIZE];
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < skillinslot.length; i++) {
 			skillinslot[i] = Skill.getSkillInSlot(getPlayerCl(), i);
 			if (skillinslot[i] != null) {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
