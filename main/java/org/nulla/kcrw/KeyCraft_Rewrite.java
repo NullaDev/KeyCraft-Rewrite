@@ -11,7 +11,7 @@ public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
-    public static final String VERSION = "Demo20160218";
+    public static final String VERSION = "Demo20160222";
     
     @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
             	serverSide = "org.nulla.kcrw.KCCommonProxy")

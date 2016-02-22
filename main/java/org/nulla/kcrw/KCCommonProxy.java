@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.nulla.kcrw.event.HandlerDrawHUD;
+import org.nulla.kcrw.event.*;
 import org.nulla.kcrw.skill.SkillNetwork;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -21,6 +21,8 @@ public class KCCommonProxy implements IGuiHandler {
 	public void init(FMLInitializationEvent event) {
 		// 注册网络事件
 		SkillNetwork.getInstance().init();
+		
+    	MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
 	}
 	 
 	public void postInit(FMLPostInitializationEvent event) {

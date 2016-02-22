@@ -19,7 +19,6 @@ public class HandlerKeyInput {
 		EntityPlayer player = KCUtils.getPlayerCl();
 		if (KCClientProxy.kbSkill1.isPressed()) {
 			if (KCUtils.isShiftKeyDown()) {
-				Skill.learnSkill(player, Skills.SkillSpeedUp);
 		    	Skill.useSkill(player, Skill.getSkillInSlot(player, 2));
 				System.out.println("使用技能2");
 			} else {

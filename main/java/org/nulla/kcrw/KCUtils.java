@@ -113,7 +113,7 @@ public class KCUtils {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
 			}
-			KCUtils.getMC().getTextureManager().bindTexture(KCResources.icon_empty_skill_slot);
+			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
 			KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
 		}		
 

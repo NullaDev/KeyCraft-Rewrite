@@ -7,3 +7,8 @@ item.peachJuice.name=粘稠浓厚桃子味
 kcrw.key.keytitle=kcrw键位设定
 kcrw.key.skill1=使用技能0/2
 kcrw.key.skill2=使用技能1/3
+
+kcrw.prompt.cheat.add=增加1k欧若拉点数。（作弊）
+kcrw.prompt.cheat.reset=重置技能点数。（作弊）
+kcrw.prompt.cheat.recover=增加生命。（作弊）
+kcrw.prompt.cheat.learn=学习所有技能。（作弊）
