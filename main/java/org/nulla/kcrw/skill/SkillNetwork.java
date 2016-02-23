@@ -170,6 +170,7 @@ public class SkillNetwork
 				{
 					Skill.setSkill(player, Skills.AllSkills.get(i), stream.readBoolean());
 					Skill.setLastUseTime(player, Skills.AllSkills.get(i), stream.readLong());
+					Skill.setExperience(player, Skills.AllSkills.get(i), stream.readInt());
 				}
 				break;
 				
@@ -220,6 +221,7 @@ public class SkillNetwork
 			{
 				stream.writeBoolean(Skill.hasSkill(player, i));
 				stream.writeLong(Skill.getLastUseTime(player, i));
+				stream.writeInt(Skill.getExperience(player, i));
 			}
 
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);

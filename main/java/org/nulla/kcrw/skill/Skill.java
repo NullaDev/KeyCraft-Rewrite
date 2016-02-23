@@ -116,7 +116,7 @@ public abstract class Skill {
 		}
 	}
 	
-	/** 使用技能，如果在客户端会发同步包 */
+	/** 使用技能，会发同步包 */
 	public static boolean useSkill(EntityPlayer player, Skill skill) {
 		// 检查技能是不是null
 		if (skill == null)
@@ -143,6 +143,10 @@ public abstract class Skill {
 			// 减欧若拉点
 			modifyAuroraPoint(player, -skill.mAuroraCost);
 		}
+		
+		// 服务端发同步技能包
+		if (player instanceof EntityPlayerMP)
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 		return res;
 	}
 	
@@ -209,5 +213,21 @@ public abstract class Skill {
 	}
 	
 	/*------------------- CD结束 -------------------*/
+	/*------------------- 熟练度开始 -------------------*/
+	
+	/** 取熟练度（给你们分享一点人生经验 */
+	public static int getExperience(EntityPlayer player, Skill skill) {
+		return player.getEntityData().getInteger("Experience" + skill.mName);
+	}
+	
+	/** 设置熟练度，如果在服务端会发同步包 */
+	public static void setExperience(EntityPlayer player, Skill skill, int experience) {
+		player.getEntityData().setInteger("Experience" + skill.mName, experience);
+		// 服务端发同步技能包
+		if (player instanceof EntityPlayerMP)
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+	}
+	
+	/*------------------- 熟练度结束 -------------------*/
 	
 }

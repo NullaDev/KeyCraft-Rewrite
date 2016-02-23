@@ -26,8 +26,8 @@ public class HandlerChatCheating {
                 Skill.setAuroraPoint(player, Skill.INITIAL_AURORA_POINT);
                 for (Skill i : Skills.AllSkills) {
                 	Skill.setSkill(player, i, false);
-                	//是不是应该发同步包
         		}
+                SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.reset")));
             }
         } else if(event.message.toLowerCase().equals("sakuya")) {
@@ -44,7 +44,7 @@ public class HandlerChatCheating {
             if (!player.worldObj.isRemote) {
                 for (Skill i : Skills.AllSkills) {
         			Skill.learnSkill(player, i);
-                	//这好像不用发
+                	//杩欏ソ鍍忎笉鐢ㄥ彂
         		}
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.learn")));
             }
