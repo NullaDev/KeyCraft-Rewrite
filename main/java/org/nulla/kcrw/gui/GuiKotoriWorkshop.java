@@ -2,8 +2,12 @@ package org.nulla.kcrw.gui;
 
 import org.nulla.kcrw.*;
 import org.nulla.kcrw.gui.part.*;
+import org.nulla.kcrw.item.*;
+import org.nulla.kcrw.item.crafting.KCRecipe;
 
 import net.minecraft.client.gui.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -13,6 +17,8 @@ public class GuiKotoriWorkshop extends GuiScreen {
 
 	private GuiButtonImage btnEnd;
 	private GuiButtonImage btnCraft[] = new GuiButtonImage[99];
+	
+	private ItemFoodKC currentCraftItem = null;
 	 
     public GuiKotoriWorkshop(GuiScreen parent) {
          parentScreen = parent;
@@ -33,9 +39,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         //drawRect(0, 0, width, height, 0xFFFFFFFF);
 
         //super.drawScreen(par1,par2,par3);
-        
-        //System.out.println(width+"，"+height);
-        
+                
         //绘制边框
         int shang = (int)(height * 0.2);
         int xia = (int)(height * 0.9);
@@ -57,12 +61,28 @@ public class GuiKotoriWorkshop extends GuiScreen {
         
         KCUtils.drawAuroraStrip(width, height);
         
+        //绘制合成界面
+        if (currentCraftItem != null) {        	
+        	
+        	fontRendererObj.drawStringWithShadow("dang qian he cheng wu pin: " + currentCraftItem.getUnlocalizedName(), zhong, shang + 10, 0xFFFFFF);
+        	fontRendererObj.drawStringWithShadow("xu yao:", zhong, shang + 20, 0xFFFFFF);
+        	fontRendererObj.drawStringWithShadow(currentCraftItem.getRecipe().getCraftItem(0).getUnlocalizedName() + ":0/" + currentCraftItem.getRecipe().getCraftItemAmount(0), zhong, shang + 30, 0xFFFFFF);
+        	fontRendererObj.drawStringWithShadow(currentCraftItem.getRecipe().getCraftItem(1).getUnlocalizedName() + ":0/" + currentCraftItem.getRecipe().getCraftItemAmount(1), zhong, shang + 40, 0xFFFFFF);
+
+        	KCUtils.initDrawerState();
+        }
     }
     
     //不是Override
 	protected void actionPerformed(GuiButtonImage button) {
 		if (button.equals(btnEnd)) {
 			mc.displayGuiScreen(parentScreen);
+    	} else {
+    		for (int i = 0; i < 99; i++) {
+    			if (button.equals(btnCraft[i])) {
+    				currentCraftItem = (ItemFoodKC) KCRecipe.getCraftItemFromNumber(i);
+    			}
+    		}
     	}
 	}
     

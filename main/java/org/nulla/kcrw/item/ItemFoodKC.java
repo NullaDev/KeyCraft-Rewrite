@@ -3,6 +3,7 @@ package org.nulla.kcrw.item;
 import java.util.List;
 
 import org.nulla.kcrw.KeyCraft_Rewrite;
+import org.nulla.kcrw.item.crafting.KCRecipe;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
@@ -17,6 +18,7 @@ public class ItemFoodKC extends ItemFood {
 	}
 	
 	protected ICallback Callback = null;
+	protected KCRecipe craftRecipe = null;
 
 	public ItemFoodKC(int amount) {
 		super(amount, 0.6F, false);	//后两个是干嘛的
@@ -42,6 +44,15 @@ public class ItemFoodKC extends ItemFood {
 		if (Callback != null) {
 			Callback.addInformation(stack, player, information, p_77624_4_);
 		}
+	}
+	
+	public ItemFoodKC setRecipe(KCRecipe recipe) {
+		this.craftRecipe = recipe;
+		return this;
+	}
+	
+	public KCRecipe getRecipe() {
+		return this.craftRecipe;
 	}
 
 }

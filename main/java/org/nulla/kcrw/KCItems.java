@@ -3,9 +3,11 @@ package org.nulla.kcrw;
 import java.util.List;
 
 import org.nulla.kcrw.item.ItemFoodKC;
+import org.nulla.kcrw.item.crafting.KCRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.potion.*;
 import net.minecraft.util.StatCollector;
@@ -28,6 +30,7 @@ public class KCItems {
 					information.add(StatCollector.translateToLocal("kcrw.item.intro.peachJuice"));
 				}
     		})
+    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.slime_ball, 4), new ItemStack(Items.apple, 1)} , 4, 10))
     		.setUnlocalizedName("peachJuice")
     		.setTextureName("kcrw:peach_juice");
     	GameRegistry.registerItem(PeachJuice, "peachJuice");

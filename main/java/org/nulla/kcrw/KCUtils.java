@@ -115,7 +115,12 @@ public class KCUtils {
 			}
 			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
 			KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-		}		
+		}	
+		FontRenderer fontRenderer = KCUtils.getMC().fontRenderer;
+		fontRenderer.drawStringWithShadow("R", widthToDraw + 2, heightToDraw[0], 0xFF0000);
+		fontRenderer.drawStringWithShadow("F", widthToDraw + 2, heightToDraw[1], 0xFF0000);
+		fontRenderer.drawStringWithShadow("Shift+R", widthToDraw + 2, heightToDraw[2], 0xFF0000);
+		fontRenderer.drawStringWithShadow("Shift+F", widthToDraw + 2, heightToDraw[3], 0xFF0000);
 
 		GL11.glDisable(GL11.GL_BLEND);
 		initDrawerState();
