@@ -198,16 +198,17 @@ public class KCUtils {
 		GL11.glEnable(GL11.GL_BLEND);
 		Skill skillinslot[] = new Skill[SkillUtils.SKILL_SLOT_SIZE];
 		
+		EntityPlayer player = getPlayerCl();
 		for (int i = 0; i < skillinslot.length; i++) {
-			skillinslot[i] = SkillUtils.getSkillInSlot(getPlayerCl(), i);
+			skillinslot[i] = SkillUtils.getSkillInSlot(player, i);
 			if (skillinslot[i] != null) {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience() / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
+				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
 				getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
 				initDrawerState();
-				if (!skillinslot[i].isCD()) {
-					int time = (int) (getPlayerCl().worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime());
+				if (!skillinslot[i].checkCD(player)) {
+					int time = (int) (player.worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(player));
 					int length =  32 - 32 * time / skillinslot[i].mCD;
 					drawRect(widthToDraw, heightToDraw[i], 32, length, 0x80000000);
 					initDrawerState();

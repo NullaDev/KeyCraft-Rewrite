@@ -4,20 +4,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 
+/** å®ç°å…³äºæŠ€èƒ½çš„å…¶ä»–éƒ¨åˆ†ï¼ˆæ¬§è‹¥æ‹‰ç‚¹ã€æŠ€èƒ½æ§½ï¼‰ */
 public class SkillUtils {
+	
+	/*------------------- æ¬§è‹¥æ‹‰ç‚¹å¼€å§‹ -------------------*/
 	
 	public static final int MAX_AURORA_POINT = 65535;
 	public static final int INITIAL_AURORA_POINT = 16384;
-	public static final int SKILL_SLOT_SIZE = 4;
-	
-	/*------------------- ¼¼ÄÜ¿ªÊ¼ -------------------*/
 
-	/** È¡Å·ÈôÀ­µã */
+	/** å–æ¬§è‹¥æ‹‰ç‚¹ */
 	public static int getAuroraPoint(EntityPlayer player) {
 		return player.getEntityData().getInteger("AuroraPoint");
 	}
 	
-	/** ÉèÖÃÅ·ÈôÀ­µã£¬Èç¹ûÔÚ·şÎñ¶Ë»á·¢Í¬²½°ü */
+	/** è®¾ç½®æ¬§è‹¥æ‹‰ç‚¹ï¼Œå¦‚æœåœ¨æœåŠ¡ç«¯ä¼šå‘åŒæ­¥åŒ… */
 	public static void setAuroraPoint(EntityPlayer player, int point) {
 		if (point < 0)
 			point = 0;
@@ -28,111 +28,29 @@ public class SkillUtils {
 			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncAuroraPointPacket(player), (EntityPlayerMP)player);
 	}
 	
-	/** ¸Ä±äÅ·ÈôÀ­µã£¬Èç¹ûÔÚ·şÎñ¶Ë»á·¢Í¬²½°ü */
+	/** æ”¹å˜æ¬§è‹¥æ‹‰ç‚¹ï¼Œå¦‚æœåœ¨æœåŠ¡ç«¯ä¼šå‘åŒæ­¥åŒ… */
 	public static void modifyAuroraPoint(EntityPlayer player, int point) {
 		setAuroraPoint(player, getAuroraPoint(player) + point);
 	}
 	
-	/** ³õÊ¼»¯Å·ÈôÀ­µãÊı£¬ÓÃÓÚÍæ¼ÒµÇÂ½·şÎñÆ÷Ê±£¬Èç¹ûÒÑ³õÊ¼»¯²»»áÖØ¸´³õÊ¼»¯ */
+	/** åˆå§‹åŒ–æ¬§è‹¥æ‹‰ç‚¹æ•°ï¼Œç”¨äºç©å®¶ç™»é™†æœåŠ¡å™¨æ—¶ï¼Œå¦‚æœå·²åˆå§‹åŒ–ä¸ä¼šé‡å¤åˆå§‹åŒ– */
 	public static void initializeAuroraPoint(EntityPlayer player) {
 		if (!hasInitialized(player)) {
 			setAuroraPoint(player, INITIAL_AURORA_POINT);
 		}
 	}
 	
-	/** ÅĞ¶ÏÊÇ·ñÒÑ¾­³õÊ¼»¯Å·ÈôÀ­µãÊı */
+	/** åˆ¤æ–­æ˜¯å¦å·²ç»åˆå§‹åŒ–æ¬§è‹¥æ‹‰ç‚¹æ•° */
 	public static boolean hasInitialized(EntityPlayer player) {
 		return player.getEntityData().hasKey("AuroraPoint");
 	}
-	
-	/** ÅĞ¶ÏÓĞÃ»ÓĞ¼¼ÄÜ */
-	public static boolean hasSkill(EntityPlayer player, Skill skill) {
-		return player.getEntityData().getBoolean("Skill" + skill.mName);
-	}
-	
-	/** ÉèÖÃÓĞÃ»ÓĞ¼¼ÄÜ */
-	public static void setSkill(EntityPlayer player, Skill skill, boolean hasSkill) {
-		player.getEntityData().setBoolean("Skill" + skill.mName, hasSkill);
-	}
-	
-	/** Ñ§Ï°¼¼ÄÜ£¬»á·¢Í¬²½°ü£¬Èç¹û¼¼ÄÜ²Û»¹ÓĞ¿ÕÎ»¾ÍÈû½øÈ¥ */
-	public static void learnSkill(EntityPlayer player, Skill skill) {
-		if (hasSkill(player, skill))
-			return;
-		
-		if (SkillUtils.getAuroraPoint(player) > skill.mAuroraRequired) { // ²»ÈÃÅ·ÈôÀ­±äÎª0
-			SkillUtils.modifyAuroraPoint(player, -skill.mAuroraRequired);
 
-			// ¿Í»§¶Ë·¢Ñ§Ï°¼¼ÄÜ°ü
-			if (player.worldObj.isRemote)
-				SkillNetwork.Channel.sendToServer(SkillNetwork.createLearnSkillPacket(skill.mID));
-			setSkill(player, skill, true);
-		}
-		// ·şÎñ¶Ë·¢Í¬²½¼¼ÄÜ°ü
-		if (player instanceof EntityPlayerMP)
-			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
-		
-		// ·Å½ø¼¼ÄÜ²Û
-		for (int i = 0; i < SKILL_SLOT_SIZE; i++) {
-			if (getSkillInSlot(player, i) == null) {
-				setSkillInSlot(player, i, skill, true);
-				break;
-			}
-		}
-	}
+	/*------------------- æ¬§è‹¥æ‹‰ç‚¹ç»“æŸ -------------------*/
+	/*------------------- æŠ€èƒ½æ§½å¼€å§‹ -------------------*/
 	
-	/** Ñ§Ï°¼¼ÄÜ£¬»á·¢Í¬²½°ü£¬Èç¹û¼¼ÄÜ²Û»¹ÓĞ¿ÕÎ»¾ÍÈû½øÈ¥ */
-	public static void learnSkill(EntityPlayer player, int skill) {
-		if (0 <= skill && skill < Skills.AllSkills.size()) {
-			learnSkill(player, Skills.AllSkills.get(skill));
-		}
-	}
+	public static final int SKILL_SLOT_SIZE = 4;
 	
-	/** Ê¹ÓÃ¼¼ÄÜ£¬»á·¢Í¬²½°ü */
-	public static boolean useSkill(EntityPlayer player, Skill skill) {
-		// ¼ì²é¼¼ÄÜÊÇ²»ÊÇnull
-		if (skill == null)
-			return false;
-		// ¼ì²éÓµÓĞ¼¼ÄÜ
-		if (!hasSkill(player, skill))
-			return false;
-		// ¼ì²éCD
-		long curTime = player.worldObj.getTotalWorldTime();
-		if (curTime - getLastUseTime(player, skill) < skill.mCD)
-			return false;
-		// ¼ì²éÅ·ÈôÀ­µã
-		if (SkillUtils.getAuroraPoint(player) < skill.mAuroraCost) // ²»ÈÃÅ·ÈôÀ­±äÎª0£¿
-			return false;
-		
-		// ¿Í»§¶Ë·¢Ê¹ÓÃ¼¼ÄÜ°ü
-		if (player.worldObj.isRemote)
-			SkillNetwork.Channel.sendToServer(SkillNetwork.createUseSkillPacket(skill.mID));
-		boolean res = skill.onUse(player);
-		
-		if (res) {
-			// ÉèÖÃÉÏ´ÎÊ¹ÓÃÊ±¼ä
-			setLastUseTime(player, skill, curTime);
-			// ¼õÅ·ÈôÀ­µã
-			SkillUtils.modifyAuroraPoint(player, -skill.mAuroraCost);
-		}
-		
-		// ·şÎñ¶Ë·¢Í¬²½¼¼ÄÜ°ü
-		if (player instanceof EntityPlayerMP)
-			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
-		return res;
-	}
-	
-	/** Ê¹ÓÃ¼¼ÄÜ£¬Èç¹ûÔÚ¿Í»§¶Ë»á·¢Í¬²½°ü */
-	public static boolean useSkill(EntityPlayer player, int skill) {
-		if (0 <= skill && skill < Skills.AllSkills.size())
-			return useSkill(player, Skills.AllSkills.get(skill));
-		return false;
-	}
-	
-	/*------------------- ¼¼ÄÜ½áÊø -------------------*/
-	/*------------------- ¼¼ÄÜ²Û¿ªÊ¼ -------------------*/
-	
-	/** È¡³ö¼¼ÄÜ²ÛÀï¶ÔÓ¦µÄ¼¼ÄÜ */
+	/** å–å‡ºæŠ€èƒ½æ§½é‡Œå¯¹åº”çš„æŠ€èƒ½ */
 	public static Skill getSkillInSlot(EntityPlayer player, int pos) {
 		final String name = "SkillSlot" + Integer.toString(pos);
 		final NBTTagCompound nbt = player.getEntityData();
@@ -144,7 +62,7 @@ public class SkillUtils {
 		return null;
 	}
 	
-	/** °Ñ¼¼ÄÜ·Å½ø¼¼ÄÜ²ÛÀï */
+	/** æŠŠæŠ€èƒ½æ”¾è¿›æŠ€èƒ½æ§½é‡Œ */
 	public static void setSkillInSlot(EntityPlayer player, int pos, Skill skill, boolean shouldSync) {
 		final String name = "SkillSlot" + Integer.toString(pos);
 		player.getEntityData().setInteger(name, skill != null ? skill.mID : -1);
@@ -157,7 +75,7 @@ public class SkillUtils {
 		}
 	}
 	
-	/** °Ñ¼¼ÄÜ·Å½ø¼¼ÄÜ²ÛÀï */
+	/** æŠŠæŠ€èƒ½æ”¾è¿›æŠ€èƒ½æ§½é‡Œ */
 	public static void setSkillInSlot(EntityPlayer player, int pos, int skill, boolean shouldSync) {
 		if (0 <= skill && skill < Skills.AllSkills.size())
 			setSkillInSlot(player, pos, Skills.AllSkills.get(skill), shouldSync);
@@ -165,54 +83,6 @@ public class SkillUtils {
 			setSkillInSlot(player, pos, null, shouldSync);
 	}
 	
-	/*------------------- ¼¼ÄÜ²Û½áÊø -------------------*/
-	/*------------------- CD¿ªÊ¼ -------------------*/
+	/*------------------- æŠ€èƒ½æ§½ç»“æŸ -------------------*/
 	
-	/** È¡ÉÏ´ÎÊ¹ÓÃÊ±¼ä£¬ÒÔWorld.getTotalWorldTime()¼ÆËãÊ±¼ä */
-	public static long getLastUseTime(EntityPlayer player, Skill skill) {
-		final String name = "LastTime" + skill.mName;
-		final NBTTagCompound nbt = player.getEntityData();
-		if (!nbt.hasKey(name))
-			return -skill.mCD;
-		return nbt.getLong(name);
-	}
-	
-	/** ÉèÖÃÉÏ´ÎÊ¹ÓÃÊ±¼ä£¬ÒÔWorld.getTotalWorldTime()¼ÆËãÊ±¼ä */
-	public static void setLastUseTime(EntityPlayer player, Skill skill, long time) {
-		player.getEntityData().setLong("LastTime" + skill.mName, time);
-	}
-	
-	public static boolean isCD(EntityPlayer player, Skill skill) {
-		long curTime = player.worldObj.getTotalWorldTime();
-		if (curTime - getLastUseTime(player, skill) < skill.mCD)
-			return false;
-		return true;
-	}
-	
-	/*------------------- CD½áÊø -------------------*/
-	/*------------------- ÊìÁ·¶È¿ªÊ¼ -------------------*/
-	
-	public static final int MAX_EXPERIENCE = 1024;
-	
-	/** È¡ÊìÁ·¶È£¨¸øÄãÃÇ·ÖÏíÒ»µãÈËÉú¾­Ñé */
-	public static int getExperience(EntityPlayer player, Skill skill) {
-		return player.getEntityData().getInteger("Experience" + skill.mName);
-	}
-	
-	/** ÉèÖÃÊìÁ·¶È£¬Èç¹ûÔÚ·şÎñ¶Ë»á·¢Í¬²½°ü */
-	public static void setExperience(EntityPlayer player, Skill skill, int experience) {
-		player.getEntityData().setInteger("Experience" + skill.mName, experience);
-		// ·şÎñ¶Ë·¢Í¬²½¼¼ÄÜ°ü
-		if (player instanceof EntityPlayerMP)
-			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
-	}
-	
-	/** µ÷ÕûÊìÁ·¶È£¬Èç¹ûÔÚ·şÎñ¶Ë»á·¢Í¬²½°ü */
-	public static void modifyExperience(EntityPlayer player, Skill skill, int experience) {
-		int exp = Math.min(getExperience(player, skill) + experience, MAX_EXPERIENCE);
-		setExperience(player, skill, exp);
-	}
-	
-	/*------------------- ÊìÁ·¶È½áÊø -------------------*/
-
 }

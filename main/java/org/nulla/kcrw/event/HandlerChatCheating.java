@@ -1,12 +1,17 @@
 package org.nulla.kcrw.event;
 
-import org.nulla.kcrw.skill.*;
+import org.nulla.kcrw.skill.Skill;
+import org.nulla.kcrw.skill.SkillNetwork;
+import org.nulla.kcrw.skill.SkillUtils;
+import org.nulla.kcrw.skill.Skills;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
-import net.minecraftforge.event.ServerChatEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.event.ServerChatEvent;
 
 public class HandlerChatCheating {
 	
@@ -25,7 +30,7 @@ public class HandlerChatCheating {
             if (!player.worldObj.isRemote) {
             	SkillUtils.setAuroraPoint(player, SkillUtils.INITIAL_AURORA_POINT);
                 for (Skill i : Skills.AllSkills) {
-                	SkillUtils.setSkill(player, i, false);
+                	i.setSkill(player, false);
         		}
                 SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.reset")));
@@ -43,7 +48,7 @@ public class HandlerChatCheating {
             EntityPlayerMP player = event.player;
             if (!player.worldObj.isRemote) {
                 for (Skill i : Skills.AllSkills) {
-                	SkillUtils.learnSkill(player, i);
+                	i.learnSkill(player);
         		}
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.learn")));
             }
