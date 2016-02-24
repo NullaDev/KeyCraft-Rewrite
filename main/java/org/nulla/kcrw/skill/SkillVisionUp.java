@@ -13,11 +13,11 @@ public class SkillVisionUp extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
-		int time = 20 * 30 * 2048 / (2048 - this.getExperience(player));
+		int time = 20 * 30 * 2048 / (2048 - SkillUtils.getExperience(player, this));
 		player.addPotionEffect(new PotionEffect(Potion.nightVision.id, time));
 		Random rand = new Random();
 		int exp = rand.nextInt(10) + 1;
-		this.modifyExperience(player, exp);
+		SkillUtils.modifyExperience(player, this, exp);
 		return true;
 	}
 }

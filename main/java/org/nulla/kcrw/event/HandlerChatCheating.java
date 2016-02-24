@@ -16,16 +16,16 @@ public class HandlerChatCheating {
         	event.setCanceled(true);
             EntityPlayerMP player = event.player;
             if (!player.worldObj.isRemote) {
-            	Skill.modifyAuroraPoint(player, 1000);
+            	SkillUtils.modifyAuroraPoint(player, 1000);
             	player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.add")));
             }
         } else if(event.message.toLowerCase().equals("reset")) {
         	event.setCanceled(true);
             EntityPlayerMP player = event.player;
             if (!player.worldObj.isRemote) {
-                Skill.setAuroraPoint(player, Skill.INITIAL_AURORA_POINT);
+            	SkillUtils.setAuroraPoint(player, SkillUtils.INITIAL_AURORA_POINT);
                 for (Skill i : Skills.AllSkills) {
-                	Skill.setSkill(player, i, false);
+                	SkillUtils.setSkill(player, i, false);
         		}
                 SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.reset")));
@@ -43,8 +43,7 @@ public class HandlerChatCheating {
             EntityPlayerMP player = event.player;
             if (!player.worldObj.isRemote) {
                 for (Skill i : Skills.AllSkills) {
-        			Skill.learnSkill(player, i);
-                	//这好像不用发
+                	SkillUtils.learnSkill(player, i);
         		}
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.learn")));
             }

@@ -3,6 +3,7 @@ package org.nulla.kcrw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.nulla.kcrw.skill.Skill;
+import org.nulla.kcrw.skill.SkillUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
@@ -149,8 +150,8 @@ public class KCUtils {
 		width *= 0.95;
 		height *= 0.05;
 		
-		int currentAuroraPoint = Skill.getAuroraPoint(KCUtils.getPlayerCl());
-		int maximumAuroraPoint = Skill.MAX_AURORA_POINT;
+		int currentAuroraPoint = SkillUtils.getAuroraPoint(KCUtils.getPlayerCl());
+		int maximumAuroraPoint = SkillUtils.MAX_AURORA_POINT;
 	        
 		int length = Math.min(105 *  currentAuroraPoint / maximumAuroraPoint, 105);
 		
@@ -162,7 +163,7 @@ public class KCUtils {
 		KCUtils.drawScaledCustomSizeModalRect(width - 120, height, 0, 0, 720, 120, 120, 20, 720, 120);
 		GL11.glDisable(GL11.GL_BLEND);
 	        
-		String info = "Aurora: " + Skill.getAuroraPoint(KCUtils.getPlayerCl()) + " / " + Skill.MAX_AURORA_POINT;
+		String info = "Aurora: " + SkillUtils.getAuroraPoint(KCUtils.getPlayerCl()) + " / " + SkillUtils.MAX_AURORA_POINT;
 		FontRenderer fontRenderer = KCUtils.getMC().fontRenderer;
 		int color = 0x7FFFBF;
 		//if (currentAuroraPoint <= MaximumAuroraPoint * 0.25) {color = 0xFF0000;}
@@ -195,18 +196,18 @@ public class KCUtils {
 		heightToDraw[3] = (int) (height * 0.65);
 					
 		GL11.glEnable(GL11.GL_BLEND);
-		Skill skillinslot[] = new Skill[Skill.SKILL_SLOT_SIZE];
+		Skill skillinslot[] = new Skill[SkillUtils.SKILL_SLOT_SIZE];
 		
 		for (int i = 0; i < skillinslot.length; i++) {
-			skillinslot[i] = Skill.getSkillInSlot(getPlayerCl(), i);
+			skillinslot[i] = SkillUtils.getSkillInSlot(getPlayerCl(), i);
 			if (skillinslot[i] != null) {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience(getPlayerCl()) / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
+				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience() / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
 				getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
 				initDrawerState();
-				if (!skillinslot[i].isCD(getPlayerCl())) {
-					int time = (int) (getPlayerCl().worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(getPlayerCl(), skillinslot[i]));
+				if (!skillinslot[i].isCD()) {
+					int time = (int) (getPlayerCl().worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime());
 					int length =  32 - 32 * time / skillinslot[i].mCD;
 					drawRect(widthToDraw, heightToDraw[i], 32, length, 0x80000000);
 					initDrawerState();

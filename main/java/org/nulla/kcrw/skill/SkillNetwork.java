@@ -62,7 +62,7 @@ public class SkillNetwork
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
-		Skill.initializeAuroraPoint(event.player);
+		SkillUtils.initializeAuroraPoint(event.player);
 		syncSkills((EntityPlayerMP)event.player);
 	}
 	
@@ -91,19 +91,19 @@ public class SkillNetwork
 		final EntityPlayer _new = event.entityPlayer;
 
 		// 设置新玩家欧若拉点数，切换世界点数不变，死亡减10
-		final int newAuroraPoint = event.wasDeath ? Math.max(Skill.getAuroraPoint(_old) - 10, 0) : Skill.getAuroraPoint(_old);
+		final int newAuroraPoint = event.wasDeath ? Math.max(SkillUtils.getAuroraPoint(_old) - 10, 0) : SkillUtils.getAuroraPoint(_old);
 		_new.getEntityData().setInteger("AuroraPoint", newAuroraPoint);
 		
 		// 克隆技能、CD
 		for (Skill i : Skills.AllSkills)
 		{
-			Skill.setSkill(_new, i, Skill.hasSkill(_old, i));
-			Skill.setLastUseTime(_new, i, Skill.getLastUseTime(_old, i));
+			SkillUtils.setSkill(_new, i, SkillUtils.hasSkill(_old, i));
+			SkillUtils.setLastUseTime(_new, i, SkillUtils.getLastUseTime(_old, i));
 		}
 		
 		// 克隆技能槽
-		for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
-			Skill.setSkillInSlot(_new, i, Skill.getSkillInSlot(_old, i), false);
+		for (int i = 0; i < SkillUtils.SKILL_SLOT_SIZE; i++)
+			SkillUtils.setSkillInSlot(_new, i, SkillUtils.getSkillInSlot(_old, i), false);
 		
 		// 复活或切换世界后同步，@SendSyncPacket.onPlayerRespawn
 	}
@@ -129,16 +129,16 @@ public class SkillNetwork
 			switch (stream.readInt())
 			{
 			case LEARN_SKILL_CODE:
-	    		Skill.learnSkill(player, stream.readInt());
+				SkillUtils.learnSkill(player, stream.readInt());
 				break;
 				
 			case USE_SKILL_CODE:
-				Skill.useSkill(player, stream.readInt());
+				SkillUtils.useSkill(player, stream.readInt());
 				break;
 				
 			case SYNC_SKILL_SLOT_CODE:
-				for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
-					Skill.setSkillInSlot(player, i, stream.readInt(), false);
+				for (int i = 0; i < SkillUtils.SKILL_SLOT_SIZE; i++)
+					SkillUtils.setSkillInSlot(player, i, stream.readInt(), false);
 				break;
 			}
 			
@@ -162,21 +162,21 @@ public class SkillNetwork
 			switch (stream.readInt())
 			{
 			case SYNC_AURORA_POINT_CODE:
-				Skill.setAuroraPoint(player, stream.readInt());
+				SkillUtils.setAuroraPoint(player, stream.readInt());
 				break;
 				
 			case SYNC_SKILL_CODE:
 				for (int i = 0; i < Skills.AllSkills.size(); i++)
 				{
-					Skill.setSkill(player, Skills.AllSkills.get(i), stream.readBoolean());
-					Skill.setLastUseTime(player, Skills.AllSkills.get(i), stream.readLong());
-					Skill.setExperience(player, Skills.AllSkills.get(i), stream.readInt());
+					SkillUtils.setSkill(player, Skills.AllSkills.get(i), stream.readBoolean());
+					SkillUtils.setLastUseTime(player, Skills.AllSkills.get(i), stream.readLong());
+					SkillUtils.setExperience(player, Skills.AllSkills.get(i), stream.readInt());
 				}
 				break;
 				
 			case SYNC_SKILL_SLOT_CODE:
-				for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
-					Skill.setSkillInSlot(player, i, stream.readInt(), false);
+				for (int i = 0; i < SkillUtils.SKILL_SLOT_SIZE; i++)
+					SkillUtils.setSkillInSlot(player, i, stream.readInt(), false);
 				break;
 			}
 			
@@ -198,7 +198,7 @@ public class SkillNetwork
 		try
 		{
 			stream.writeInt(SYNC_AURORA_POINT_CODE);
-			stream.writeInt(Skill.getAuroraPoint(player));
+			stream.writeInt(SkillUtils.getAuroraPoint(player));
 			
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
 			stream.close();
@@ -219,9 +219,9 @@ public class SkillNetwork
 			stream.writeInt(SYNC_SKILL_CODE);
 			for (Skill i : Skills.AllSkills)
 			{
-				stream.writeBoolean(Skill.hasSkill(player, i));
-				stream.writeLong(Skill.getLastUseTime(player, i));
-				stream.writeInt(Skill.getExperience(player, i));
+				stream.writeBoolean(SkillUtils.hasSkill(player, i));
+				stream.writeLong(SkillUtils.getLastUseTime(player, i));
+				stream.writeInt(SkillUtils.getExperience(player, i));
 			}
 
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);
@@ -279,9 +279,9 @@ public class SkillNetwork
 		try
 		{
 			stream.writeInt(SYNC_SKILL_SLOT_CODE);
-			for (int i = 0; i < Skill.SKILL_SLOT_SIZE; i++)
+			for (int i = 0; i < SkillUtils.SKILL_SLOT_SIZE; i++)
 			{
-				Skill skill = Skill.getSkillInSlot(player, i);
+				Skill skill = SkillUtils.getSkillInSlot(player, i);
 				if (skill != null)
 					stream.writeInt(skill.mID);
 				else
