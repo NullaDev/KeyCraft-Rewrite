@@ -18,7 +18,7 @@ public abstract class Skill {
 	public final int mAuroraCost;
 	/** 单位：Tick */
 	public final int mCD;
-	
+		
 	public Skill(String name, int auroraRequired, int auroraCost, int cd) {
 		this.mID = Skills.AllSkills.size();
 		this.mName = name;
@@ -212,12 +212,30 @@ public abstract class Skill {
 		player.getEntityData().setLong("LastTime" + skill.mName, time);
 	}
 	
+	public static boolean isCD(EntityPlayer player, Skill skill) {
+		long curTime = player.worldObj.getTotalWorldTime();
+		if (curTime - getLastUseTime(player, skill) < skill.mCD)
+			return false;
+		return true;
+	}
+	
+	public boolean isCD(EntityPlayer player) {
+		return isCD(player, this);
+	}
+	
 	/*------------------- CD结束 -------------------*/
 	/*------------------- 熟练度开始 -------------------*/
+	
+	public static final int MAX_EXPERIENCE = 1024;
 	
 	/** 取熟练度（给你们分享一点人生经验 */
 	public static int getExperience(EntityPlayer player, Skill skill) {
 		return player.getEntityData().getInteger("Experience" + skill.mName);
+	}
+	
+	/** 取熟练度（给你们分享一点人生经验 */
+	public int getExperience(EntityPlayer player) {
+		return getExperience(player, this);
 	}
 	
 	/** 设置熟练度，如果在服务端会发同步包 */
@@ -227,6 +245,23 @@ public abstract class Skill {
 		if (player instanceof EntityPlayerMP)
 			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 	}
+	
+	/** 设置熟练度，如果在服务端会发同步包 */
+	public void setExperience(EntityPlayer player, int experience) {
+		setExperience(player, this, experience);
+	}
+	
+	/** 调整熟练度，如果在服务端会发同步包 */
+	public static void modifyExperience(EntityPlayer player, Skill skill, int experience) {
+		int exp = Math.min(getExperience(player, skill) + experience, skill.MAX_EXPERIENCE);
+		setExperience(player, skill, exp);
+	}
+	
+	/** 调整熟练度，如果在服务端会发同步包 */
+	public void modifyExperience(EntityPlayer player, int experience) {
+		modifyExperience(player, this, experience);
+	}
+	
 	
 	/*------------------- 熟练度结束 -------------------*/
 	

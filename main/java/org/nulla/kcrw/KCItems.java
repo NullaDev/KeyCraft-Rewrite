@@ -19,7 +19,7 @@ public class KCItems {
 	
     public static void InitItems() {
 
-    	PeachJuice = new ItemFoodKC(4)
+    	PeachJuice = new ItemFoodKC(3)
     		.setCallback(new ItemFoodKC.ICallback() {
 				@Override
 				public void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {

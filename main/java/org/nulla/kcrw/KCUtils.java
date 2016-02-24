@@ -6,6 +6,7 @@ import org.nulla.kcrw.skill.Skill;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -23,6 +24,10 @@ public class KCUtils {
 		return getMC().thePlayer;
 	}
 	
+	public static FontRenderer getfontRenderer() {
+		return getMC().fontRenderer;
+	}
+	
 	/** 
 	 * 判断Shift键是否按下。
 	 */
@@ -35,6 +40,13 @@ public class KCUtils {
 	 */
 	public static boolean isCtrlKeyDown() {
         return Minecraft.isRunningOnMac ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
+    }
+	
+	public static void exchange(Object a, Object b) {
+		Object c;
+		c = a;
+		a = b;
+		b = c;
     }
 	
 	/** 
@@ -68,6 +80,45 @@ public class KCUtils {
 			}
 		}
 	}
+	
+    public static void drawRect(int x1, int y1, int width, int height, int color) {
+    	int x2 = x1 + width;
+    	int y2 = y1 + height;
+    	
+        int j1;
+
+        if (x1 < x2)
+        {
+            j1 = x1;
+            x1 = x2;
+            x2 = j1;
+        }
+
+        if (y1 < y2)
+        {
+            j1 = y1;
+            y1 = y2;
+            y2 = j1;
+        }
+
+        float f3 = (float)(color >> 24 & 255) / 255.0F;
+        float f = (float)(color >> 16 & 255) / 255.0F;
+        float f1 = (float)(color >> 8 & 255) / 255.0F;
+        float f2 = (float)(color & 255) / 255.0F;
+        Tessellator tessellator = Tessellator.instance;
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glColor4f(f, f1, f2, f3);
+        tessellator.startDrawingQuads();
+        tessellator.addVertex((double)x1, (double)y2, 0.0D);
+        tessellator.addVertex((double)x2, (double)y2, 0.0D);
+        tessellator.addVertex((double)x2, (double)y1, 0.0D);
+        tessellator.addVertex((double)x1, (double)y1, 0.0D);
+        tessellator.draw();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+    }
 	
 	/** 
 	 * 绘制可缩放的纹理。<BR/>
@@ -134,7 +185,7 @@ public class KCUtils {
 	 * 绘制HUD上的技能槽。<BR/>
 	 * width，height代表屏幕的宽高。
 	 */
-	public static void drawSkill(int width, int height) {
+	public static void drawSkillSlot(int width, int height) {
 		
 		int widthToDraw = (int) (0.9 * width);
 		int heightToDraw[] = new int[4];
@@ -142,7 +193,7 @@ public class KCUtils {
 		heightToDraw[1] = (int) (height * 0.35);
 		heightToDraw[2] = (int) (height * 0.5);
 		heightToDraw[3] = (int) (height * 0.65);
-			
+					
 		GL11.glEnable(GL11.GL_BLEND);
 		Skill skillinslot[] = new Skill[Skill.SKILL_SLOT_SIZE];
 		
@@ -151,15 +202,25 @@ public class KCUtils {
 			if (skillinslot[i] != null) {
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience(getPlayerCl()) / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
+				getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
+				initDrawerState();
+				if (!skillinslot[i].isCD(getPlayerCl())) {
+					int time = (int) (getPlayerCl().worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(getPlayerCl(), skillinslot[i]));
+					int length =  32 - 32 * time / skillinslot[i].mCD;
+					drawRect(widthToDraw, heightToDraw[i], 32, length, 0x80000000);
+					initDrawerState();
+				}
 			}
 			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
 			KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_exp);
+			KCUtils.drawScaledCustomSizeModalRect(widthToDraw + 32, heightToDraw[i], 0, 0, 16, 64, 8, 32, 16, 64);
 		}	
-		FontRenderer fontRenderer = KCUtils.getMC().fontRenderer;
-		fontRenderer.drawStringWithShadow("R", widthToDraw + 2, heightToDraw[0], 0xFF0000);
-		fontRenderer.drawStringWithShadow("F", widthToDraw + 2, heightToDraw[1], 0xFF0000);
-		fontRenderer.drawStringWithShadow("Shift+R", widthToDraw + 2, heightToDraw[2], 0xFF0000);
-		fontRenderer.drawStringWithShadow("Shift+F", widthToDraw + 2, heightToDraw[3], 0xFF0000);
+		getfontRenderer().drawStringWithShadow("R", widthToDraw + 2, heightToDraw[0], 0xFF0000);
+		getfontRenderer().drawStringWithShadow("F", widthToDraw + 2, heightToDraw[1], 0xFF0000);
+		getfontRenderer().drawStringWithShadow("Shift+R", widthToDraw + 2, heightToDraw[2], 0xFF0000);
+		getfontRenderer().drawStringWithShadow("Shift+F", widthToDraw + 2, heightToDraw[3], 0xFF0000);
 
 		GL11.glDisable(GL11.GL_BLEND);
 		initDrawerState();

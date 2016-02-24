@@ -16,6 +16,7 @@ public class KCResources {
 	public static ResourceLocation item_peach_juice = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/peach_juice.png");
 	
 	public static ResourceLocation skill_empty_slot = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/empty_slot.png");
+	public static ResourceLocation skill_empty_exp = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/empty_exp.png");
 	public static ResourceLocation skill_speed_up = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/speed_up.png");
 	public static ResourceLocation skill_strength_up = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/strength_up.png");
 	public static ResourceLocation skill_vision_up = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/vision_up.png");

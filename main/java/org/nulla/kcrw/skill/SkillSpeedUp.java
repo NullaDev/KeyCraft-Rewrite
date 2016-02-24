@@ -1,5 +1,7 @@
 package org.nulla.kcrw.skill;
 
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -12,8 +14,11 @@ public class SkillSpeedUp extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
-		System.out.println("使用技能加速");
-		player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 30 * 20, 1));
+		int time = 20 * 30 * 2048 / (2048 - this.getExperience(player));
+		player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, time, 1));
+		Random rand = new Random();
+		int exp = rand.nextInt(10) + 1;
+		this.modifyExperience(player, exp);
 		return true;
 	}
 }
