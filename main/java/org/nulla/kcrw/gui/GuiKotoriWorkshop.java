@@ -8,6 +8,7 @@ import org.nulla.kcrw.item.crafting.KCRecipe;
 import net.minecraft.client.gui.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -62,12 +63,26 @@ public class GuiKotoriWorkshop extends GuiScreen {
         KCUtils.drawAuroraStrip(width, height);
         
         //绘制合成界面
-        if (currentCraftItem != null) {        	
+        if (currentCraftItem != null) {
+        	ItemStack craftItemStack[] = new ItemStack[3];
+        	for (int i = 0; i < 3; i++)
+        		craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
         	
-        	fontRendererObj.drawStringWithShadow("dang qian he cheng wu pin: " + currentCraftItem.getUnlocalizedName(), zhong, shang + 10, 0xFFFFFF);
-        	fontRendererObj.drawStringWithShadow("xu yao:", zhong, shang + 20, 0xFFFFFF);
-        	fontRendererObj.drawStringWithShadow(currentCraftItem.getRecipe().getCraftItem(0).getUnlocalizedName() + ":0/" + currentCraftItem.getRecipe().getCraftItemAmount(0), zhong, shang + 30, 0xFFFFFF);
-        	fontRendererObj.drawStringWithShadow(currentCraftItem.getRecipe().getCraftItem(1).getUnlocalizedName() + ":0/" + currentCraftItem.getRecipe().getCraftItemAmount(1), zhong, shang + 40, 0xFFFFFF);
+        	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":" + currentCraftItem.getUnlocalizedName(), zhong + 5, shang + 10, 0xFFFFFF);
+        	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.needs") + ":", zhong + 5, shang + 20, 0xFFFFFF);
+        	for (int i=0;i<3;i++) {
+        		if (craftItemStack[i] != null) {
+        			int number = KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), craftItemStack[i].getItem());
+        			String info = "";
+        			info += craftItemStack[i].getUnlocalizedName();
+        			info += ": ";
+        			info += number;
+        			info += " / ";
+        			info += craftItemStack[i].stackSize;
+        			int color = number >= craftItemStack[i].stackSize? 0xFFFFFF : 0xFF0000;
+        			fontRendererObj.drawStringWithShadow(info, zhong + 5, shang + 30 + 10 * i, color);
+        		}
+        	}
 
         	KCUtils.initDrawerState();
         }

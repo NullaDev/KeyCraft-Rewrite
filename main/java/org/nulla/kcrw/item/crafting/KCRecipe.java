@@ -11,7 +11,8 @@ public class KCRecipe {
 	protected int auroraRequired;
 
 	public KCRecipe(ItemStack[] itemstacks, int amount, int aurora) {
-		this.craftItems = itemstacks;
+		for (int i = 0; i < itemstacks.length; i++)
+			this.craftItems[i] = itemstacks[i];
 		this.productAmount = amount;
 		this.auroraRequired = aurora;
 	}

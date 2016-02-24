@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
 public class KCUtils {
 	
@@ -22,13 +23,51 @@ public class KCUtils {
 		return getMC().thePlayer;
 	}
 	
+	/** 
+	 * 判断Shift键是否按下。
+	 */
 	public static boolean isShiftKeyDown() {
         return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
     }
 	
+	/** 
+	 * 判断Ctrl键是否按下。
+	 */
 	public static boolean isCtrlKeyDown() {
         return Minecraft.isRunningOnMac ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
     }
+	
+	/** 
+	 * 获取player身上某种item的总数量。
+	 */
+	public static int getNumberOfItemInPlayer(EntityPlayer player, Item item) {
+		int number = 0;
+		for (int i = 0; i < 36; i++) {
+			if (player.inventory.mainInventory[i] != null) {
+				if (player.inventory.mainInventory[i].getItem().equals(item))
+					number += player.inventory.mainInventory[i].stackSize;
+			}
+		}
+		return number;
+	}
+	
+	/** 
+	 * 从player身上扣掉一定数量的item，用于合成。
+	 */
+	public static void setNumberOfItemInPlayer(EntityPlayer player, Item item, int number) {
+		for (int i = 0; i < 36; i++) {
+			if (player.inventory.mainInventory[i] != null) {
+				if (player.inventory.mainInventory[i].getItem().equals(item)) {
+					if (player.inventory.mainInventory[i].stackSize >= number)
+						player.inventory.mainInventory[i].stackSize -= number;
+					else {
+						player.inventory.mainInventory[i].stackSize = 0;
+						setNumberOfItemInPlayer(player, item, number - player.inventory.mainInventory[i].stackSize);
+					}
+				}
+			}
+		}
+	}
 	
 	/** 
 	 * 绘制可缩放的纹理。<BR/>
