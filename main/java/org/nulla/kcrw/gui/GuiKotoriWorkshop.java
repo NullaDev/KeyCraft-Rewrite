@@ -15,11 +15,13 @@ import net.minecraftforge.common.MinecraftForge;
 public class GuiKotoriWorkshop extends GuiScreen {
 	
 	private GuiScreen parentScreen;
+	
+	private String currentState = "CRAFT";
 
 	private GuiButtonImage btnEnd;
 	private GuiButtonImage btnCraft[] = new GuiButtonImage[99];
 	
-	private ItemFoodKC currentCraftItem = null;
+	private KCItemBase currentCraftItem = null;
 	 
     public GuiKotoriWorkshop(GuiScreen parent) {
          parentScreen = parent;
@@ -70,7 +72,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         	
         	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":" + currentCraftItem.getUnlocalizedName(), zhong + 5, shang + 10, 0xFFFFFF);
         	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.needs") + ":", zhong + 5, shang + 20, 0xFFFFFF);
-        	for (int i=0;i<3;i++) {
+        	for (int i=0; i<3; i++) {
         		if (craftItemStack[i] != null) {
         			int number = KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), craftItemStack[i].getItem());
         			String info = "";
@@ -95,7 +97,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
     	} else {
     		for (int i = 0; i < 99; i++) {
     			if (button.equals(btnCraft[i])) {
-    				currentCraftItem = (ItemFoodKC) KCRecipe.getCraftItemFromNumber(i);
+    				currentCraftItem = (KCItemBase) KCRecipe.getCraftItemFromNumber(i);
     			}
     		}
     	}

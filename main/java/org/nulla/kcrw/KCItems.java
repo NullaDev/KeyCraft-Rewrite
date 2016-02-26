@@ -30,6 +30,7 @@ public class KCItems {
 					information.add(StatCollector.translateToLocal("kcrw.item.intro.peachJuice"));
 				}
     		})
+    		.setAlwaysEdible()
     		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.slime_ball, 4), new ItemStack(Items.apple, 1)} , 4, 10))
     		.setUnlocalizedName("peachJuice")
     		.setTextureName("kcrw:peach_juice");

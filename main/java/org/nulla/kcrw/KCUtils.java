@@ -169,7 +169,7 @@ public class KCUtils {
 		//if (currentAuroraPoint <= MaximumAuroraPoint * 0.25) {color = 0xFF0000;}
 		//else if (currentAuroraPoint <= MaximumAuroraPoint * 0.5) {color = 0xFFFF00;}
 		//else if (currentAuroraPoint > MaximumAuroraPoint) {color = 0x00FF00;}
-		fontRenderer.drawStringWithShadow(info, (int)width - 105, (int)height - 3, color);
+		fontRenderer.drawStringWithShadow(info, width - 105, height - 3, color);
 		initDrawerState();
 		getMC().renderEngine.bindTexture(Gui.icons);
 	}
@@ -202,11 +202,16 @@ public class KCUtils {
 		for (int i = 0; i < skillinslot.length; i++) {
 			skillinslot[i] = SkillUtils.getSkillInSlot(player, i);
 			if (skillinslot[i] != null) {
+				//绘制技能图标
 				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-				drawRect(widthToDraw + 32, heightToDraw[i], 8, 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE, 0xFF7FFF7F);
+				//绘制熟练度条
+				int exp = 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE;
+				drawRect(widthToDraw + 32, heightToDraw[i] + 32 - exp, 8, exp, 0xFF7FFF7F);
+				//绘制Aurora消耗
 				getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
 				initDrawerState();
+				//绘制CD状态
 				if (!skillinslot[i].checkCD(player)) {
 					int time = (int) (player.worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(player));
 					int length =  32 - 32 * time / skillinslot[i].mCD;
