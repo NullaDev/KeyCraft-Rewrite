@@ -4,11 +4,15 @@ kcrw.item.intro.peachJuice=粘稠浓厚桃子味果汁，你确定这东西能�
 
 item.peachJuice.name=粘稠浓厚桃子味
 
+tile.KotoriWorkshop.name=小鸟工坊
+
 kcrw.key.keytitle=kcrw键位设定
 kcrw.key.skill1=使用技能0/2
 kcrw.key.skill2=使用技能1/3
 
 kcrw.gui.currentCraftItem=当前合成物品
+kcrw.gui.currentCraftItemAmount=每次合成数量
+kcrw.gui.currentCraftItemInBag=已拥有数量
 kcrw.gui.needs=需要
 
 kcrw.prompt.cheat.add=增加1k欧若拉点数(作弊)。

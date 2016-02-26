@@ -4,6 +4,7 @@ import org.nulla.kcrw.*;
 import org.nulla.kcrw.gui.part.*;
 import org.nulla.kcrw.item.*;
 import org.nulla.kcrw.item.crafting.KCRecipe;
+import org.nulla.kcrw.skill.SkillUtils;
 
 import net.minecraft.client.gui.*;
 import net.minecraft.item.Item;
@@ -29,7 +30,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
 
     @Override
     public void initGui() {
-    	buttonList.add(btnEnd = new GuiButtonImage(100, (int)(width * 0.05), (int)(height * 0.2 - 31), 32, 32, "end"));
+    	//buttonList.add(btnEnd = new GuiButtonImage(100, (int)(width * 0.05), (int)(height * 0.2 - 31), 32, 32, "end"));
     	addCraftButton();
     }
 
@@ -37,7 +38,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         //drawDefaultBackground();
         
-        mc.renderEngine.bindTexture(KCResources.bg);
+        mc.renderEngine.bindTexture(KCResources.gui_kotori_workshop);
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
         //drawRect(0, 0, width, height, 0xFFFFFFFF);
 
@@ -45,48 +46,53 @@ public class GuiKotoriWorkshop extends GuiScreen {
                 
         //绘制边框
         int shang = (int)(height * 0.2);
-        int xia = (int)(height * 0.9);
-        int zuo = (int)(width * 0.05);
-        int you = (int)(width * 0.95);
-        int zhong = (int)(width * 0.5);
+        int xia = (int)(height * 0.85);
+        int zhong = (int)(width * 0.42);
         
-        drawRect(zuo, shang, you, shang + 1, 0xFF000000);
-        drawRect(zuo, shang, zuo + 1, xia, 0xFF000000);
-        drawRect(you - 1, shang, you, xia, 0xFF000000);
-        drawRect(zuo, xia - 1, you, xia, 0xFF000000);
-        drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);
-        
+        drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);      
         KCUtils.initDrawerState();
     	
         for (int k = 0; k < this.buttonList.size(); ++k) {
             ((GuiButtonImage)this.buttonList.get(k)).drawButton(this.mc, par1, par2);
         }
-        
-        KCUtils.drawAuroraStrip(width, height);
-        
+                
         //绘制合成界面
-        if (currentCraftItem != null) {
-        	ItemStack craftItemStack[] = new ItemStack[3];
-        	for (int i = 0; i < 3; i++)
-        		craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
-        	
-        	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":" + currentCraftItem.getUnlocalizedName(), zhong + 5, shang + 10, 0xFFFFFF);
-        	fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.needs") + ":", zhong + 5, shang + 20, 0xFFFFFF);
-        	for (int i=0; i<3; i++) {
-        		if (craftItemStack[i] != null) {
-        			int number = KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), craftItemStack[i].getItem());
-        			String info = "";
-        			info += craftItemStack[i].getUnlocalizedName();
-        			info += ": ";
-        			info += number;
-        			info += " / ";
-        			info += craftItemStack[i].stackSize;
-        			int color = number >= craftItemStack[i].stackSize? 0xFFFFFF : 0xFF0000;
-        			fontRendererObj.drawStringWithShadow(info, zhong + 5, shang + 30 + 10 * i, color);
+        if (currentState.equals("CRAFT")) {
+        	if (currentCraftItem != null) {
+        		
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":", zhong + 10, shang + 5, 0xAFAFAF);
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal(currentCraftItem.getUnlocalizedName()+".name"), zhong + 10, shang + 15, 0x7FFFBF);
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItemAmount") + ": " + currentCraftItem.getRecipe().getProductAmount(), zhong + 10, shang + 35, 0xAFAFAF);
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItemInBag") + ": " + KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), currentCraftItem), zhong + 10, shang + 55, 0xAFAFAF);
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.needs") + ":", zhong + 10, shang + 75, 0xAFAFAF);
+        		
+        		for (int i = 0; i < 3; i++) {
+            		ItemStack craftItemStack[] = new ItemStack[3];
+        			craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
+        			if (craftItemStack[i] != null) {
+        				int number = KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), craftItemStack[i].getItem());
+        				String info = "";
+        				info += craftItemStack[i].getDisplayName();
+        				info += ": ";
+        				info += number;
+        				info += " / ";
+        				info += craftItemStack[i].stackSize;
+        				int color = number >= craftItemStack[i].stackSize? 0x7FFFBF : 0xFF0000;
+        				fontRendererObj.drawStringWithShadow(info, zhong + 10, shang + 85 + 10 * i, color);
+        			} else {
+        				String info = "----: -- / --";
+        				fontRendererObj.drawStringWithShadow(info, zhong + 10, shang + 85 + 10 * i, 0xAFAFAF);
+        			}
         		}
-        	}
+        		
+        		int aurora = SkillUtils.getAuroraPoint(KCUtils.getPlayerCl());
+        		int aurora_required = currentCraftItem.getRecipe().getAuroraRequired();
+        		int color = aurora > aurora_required ? 0x7FFFBF : 0xFF00000;
+        		String info = "Aurora: " +  aurora_required + " / " + aurora;
+				fontRendererObj.drawStringWithShadow(info, zhong + 10, shang + 125, color);
 
-        	KCUtils.initDrawerState();
+        		KCUtils.initDrawerState();
+        	}
         }
     }
     
@@ -130,7 +136,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
     }
     
     private void addCraftButton() {
-    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.3 - 64), (int)(height * 0.3), 32, 32, "peach_juice"));
+    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.3 - 64), (int)(height * 0.4), 32, 32, "peach_juice"));
     }
 
 }
