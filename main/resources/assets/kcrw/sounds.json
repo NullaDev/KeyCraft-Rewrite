@@ -1,0 +1,11 @@
+{
+  "music.test": {
+    "category": "music",
+	"sounds": [
+      {
+        "name": "music/pump_it",
+        "stream": true
+      }
+    ]
+  }
+}
