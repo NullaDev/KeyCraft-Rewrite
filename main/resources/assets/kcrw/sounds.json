@@ -8,4 +8,14 @@
       }
     ]
   }
+, 
+  "music.tori_no_uta": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "music/tori_no_uta",
+        "stream": true
+      }
+    ]
+  }
 }

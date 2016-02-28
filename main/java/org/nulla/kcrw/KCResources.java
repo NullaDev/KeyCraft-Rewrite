@@ -21,6 +21,9 @@ public class KCResources {
 	public static ResourceLocation skill_strength_up = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/strength_up.png");
 	public static ResourceLocation skill_vision_up = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/vision_up.png");
 	
+	public static ResourceLocation music_pump_it = new ResourceLocation(KeyCraft_Rewrite.MODID, "music.test");
+	public static ResourceLocation music_tori_no_uta = new ResourceLocation(KeyCraft_Rewrite.MODID, "music.tori_no_uta");
+	
 	public static ResourceLocation[] locations = {icon_end, item_peach_juice, skill_speed_up, skill_strength_up, skill_vision_up};
 	
 	public static ResourceLocation getLocationFromName(String name) {

@@ -28,6 +28,7 @@ public class KCClientProxy extends KCCommonProxy {
 		
 		// 注册GUI、用户输入事件
     	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
+    	MinecraftForge.EVENT_BUS.register(new KCMusicHelper());
 		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
 		
 		//注册KeyBinding

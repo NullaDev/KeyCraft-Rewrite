@@ -6,11 +6,13 @@ import org.nulla.kcrw.skill.Skill;
 import org.nulla.kcrw.skill.SkillUtils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class KCUtils {
 	
@@ -234,5 +236,12 @@ public class KCUtils {
 		getMC().renderEngine.bindTexture(Gui.icons);
 	}
 
-
+	public static void playSound(ResourceLocation location) {
+		if (!KCMusicHelper.isPlayingMusic()) {
+			getMC().getSoundHandler().stopSounds();
+			KCMusicHelper.currentSound = PositionedSoundRecord.func_147673_a(location);
+			getMC().getSoundHandler().playSound(KCMusicHelper.currentSound);
+		}
+	}
+	
 }
