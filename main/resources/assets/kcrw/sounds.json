@@ -18,4 +18,14 @@
       }
     ]
   }
+, 
+  "sound.aurora": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "sound/aurora",
+        "stream": true
+      }
+    ]
+  }
 }

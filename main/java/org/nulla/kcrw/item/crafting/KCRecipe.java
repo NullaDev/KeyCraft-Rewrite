@@ -45,7 +45,8 @@ public class KCRecipe {
 	
 	public static Item getCraftItemFromNumber(int number) {
 		switch (number) {
-			case 0: return KCItems.PeachJuice;
+			case 0: return KCItems.peachjuice;
+			case 1: return KCItems.musicplayer;
 			default: return null;
 		}
 	}

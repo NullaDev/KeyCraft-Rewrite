@@ -1,7 +1,8 @@
 package org.nulla.kcrw.skill;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import org.nulla.kcrw.*;
+
+import net.minecraft.entity.player.*;
 import net.minecraft.nbt.NBTTagCompound;
 
 /** 所有技能的基类，实现和技能紧密相关的部分（使用、CD、熟练度） */
@@ -106,7 +107,7 @@ public abstract class Skill {
 		
 		// 服务端发同步技能包
 		if (player instanceof EntityPlayerMP)
-			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);		
 		return res;
 	}
 	

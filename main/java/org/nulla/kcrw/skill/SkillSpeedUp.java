@@ -2,6 +2,9 @@ package org.nulla.kcrw.skill;
 
 import java.util.Random;
 
+import org.nulla.kcrw.KCMusicHelper;
+import org.nulla.kcrw.KCResources;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -22,6 +25,7 @@ public class SkillSpeedUp extends Skill {
 			int exp = rand.nextInt(10) + 1;
 			modifyExperience(player, exp);
 		}
+		KCMusicHelper.playSound(KCResources.sound_aurora);
 		return true;
 	}
 }

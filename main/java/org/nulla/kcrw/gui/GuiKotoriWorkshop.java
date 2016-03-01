@@ -136,7 +136,8 @@ public class GuiKotoriWorkshop extends GuiScreen {
     }
     
     private void addCraftButton() {
-    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.3 - 64), (int)(height * 0.4), 32, 32, "peach_juice"));
+    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.3 - 52), (int)(height * 0.4), 32, 32, "peach_juice"));
+    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.3 - 16), (int)(height * 0.4), 32, 32, "music_player"));
     }
 
 }
