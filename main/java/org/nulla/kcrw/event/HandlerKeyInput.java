@@ -24,7 +24,11 @@ public class HandlerKeyInput {
 				skill = SkillUtils.getSkillInSlot(player, 0);
 				System.out.println("使用技能0");
 				// 播放音乐测试
-				KCUtils.playSound(KCResources.music_tori_no_uta);
+				/*if (KCMusicHelper.isMcBgmPlaying())
+					KCMusicHelper.stopMcBgm();
+				else
+					KCMusicHelper.restartMcBgm();*/
+				KCMusicHelper.playSound(KCResources.music_tori_no_uta);
 			}
 		} else if (KCClientProxy.kbSkill2.isPressed()) {
 		    if (KCUtils.isShiftKeyDown()) {

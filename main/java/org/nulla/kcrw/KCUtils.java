@@ -235,13 +235,5 @@ public class KCUtils {
 		initDrawerState();
 		getMC().renderEngine.bindTexture(Gui.icons);
 	}
-
-	public static void playSound(ResourceLocation location) {
-		if (!KCMusicHelper.isPlayingMusic()) {
-			getMC().getSoundHandler().stopSounds();
-			KCMusicHelper.currentSound = PositionedSoundRecord.func_147673_a(location);
-			getMC().getSoundHandler().playSound(KCMusicHelper.currentSound);
-		}
-	}
 	
 }
