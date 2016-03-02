@@ -107,7 +107,7 @@ public abstract class Skill {
 		
 		// 服务端发同步技能包
 		if (player instanceof EntityPlayerMP)
-			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);		
+			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 		return res;
 	}
 	

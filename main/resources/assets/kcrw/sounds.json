@@ -7,8 +7,7 @@
         "stream": true
       }
     ]
-  }
-, 
+  },
   "music.tori_no_uta": {
     "category": "music",
     "sounds": [
@@ -17,10 +16,9 @@
         "stream": true
       }
     ]
-  }
-, 
+  },
   "sound.aurora": {
-    "category": "music",
+    "category": "player",
     "sounds": [
       {
         "name": "sound/aurora",

@@ -27,7 +27,7 @@ public class SkillStrengthUp extends Skill {
 			int exp = rand.nextInt(10) + 1;
 			modifyExperience(player, exp);
 		}
-		KCMusicHelper.playSound(KCResources.sound_aurora);
+		player.worldObj.playSoundAtEntity(player, KCResources.sound_aurora.toString(), 1.0f, 1.0f);
 		return true;
 	}
 }

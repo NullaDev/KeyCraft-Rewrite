@@ -18,10 +18,11 @@ public class KCMusicHelper {
 		return KCUtils.getMC().getSoundHandler().isSoundPlaying(currentSound);
 	}
 
-	public static void playSound(ResourceLocation location) {
+	/** 停止MC原版BGM并播放新的BGM */
+	public static void playBgm(ResourceLocation location) {
 		if (!isPlayingMusic()) {
 			stopMcBgm();
-			currentSound = PositionedSoundRecord.func_147673_a(location);
+			currentSound = PositionedSoundRecord.func_147673_a(location); // 以后会改进
 			Minecraft.getMinecraft().getSoundHandler().playSound(KCMusicHelper.currentSound);
 		}
 	}

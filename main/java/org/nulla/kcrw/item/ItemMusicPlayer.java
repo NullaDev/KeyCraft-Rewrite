@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class ItemMusicPlayer extends KCItemBase {
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		KCMusicHelper.playSound(KCResources.music_tori_no_uta);
+		KCMusicHelper.playBgm(KCResources.music_tori_no_uta);
 		return stack;
     }
 
