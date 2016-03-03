@@ -26,7 +26,7 @@ public class BlockKotoriWorkshop extends KCBlockBase {
 		if (!world.isRemote) {
 			return true;
 		}
-		KCUtils.getMC().displayGuiScreen(new GuiKotoriWorkshop(KCUtils.getMC().currentScreen));
+		KCUtils.getMC().displayGuiScreen(new GuiKotoriWorkshop(KCUtils.getMC().currentScreen, player));
 		return true;
     }
 	

@@ -69,7 +69,7 @@ public class KCUtils {
 	/** 
 	 * 从player身上扣掉一定数量的item，用于合成。
 	 */
-	public static void setNumberOfItemInPlayer(EntityPlayer player, Item item, int number) {
+	public static void minusNumberOfItemInPlayer(EntityPlayer player, Item item, int number) {
 		for (int i = 0; i < 36; i++) {
 			if (player.inventory.mainInventory[i] != null) {
 				if (player.inventory.mainInventory[i].getItem().equals(item)) {
@@ -77,7 +77,7 @@ public class KCUtils {
 						player.inventory.mainInventory[i].stackSize -= number;
 					else {
 						player.inventory.mainInventory[i].stackSize = 0;
-						setNumberOfItemInPlayer(player, item, number - player.inventory.mainInventory[i].stackSize);
+						minusNumberOfItemInPlayer(player, item, number - player.inventory.mainInventory[i].stackSize);
 					}
 				}
 			}

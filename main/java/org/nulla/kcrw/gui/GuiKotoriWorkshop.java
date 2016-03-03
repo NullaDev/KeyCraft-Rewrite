@@ -7,6 +7,7 @@ import org.nulla.kcrw.item.crafting.KCRecipe;
 import org.nulla.kcrw.skill.SkillUtils;
 
 import net.minecraft.client.gui.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -16,21 +17,25 @@ import net.minecraftforge.common.MinecraftForge;
 public class GuiKotoriWorkshop extends GuiScreen {
 	
 	private GuiScreen parentScreen;
+	private EntityPlayer crafter;
 	
 	private String currentState = "CRAFT";
 
-	private GuiButtonImage btnEnd;
+	private GuiButtonImage btnEnsureCraft;
 	private GuiButtonImage btnCraft[] = new GuiButtonImage[99];
 	
 	private KCItemBase currentCraftItem = null;
 	 
-    public GuiKotoriWorkshop(GuiScreen parent) {
+    public GuiKotoriWorkshop(GuiScreen parent, EntityPlayer player) {
          parentScreen = parent;
+         crafter = player;
     }
 
     @Override
     public void initGui() {
-    	//buttonList.add(btnEnd = new GuiButtonImage(100, (int)(width * 0.05), (int)(height * 0.2 - 31), 32, 32, "end"));
+    	if (currentCraftItem != null) {
+    		buttonList.add(btnEnsureCraft = new GuiButtonImage(256, (int)(width * 0.42 + 10), (int)(height * 0.2 + 145), 16, 16, "craft"));
+    	}
     	addCraftButton();
     }
 
@@ -63,21 +68,21 @@ public class GuiKotoriWorkshop extends GuiScreen {
         		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":", zhong + 10, shang + 5, 0xAFAFAF);
         		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal(currentCraftItem.getUnlocalizedName()+".name"), zhong + 10, shang + 15, 0x7FFFBF);
         		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItemAmount") + ": " + currentCraftItem.getRecipe().getProductAmount(), zhong + 10, shang + 35, 0xAFAFAF);
-        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItemInBag") + ": " + KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), currentCraftItem), zhong + 10, shang + 55, 0xAFAFAF);
+        		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItemInBag") + ": " + KCUtils.getNumberOfItemInPlayer(crafter, currentCraftItem), zhong + 10, shang + 55, 0xAFAFAF);
         		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.needs") + ":", zhong + 10, shang + 75, 0xAFAFAF);
         		
         		for (int i = 0; i < 3; i++) {
             		ItemStack craftItemStack[] = new ItemStack[3];
         			craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
         			if (craftItemStack[i] != null) {
-        				int number = KCUtils.getNumberOfItemInPlayer(KCUtils.getPlayerCl(), craftItemStack[i].getItem());
+        				int number = KCUtils.getNumberOfItemInPlayer(crafter, craftItemStack[i].getItem());
         				String info = "";
         				info += craftItemStack[i].getDisplayName();
         				info += ": ";
         				info += number;
         				info += " / ";
         				info += craftItemStack[i].stackSize;
-        				int color = number >= craftItemStack[i].stackSize? 0x7FFFBF : 0xFF0000;
+        				int color = isEnough(i)? 0x7FFFBF : 0xFF0000;
         				fontRendererObj.drawStringWithShadow(info, zhong + 10, shang + 85 + 10 * i, color);
         			} else {
         				String info = "----: -- / --";
@@ -85,7 +90,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         			}
         		}
         		
-        		int aurora = SkillUtils.getAuroraPoint(KCUtils.getPlayerCl());
+        		int aurora = SkillUtils.getAuroraPoint(crafter);
         		int aurora_required = currentCraftItem.getRecipe().getAuroraRequired();
         		int color = aurora > aurora_required ? 0x7FFFBF : 0xFF00000;
         		String info = "Aurora: " +  aurora_required + " / " + aurora;
@@ -98,8 +103,10 @@ public class GuiKotoriWorkshop extends GuiScreen {
     
     //不是Override
 	protected void actionPerformed(GuiButtonImage button) {
-		if (button.equals(btnEnd)) {
-			mc.displayGuiScreen(parentScreen);
+		if (button.equals(btnEnsureCraft)) {
+			if (isEnough(0) && isEnough(1) && isEnough(2)) {
+				craft();
+			}				
     	} else {
     		for (int i = 0; i < 99; i++) {
     			if (button.equals(btnCraft[i])) {
@@ -107,6 +114,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
     			}
     		}
     	}
+		refresh();
 	}
     
     @Override
@@ -124,7 +132,8 @@ public class GuiKotoriWorkshop extends GuiScreen {
     }
     
     public void refresh() {
-        mc.displayGuiScreen(new GuiKotoriWorkshop(this.parentScreen));
+    	buttonList.clear();
+    	this.initGui();
     }
     
     public GuiScreen getParentScreen() {
@@ -136,8 +145,34 @@ public class GuiKotoriWorkshop extends GuiScreen {
     }
     
     private void addCraftButton() {
-    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.3 - 52), (int)(height * 0.4), 32, 32, "peach_juice"));
-    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.3 - 16), (int)(height * 0.4), 32, 32, "music_player"));
+    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.2 ), (int)(height * 0.4), 32, 32, "peach_juice"));
+    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.2 + 36), (int)(height * 0.4), 32, 32, "music_player"));
+    }
+    
+    private boolean isEnough(int i) {
+		ItemStack craftItemStack = currentCraftItem.getRecipe().getCraftItemStack(i);
+
+		if (craftItemStack == null)
+			return true;
+		
+    	if (craftItemStack.stackSize <= KCUtils.getNumberOfItemInPlayer(crafter, craftItemStack.getItem()))
+    		return true;
+    	else
+    		return false;
+    	
+    }
+    
+    private void craft() {
+    	for (int i = 0; i < 3; i++) {
+    		ItemStack craftItemStack[] = new ItemStack[3];
+			craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
+			if (craftItemStack[i] != null) {
+				KCUtils.minusNumberOfItemInPlayer(crafter, craftItemStack[i].getItem(), craftItemStack[i].stackSize);
+			}
+    	}
+    	SkillUtils.modifyAuroraPoint(crafter, -1 * currentCraftItem.getRecipe().getAuroraRequired());
+    	ItemStack stack = new ItemStack(currentCraftItem, currentCraftItem.getRecipe().getProductAmount());
+    	crafter.inventory.addItemStackToInventory(stack);
     }
 
 }
