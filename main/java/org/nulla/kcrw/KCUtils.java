@@ -70,17 +70,20 @@ public class KCUtils {
 	 * 从player身上扣掉一定数量的item，用于合成。
 	 */
 	public static void minusNumberOfItemInPlayer(EntityPlayer player, Item item, int number) {
-		for (int i = 0; i < 36; i++) {
-			if (player.inventory.mainInventory[i] != null) {
-				if (player.inventory.mainInventory[i].getItem().equals(item)) {
-					if (player.inventory.mainInventory[i].stackSize >= number)
-						player.inventory.mainInventory[i].stackSize -= number;
-					else {
-						player.inventory.mainInventory[i].stackSize = 0;
-						minusNumberOfItemInPlayer(player, item, number - player.inventory.mainInventory[i].stackSize);
-					}
+		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+			if (player.inventory.mainInventory[i] != null
+				&& player.inventory.mainInventory[i].getItem().equals(item)) {
+				int size = player.inventory.mainInventory[i].stackSize;
+				if (size >= number) {
+					player.inventory.decrStackSize(i, number);
+					number = 0;
+				} else {
+					player.inventory.decrStackSize(i, size);
+					number -= size;
 				}
 			}
+			if (number <= 0)
+				break;
 		}
 	}
 	

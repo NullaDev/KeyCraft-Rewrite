@@ -19,13 +19,11 @@ public class KCClientProxy extends KCCommonProxy {
 	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		super.preInit(event);
+		
 	}
 	
 	@Override
 	public void init(FMLInitializationEvent event) {
-		super.init(event);
-		
 		// 注册GUI、用户输入事件
     	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
@@ -37,7 +35,7 @@ public class KCClientProxy extends KCCommonProxy {
 	
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-		super.postInit(event);
+		
 	}
 	
 	@Override

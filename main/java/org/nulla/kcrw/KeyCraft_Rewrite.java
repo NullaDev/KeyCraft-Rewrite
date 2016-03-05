@@ -1,6 +1,9 @@
 package org.nulla.kcrw;
 
 import net.minecraft.creativetab.CreativeTabs;
+
+import org.nulla.kcrw.skill.SkillNetwork;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
@@ -25,11 +28,18 @@ public class KeyCraft_Rewrite {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	KCItems.InitItems();
+    	KCBlocks.InitBlocks();
+    	
     	proxy.preInit(event);
     }
     
     @EventHandler
     public void Init(FMLInitializationEvent event) {
+		// 注册网络事件
+		SkillNetwork.getInstance().init();
+		RewriteNetwork.getInstance().init();
+		
     	proxy.init(event);
     }
     

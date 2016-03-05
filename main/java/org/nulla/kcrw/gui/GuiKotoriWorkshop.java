@@ -4,6 +4,7 @@ import org.nulla.kcrw.*;
 import org.nulla.kcrw.gui.part.*;
 import org.nulla.kcrw.item.*;
 import org.nulla.kcrw.item.crafting.KCRecipe;
+import org.nulla.kcrw.skill.SkillNetwork;
 import org.nulla.kcrw.skill.SkillUtils;
 
 import net.minecraft.client.gui.*;
@@ -105,7 +106,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
 	protected void actionPerformed(GuiButtonImage button) {
 		if (button.equals(btnEnsureCraft)) {
 			if (isEnough(0) && isEnough(1) && isEnough(2)) {
-				craft();
+				craft(currentCraftItem, crafter);
 			}				
     	} else {
     		for (int i = 0; i < 99; i++) {
@@ -162,17 +163,30 @@ public class GuiKotoriWorkshop extends GuiScreen {
     	
     }
     
-    private void craft() {
+    /** 如果在客户端会发同步包 */
+    public static void craft(KCItemBase output, EntityPlayer player) {
+    	if (output == null)
+    		return;
+    	
+    	if (player.worldObj.isRemote)
+        	RewriteNetwork.Channel.sendToServer(RewriteNetwork.createCraftPacket(output));
+    	
     	for (int i = 0; i < 3; i++) {
     		ItemStack craftItemStack[] = new ItemStack[3];
-			craftItemStack[i] = currentCraftItem.getRecipe().getCraftItemStack(i);
+			craftItemStack[i] = output.getRecipe().getCraftItemStack(i);
 			if (craftItemStack[i] != null) {
-				KCUtils.minusNumberOfItemInPlayer(crafter, craftItemStack[i].getItem(), craftItemStack[i].stackSize);
+				KCUtils.minusNumberOfItemInPlayer(player, craftItemStack[i].getItem(), craftItemStack[i].stackSize);
 			}
     	}
-    	SkillUtils.modifyAuroraPoint(crafter, -1 * currentCraftItem.getRecipe().getAuroraRequired());
-    	ItemStack stack = new ItemStack(currentCraftItem, currentCraftItem.getRecipe().getProductAmount());
-    	crafter.inventory.addItemStackToInventory(stack);
+    	SkillUtils.modifyAuroraPoint(player, -1 * output.getRecipe().getAuroraRequired());
+    	ItemStack stack = new ItemStack(output, output.getRecipe().getProductAmount());
+    	player.inventory.addItemStackToInventory(stack);
+    }
+    
+    public static void craft(Item output, EntityPlayer player) {
+    	if (!(output instanceof KCItemBase))
+    		return;
+    	craft((KCItemBase)output, player);
     }
 
 }
