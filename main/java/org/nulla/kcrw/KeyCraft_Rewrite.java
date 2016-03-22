@@ -1,7 +1,9 @@
 package org.nulla.kcrw;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 
+import org.nulla.kcrw.event.HandlerChatCheating;
 import org.nulla.kcrw.skill.SkillNetwork;
 
 import cpw.mods.fml.common.Mod;
@@ -14,7 +16,7 @@ public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
-    public static final String VERSION = "Demo20160224";
+    public static final String VERSION = "Demo20160323";
     
     @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
             	serverSide = "org.nulla.kcrw.KCCommonProxy")
@@ -28,19 +30,18 @@ public class KeyCraft_Rewrite {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	proxy.preInit(event);
     	KCItems.InitItems();
     	KCBlocks.InitBlocks();
-    	
-    	proxy.preInit(event);
     }
     
     @EventHandler
     public void Init(FMLInitializationEvent event) {
+    	proxy.init(event);
+    	MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
 		// 注册网络事件
 		SkillNetwork.getInstance().init();
-		RewriteNetwork.getInstance().init();
-		
-    	proxy.init(event);
+		KCNetwork.getInstance().init();	
     }
     
     @EventHandler

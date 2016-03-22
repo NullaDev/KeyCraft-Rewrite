@@ -1,6 +1,7 @@
 package org.nulla.kcrw;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import org.nulla.kcrw.event.HandlerDrawHUD;
 import org.nulla.kcrw.event.HandlerKeyInput;
 
@@ -19,7 +20,7 @@ public class KCClientProxy extends KCCommonProxy {
 	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		Display.setTitle("Welcome to KeyCraft's World!");
 	}
 	
 	@Override

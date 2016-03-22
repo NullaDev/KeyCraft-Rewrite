@@ -55,9 +55,11 @@ public class GuiKotoriWorkshop extends GuiScreen {
         int xia = (int)(height * 0.85);
         int zhong = (int)(width * 0.42);
         
+        //这是一条竖线
         drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);      
         KCUtils.initDrawerState();
     	
+        //绘制Button
         for (int k = 0; k < this.buttonList.size(); ++k) {
             ((GuiButtonImage)this.buttonList.get(k)).drawButton(this.mc, par1, par2);
         }
@@ -169,7 +171,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
     		return;
     	
     	if (player.worldObj.isRemote)
-        	RewriteNetwork.Channel.sendToServer(RewriteNetwork.createCraftPacket(output));
+        	KCNetwork.Channel.sendToServer(KCNetwork.createCraftPacket(output));
     	
     	for (int i = 0; i < 3; i++) {
     		ItemStack craftItemStack[] = new ItemStack[3];

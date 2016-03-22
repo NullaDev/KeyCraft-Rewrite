@@ -4,15 +4,18 @@ import java.util.Random;
 
 import org.nulla.kcrw.KCMusicHelper;
 import org.nulla.kcrw.KCResources;
+import org.nulla.kcrw.KeyCraft_Rewrite;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillSpeedUp extends Skill {
 	
 	public SkillSpeedUp(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/speed_up.png");
 	}
 	
 	@Override

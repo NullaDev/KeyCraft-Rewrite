@@ -20,20 +20,20 @@ import net.minecraft.item.Item;
 import net.minecraft.network.NetHandlerPlayServer;
 
 /** 处理其他的网络事件 */
-public class RewriteNetwork
+public class KCNetwork
 {
 	public static final String CHANNEL_STRING = "REWRITE_CHANNEL";
 	public static FMLEventChannel Channel;
 	
 	// 单例模式
-	private static RewriteNetwork instance = new RewriteNetwork();
-	private RewriteNetwork(){ }
-	public static RewriteNetwork getInstance(){ return instance; }
+	private static KCNetwork instance = new KCNetwork();
+	private KCNetwork(){ }
+	public static KCNetwork getInstance(){ return instance; }
 	
 	/** 初始化，注册频道 */
 	public void init()
 	{
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(RewriteNetwork.CHANNEL_STRING);
+		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(KCNetwork.CHANNEL_STRING);
 		Channel.register(this);
 	}
 	

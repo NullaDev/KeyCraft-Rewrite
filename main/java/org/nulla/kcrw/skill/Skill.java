@@ -4,6 +4,7 @@ import org.nulla.kcrw.*;
 
 import net.minecraft.entity.player.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 /** 所有技能的基类，实现和技能紧密相关的部分（使用、CD、熟练度） */
 public abstract class Skill {
@@ -18,6 +19,8 @@ public abstract class Skill {
 	public final int mAuroraCost;
 	/** 单位：Tick */
 	public final int mCD;
+	/** 此技能的图标 */
+	public ResourceLocation mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/empty_skill_icon.png");
 		
 	public Skill(String name, int auroraRequired, int auroraCost, int cd) {
 		this.mID = Skills.AllSkills.size();

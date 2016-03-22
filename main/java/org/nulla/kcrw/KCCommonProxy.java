@@ -19,7 +19,7 @@ public class KCCommonProxy implements IGuiHandler {
 	 
 	public void init(FMLInitializationEvent event) {
 		// 注册聊天作弊
-    	MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
+    	//MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
 	}
 	 
 	public void postInit(FMLPostInitializationEvent event) {

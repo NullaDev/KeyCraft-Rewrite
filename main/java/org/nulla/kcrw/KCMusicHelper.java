@@ -3,9 +3,7 @@ package org.nulla.kcrw;
 import java.lang.reflect.Field;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.audio.*;
 import net.minecraft.util.ResourceLocation;
 
 public class KCMusicHelper {
@@ -23,7 +21,7 @@ public class KCMusicHelper {
 		if (!isPlayingMusic()) {
 			stopMcBgm();
 			currentSound = PositionedSoundRecord.func_147673_a(location); // 以后会改进
-			Minecraft.getMinecraft().getSoundHandler().playSound(KCMusicHelper.currentSound);
+			KCUtils.getMC().getSoundHandler().playSound(KCMusicHelper.currentSound);
 		}
 	}
 	

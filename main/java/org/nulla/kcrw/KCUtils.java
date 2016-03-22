@@ -5,13 +5,14 @@ import org.lwjgl.opengl.GL11;
 import org.nulla.kcrw.skill.Skill;
 import org.nulla.kcrw.skill.SkillUtils;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.*;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 
 public class KCUtils {
@@ -51,6 +52,29 @@ public class KCUtils {
 		a = b;
 		b = c;
     }
+	
+	/** 
+	 * 注册带附魔的合成表。
+	 */
+	public static void addEnchantedRecipe(ItemStack item, Enchantment enchantment, int enchantmentLevel, Object[] ingredientArray) {
+		if (enchantment != null) {
+			item.addEnchantment(enchantment, enchantmentLevel);
+	    }
+	    GameRegistry.addRecipe(item, ingredientArray);
+	}
+	
+	/** 
+	 * 注册带附魔和名字的合成表。
+	 */
+	public static void addEnchantedNamedRecipe(ItemStack item, Enchantment enchantment, int enchantmentLevel, String name, Object[] ingredientArray) {
+		if (enchantment != null) {
+			item.addEnchantment(enchantment, enchantmentLevel);
+	    }
+		if (name != null) {
+			item.setStackDisplayName(name);
+		}
+	    GameRegistry.addRecipe(item, ingredientArray);
+	}
 	
 	/** 
 	 * 获取player身上某种item的总数量。
@@ -208,7 +232,7 @@ public class KCUtils {
 			skillinslot[i] = SkillUtils.getSkillInSlot(player, i);
 			if (skillinslot[i] != null) {
 				//绘制技能图标
-				KCUtils.getMC().getTextureManager().bindTexture(KCResources.getLocationFromName(skillinslot[i].mName));
+				KCUtils.getMC().getTextureManager().bindTexture(skillinslot[i].mIcon);
 				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
 				//绘制熟练度条
 				int exp = 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE;
