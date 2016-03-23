@@ -32,6 +32,17 @@ public class GuiButtonImage extends Gui {
         this.height = btnHeight;
         this.buttonTextures = KCResources.getLocationFromName(name);
     }
+    
+    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, ResourceLocation location) {
+        this.enabled = true;
+        this.visible = true;
+        this.id = btnID;
+        this.posX = btnPosX;
+        this.posY = btnPosY;
+        this.width = btnWidth;
+        this.height = btnHeight;
+        this.buttonTextures = location;
+    }
 
     /**
      * 如果Disable返回0, 没有Hover返回1, Hover返回2。

@@ -11,5 +11,5 @@ public class Skills {
 	public static final SkillStrengthUp SkillStrengthUp = new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
 	public static final SkillVisionUp SkillVisionUp = new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
 	public static final SkillAuroraBlade SkillAuroraBlade = new SkillAuroraBlade("aurora_blade", 1024, 16, 120 * 20);
-	
+
 }
