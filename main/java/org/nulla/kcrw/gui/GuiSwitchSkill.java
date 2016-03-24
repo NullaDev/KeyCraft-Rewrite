@@ -18,6 +18,7 @@ public class GuiSwitchSkill extends GuiScreen {
 	
 	private GuiButtonImage btnCurrentSkillSlot[] = new GuiButtonImage[4];
 	private GuiButtonImage btnOptionalSkill[];
+	private Skill[] optionalSkill;
 	
 	private int currentState = -1;
 		 
@@ -32,15 +33,15 @@ public class GuiSwitchSkill extends GuiScreen {
     	for (int i = 0; i < 4; i++) {
     		skillsInSlot[i] = SkillUtils.getSkillInSlot(skillOwner, i);
     		if (skillsInSlot[i] != null) {
-    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i)), (int)(height * 0.4), 16, 16, skillsInSlot[i].mIcon));
+    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, skillsInSlot[i].mIcon));
     		} else {
-    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i)), (int)(height * 0.4), 16, 16, Skill.empty_skill_icon));
+    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, Skill.empty_skill_icon));
     		}
     	}
     	   
         if (currentState != -1) {
         	int optionalSkillNumber = 0;
-        	Skill[] optionalSkill = new Skill[99];
+        	optionalSkill = new Skill[99];
         	for (Skill i : Skills.AllSkills) {
         		if (i.hasSkill(skillOwner)) {
         			optionalSkill[optionalSkillNumber++] = i;
@@ -50,7 +51,7 @@ public class GuiSwitchSkill extends GuiScreen {
     		btnOptionalSkill = new GuiButtonImage[optionalSkillNumber];
 
         	for (int i = 0; i < optionalSkillNumber; i++) {
-    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * 0.1 * (i % 6 + 2)), (int)(height * 0.4), 16, 16, Skill.empty_skill_icon));
+    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * i)) - 8, (int)(height * 0.6), 16, 16, optionalSkill[i].mIcon));
         	}
         }
     }
@@ -59,7 +60,7 @@ public class GuiSwitchSkill extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         //drawDefaultBackground();
         
-        drawRect((int) (width * 0.2), (int) (height* 0.8), (int) (width * 0.8), (int) (height * 0.8), 0xFFFFFFFF);
+        drawRect((int) (width * 0.2), (int) (height * 0.2), (int) (width * 0.8), (int) (height * 0.8), 0x7F000000);
 
         //super.drawScreen(par1,par2,par3);
     	
@@ -72,6 +73,15 @@ public class GuiSwitchSkill extends GuiScreen {
     
     //²»ÊÇOverride
 	protected void actionPerformed(GuiButtonImage button) {
+		if (currentState != -1) {
+			for (int i = 0; i < btnOptionalSkill.length; i++) {
+				if (button.equals(btnOptionalSkill[i])) {
+					SkillUtils.setSkillInSlot(skillOwner, currentState, optionalSkill[i], true);
+					currentState = -1;
+				}
+			}
+		}
+		
 		for (int i = 0; i < 4; i++) {
 			if (button.equals(btnCurrentSkillSlot[i])) {
 				currentState = i;
