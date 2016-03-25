@@ -13,19 +13,19 @@ public class EntityBase extends Entity{
 
 	@Override
 	protected void entityInit()
-{
+	{
 		
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound par1)
-{
+	{
 		
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound par1)
-{
+	{
 		
 	}
 

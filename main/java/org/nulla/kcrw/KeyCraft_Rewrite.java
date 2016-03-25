@@ -21,9 +21,6 @@ public class KeyCraft_Rewrite {
     @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
             	serverSide = "org.nulla.kcrw.KCCommonProxy")
     public static KCCommonProxy proxy;
- 
-    @Instance(MODID)
-    public static KeyCraft_Rewrite instance;
     
     public static CreativeTabs KCCreativeTab = new KCCreativeTab("kcrw");
     
@@ -31,6 +28,7 @@ public class KeyCraft_Rewrite {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	proxy.preInit(event);
+    	
     	KCItems.InitItems();
     	KCBlocks.InitBlocks();
     }
@@ -38,7 +36,10 @@ public class KeyCraft_Rewrite {
     @EventHandler
     public void Init(FMLInitializationEvent event) {
     	proxy.init(event);
+    	
+		// 注册聊天作弊
     	MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
+    	
 		// 注册网络事件
 		SkillNetwork.getInstance().init();
 		KCNetwork.getInstance().init();	

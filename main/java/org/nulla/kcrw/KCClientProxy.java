@@ -5,14 +5,15 @@ import org.lwjgl.opengl.Display;
 import org.nulla.kcrw.event.HandlerDrawHUD;
 import org.nulla.kcrw.event.HandlerKeyInput;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.common.MinecraftForge;
 
+/* 注册只在客户端发生的事件 */
 public class KCClientProxy extends KCCommonProxy {
 	
 	public static final KeyBinding kbSkill1 = new KeyBinding("kcrw.key.skill1", Keyboard.KEY_R, "kcrw.key.keytitle");
@@ -38,11 +39,6 @@ public class KCClientProxy extends KCCommonProxy {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		
-	}
-	
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		return null;
 	}
 
 }
