@@ -1,6 +1,7 @@
 package org.nulla.kcrw.gui;
 
 import org.nulla.kcrw.KCResources;
+import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.gui.part.GuiButtonImage;
 import org.nulla.kcrw.item.KCItemBase;
 import org.nulla.kcrw.item.crafting.KCRecipe;
@@ -11,9 +12,8 @@ import org.nulla.kcrw.skill.Skills;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class GuiSwitchSkill extends GuiScreen {
+public class GuiSwitchSkill extends KCGuiBase {
 	
-	private GuiScreen parentScreen;
 	private EntityPlayer skillOwner;
 	
 	private GuiButtonImage btnCurrentSkillSlot[] = new GuiButtonImage[4];
@@ -23,8 +23,8 @@ public class GuiSwitchSkill extends GuiScreen {
 	private int currentState = -1;
 		 
     public GuiSwitchSkill(GuiScreen parent, EntityPlayer player) {
-         parentScreen = parent;
-         skillOwner = player;
+    	super(parent);
+    	skillOwner = player;
     }
 
     @Override
@@ -58,20 +58,12 @@ public class GuiSwitchSkill extends GuiScreen {
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        //drawDefaultBackground();
-        
         drawRect((int) (width * 0.2), (int) (height * 0.2), (int) (width * 0.8), (int) (height * 0.8), 0x7F000000);
-
-        //super.drawScreen(par1,par2,par3);
-    	
-        //ªÊ÷∆Button
-        for (int k = 0; k < this.buttonList.size(); ++k) {
-            ((GuiButtonImage)this.buttonList.get(k)).drawButton(this.mc, par1, par2);
-        }
-                
+        KCUtils.initDrawerState();      
+    	super.drawScreen(par1, par2, par3);
     }
     
-    //≤ª «Override
+    @Override
 	protected void actionPerformed(GuiButtonImage button) {
 		if (currentState != -1) {
 			for (int i = 0; i < btnOptionalSkill.length; i++) {
@@ -89,32 +81,5 @@ public class GuiSwitchSkill extends GuiScreen {
 		}
 		refresh();
 	}
-    
-    @Override
-    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_) {
-    	if (p_73864_3_ == 0) {
-            for (int l = 0; l < this.buttonList.size(); ++l) {
-            	GuiButtonImage guibutton = (GuiButtonImage)this.buttonList.get(l);
-
-                if (guibutton.mousePressed(this.mc, p_73864_1_, p_73864_2_)) {
-                	guibutton.func_146113_a(this.mc.getSoundHandler());
-                    this.actionPerformed(guibutton);
-                }
-            }
-        }
-    }
-    
-    public void refresh() {
-    	buttonList.clear();
-    	this.initGui();
-    }
-    
-    public GuiScreen getParentScreen() {
-    	return this.parentScreen;
-    }
-    
-    public GuiScreen getThisScreen() {
-    	return mc.currentScreen;
-    }
 
 }

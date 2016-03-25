@@ -15,9 +15,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-public class GuiKotoriWorkshop extends GuiScreen {
+public class GuiKotoriWorkshop extends KCGuiBase {
 	
-	private GuiScreen parentScreen;
 	private EntityPlayer crafter;
 	
 	private String currentState = "CRAFT";
@@ -28,7 +27,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
 	private KCItemBase currentCraftItem = null;
 	 
     public GuiKotoriWorkshop(GuiScreen parent, EntityPlayer player) {
-         parentScreen = parent;
+         super(parent);
          crafter = player;
     }
 
@@ -42,13 +41,9 @@ public class GuiKotoriWorkshop extends GuiScreen {
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        //drawDefaultBackground();
         
         mc.renderEngine.bindTexture(KCResources.gui_kotori_workshop);
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
-        //drawRect(0, 0, width, height, 0xFFFFFFFF);
-
-        //super.drawScreen(par1,par2,par3);
                 
         //绘制边框
         int shang = (int)(height * 0.2);
@@ -59,10 +54,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);      
         KCUtils.initDrawerState();
     	
-        //绘制Button
-        for (int k = 0; k < this.buttonList.size(); ++k) {
-            ((GuiButtonImage)this.buttonList.get(k)).drawButton(this.mc, par1, par2);
-        }
+        super.drawScreen(par1, par2, par3);
                 
         //绘制合成界面
         if (currentState.equals("CRAFT")) {
@@ -104,7 +96,7 @@ public class GuiKotoriWorkshop extends GuiScreen {
         }
     }
     
-    //不是Override
+    @Override
 	protected void actionPerformed(GuiButtonImage button) {
 		if (button.equals(btnEnsureCraft)) {
 			if (isEnough(0) && isEnough(1) && isEnough(2)) {
@@ -119,33 +111,6 @@ public class GuiKotoriWorkshop extends GuiScreen {
     	}
 		refresh();
 	}
-    
-    @Override
-    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_) {
-    	if (p_73864_3_ == 0) {
-            for (int l = 0; l < this.buttonList.size(); ++l) {
-            	GuiButtonImage guibutton = (GuiButtonImage)this.buttonList.get(l);
-
-                if (guibutton.mousePressed(this.mc, p_73864_1_, p_73864_2_)) {
-                	guibutton.func_146113_a(this.mc.getSoundHandler());
-                    this.actionPerformed(guibutton);
-                }
-            }
-        }
-    }
-    
-    public void refresh() {
-    	buttonList.clear();
-    	this.initGui();
-    }
-    
-    public GuiScreen getParentScreen() {
-    	return this.parentScreen;
-    }
-    
-    public GuiScreen getThisScreen() {
-    	return mc.currentScreen;
-    }
     
     private void addCraftButton() {
     	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.2 ), (int)(height * 0.4), 32, 32, "peach_juice"));
