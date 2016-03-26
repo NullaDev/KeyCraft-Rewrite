@@ -8,42 +8,79 @@ import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+/** 还没写同步 */
 public class PotionUtils {
 
-	public static final ArrayList<KCPotion> AllPotions = new ArrayList<KCPotion>();
-	
-	public static void addPotion(EntityPlayer player, KCPotion potion, int ticks) {
-		String name = "potion_" + potion.mName;
-		if (player.getEntityData().hasKey(name)) {
-			int restTicks = player.getEntityData().getInteger(name);
-			player.getEntityData().setInteger("potion_" + potion.mName, Math.max(ticks, restTicks));
-		} else {
-			player.getEntityData().setInteger("potion_" + potion.mName, ticks);
+	public static void addPotion(EntityPlayer player, KCPotion potion, int level, int ticks) {
+		// 以后再优化了..
+		int[] currentPotion = getPotion(player), 
+				currentPotionLv = getPotionLevel(player),
+				curPotionRestTick = getPotionRestTick(player);
+		int[] newPotion = new int[currentPotion.length + 1], 
+				newPotionLv = new int[currentPotion.length + 1],
+				newPotionRestTick = new int[currentPotion.length + 1];
+		
+		System.out.println(String.format("%d %d %d", currentPotion.length, currentPotionLv.length, curPotionRestTick.length));
+		
+		for (int i = 0; i < currentPotion.length; i++)
+		{
+			newPotion[i] = currentPotion[i];
+			newPotionLv[i] = currentPotionLv[i];
+			newPotionRestTick[i] = curPotionRestTick[i];
 		}
+		newPotion[currentPotion.length] = potion.mID;
+		newPotionLv[currentPotion.length] = level;
+		newPotionRestTick[currentPotion.length] = ticks;
+		
+		player.getEntityData().setIntArray("KCPotions", newPotion);
+		player.getEntityData().setIntArray("KCPotionLevels", newPotionLv);
+		player.getEntityData().setIntArray("KCPotionRestTicks", newPotionRestTick);
+	}
+
+	public static int[] getPotion(EntityPlayer player) {
+		return player.getEntityData().getIntArray("KCPotions");
 	}
 	
-	public static void addPotion(EntityPlayer player, HashMap potions) {
-		Iterator iter = potions.entrySet().iterator();
-		while (iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
-			KCPotion key = (KCPotion) entry.getKey();
-			int val = (Integer) entry.getValue();
-			addPotion(player, key, val);
-		}
-	}
-	
-	public static HashMap getPotion(EntityPlayer player) {
-		HashMap<KCPotion, Integer> potions = new HashMap<KCPotion, Integer>();
-		for (KCPotion i : AllPotions) {
-			String name = "potion_" + i.mName;
-			if (player.getEntityData().hasKey(name)) {
-				int restTicks = player.getEntityData().getInteger(name);
-				if (restTicks != 0) {
-					potions.put(i, restTicks);
-				}
+	public static void deletePotion(EntityPlayer player, KCPotion potion) {
+		int[] currentPotion = getPotion(player), 
+				currentPotionLv = getPotionLevel(player),
+				curPotionRestTick = getPotionRestTick(player);
+		int[] newPotion = new int[currentPotion.length - 1], 
+				newPotionLv = new int[currentPotion.length - 1],
+				newPotionRestTick = new int[currentPotion.length - 1];
+		
+		int iNew = 0;
+		for (int iCur = 0; iCur < potion.mID; iCur++)
+		{
+			if (currentPotion[iCur] != potion.mID)
+			{
+				newPotion[iNew] = currentPotion[iCur];
+				newPotionLv[iNew] = currentPotionLv[iCur];
+				newPotionRestTick[iNew] = curPotionRestTick[iCur];
+				iNew++;
 			}
 		}
-		return potions;
+		
+		player.getEntityData().setIntArray("KCPotions", newPotion);
+		player.getEntityData().setIntArray("KCPotionLevels", newPotionLv);
+		player.getEntityData().setIntArray("KCPotionRestTicks", newPotionRestTick);
+	}
+
+	public static int[] getPotionLevel(EntityPlayer player) {
+		return player.getEntityData().getIntArray("KCPotionLevels");
+	}
+
+	public static int[] getPotionRestTick(EntityPlayer player) {
+		return player.getEntityData().getIntArray("KCPotionRestTicks");
+	}
+
+	public static void modifyPotionRestTick(EntityPlayer player, KCPotion potion, int ticks) {
+		int[] potionRestTick = getPotionRestTick(player);
+		potionRestTick[potion.mID] += ticks;
+		if (potionRestTick[potion.mID] > 0)
+			player.getEntityData().setIntArray("KCPotionRestTicks", potionRestTick);
+		else
+			deletePotion(player, potion);
 	}
 	
 }

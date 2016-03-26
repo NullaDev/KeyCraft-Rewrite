@@ -4,8 +4,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.nulla.kcrw.event.HandlerChatCheating;
+import org.nulla.kcrw.potion.PerformPotion;
 import org.nulla.kcrw.skill.SkillNetwork;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
@@ -43,6 +45,9 @@ public class KeyCraft_Rewrite {
 		// 注册网络事件
 		SkillNetwork.getInstance().init();
 		KCNetwork.getInstance().init();	
+		
+		// 注册效果
+		FMLCommonHandler.instance().bus().register(new PerformPotion());
     }
     
     @EventHandler
