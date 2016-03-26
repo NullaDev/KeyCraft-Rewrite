@@ -17,5 +17,9 @@ public class SkillPassive extends Skill {
 	public boolean isPassive() {
 		return true;
 	}
+	
+	public boolean onTrigger(EntityPlayer player) {
+		return false;
+	}
 
 }

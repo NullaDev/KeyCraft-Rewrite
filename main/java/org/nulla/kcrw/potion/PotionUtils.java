@@ -83,4 +83,12 @@ public class PotionUtils {
 			deletePotion(player, potion);
 	}
 	
+	public static KCPotion getPotionFromID(int id) {
+		for (KCPotion i : Potions.AllPotions) {
+			if (i.mID == id)
+				return i;
+		}
+		return null;
+	}
+	
 }

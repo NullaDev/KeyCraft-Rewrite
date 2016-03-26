@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.nulla.kcrw.potion.KCPotion;
-import org.nulla.kcrw.potion.PotionUtils;
+import org.nulla.kcrw.potion.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -17,15 +16,11 @@ public class HandlerTick_KCPotion {
 	@SubscribeEvent
 	public void PotionTick(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
-		HashMap potions = PotionUtils.getPotion(player);
-		Iterator iter = potions.entrySet().iterator();
-		while (iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
-			KCPotion key = (KCPotion) entry.getKey();
-			int val = (Integer) entry.getValue() - 1;
-			potions.replace(key, val);
+		int[] potions = PotionUtils.getPotion(player);
+		for (int i : potions) {
+			KCPotion potion = PotionUtils.getPotionFromID(i);
+			PotionUtils.modifyPotionRestTick(player, potion, -1);
 		}
-		PotionUtils.addPotion(player, potions);
 	}
 
 }
