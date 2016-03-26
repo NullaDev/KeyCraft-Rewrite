@@ -2,6 +2,8 @@ package org.nulla.kcrw.event;
 
 import org.nulla.kcrw.*;
 import org.nulla.kcrw.gui.*;
+import org.nulla.kcrw.potion.PotionUtils;
+import org.nulla.kcrw.potion.Potions;
 import org.nulla.kcrw.skill.*;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +26,9 @@ public class HandlerKeyInput {
 			} else {
 				skill = SkillUtils.getSkillInSlot(player, 0);
 				//System.out.println("使用技能0");
+				
+				// 测试
+				PotionUtils.addPotion(player, Potions.test, 0, 50);
 			}
 		} else if (KCClientProxy.kbSkill2.isPressed()) {
 		    if (KCUtils.isShiftKeyDown()) {
