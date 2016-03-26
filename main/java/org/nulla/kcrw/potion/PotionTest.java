@@ -1,5 +1,6 @@
 package org.nulla.kcrw.potion;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -11,7 +12,7 @@ public class PotionTest extends KCPotion {
 	}
 
 	@Override
-	public void onPerform(EntityPlayer player, int level) {
+	public void performEffect(EntityLivingBase entity, int level) {
 		System.out.println("Hello world!");
 	}
 

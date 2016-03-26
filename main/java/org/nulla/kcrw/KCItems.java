@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.nulla.kcrw.item.*;
 import org.nulla.kcrw.item.crafting.KCRecipe;
+import org.nulla.kcrw.potion.Potions;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
@@ -25,7 +26,7 @@ public class KCItems {
 	
     public static void InitItems() {
     	
-    	//ÆÕÍ¨ÎïÆ·
+    	//ï¿½ï¿½Í¨ï¿½ï¿½Æ·
     	musicplayer = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))
 			.setUnlocalizedName("musicplayer")
@@ -36,7 +37,10 @@ public class KCItems {
     		.setCallback(new ItemFoodKC.ICallback() {
 				@Override
 				public void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
-    				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20));					
+    				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20));
+    				
+    				// æµ‹è¯•
+    				player.addPotionEffect(new PotionEffect(Potions.test.id, 50));
 				}
 				@Override
 				public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
@@ -49,10 +53,10 @@ public class KCItems {
     		.setTextureName("kcrw:peach_juice");
     	GameRegistry.registerItem(peachjuice, "peachjuice");
     	
-    	//KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "ÎÒÊÇ¹â¹÷", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
+    	//KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
     	
     	
-    	//¼¼ÄÜÎïÆ·
+    	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
     	aurorablade = new ItemAuroraBlade()
 			.setUnlocalizedName("aurorablade")
 			.setTextureName("kcrw:aurora_blade");

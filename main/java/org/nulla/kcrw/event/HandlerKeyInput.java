@@ -26,9 +26,6 @@ public class HandlerKeyInput {
 			} else {
 				skill = SkillUtils.getSkillInSlot(player, 0);
 				//System.out.println("使用技能0");
-				
-				// 测试
-				PotionUtils.addPotion(player, Potions.test, 0, 50);
 			}
 		} else if (KCClientProxy.kbSkill2.isPressed()) {
 		    if (KCUtils.isShiftKeyDown()) {

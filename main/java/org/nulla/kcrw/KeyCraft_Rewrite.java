@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.nulla.kcrw.event.HandlerChatCheating;
-import org.nulla.kcrw.potion.PerformPotion;
+import org.nulla.kcrw.potion.PotionUtils;
 import org.nulla.kcrw.skill.SkillNetwork;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -47,7 +47,7 @@ public class KeyCraft_Rewrite {
 		KCNetwork.getInstance().init();	
 		
 		// 注册效果
-		FMLCommonHandler.instance().bus().register(new PerformPotion());
+		PotionUtils.init();
     }
     
     @EventHandler
