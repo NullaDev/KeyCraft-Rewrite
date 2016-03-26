@@ -33,6 +33,11 @@ public abstract class Skill {
 		Skills.AllSkills.add(this);
 	}
 	
+	public boolean isPassive() {
+		return false;
+	}
+
+	
 	/*------------------- 技能实现部分开始 -------------------*/
 	
 	/** 重载实现使用技能 */
@@ -94,6 +99,10 @@ public abstract class Skill {
 		// 检查CD
 		if (!checkCD(player))
 			return false;
+		// 检查被动
+		if (isPassive()) {
+			return false;
+		}
 		// 检查欧若拉点
 		if (SkillUtils.getAuroraPoint(player) <= mAuroraCost) // 不让欧若拉变为0
 			return false;

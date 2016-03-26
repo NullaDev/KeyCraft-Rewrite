@@ -1,4 +1,4 @@
-package org.nulla.kcrw.Entity;
+package org.nulla.kcrw.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

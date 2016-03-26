@@ -4,6 +4,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.nulla.kcrw.event.HandlerDrawHUD;
 import org.nulla.kcrw.event.HandlerKeyInput;
+import org.nulla.kcrw.event.HandlerLivingAttack;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -30,10 +31,13 @@ public class KCClientProxy extends KCCommonProxy {
 		// 注册GUI、用户输入事件
     	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
+		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttack());
+
 		
 		//注册KeyBinding
 		ClientRegistry.registerKeyBinding(kbSkill1);
 		ClientRegistry.registerKeyBinding(kbSkill2);
+		
 	}
 	
 	@Override
