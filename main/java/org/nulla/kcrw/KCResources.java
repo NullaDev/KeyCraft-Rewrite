@@ -25,6 +25,8 @@ public class KCResources {
 	
 	public static ResourceLocation sound_aurora = new ResourceLocation(KeyCraft_Rewrite.MODID, "sound.aurora");
 	
+	public static ResourceLocation potion_poisonResistance = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/potions/poison_resistance.png");
+	
 	public static ResourceLocation[] locations = {icon_end, icon_craft, item_peach_juice, item_music_player};
 	
 	public static ResourceLocation getLocationFromName(String name) {
