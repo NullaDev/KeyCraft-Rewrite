@@ -14,9 +14,11 @@ public class HandlerLivingAttack {
 	@SubscribeEvent
 	public void AuroraAttack(LivingHurtEvent event) {
 		if (event.source.damageType.equals("player")) {
-			event.entity.attackEntityFrom(KCDamageSource.aurora, 2.0F);
+			event.entityLiving.attackEntityFrom(KCDamageSource.aurora, 2.0F);
+			if (event.entityLiving.getHealth() <= 0) {
+				event.setCanceled(true);
+			}
 		}
-		System.out.println(event.source.damageType);
 		
 	}
 	

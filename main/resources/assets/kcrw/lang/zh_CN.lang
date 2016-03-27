@@ -23,3 +23,6 @@ kcrw.prompt.cheat.recover=增加生命(作弊)。
 kcrw.prompt.cheat.learn=学习所有技能(作弊)。
 
 kcrw.potion.test=测试效果
+kcrw.potion.poisonResistance=抗毒
+
+death.attack.Aurora=%1$s 死于Aurora。
