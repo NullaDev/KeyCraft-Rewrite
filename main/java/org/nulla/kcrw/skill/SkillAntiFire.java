@@ -21,7 +21,7 @@ public class SkillAntiFire extends Skill {
 	public boolean onUse(EntityPlayer player) {
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, time));
-		// Ëæ»úÊÂ¼şÖ»ÔÚ·şÎñÆ÷·¢Éú
+		// éšæœºäº‹ä»¶åªåœ¨æœåŠ¡å™¨å‘ç”Ÿ
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();
 			int exp = rand.nextInt(10) + 1;

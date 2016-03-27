@@ -21,7 +21,7 @@ public class SkillAntiPoison extends Skill {
 	public boolean onUse(EntityPlayer player) {
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potions.poisonResistance.id, time));
-		// ����¼�ֻ�ڷ���������
+		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();
 			int exp = rand.nextInt(10) + 1;

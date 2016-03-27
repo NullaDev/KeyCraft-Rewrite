@@ -20,33 +20,33 @@ public class SkillPassive extends Skill {
 	}
 	
 	public boolean trigger(EntityPlayer player) {
-		// ¼ì²éÓµÓĞ¼¼ÄÜ
+		// æ£€æŸ¥æ‹¥æœ‰æŠ€èƒ½
 		if (!hasSkill(player))
 			return false;
-		// ¼ì²éCD
+		// æ£€æŸ¥CD
 		if (!checkCD(player))
 			return false;
-		// ¼ì²é±»¶¯
+		// æ£€æŸ¥è¢«åŠ¨
 		if (!isPassive()) {
 			return false;
 		}
-		// ¼ì²éÅ·ÈôÀ­µã
-		if (SkillUtils.getAuroraPoint(player) <= mAuroraCost) // ²»ÈÃÅ·ÈôÀ­±äÎª0
+		// æ£€æŸ¥æ¬§è‹¥æ‹‰ç‚¹
+		if (SkillUtils.getAuroraPoint(player) <= mAuroraCost) // ï¿½ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 			return false;
 				
-		// ¿Í»§¶Ë·¢Ê¹ÓÃ¼¼ÄÜ°ü
+		// å®¢æˆ·ç«¯å‘ä½¿ç”¨æŠ€èƒ½åŒ…
 		if (player.worldObj.isRemote)
 			SkillNetwork.Channel.sendToServer(SkillNetwork.createUseSkillPacket(mID));
 		boolean res = onTrigger(player);
 				
 		if (res) {
-			// ÉèÖÃÉÏ´ÎÊ¹ÓÃÊ±¼ä
+			// è®¾ç½®ä¸Šæ¬¡ä½¿ç”¨æ—¶é—´
 			setLastUseTime(player, player.worldObj.getTotalWorldTime());
-			// ¼õÅ·ÈôÀ­µã
+			// å‡æ¬§è‹¥æ‹‰ç‚¹
 			SkillUtils.modifyAuroraPoint(player, -mAuroraCost);
 		}
 				
-		// ·şÎñ¶Ë·¢Í¬²½¼¼ÄÜ°ü
+		// æœåŠ¡ç«¯å‘åŒæ­¥æŠ€èƒ½åŒ…
 		if (player instanceof EntityPlayerMP)
 			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), (EntityPlayerMP)player);
 		
@@ -54,7 +54,7 @@ public class SkillPassive extends Skill {
 		
 	}
 	
-	/** ÖØÔØÊµÏÖÊ¹ÓÃ¼¼ÄÜ */
+	/** é‡è½½å®ç°ä½¿ç”¨æŠ€èƒ½ï¼Ÿ */
 	public boolean onTrigger(EntityPlayer player) {
 		return false;
 	}
