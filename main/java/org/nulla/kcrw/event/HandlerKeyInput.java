@@ -2,8 +2,6 @@ package org.nulla.kcrw.event;
 
 import org.nulla.kcrw.*;
 import org.nulla.kcrw.gui.*;
-import org.nulla.kcrw.potion.PotionUtils;
-import org.nulla.kcrw.potion.Potions;
 import org.nulla.kcrw.skill.*;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
