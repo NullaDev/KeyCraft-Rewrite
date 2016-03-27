@@ -8,12 +8,12 @@ import org.nulla.kcrw.KCResources;
 public class Potions {
 
 	public static PotionTest test;
-	//public static KCPotion poisonResistance;
+	public static PoisonResistance poisonResistance;
 	
 	public static void initPotions()
 	{
 		test = new PotionTest("kcrw.potion.test", null);
-		//poisonResistance = new KCPotion("kcrw.potion.poisonResistance", KCResources.potion_poisonResistance);
+		poisonResistance = new PoisonResistance("kcrw.potion.poisonResistance", KCResources.potion_poisonResistance);
 	}
 	
 }
