@@ -1,7 +1,7 @@
 package org.nulla.kcrw.event;
 
 import org.nulla.kcrw.damage.KCDamageSource;
-import org.nulla.kcrw.potion.Potions;
+import org.nulla.kcrw.potion.KCPotions;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -26,7 +26,7 @@ public class HandlerLivingAttack {
 	public void PoisonCanceller(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (event.source.damageType.equals("magic") && player.isPotionActive(Potions.poisonResistance)) {
+			if (event.source.damageType.equals("magic") && player.isPotionActive(KCPotions.poisonResistance)) {
 				event.setCanceled(true);
 			}
 		}

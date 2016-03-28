@@ -36,7 +36,7 @@ public class KCPotion extends Potion {
 		}
 		
 		// 注册所有效果
-		Potions.initPotions();
+		KCPotions.initPotions();
 	}
 	
 	
