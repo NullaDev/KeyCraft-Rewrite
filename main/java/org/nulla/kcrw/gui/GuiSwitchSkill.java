@@ -33,9 +33,9 @@ public class GuiSwitchSkill extends KCGuiBase {
     	for (int i = 0; i < 4; i++) {
     		skillsInSlot[i] = SkillUtils.getSkillInSlot(skillOwner, i);
     		if (skillsInSlot[i] != null) {
-    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, skillsInSlot[i].mIcon));
+    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, skillsInSlot[i].mIcon, true));
     		} else {
-    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, Skill.empty_skill_icon));
+    	    	buttonList.add(btnCurrentSkillSlot[i] = new GuiButtonImage(i, (int)(width * (0.35 + 0.1 * i) - 16), (int)(height * 0.3), 32, 32, Skill.empty_skill_icon, true));
     		}
     	}
     	   
@@ -51,7 +51,7 @@ public class GuiSwitchSkill extends KCGuiBase {
     		btnOptionalSkill = new GuiButtonImage[optionalSkillNumber];
 
         	for (int i = 0; i < optionalSkillNumber; i++) {
-    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * i)) - 8, (int)(height * 0.6), 16, 16, optionalSkill[i].mIcon));
+    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * i)) - 8, (int)(height * 0.6), 16, 16, optionalSkill[i].mIcon, true));
         	}
         }
     }

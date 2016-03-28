@@ -21,6 +21,9 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 	
 	private String currentState = "CRAFT";
 
+	private GuiButtonImage btnChooseCraft;
+	private GuiButtonImage btnChooseDecompose;
+	private GuiButtonImage btnChooseReturn;
 	private GuiButtonImage btnEnsureCraft;
 	private GuiButtonImage btnCraft[] = new GuiButtonImage[99];
 	
@@ -33,10 +36,16 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 
     @Override
     public void initGui() {
+		buttonList.add(btnChooseCraft = new GuiButtonImage(128, (int)(width * 0.32 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_craft, false));
+		buttonList.add(btnChooseDecompose = new GuiButtonImage(129, (int)(width * 0.40 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_decompose, false));
+		buttonList.add(btnChooseReturn = new GuiButtonImage(130, (int)(width * 0.48 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_return, false));
+
     	if (currentCraftItem != null) {
-    		buttonList.add(btnEnsureCraft = new GuiButtonImage(256, (int)(width * 0.42 + 10), (int)(height * 0.2 + 145), 16, 16, "craft"));
+    		buttonList.add(btnEnsureCraft = new GuiButtonImage(256, (int)(width * 0.42 + 10), (int)(height * 0.2 + 145), 16, 16, KCResources.btn_ensure, false));
     	}
-    	addCraftButton();
+        if (currentState.equals("CRAFT")) {
+        	addCraftButton();
+        }
     }
 
     @Override
@@ -44,20 +53,20 @@ public class GuiKotoriWorkshop extends KCGuiBase {
         
         mc.renderEngine.bindTexture(KCResources.gui_kotori_workshop);
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
-                
-        //绘制边框
-        int shang = (int)(height * 0.2);
-        int xia = (int)(height * 0.85);
-        int zhong = (int)(width * 0.42);
-        
-        //这是一条竖线
-        drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);      
-        KCUtils.initDrawerState();
     	
         super.drawScreen(par1, par2, par3);
                 
         //绘制合成界面
         if (currentState.equals("CRAFT")) {
+        	//绘制边框
+            int shang = (int)(height * 0.2);
+            int xia = (int)(height * 0.85);
+            int zhong = (int)(width * 0.42);
+            
+            //这是一条竖线
+            drawRect(zhong, shang, zhong + 1, xia, 0xFF000000);      
+            KCUtils.initDrawerState();
+            
         	if (currentCraftItem != null) {
         		
         		fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("kcrw.gui.currentCraftItem") + ":", zhong + 10, shang + 5, 0xAFAFAF);
@@ -98,7 +107,13 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     
     @Override
 	protected void actionPerformed(GuiButtonImage button) {
-		if (button.equals(btnEnsureCraft)) {
+    	if (button.equals(btnChooseCraft)) {
+    		currentState = "CRAFT";
+    	} else if (button.equals(btnChooseDecompose)) {
+    		currentState = "DECOMPOSE";
+    	} else if (button.equals(btnChooseReturn)) {
+    		mc.displayGuiScreen(getParentScreen());
+    	} else if (button.equals(btnEnsureCraft)) {
 			if (isEnough(0) && isEnough(1) && isEnough(2)) {
 				craft(currentCraftItem, crafter);
 			}				
@@ -113,8 +128,8 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 	}
     
     private void addCraftButton() {
-    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.2 ), (int)(height * 0.4), 32, 32, "peach_juice"));
-    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.2 + 36), (int)(height * 0.4), 32, 32, "music_player"));
+    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.2 ), (int)(height * 0.4), 32, 32, "peach_juice", true));
+    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.2 + 36), (int)(height * 0.4), 32, 32, "music_player", true));
     }
     
     private boolean isEnough(int i) {

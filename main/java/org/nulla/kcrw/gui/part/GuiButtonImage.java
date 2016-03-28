@@ -17,12 +17,13 @@ public class GuiButtonImage extends Gui {
     public int posX;
     public int posY;
     public int id;
+    public boolean hasFrame;
     public boolean enabled;
     public boolean visible;
     protected boolean isPointAt;
     public int packedFGColour;
 
-    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, String name) {
+    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, String name, boolean frame) {
         this.enabled = true;
         this.visible = true;
         this.id = btnID;
@@ -31,9 +32,10 @@ public class GuiButtonImage extends Gui {
         this.width = btnWidth;
         this.height = btnHeight;
         this.buttonTextures = KCResources.getLocationFromName(name);
+        this.hasFrame = frame;
     }
     
-    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, ResourceLocation location) {
+    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, ResourceLocation location, boolean frame) {
         this.enabled = true;
         this.visible = true;
         this.id = btnID;
@@ -42,6 +44,7 @@ public class GuiButtonImage extends Gui {
         this.width = btnWidth;
         this.height = btnHeight;
         this.buttonTextures = location;
+        this.hasFrame = frame;
     }
 
     /**
@@ -63,22 +66,24 @@ public class GuiButtonImage extends Gui {
      * 在屏幕上绘制Button。
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (this.visible) {
-        	mc.getTextureManager().bindTexture(buttonTextures);
+    	if (this.visible) {
+    		mc.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.isPointAt = mouseX >= posX && mouseY >= posY && mouseX < posX + width && mouseY < posY + height;
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             
-            //按钮背景
-            drawRect(posX, posY, posX + width, posY + height, 0xFF8C6238);
+            if (this.hasFrame) {
+            	//按钮背景
+            	drawRect(posX, posY, posX + width, posY + height, 0xFF8C6238);
             
-            //按钮边框
-            drawRect(posX, posY, posX + width, posY + 1, 0xFF000000);
-            drawRect(posX, posY, posX + 1, posY + height, 0xFF000000);
-            drawRect(posX + width - 1, posY, posX + width, posY + height, 0xFF000000);
-            drawRect(posX, posY + height -1, posX + width, posY + height, 0xFF000000);
+            	//按钮边框
+            	drawRect(posX, posY, posX + width, posY + 1, 0xFF000000);
+            	drawRect(posX, posY, posX + 1, posY + height, 0xFF000000);
+            	drawRect(posX + width - 1, posY, posX + width, posY + height, 0xFF000000);
+            	drawRect(posX, posY + height -1, posX + width, posY + height, 0xFF000000);
+            }
 
             KCUtils.initDrawerState();
             

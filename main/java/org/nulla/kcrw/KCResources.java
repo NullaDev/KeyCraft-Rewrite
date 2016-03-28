@@ -11,8 +11,11 @@ public class KCResources {
 	public static ResourceLocation aurora_strip_outside = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/aurora_strip_outside.png");
 	public static ResourceLocation aurora_strip_inside = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/aurora_strip_inside.png");
 	
-	public static ResourceLocation icon_end = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/end.png");
-	public static ResourceLocation icon_craft = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/craft.png");
+	public static ResourceLocation btn_craft = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_craft.png");
+	public static ResourceLocation btn_decompose = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_decompose.png");
+	public static ResourceLocation btn_end = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/end.png");
+	public static ResourceLocation btn_ensure = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_ensure.png");
+	public static ResourceLocation btn_return = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_return.png");
 
 	public static ResourceLocation item_peach_juice = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/peach_juice.png");
 	public static ResourceLocation item_music_player = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/music_player.png");
@@ -29,7 +32,7 @@ public class KCResources {
 	
 	public static ResourceLocation potion_poisonResistance = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/potions/poison_resistance.png");
 	
-	public static ResourceLocation[] locations = {icon_end, icon_craft, item_peach_juice, item_music_player};
+	public static ResourceLocation[] locations = {btn_end, btn_ensure, item_peach_juice, item_music_player};
 	
 	public static ResourceLocation getLocationFromName(String name) {
 		for (ResourceLocation i: locations) {
