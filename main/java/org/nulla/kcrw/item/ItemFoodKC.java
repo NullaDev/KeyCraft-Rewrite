@@ -21,14 +21,14 @@ public class ItemFoodKC extends KCItemBase {
 	
 	protected ICallback Callback = null;
 	protected KCRecipe craftRecipe = null;
-	/** ³ÔÕâÍæÒâÓÃµÄÊ±¼ä¡£ */
+	/** æˆ‘å½“æ—¶å†™çš„ä»€ä¹ˆæ³¨é‡Šä¹±ç äº†çœ‹ä¸å‡ºæ¥ */
     public final int itemUseDuration;
-    /** ³ÔÕâÍæÒâ¼ÓµÄ¼¦ÍÈ¡£ */
+    /** é£Ÿç‰©å›çš„é¥¥é¥¿åº¦ */
     private final int healAmount;
     private final float saturationModifier;
-    /** ÀÇÏ²²»Ï²»¶³ÔÕâÍæÒâ¡£ */
+    /** æ˜¯ä¸æ˜¯ç‹¼çˆ±åƒçš„é£Ÿç‰©ï¼ˆå¼•ç”¨è‡ªåŸç‰ˆï¼Œå¹¶æ²¡æœ‰ä»€ä¹ˆç‹—ç”¨ï¼‰ */
     private final boolean isWolfsFavoriteMeat;
-    /** Èç¹ûÕâÍæÒâÊÇtrue£¬Ôò¼´Ê¹³Å×ÅÒ²ÄÜ³ÔÏÂÈ¥¡£ */
+    /** æ˜¯å¦åœ¨æ»¡é¥¥é¥¿åº¦æ—¶è¿˜å¯é£Ÿç”¨ã€‚ */
     private boolean alwaysEdible;
 
 	public ItemFoodKC(int eatTime, int amount, float p_i45339_2_, boolean isWolfLike) {
@@ -70,17 +70,17 @@ public class ItemFoodKC extends KCItemBase {
 		}
 	}
 	
-	/** »ñÈ¡Ê¹ÓÃ´ËÎïÆ·µÄÊ±¼ä¡£ */
+	/** How long it takes to ä½¿ç”¨è¿™ä¸ªç‰©å“ã€‚ */
     public int getMaxItemUseDuration(ItemStack stack) {
         return this.itemUseDuration != 0 ? this.itemUseDuration : 32;
     }
 
-    /** returnÍæ¼ÒÊ¹ÓÃ´ËÎïÆ·µÄAction¡£ */
+    /** returns the action that è¿™ä¸ªç‰©å“è¢«ä½¿ç”¨æ—¶ã€‚  */
     public EnumAction getItemUseAction(ItemStack p_77661_1_) {
         return EnumAction.eat;
     }
 
-    /** ÓÒ¼ü´ËItemÊ±µ÷ÓÃµÄ·½·¨£¬´Ë´¦¼´³Ô¡£ */
+    /** Called whenever æ­¤ç‰©å“è¢«è£…å¤‡ and å³é”®æŒ‰ä¸‹ã€‚ */
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (player.canEat(this.alwaysEdible)) {
         	player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
@@ -97,12 +97,12 @@ public class ItemFoodKC extends KCItemBase {
         return this.saturationModifier;
     }
 
-    /** returnÀÇÏ²²»Ï²»¶³ÔÕâÍæÒâ¡£ */
+    /** return å–µå–µå–µå–µå–µï¼Ÿ */
     public boolean isWolfsFavoriteMeat() {
         return this.isWolfsFavoriteMeat;
     }
     
-    /** Èç¹ûµ÷ÓÃ´Ë·½·¨£¬ÔòÕâÖÖÊ³ÎïÔÚ¼´Ê¹±¥Ê³¶ÈÒÑÂúÊ±Ò²¿ÉÒÔ³Ô¡£ */
+    /** è®© 'alwaysEdible' å˜æˆ true, è€Œä¸”è®©é£Ÿç‰©éšæ—¶å¯ä»¥åƒ even if ä½ å¾ˆé¥±ã€‚ */
     public ItemFoodKC setAlwaysEdible() {
         this.alwaysEdible = true;
         return this;
