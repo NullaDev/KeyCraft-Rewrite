@@ -26,7 +26,6 @@ public class HandlerLivingAttack {
 	public void PoisonCanceller(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (event.source.damageType.equals("magic") && player.isPotionActive(Potions.poisonResistance)) {
 				event.setCanceled(true);
 			}
 		}

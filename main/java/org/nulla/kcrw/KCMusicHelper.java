@@ -2,6 +2,9 @@ package org.nulla.kcrw;
 
 import java.lang.reflect.Field;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.*;
 import net.minecraft.util.ResourceLocation;
@@ -10,29 +13,44 @@ public class KCMusicHelper {
 	
 	private static ISound currentSound = null; 
 	
-	public static boolean isPlayingMusic() {
-		if (currentSound == null)
-			return false;
-		return KCUtils.getMC().getSoundHandler().isSoundPlaying(currentSound);
+	public static boolean isBgmPlaying() {
+		return currentSound != null;
 	}
 
-	/** 停止MC原版BGM并播放新的BGM */
+	/** 停止当前BGM、MC原版BGM并播放新的BGM */
 	public static void playBgm(ResourceLocation location) {
-		if (!isPlayingMusic()) {
-			stopMcBgm();
-			currentSound = PositionedSoundRecord.func_147673_a(location); // 以后会改进
-			KCUtils.getMC().getSoundHandler().playSound(KCMusicHelper.currentSound);
+		SoundHandler soundHandler = KCUtils.getMC().getSoundHandler();
+		if (isBgmPlaying()) {
+			soundHandler.stopSound(currentSound);
+		}
+		stopMcBgm();
+		currentSound = PositionedSoundRecord.func_147673_a(location);
+		soundHandler.playSound(currentSound);
+	}
+	
+	/** 当前BGM播放完后恢复原版BGM */
+	@SubscribeEvent
+	public void onClientTick(ClientTickEvent event)
+	{
+		Minecraft mc = KCUtils.getMC();
+		if (event.phase == TickEvent.Phase.END
+			&& !mc.isGamePaused()
+			&& isBgmPlaying()
+			&& !mc.getSoundHandler().isSoundPlaying(currentSound))
+		{
+			currentSound = null;
+			restartMcBgm();
 		}
 	}
 	
 	
 	private static boolean mcBgmPlaying = true;
 	
-	public static boolean isMcBgmPlaying() {
+	private static boolean isMcBgmPlaying() {
 		return mcBgmPlaying;
 	}
 	
-	public static void stopMcBgm() {
+	private static void stopMcBgm() {
 		if (!mcBgmPlaying)
 			return;
 		
@@ -59,9 +77,14 @@ public class KCMusicHelper {
 		}
 	}
 	
-	public static void restartMcBgm() {
+	private static void restartMcBgm() {
 		if (mcBgmPlaying)
 			return;
+		if (isBgmPlaying())
+		{
+			KCUtils.getMC().getSoundHandler().stopSound(currentSound);
+			currentSound = null;
+		}
 		
 		Minecraft mc = Minecraft.getMinecraft();
 		try {

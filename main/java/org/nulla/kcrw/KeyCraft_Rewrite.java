@@ -31,8 +31,12 @@ public class KeyCraft_Rewrite {
     public void preInit(FMLPreInitializationEvent event) {
     	proxy.preInit(event);
     	
+    	// 注册物品、方块
     	KCItems.InitItems();
     	KCBlocks.InitBlocks();
+		
+		// 注册效果
+		KCPotion.init();
     }
     
     @EventHandler
@@ -46,8 +50,8 @@ public class KeyCraft_Rewrite {
 		SkillNetwork.getInstance().init();
 		KCNetwork.getInstance().init();	
 		
-		// 注册效果
-		KCPotion.init();
+		// 注册音乐tick事件
+		FMLCommonHandler.instance().bus().register(new KCMusicHelper());
     }
     
     @EventHandler
