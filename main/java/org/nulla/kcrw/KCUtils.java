@@ -260,7 +260,7 @@ public class KCUtils {
 			
 			if (skillinslot[i] != null && skillinslot[i] instanceof SkillPassive) {
 				SkillPassive toDraw = (SkillPassive) skillinslot[i];
-				if (toDraw.isOn)
+				if (toDraw.getIsOn(player))
 					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_on);
 				else
 					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_off);

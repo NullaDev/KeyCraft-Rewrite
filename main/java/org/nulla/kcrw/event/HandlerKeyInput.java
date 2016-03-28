@@ -35,7 +35,7 @@ public class HandlerKeyInput {
 		    }
 		}
 		if (skill != null)
-			skill.tryUseSkill(player);
+			skill.useSkill(player);
 		
 		if (KCClientProxy.kbSwitchSkill.isPressed()) {
 			KCUtils.getMC().displayGuiScreen(new GuiSwitchSkill(KCUtils.getMC().currentScreen, player));

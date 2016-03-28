@@ -32,10 +32,6 @@ public abstract class Skill {
 		this.mCD = cd;
 		Skills.AllSkills.add(this);
 	}
-	
-	public boolean isPassive() {
-		return false;
-	}
 
 	
 	/*------------------- 技能实现部分开始 -------------------*/
@@ -125,22 +121,6 @@ public abstract class Skill {
 	public static boolean useSkill(EntityPlayer player, int skill) {
 		if (0 <= skill && skill < Skills.AllSkills.size())
 			return Skills.AllSkills.get(skill).useSkill(player);
-		return false;
-	}
-	
-	/** 使用技能，如果在客户端会发同步包 */
-	public static boolean useSkill(EntityPlayer player, Skill skill) {
-		return skill.useSkill(player);
-	}
-	
-	/** 使用或切换Slot中的技能 */
-	public boolean tryUseSkill(EntityPlayer player) {
-		if (this instanceof SkillPassive) {
-			SkillPassive skillToChange = (SkillPassive) this;
-			skillToChange.isOn = !skillToChange.isOn;
-		} else {
-			return useSkill(player);
-		}
 		return false;
 	}
 	
