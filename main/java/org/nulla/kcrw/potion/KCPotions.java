@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.nulla.kcrw.KCResources;
 
 /** 声明所有效果 */
-public class Potions {
+public class KCPotions {
 
 	public static PotionTest test;
 	public static PoisonResistance poisonResistance;

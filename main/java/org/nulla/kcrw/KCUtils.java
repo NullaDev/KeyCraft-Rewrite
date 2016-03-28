@@ -3,6 +3,7 @@ package org.nulla.kcrw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.nulla.kcrw.skill.Skill;
+import org.nulla.kcrw.skill.SkillPassive;
 import org.nulla.kcrw.skill.SkillUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -10,6 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
@@ -223,6 +226,12 @@ public class KCUtils {
 		heightToDraw[1] = (int) (height * 0.35);
 		heightToDraw[2] = (int) (height * 0.5);
 		heightToDraw[3] = (int) (height * 0.65);
+		
+		String[] SkillButton = new String[4];
+		SkillButton[0] = GameSettings.getKeyDisplayString(KCClientProxy.kbSkill1.getKeyCode());
+		SkillButton[1] = GameSettings.getKeyDisplayString(KCClientProxy.kbSkill2.getKeyCode());
+		SkillButton[2] = "Shift+" + GameSettings.getKeyDisplayString(KCClientProxy.kbSkill1.getKeyCode());
+		SkillButton[3] = "Shift+" + GameSettings.getKeyDisplayString(KCClientProxy.kbSkill2.getKeyCode());
 					
 		GL11.glEnable(GL11.GL_BLEND);
 		Skill skillinslot[] = new Skill[SkillUtils.SKILL_SLOT_SIZE];
@@ -248,18 +257,28 @@ public class KCUtils {
 					initDrawerState();
 				}
 			}
-			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
-			KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+			
+			if (skillinslot[i] != null && skillinslot[i] instanceof SkillPassive) {
+				SkillPassive toDraw = (SkillPassive) skillinslot[i];
+				if (toDraw.isOn)
+					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_on);
+				else
+					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_off);
+				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+			} else {
+				KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
+				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
+				getfontRenderer().drawStringWithShadow(SkillButton[i], widthToDraw + 2, heightToDraw[i], 0xFF0000);
+				initDrawerState();
+			}
+			
 			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_exp);
 			KCUtils.drawScaledCustomSizeModalRect(widthToDraw + 32, heightToDraw[i], 0, 0, 16, 64, 8, 32, 16, 64);
+						
 		}	
-		getfontRenderer().drawStringWithShadow("R", widthToDraw + 2, heightToDraw[0], 0xFF0000);
-		getfontRenderer().drawStringWithShadow("F", widthToDraw + 2, heightToDraw[1], 0xFF0000);
-		getfontRenderer().drawStringWithShadow("Shift+R", widthToDraw + 2, heightToDraw[2], 0xFF0000);
-		getfontRenderer().drawStringWithShadow("Shift+F", widthToDraw + 2, heightToDraw[3], 0xFF0000);
 
-		GL11.glDisable(GL11.GL_BLEND);
 		initDrawerState();
+		GL11.glDisable(GL11.GL_BLEND);
 		getMC().renderEngine.bindTexture(Gui.icons);
 	}
 	

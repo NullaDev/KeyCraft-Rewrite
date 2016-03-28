@@ -99,10 +99,6 @@ public abstract class Skill {
 		// 检查CD
 		if (!checkCD(player))
 			return false;
-		// 检查被动
-		if (isPassive()) {
-			return false;
-		}
 		// 检查欧若拉点
 		if (SkillUtils.getAuroraPoint(player) <= mAuroraCost) // 不让欧若拉变为0
 			return false;
@@ -129,6 +125,22 @@ public abstract class Skill {
 	public static boolean useSkill(EntityPlayer player, int skill) {
 		if (0 <= skill && skill < Skills.AllSkills.size())
 			return Skills.AllSkills.get(skill).useSkill(player);
+		return false;
+	}
+	
+	/** 使用技能，如果在客户端会发同步包 */
+	public static boolean useSkill(EntityPlayer player, Skill skill) {
+		return skill.useSkill(player);
+	}
+	
+	/** 使用或切换Slot中的技能 */
+	public boolean tryUseSkill(EntityPlayer player) {
+		if (this instanceof SkillPassive) {
+			SkillPassive skillToChange = (SkillPassive) this;
+			skillToChange.isOn = !skillToChange.isOn;
+		} else {
+			return useSkill(player);
+		}
 		return false;
 	}
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.nulla.kcrw.item.*;
 import org.nulla.kcrw.item.crafting.KCRecipe;
-import org.nulla.kcrw.potion.Potions;
+import org.nulla.kcrw.potion.KCPotions;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
@@ -40,7 +40,7 @@ public class KCItems {
     				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20));
     				
     				// 测试
-    				player.addPotionEffect(new PotionEffect(Potions.test.id, 50));
+    				player.addPotionEffect(new PotionEffect(KCPotions.test.id, 50));
 				}
 				@Override
 				public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {

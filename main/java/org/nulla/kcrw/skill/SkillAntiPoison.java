@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KeyCraft_Rewrite;
-import org.nulla.kcrw.potion.Potions;
+import org.nulla.kcrw.potion.KCPotions;
 
 public class SkillAntiPoison extends Skill {
 	
@@ -20,7 +20,7 @@ public class SkillAntiPoison extends Skill {
 	@Override
 	public boolean onUse(EntityPlayer player) {
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
-		player.addPotionEffect(new PotionEffect(Potions.poisonResistance.id, time));
+		player.addPotionEffect(new PotionEffect(KCPotions.poisonResistance.id, time));
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();

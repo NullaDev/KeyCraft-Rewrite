@@ -18,6 +18,8 @@ public class KCResources {
 	public static ResourceLocation item_music_player = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/music_player.png");
 
 	public static ResourceLocation skill_empty_slot = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/empty_slot.png");
+	public static ResourceLocation skill_passive_on = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/passive_on.png");
+	public static ResourceLocation skill_passive_off = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/passive_off.png");
 	public static ResourceLocation skill_empty_exp = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/empty_exp.png");
 	
 	public static ResourceLocation music_pump_it = new ResourceLocation(KeyCraft_Rewrite.MODID, "music.test");
