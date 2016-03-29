@@ -92,11 +92,14 @@ public class SkillNetwork
 		final int newAuroraPoint = event.wasDeath ? Math.max(SkillUtils.getAuroraPoint(_old) - 10, 0) : SkillUtils.getAuroraPoint(_old);
 		_new.getEntityData().setInteger("AuroraPoint", newAuroraPoint);
 		
-		// 克隆技能、CD
+		// 克隆技能、CD、经验、开启
 		for (Skill i : Skills.AllSkills)
 		{
 			i.setSkill(_new, i.hasSkill(_old));
 			i.setLastUseTime(_new, i.getLastUseTime(_old));
+			i.setExperience(_new, i.getExperience(_old));
+			if (i instanceof SkillPassive)
+				((SkillPassive)i).setIsOn(_new, ((SkillPassive)i).getIsOn(_old));
 		}
 		
 		// 克隆技能槽
@@ -169,6 +172,8 @@ public class SkillNetwork
 					i.setSkill(player, stream.readBoolean());
 					i.setLastUseTime(player, stream.readLong());
 					i.setExperience(player, stream.readInt());
+					if (i instanceof SkillPassive)
+						((SkillPassive)i).setIsOn(player, stream.readBoolean());
 				}
 				break;
 				
@@ -220,6 +225,8 @@ public class SkillNetwork
 				stream.writeBoolean(i.hasSkill(player));
 				stream.writeLong(i.getLastUseTime(player));
 				stream.writeInt(i.getExperience(player));
+				if (i instanceof SkillPassive)
+					stream.writeBoolean(((SkillPassive)i).getIsOn(player));
 			}
 
 			packet = new FMLProxyPacket(stream.buffer(), CHANNEL_STRING);

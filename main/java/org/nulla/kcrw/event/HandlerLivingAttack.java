@@ -4,6 +4,7 @@ import org.nulla.kcrw.damage.KCDamageSource;
 import org.nulla.kcrw.potion.KCPotions;
 import org.nulla.kcrw.skill.*;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -13,17 +14,21 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class HandlerLivingAttack {
 		
 	@SubscribeEvent
-	public void AuroraAttack(LivingHurtEvent event) {
-		if (!(event.source.getEntity() instanceof EntityPlayer)) {
+	public void AuroraAttack(LivingAttackEvent event) { // HurtEvent客户端不触发
+		if (event.source == KCDamageSource.aurora)
 			return;
-		}
-		EntityPlayer player = (EntityPlayer) event.source.getEntity();
-		if (player.worldObj.isRemote) {
+		Entity entity = event.source.getEntity();
+		if (!(entity instanceof EntityPlayer))
 			return;
-		}
+		// @EntityLivingBase.attackEntityFrom
+		if (event.entityLiving.isEntityInvulnerable()
+			|| event.entityLiving.getHealth() <= 0.0F)
+			return;
+		
+		EntityPlayer player = (EntityPlayer)entity;
 		if (event.source.damageType.equals("player")) {
 			//这里直接有判断cd和是否习得了，太棒了
-			if (Skill.useSkill(player, Skills.SkillAuroraAttack.mID))
+			if (Skills.SkillAuroraAttack.trigSkill(player))
 				event.entityLiving.attackEntityFrom(KCDamageSource.aurora, 20.0F);
 		}
 		
