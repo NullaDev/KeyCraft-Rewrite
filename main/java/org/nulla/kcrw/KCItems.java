@@ -23,6 +23,11 @@ public class KCItems {
 	
 	public static Item aurora_iron_ingot;
 	
+    public static Item aurora_iron_helmet;
+    public static Item aurora_iron_chestplate;
+    public static Item aurora_iron_leggings;
+    public static Item aurora_iron_boots;
+	
 	public static Item music_player;
 	
 	public static Item peach_juice;
@@ -36,6 +41,34 @@ public class KCItems {
 			.setUnlocalizedName("auroraIronIngot")
 			.setTextureName("kcrw:aurora_iron_ingot");
     	GameRegistry.registerItem(aurora_iron_ingot, "aurora_iron_ingot");
+    	
+    	aurora_iron_helmet = new ItemAuroraArmor(0)
+			.setUnlocalizedName("auroraIronHelmet")
+			.setTextureName("kcrw:aurora_iron_helmet")
+			.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
+    	GameRegistry.registerItem(aurora_iron_helmet, "aurora_iron_helmet");
+    	KCUtils.addEnchantedRecipe(aurora_iron_helmet, Enchantment.protection, 2, new Object[] { "AAA", "A A", 'A', aurora_iron_ingot });
+
+    	aurora_iron_chestplate = new ItemAuroraArmor(1)
+    		.setUnlocalizedName("auroraIronChestPlate")
+    		.setTextureName("kcrw:aurora_iron_chestplate")
+			.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
+    	GameRegistry.registerItem(aurora_iron_chestplate, "aurora_iron_chestplate");
+    	KCUtils.addEnchantedRecipe(aurora_iron_chestplate, Enchantment.protection, 2, new Object[] { "A A", "AAA", "AAA", 'A', aurora_iron_ingot });
+
+    	aurora_iron_leggings = new ItemAuroraArmor(2)
+			.setUnlocalizedName("auroraIronLeggings")
+			.setTextureName("kcrw:aurora_iron_leggings")
+			.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
+    	GameRegistry.registerItem(aurora_iron_leggings, "aurora_iron_leggings");
+    	KCUtils.addEnchantedRecipe(aurora_iron_leggings, Enchantment.protection, 2, new Object[] { "AAA", "A A", "A A", 'A', aurora_iron_ingot });
+
+    	aurora_iron_boots = new ItemAuroraArmor(3)
+			.setUnlocalizedName("auroraIronBoots")
+			.setTextureName("kcrw:aurora_iron_boots")
+			.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
+    	GameRegistry.registerItem(aurora_iron_boots, "aurora_iron_boots");
+    	KCUtils.addEnchantedRecipe(aurora_iron_boots, Enchantment.protection, 2, new Object[] { "A A", "A A", 'A', aurora_iron_ingot });
     	
     	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))
@@ -60,7 +93,7 @@ public class KCItems {
     		.setTextureName("kcrw:peach_juice");
     	GameRegistry.registerItem(peach_juice, "peach_juice");
     	
-    	//KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "���ǹ��", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
+    	KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "我是光棍", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
     	
     	aurora_blade = new ItemAuroraBlade()
 			.setUnlocalizedName("auroraBlade")

@@ -67,6 +67,13 @@ public class KCUtils {
 	}
 	
 	/** 
+	 * 注册带附魔的合成表。
+	 */
+	public static void addEnchantedRecipe(Item item, Enchantment enchantment, int enchantmentLevel, Object[] ingredientArray) {
+		addEnchantedRecipe(new ItemStack(item), enchantment, enchantmentLevel, ingredientArray);
+	}
+	
+	/** 
 	 * 注册带附魔和名字的合成表。
 	 */
 	public static void addEnchantedNamedRecipe(ItemStack item, Enchantment enchantment, int enchantmentLevel, String name, Object[] ingredientArray) {
@@ -179,6 +186,8 @@ public class KCUtils {
 	 */
 	public static void drawAuroraStrip(int width, int height) {
 		
+		initDrawerState();
+
 		width *= 0.95;
 		height *= 0.05;
 		
@@ -219,6 +228,8 @@ public class KCUtils {
 	 * width，height代表屏幕的宽高。
 	 */
 	public static void drawSkillSlot(int width, int height) {
+		
+		initDrawerState();
 		
 		int widthToDraw = (int) (0.9 * width);
 		int heightToDraw[] = new int[4];
