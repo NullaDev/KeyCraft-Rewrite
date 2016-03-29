@@ -15,8 +15,9 @@ public class HandlerLivingAttack {
 		
 	@SubscribeEvent
 	public void AuroraAttack(LivingAttackEvent event) { // HurtEvent客户端不触发
-		if (event.source == KCDamageSource.aurora)
+		if (event.source.damageType.equals("aurora")) {
 			return;
+		}
 		Entity entity = event.source.getEntity();
 		if (!(entity instanceof EntityPlayer))
 			return;
@@ -28,9 +29,10 @@ public class HandlerLivingAttack {
 		EntityPlayer player = (EntityPlayer)entity;
 		if (event.source.damageType.equals("player")) {
 			//这里直接有判断cd和是否习得了，太棒了
-			if (Skills.SkillAuroraAttack.trigSkill(player))
+			if (Skills.SkillAuroraAttack.trigSkill(player)) {
 				event.entityLiving.setLastAttacker(player);
-				event.entityLiving.attackEntityFrom(KCDamageSource.aurora, 20.0F);
+				event.entityLiving.attackEntityFrom(KCDamageSource.CauseAuroraDamage(player), 20.0F);
+			}
 		}
 		
 	}
