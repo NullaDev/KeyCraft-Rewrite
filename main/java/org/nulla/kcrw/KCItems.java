@@ -68,8 +68,9 @@ public class KCItems {
 			.setTextureName("kcrw:aurora_iron_boots")
 			.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
     	GameRegistry.registerItem(aurora_iron_boots, "aurora_iron_boots");
-    	KCUtils.addEnchantedRecipe(aurora_iron_boots, Enchantment.protection, 2, new Object[] { "A A", "A A", 'A', aurora_iron_ingot });
-    	
+    	//KCUtils.addEnchantedRecipe(aurora_iron_boots, Enchantment.protection, 2, new Object[] { "A A", "A A", 'A', aurora_iron_ingot });
+    	KCUtils.addEnchantedRecipe(new ItemStack(aurora_iron_boots, 1, 200), Enchantment.protection, 2, new Object[] { "A A", "A A", 'A', aurora_iron_ingot });
+
     	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))
 			.setUnlocalizedName("musicPlayer")

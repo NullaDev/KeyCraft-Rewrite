@@ -2,9 +2,7 @@ package org.nulla.kcrw;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.nulla.kcrw.event.HandlerDrawHUD;
-import org.nulla.kcrw.event.HandlerKeyInput;
-import org.nulla.kcrw.event.HandlerLivingAttack;
+import org.nulla.kcrw.event.*;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -31,7 +29,9 @@ public class KCClientProxy extends KCCommonProxy {
 		// 注册GUI、用户输入事件
     	MinecraftForge.EVENT_BUS.register(new HandlerDrawHUD());
 		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
+		FMLCommonHandler.instance().bus().register(new HandlerPlayerTick());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttack());
+		MinecraftForge.EVENT_BUS.register(new HandlerLivingDeath());
 
 		
 		//注册KeyBinding

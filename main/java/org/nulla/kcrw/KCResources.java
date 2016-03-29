@@ -31,6 +31,7 @@ public class KCResources {
 	
 	public static ResourceLocation sound_aurora = new ResourceLocation(KeyCraft_Rewrite.MODID, "sound.aurora");
 	
+	public static ResourceLocation potion_aurora_regeneration = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/potions/potion_aurora_regeneration.png");
 	public static ResourceLocation potion_poisonResistance = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/potions/poison_resistance.png");
-		
+	
 }
