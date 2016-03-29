@@ -17,6 +17,7 @@ public class KCResources {
 	public static ResourceLocation btn_ensure = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_ensure.png");
 	public static ResourceLocation btn_return = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_return.png");
 
+	public static ResourceLocation item_aurora_iron_ingot = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/aurora_iron_ingot.png");
 	public static ResourceLocation item_peach_juice = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/peach_juice.png");
 	public static ResourceLocation item_music_player = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/items/music_player.png");
 
@@ -31,14 +32,5 @@ public class KCResources {
 	public static ResourceLocation sound_aurora = new ResourceLocation(KeyCraft_Rewrite.MODID, "sound.aurora");
 	
 	public static ResourceLocation potion_poisonResistance = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/potions/poison_resistance.png");
-	
-	public static ResourceLocation[] locations = {btn_end, btn_ensure, item_peach_juice, item_music_player};
-	
-	public static ResourceLocation getLocationFromName(String name) {
-		for (ResourceLocation i: locations) {
-			if (i.getResourcePath().contains(name))
-				return i;
-		}
-		return null;
-	}
+		
 }

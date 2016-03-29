@@ -22,18 +22,6 @@ public class GuiButtonImage extends Gui {
     public boolean visible;
     protected boolean isPointAt;
     public int packedFGColour;
-
-    public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, String name, boolean frame) {
-        this.enabled = true;
-        this.visible = true;
-        this.id = btnID;
-        this.posX = btnPosX;
-        this.posY = btnPosY;
-        this.width = btnWidth;
-        this.height = btnHeight;
-        this.buttonTextures = KCResources.getLocationFromName(name);
-        this.hasFrame = frame;
-    }
     
     public GuiButtonImage(int btnID, int btnPosX, int btnPosY, int btnWidth, int btnHeight, ResourceLocation location, boolean frame) {
         this.enabled = true;

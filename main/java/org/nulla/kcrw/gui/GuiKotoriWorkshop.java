@@ -128,8 +128,9 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 	}
     
     private void addCraftButton() {
-    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.2 ), (int)(height * 0.4), 32, 32, "peach_juice", true));
-    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.2 + 36), (int)(height * 0.4), 32, 32, "music_player", true));
+    	buttonList.add(btnCraft[0] = new GuiButtonImage(0, (int)(width * 0.15 ), (int)(height * 0.4), 32, 32, KCResources.item_peach_juice, true));
+    	buttonList.add(btnCraft[1] = new GuiButtonImage(1, (int)(width * 0.15 + 36), (int)(height * 0.4), 32, 32, KCResources.item_music_player, true));
+    	buttonList.add(btnCraft[2] = new GuiButtonImage(2, (int)(width * 0.15 + 72), (int)(height * 0.4), 32, 32, KCResources.item_aurora_iron_ingot, true));
     }
     
     private boolean isEnough(int i) {

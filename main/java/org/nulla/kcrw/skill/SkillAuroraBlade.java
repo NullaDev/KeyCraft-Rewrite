@@ -25,7 +25,7 @@ public class SkillAuroraBlade extends Skill {
 	public boolean onUse(EntityPlayer player) {
 		ItemStack held = player.getHeldItem();
 		if (held == null) {
-			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.aurorablade, 1));
+			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.aurora_blade, 1));
 			if (!player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("keycraft.prompt.callblade")));
     		}	
@@ -33,7 +33,7 @@ public class SkillAuroraBlade extends Skill {
 		return true;
 	}
 	
-	/** »ØÊÕÅ·ÈôÀ­Èý²æêª»ò½£ */
+	/** ï¿½ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½êª»ï¿½ */
 	public static void recycleAurora(EntityPlayer player, double proportion) {
 		if (proportion == 0) {
 			SkillUtils.modifyAuroraPoint(player, (int) (Skills.SkillAuroraBlade.mAuroraCost * 0.5F));
@@ -50,7 +50,7 @@ public class SkillAuroraBlade extends Skill {
 		}
 	}
 	
-	/** Å·ÈôÀ­Èý²æêª»ò½£±»ÆÆ»µºó¸ødebuff */
+	/** Å·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½êª»ò½£±ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½debuff */
 	public static void breakAurora(EntityPlayer player) {
 		recycleAurora(player, 1D);
     }

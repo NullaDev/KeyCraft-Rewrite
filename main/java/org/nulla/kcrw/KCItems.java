@@ -1,5 +1,6 @@
 package org.nulla.kcrw;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.nulla.kcrw.item.*;
@@ -18,29 +19,35 @@ import net.minecraft.world.World;
 
 public class KCItems {
 	
-	public static Item musicplayer;
+	public static final ArrayList<Item> items = new ArrayList<Item>();
 	
-	public static Item peachjuice;
+	public static Item aurora_iron_ingot;
 	
-	public static Item aurorablade;
+	public static Item music_player;
+	
+	public static Item peach_juice;
+	
+	public static Item aurora_blade;
 	
     public static void InitItems() {
     	
-    	//��ͨ��Ʒ
-    	musicplayer = new ItemMusicPlayer()
+    	aurora_iron_ingot = new ItemAuroraIronIngot()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 16))
+			.setUnlocalizedName("auroraIronIngot")
+			.setTextureName("kcrw:aurora_iron_ingot");
+    	GameRegistry.registerItem(aurora_iron_ingot, "aurora_iron_ingot");
+    	
+    	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))
-			.setUnlocalizedName("musicplayer")
+			.setUnlocalizedName("musicPlayer")
 			.setTextureName("kcrw:music_player");
-    	GameRegistry.registerItem(musicplayer, "musicplayer");
+    	GameRegistry.registerItem(music_player, "music_player");
 		
-    	peachjuice = new ItemFoodKC(3)
+    	peach_juice = new ItemFoodKC(3)
     		.setCallback(new ItemFoodKC.ICallback() {
 				@Override
 				public void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
     				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 30 * 20));
-    				
-    				// 测试
-    				player.addPotionEffect(new PotionEffect(KCPotions.test.id, 50));
 				}
 				@Override
 				public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
@@ -49,17 +56,15 @@ public class KCItems {
     		})
     		.setAlwaysEdible()
     		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.slime_ball, 4), new ItemStack(Items.apple, 1)} , 4, 10))
-    		.setUnlocalizedName("peachjuice")
+    		.setUnlocalizedName("peachJuice")
     		.setTextureName("kcrw:peach_juice");
-    	GameRegistry.registerItem(peachjuice, "peachjuice");
+    	GameRegistry.registerItem(peach_juice, "peach_juice");
     	
     	//KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "���ǹ��", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
     	
-    	
-    	//������Ʒ
-    	aurorablade = new ItemAuroraBlade()
-			.setUnlocalizedName("aurorablade")
+    	aurora_blade = new ItemAuroraBlade()
+			.setUnlocalizedName("auroraBlade")
 			.setTextureName("kcrw:aurora_blade");
-    	GameRegistry.registerItem(aurorablade, "aurorablade");
+    	GameRegistry.registerItem(aurora_blade, "aurora_blade");
     }
 }
