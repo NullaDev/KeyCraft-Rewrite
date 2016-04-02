@@ -42,16 +42,14 @@ public class ItemAuroraTool extends KCItemBase {
     }
     
     public float getExtraDamage(String toolType) {
-    	switch (toolType) {
-    		case "axe" :
-    			return 3.0F;
-    		case "pickaxe" :
-    			return 2.0F;
-    		case "shovel" :
-    			return 1.0F;
-    		default:
-    			return 0.0F;
-    	}
+    	if(toolType == "axe"){
+    		return 3.0F;
+    	}else if (toolType == "pickaxe") {
+			return 2.0F;
+		}else if (toolType == "shovel") {
+			return 1.0F;
+		}
+    	return 0.0F;
     }
 
     /** 这个工具不是用来打人的，打人掉双倍耐久。 */
