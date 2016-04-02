@@ -1,7 +1,7 @@
 package org.nulla.kcrw.block;
 
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.gui.GuiKotoriWorkshop;
+import org.nulla.kcrw.clinet.gui.GuiKotoriWorkshop;
 import org.nulla.kcrw.skill.*;
 
 import cpw.mods.fml.relauncher.*;

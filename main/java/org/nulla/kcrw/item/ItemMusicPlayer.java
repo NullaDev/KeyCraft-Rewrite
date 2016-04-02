@@ -1,6 +1,7 @@
 package org.nulla.kcrw.item;
 
 import org.nulla.kcrw.*;
+import org.nulla.kcrw.clinet.KCMusicHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

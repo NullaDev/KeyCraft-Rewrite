@@ -1,6 +1,8 @@
-package org.nulla.kcrw;
+package org.nulla.kcrw.clinet;
 
 import java.lang.reflect.Field;
+
+import org.nulla.kcrw.KCUtils;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;

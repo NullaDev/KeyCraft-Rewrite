@@ -1,10 +1,9 @@
-package org.nulla.kcrw.gui;
+package org.nulla.kcrw.clinet.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.gui.part.GuiButtonImage;
 import org.nulla.kcrw.skill.Skill;
 import org.nulla.kcrw.skill.SkillUtils;
 import org.nulla.kcrw.skill.Skills;

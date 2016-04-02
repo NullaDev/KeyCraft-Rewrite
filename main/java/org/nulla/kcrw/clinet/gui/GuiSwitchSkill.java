@@ -1,8 +1,7 @@
-package org.nulla.kcrw.gui;
+package org.nulla.kcrw.clinet.gui;
 
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.gui.part.GuiButtonImage;
 import org.nulla.kcrw.item.KCItemBase;
 import org.nulla.kcrw.item.crafting.KCRecipe;
 import org.nulla.kcrw.skill.Skill;

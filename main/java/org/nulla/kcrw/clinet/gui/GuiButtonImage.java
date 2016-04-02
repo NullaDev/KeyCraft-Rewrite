@@ -1,4 +1,4 @@
-package org.nulla.kcrw.gui.part;
+package org.nulla.kcrw.clinet.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.*;
