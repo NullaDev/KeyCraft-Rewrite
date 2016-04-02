@@ -26,7 +26,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 /** 处理和技能有关的网络事件 */
 public class SkillNetwork
 {
-	public static final String CHANNEL_STRING = "REWRITE_SKILL_CHANNEL";
+	public static final String CHANNEL_STRING = "RW_SKILL_CHANNEL";
 	public static FMLEventChannel Channel;
 	
 	// 单例模式
