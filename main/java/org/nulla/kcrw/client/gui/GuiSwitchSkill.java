@@ -1,4 +1,4 @@
-package org.nulla.kcrw.clinet.gui;
+package org.nulla.kcrw.client.gui;
 
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;

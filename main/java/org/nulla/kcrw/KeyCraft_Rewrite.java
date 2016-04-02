@@ -3,7 +3,7 @@ package org.nulla.kcrw;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.nulla.kcrw.clinet.KCMusicHelper;
+import org.nulla.kcrw.client.KCMusicHelper;
 import org.nulla.kcrw.event.HandlerChatCheating;
 import org.nulla.kcrw.potion.KCPotion;
 import org.nulla.kcrw.skill.SkillNetwork;

@@ -2,7 +2,7 @@ package org.nulla.kcrw;
 
 import java.io.IOException;
 
-import org.nulla.kcrw.clinet.gui.GuiKotoriWorkshop;
+import org.nulla.kcrw.client.gui.GuiKotoriWorkshop;
 import org.nulla.kcrw.item.KCItemBase;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

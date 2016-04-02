@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KeyCraft_Rewrite;
-import org.nulla.kcrw.clinet.KCMusicHelper;
+import org.nulla.kcrw.client.KCMusicHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;

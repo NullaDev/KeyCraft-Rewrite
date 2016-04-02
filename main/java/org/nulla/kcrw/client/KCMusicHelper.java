@@ -1,4 +1,4 @@
-package org.nulla.kcrw.clinet;
+package org.nulla.kcrw.client;
 
 import java.lang.reflect.Field;
 
