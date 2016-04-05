@@ -35,8 +35,6 @@ public class MonsterBase extends EntityLivingBase
     /** The active target the Task system uses for tracking */
     private EntityLivingBase attackTarget;
     
-    
-
 	public MonsterBase(World p_i1594_1_)
 	{
 		super(p_i1594_1_);
@@ -45,8 +43,7 @@ public class MonsterBase extends EntityLivingBase
 	}
 
 	/**重写以返回实体死亡时掉落的欧若拉点数*/
-	public int getDeathAuroraDrop()
-	{
+	public int getDeathAuroraDrop() {
 		return 0;
 	}
 	
@@ -68,41 +65,35 @@ public class MonsterBase extends EntityLivingBase
 	}
 	/*------------------以下为EntityLiving类的各种搬运-----------------------*/
 	@Override
-	public ItemStack getHeldItem() 
-	{
+	public ItemStack getHeldItem() {
 		return this.equipment[0];
 	}
 
 	@Override
-	public ItemStack getEquipmentInSlot(int p_71124_1_)
-	{
-		return this.equipment[p_71124_1_];
+	public ItemStack getEquipmentInSlot(int pos) {
+		return this.equipment[pos];
 	}
 
 	@Override
-	public void setCurrentItemOrArmor(int p_70062_1_, ItemStack p_70062_2_)
-	{
-		this.equipment[p_70062_1_] = p_70062_2_;
+	public void setCurrentItemOrArmor(int pos, ItemStack stack) {
+		this.equipment[pos] = stack;
 	}
 
 	@Override
-	public ItemStack[] getLastActiveItems()
-	{
+	public ItemStack[] getLastActiveItems() {
 		return this.equipment;
 	}
 	/**
      * Gets the active target the Task system uses for tracking
      */
-    public EntityLivingBase getAttackTarget()
-    {
+    public EntityLivingBase getAttackTarget() {
         return this.attackTarget;
     }
 
     /**
      * Sets the active target the Task system uses for tracking
      */
-    public void setAttackTarget(EntityLivingBase p_70624_1_)
-    {
+    public void setAttackTarget(EntityLivingBase p_70624_1_) {
         this.attackTarget = p_70624_1_;
         ForgeHooks.onLivingSetAttackTarget(this, p_70624_1_);
     }
@@ -110,27 +101,22 @@ public class MonsterBase extends EntityLivingBase
     /**
      * Returns true if this entity can attack entities of the specified class.
      */
-    public boolean canAttackClass(Class p_70686_1_)
-    {
+    public boolean canAttackClass(Class p_70686_1_) {
         return EntityCreeper.class != p_70686_1_ && EntityGhast.class != p_70686_1_;
     }
     /**
      * Changes pitch and yaw so that the entity calling the function is facing the entity provided as an argument.
      */
-    public void faceEntity(Entity p_70625_1_, float p_70625_2_, float p_70625_3_)
-    {
-        double d0 = p_70625_1_.posX - this.posX;
-        double d2 = p_70625_1_.posZ - this.posZ;
+    public void faceEntity(Entity entity, float p_70625_2_, float p_70625_3_) {
+        double d0 = entity.posX - this.posX;
+        double d2 = entity.posZ - this.posZ;
         double d1;
 
-        if (p_70625_1_ instanceof EntityLivingBase)
-        {
-            EntityLivingBase entitylivingbase = (EntityLivingBase)p_70625_1_;
+        if (entity instanceof EntityLivingBase) {
+            EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
             d1 = entitylivingbase.posY + (double)entitylivingbase.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
-        }
-        else
-        {
-            d1 = (p_70625_1_.boundingBox.minY + p_70625_1_.boundingBox.maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
+        } else {
+            d1 = (entity.boundingBox.minY + entity.boundingBox.maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
         }
 
         double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
@@ -142,17 +128,14 @@ public class MonsterBase extends EntityLivingBase
     /**
      * Arguments: current rotation, intended rotation, max increment.
      */
-    private float updateRotation(float p_70663_1_, float p_70663_2_, float p_70663_3_)
-    {
+    private float updateRotation(float p_70663_1_, float p_70663_2_, float p_70663_3_) {
         float f3 = MathHelper.wrapAngleTo180_float(p_70663_2_ - p_70663_1_);
 
-        if (f3 > p_70663_3_)
-        {
+        if (f3 > p_70663_3_) {
             f3 = p_70663_3_;
         }
 
-        if (f3 < -p_70663_3_)
-        {
+        if (f3 < -p_70663_3_) {
             f3 = -p_70663_3_;
         }
 

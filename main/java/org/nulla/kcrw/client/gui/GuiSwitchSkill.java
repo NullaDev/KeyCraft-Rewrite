@@ -80,5 +80,13 @@ public class GuiSwitchSkill extends KCGuiBase {
 		}
 		refresh();
 	}
+    
+    /**
+     * Returns true if this GUI should pause the game when it is displayed in single-player
+     */
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
 }
