@@ -7,7 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBaseball extends EntityThrowableWithoutGravity {
+public class EntityBaseball extends KCEntityThrowable {
 
 	protected static final float SPEED_NO_SKILL = 2.0F;
 	//protected static final float SPEED_HAS_SKILL = 10.0F;
@@ -19,7 +19,11 @@ public class EntityBaseball extends EntityThrowableWithoutGravity {
     }
 	
 	public EntityBaseball(World world, EntityLivingBase thrower) {
-        super(world, thrower);
+		this(world, thrower, 0.25F, 0.25F ,0.03F);
+	}
+	
+	public EntityBaseball(World world, EntityLivingBase thrower, float width, float height, float gravity) {
+        super(world, thrower, width, height, gravity);
         
         // 重新设置位置和速度
         this.setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
@@ -41,9 +45,10 @@ public class EntityBaseball extends EntityThrowableWithoutGravity {
         	} else {
         		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower == null ? this : thrower), DAMAGE_NO_SKILL);
         	}
-        	target.entityHit.worldObj.createExplosion(thrower, posX, posY, posZ, 10.0F, true);
         }
 
+    	this.worldObj.createExplosion(thrower, posX, posY, posZ, 5.0F, false);
+        
         if (!this.worldObj.isRemote) {
             this.setDead();
         }

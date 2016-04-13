@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public abstract class EntityThrowableWithoutGravity extends Entity implements IProjectile {
+public abstract class KCEntityThrowable extends Entity implements IProjectile {
 	
     private int tileX = -1;
     private int tileY = -1;
@@ -20,13 +20,13 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
     protected boolean inGround;
     public int throwableShake;
     /** 扔出Entity的生物 */
-    private EntityLivingBase thrower;
+    protected EntityLivingBase thrower;
     private String throwerName;
     private int ticksInGround;
     private int ticksInAir;
-    private static final String __OBFID = "CL_00001723";
+    protected float mGravity = 0.03F;
 
-    public EntityThrowableWithoutGravity(World world, float width, float height) {
+    public KCEntityThrowable(World world, float width, float height) {
         super(world);
         this.setSize(width, height);
     }
@@ -44,10 +44,11 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
         return distance < d1 * d1;
     }
 
-    public EntityThrowableWithoutGravity(World world, EntityLivingBase thrower) {
+    public KCEntityThrowable(World world, EntityLivingBase thrower, float width, float height, float gravity) {
         super(world);
         this.thrower = thrower;
-        this.setSize(0.25F, 0.25F);
+        this.setSize(width, height);
+        this.mGravity = gravity;
         this.setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
         this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
         this.posY -= 0.10000000149011612D;
@@ -61,7 +62,7 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F, 1.0F);
     }
 
-    public EntityThrowableWithoutGravity(World world, double posX, double posY, double posZ, float width, float height) {
+    public KCEntityThrowable(World world, double posX, double posY, double posZ, float width, float height) {
         super(world);
         this.ticksInGround = 0;
         this.setSize(width, height);
@@ -119,24 +120,7 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
             --this.throwableShake;
         }
 
-        if (this.inGround) {
-            if (this.worldObj.getBlock(this.tileX, this.tileY, this.tileZ) == this.field_145785_f) {
-                ++this.ticksInGround;
-
-                if (this.ticksInGround == 1200) {
-                    this.setDead();
-                }
-
-                return;
-            }
-
-            this.inGround = false;
-            this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-            this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-            this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
-            this.ticksInGround = 0;
-            this.ticksInAir = 0;
-        } else {
+        if (!this.inGround) {
             ++this.ticksInAir;
         }
 
@@ -213,11 +197,9 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
         this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
         this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
         float f2 = 0.99F;
-        float f3 = this.getGravityVelocity();
 
         if (this.isInWater()) {
-            for (int i = 0; i < 4; ++i)
-            {
+            for (int i = 0; i < 4; ++i) {
                 float f4 = 0.25F;
                 this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f4, this.posY - this.motionY * (double)f4, this.posZ - this.motionZ * (double)f4, this.motionX, this.motionY, this.motionZ);
             }
@@ -229,7 +211,7 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
         this.motionY *= (double)f2;
         this.motionZ *= (double)f2;
         //不因为重力下降
-        this.motionY -= (double)f3;
+        this.motionY -= (double)this.getGravityVelocity();
         this.setPosition(this.posX, this.posY, this.posZ);
         if (this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ <= 0.0064F)
         	this.setDead();
@@ -240,7 +222,7 @@ public abstract class EntityThrowableWithoutGravity extends Entity implements IP
      */
     @Deprecated
     protected float getGravityVelocity() {
-        return 0F;
+        return mGravity;
     }
 
     /**

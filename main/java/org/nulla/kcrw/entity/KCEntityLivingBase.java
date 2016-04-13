@@ -24,7 +24,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class MonsterBase extends EntityLivingBase
+public class KCEntityLivingBase extends EntityLivingBase
 {
 	/** Equipment (armor and held item) for this entity. */
     private ItemStack[] equipment = new ItemStack[5];
@@ -35,7 +35,7 @@ public class MonsterBase extends EntityLivingBase
     /** The active target the Task system uses for tracking */
     private EntityLivingBase attackTarget;
     
-	public MonsterBase(World p_i1594_1_) {
+	public KCEntityLivingBase(World p_i1594_1_) {
 		super(p_i1594_1_);
 		this.tasks = new EntityAITasks(p_i1594_1_ != null && p_i1594_1_.theProfiler != null ? p_i1594_1_.theProfiler : null);
         this.targetTasks = new EntityAITasks(p_i1594_1_ != null && p_i1594_1_.theProfiler != null ? p_i1594_1_.theProfiler : null);

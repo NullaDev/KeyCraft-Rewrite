@@ -42,7 +42,7 @@ public class KeyCraft_Rewrite {
 		KCPotion.init();
 		
 		// 注册实体
-    	int modID = 1;
+		int modID = 1;
     	EntityRegistry.registerModEntity(EntityBaseball.class, "baseball", modID++, this, 128, 1, true);
     }
     
