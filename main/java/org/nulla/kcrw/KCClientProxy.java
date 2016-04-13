@@ -2,13 +2,16 @@ package org.nulla.kcrw;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.event.*;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -37,6 +40,9 @@ public class KCClientProxy extends KCCommonProxy {
 		//注册KeyBinding
 		ClientRegistry.registerKeyBinding(kbSkill1);
 		ClientRegistry.registerKeyBinding(kbSkill2);
+		
+		// 注册渲染器
+		RenderingRegistry.registerEntityRenderingHandler(EntityBaseball.class, new RenderSnowball(KCItems.baseball));
 		
 	}
 	

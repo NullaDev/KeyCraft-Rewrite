@@ -35,8 +35,7 @@ public class MonsterBase extends EntityLivingBase
     /** The active target the Task system uses for tracking */
     private EntityLivingBase attackTarget;
     
-	public MonsterBase(World p_i1594_1_)
-	{
+	public MonsterBase(World p_i1594_1_) {
 		super(p_i1594_1_);
 		this.tasks = new EntityAITasks(p_i1594_1_ != null && p_i1594_1_.theProfiler != null ? p_i1594_1_.theProfiler : null);
         this.targetTasks = new EntityAITasks(p_i1594_1_ != null && p_i1594_1_.theProfiler != null ? p_i1594_1_.theProfiler : null);
@@ -48,17 +47,14 @@ public class MonsterBase extends EntityLivingBase
 	}
 	
 	@Override
-	public void onDeath(DamageSource par1)
-	{
+	public void onDeath(DamageSource par1) {
 		super.onDeath(par1);
 		//死亡加欧若拉
-		if(par1.getEntity() instanceof EntityPlayer)
-		{
+		if (par1.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player=(EntityPlayer) par1.getEntity();
 			SkillUtils.setAuroraPoint(player, SkillUtils.getAuroraPoint(player)+getDeathAuroraDrop());
 		}
-		if(worldObj.isRemote)
-		{
+		if (worldObj.isRemote) {
 			worldObj.spawnParticle("magicCrit", posX, posY, posZ, 0, 2, 0);//死亡DUANG...
 		}
 		

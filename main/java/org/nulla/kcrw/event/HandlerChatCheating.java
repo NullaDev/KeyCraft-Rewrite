@@ -49,7 +49,7 @@ public class HandlerChatCheating {
             EntityPlayerMP player = event.player;
             if (!player.worldObj.isRemote) {
                 for (Skill i : Skills.AllSkills) {
-                	i.learnSkill(player);
+                	i.setSkill(player, true);
         		}
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.learn")));
             }

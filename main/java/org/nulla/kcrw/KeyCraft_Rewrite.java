@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.nulla.kcrw.client.KCMusicHelper;
+import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.event.HandlerChatCheating;
 import org.nulla.kcrw.potion.KCPotion;
 import org.nulla.kcrw.skill.SkillNetwork;
@@ -13,13 +14,14 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 @Mod(modid = KeyCraft_Rewrite.MODID, name = KeyCraft_Rewrite.MODNAME, version = KeyCraft_Rewrite.VERSION)
 public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
 	public static final String MODNAME = "KeyCraft Rewrite Ver.";
-    public static final String VERSION = "Demo20160403";
+    public static final String VERSION = "Demo20160413";
     
     @SidedProxy(clientSide = "org.nulla.kcrw.KCClientProxy",
             	serverSide = "org.nulla.kcrw.KCCommonProxy")
@@ -38,6 +40,10 @@ public class KeyCraft_Rewrite {
 		
 		// 注册效果
 		KCPotion.init();
+		
+		// 注册实体
+    	int modID = 1;
+    	EntityRegistry.registerModEntity(EntityBaseball.class, "baseball", modID++, this, 128, 1, true);
     }
     
     @EventHandler

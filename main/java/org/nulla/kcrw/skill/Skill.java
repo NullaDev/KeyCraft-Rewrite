@@ -42,6 +42,11 @@ public abstract class Skill {
 	/*------------------- 技能实现部分结束 -------------------*/
 	/*------------------- 学习技能开始 -------------------*/
 
+	/** 重载实现学习条件 */
+	public boolean canLearnSkill(EntityPlayer player) {
+		return false;
+	}
+	
 	/** 判断有没有技能 */
 	public boolean hasSkill(EntityPlayer player) {
 		return player.getEntityData().getBoolean("Skill" + mName);
@@ -55,6 +60,9 @@ public abstract class Skill {
 	/** 学习技能，会发同步包，如果技能槽还有空位就塞进去 */
 	public void learnSkill(EntityPlayer player) {
 		if (hasSkill(player))
+			return;
+		
+		if (!canLearnSkill(player))
 			return;
 		
 		if (SkillUtils.getAuroraPoint(player) > mAuroraRequired) { // 不让欧若拉变为0

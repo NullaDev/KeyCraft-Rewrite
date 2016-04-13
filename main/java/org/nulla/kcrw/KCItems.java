@@ -35,6 +35,8 @@ public class KCItems {
     public static Item aurora_iron_sword;
     
     public static Item aurora_iron_hoe;
+    
+	public static Item baseball;
 	
 	public static Item music_player;
 	
@@ -106,6 +108,12 @@ public class KCItems {
     	GameRegistry.registerItem(aurora_iron_sword, "aurora_iron_sword");
     	KCUtils.addEnchantedRecipe(aurora_iron_sword, Enchantment.sharpness, 2, new Object[] { "A", "A", "B", 'A', aurora_iron_ingot, 'B', Items.stick });
 	
+    	baseball = new ItemBaseball()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.leather, 4), new ItemStack(Blocks.wool, 1, 0)}, 16, 32))
+			.setUnlocalizedName("baseball")
+			.setTextureName("kcrw:baseball");
+    	GameRegistry.registerItem(baseball, "baseball");
+    	
     	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))
 			.setUnlocalizedName("musicPlayer")

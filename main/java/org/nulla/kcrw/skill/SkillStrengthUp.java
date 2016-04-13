@@ -21,6 +21,11 @@ public class SkillStrengthUp extends Skill {
 	}
 	
 	@Override
+	public boolean canLearnSkill(EntityPlayer player) {
+		return true;
+	}
+	
+	@Override
 	public boolean onUse(EntityPlayer player) {
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, time, 1));
