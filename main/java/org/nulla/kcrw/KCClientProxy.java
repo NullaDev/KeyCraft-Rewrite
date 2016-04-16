@@ -42,7 +42,7 @@ public class KCClientProxy extends KCCommonProxy {
 		ClientRegistry.registerKeyBinding(kbSkill2);
 		
 		// 注册渲染器
-		RenderingRegistry.registerEntityRenderingHandler(EntityBaseball.class, new RenderSnowball(KCItems.baseball));
+		KCRenderer.init();
 		
 	}
 	
