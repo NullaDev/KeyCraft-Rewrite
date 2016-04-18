@@ -12,7 +12,7 @@ public class KCCreativeTab extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return Items.apple;
+		return KCItems.aurora_blade;
 	}
 
 }
