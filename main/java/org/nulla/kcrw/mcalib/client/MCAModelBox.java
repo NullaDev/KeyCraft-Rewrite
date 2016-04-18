@@ -1,4 +1,4 @@
-package org.nulla.kcrw.client.MCAClientLibrary;
+package org.nulla.kcrw.mcalib.client;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

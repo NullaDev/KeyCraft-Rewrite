@@ -1,4 +1,4 @@
-package org.nulla.kcrw.common.MCACommonLibrary.math;
+package org.nulla.kcrw.mcalib.common.math;
 
 import java.lang.Math;
 

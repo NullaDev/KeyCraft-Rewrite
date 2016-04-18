@@ -1,4 +1,4 @@
-package org.nulla.kcrw.common.MCACommonLibrary;
+package org.nulla.kcrw.mcalib.common;
 
 public class MCAVersionChecker {
 	public static final int VersionID = 2;

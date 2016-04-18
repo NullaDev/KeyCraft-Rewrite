@@ -1,4 +1,4 @@
-package org.nulla.kcrw.common.MCACommonLibrary.animation;
+package org.nulla.kcrw.mcalib.common.animation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

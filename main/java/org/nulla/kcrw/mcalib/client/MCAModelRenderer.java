@@ -1,18 +1,16 @@
-package org.nulla.kcrw.client.MCAClientLibrary;
+package org.nulla.kcrw.mcalib.client;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
-
-import org.nulla.kcrw.common.MCACommonLibrary.Utils;
-import org.nulla.kcrw.common.MCACommonLibrary.math.Matrix4f;
-import org.nulla.kcrw.common.MCACommonLibrary.math.Quaternion;
-import org.nulla.kcrw.common.MCACommonLibrary.math.Vector3f;
+import org.nulla.kcrw.mcalib.common.Utils;
+import org.nulla.kcrw.mcalib.common.math.Matrix4f;
+import org.nulla.kcrw.mcalib.common.math.Quaternion;
+import org.nulla.kcrw.mcalib.common.math.Vector3f;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;

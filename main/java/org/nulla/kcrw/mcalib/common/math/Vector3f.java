@@ -1,4 +1,4 @@
-package org.nulla.kcrw.common.MCACommonLibrary.math; import java.io.IOException;
+package org.nulla.kcrw.mcalib.common.math; import java.io.IOException;
 import java.util.logging.Logger;
 
 /**

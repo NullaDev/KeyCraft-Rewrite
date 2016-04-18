@@ -1,4 +1,4 @@
-package org.nulla.kcrw.common.MCACommonLibrary.animation;
+package org.nulla.kcrw.mcalib.common.animation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 
 import net.minecraft.entity.Entity;
 
-import org.nulla.kcrw.client.MCAClientLibrary.MCAModelRenderer;
-import org.nulla.kcrw.common.MCACommonLibrary.IMCAnimatedEntity;
-import org.nulla.kcrw.common.MCACommonLibrary.math.Quaternion;
-import org.nulla.kcrw.common.MCACommonLibrary.math.Vector3f;
+import org.nulla.kcrw.mcalib.client.MCAModelRenderer;
+import org.nulla.kcrw.mcalib.common.IMCAnimatedEntity;
+import org.nulla.kcrw.mcalib.common.math.Quaternion;
+import org.nulla.kcrw.mcalib.common.math.Vector3f;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;

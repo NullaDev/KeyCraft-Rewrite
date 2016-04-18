@@ -1,10 +1,10 @@
-package org.nulla.kcrw.common.MCACommonLibrary.animation;
+package org.nulla.kcrw.mcalib.common.animation;
 
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 
-import org.nulla.kcrw.common.MCACommonLibrary.IMCAnimatedEntity;
+import org.nulla.kcrw.mcalib.common.IMCAnimatedEntity;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

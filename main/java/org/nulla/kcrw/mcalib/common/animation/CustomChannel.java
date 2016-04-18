@@ -1,9 +1,9 @@
-package org.nulla.kcrw.common.MCACommonLibrary.animation;
+package org.nulla.kcrw.mcalib.common.animation;
 
 import java.util.HashMap;
 
-import org.nulla.kcrw.client.MCAClientLibrary.MCAModelRenderer;
-import org.nulla.kcrw.common.MCACommonLibrary.IMCAnimatedEntity;
+import org.nulla.kcrw.mcalib.client.MCAModelRenderer;
+import org.nulla.kcrw.mcalib.common.IMCAnimatedEntity;
 
 public class CustomChannel extends Channel {
 
