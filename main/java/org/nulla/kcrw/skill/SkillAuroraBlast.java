@@ -23,17 +23,17 @@ public class SkillAuroraBlast extends Skill {
 	}
 	
 	@Override
-	public boolean onUse(EntityPlayer player) {
+	public boolean onUse(final EntityPlayer player) {
 		if (player.worldObj.isRemote) {
 			return false;
 		}
 		Vec3 skilldict = player.getLookVec();
 		for (int i = 0; i < 10; i++) {
 			KCDelayedEffect effect = new KCDelayedEffect(10 * i);
-			Double expX = player.posX + i * skilldict.xCoord * 2;
-			Double expY = player.posY + i * skilldict.yCoord * 2;
-			Double expZ = player.posZ + i * skilldict.zCoord * 2;
-			float expS = 2.0F + 0.2F * i;
+			final Double expX = player.posX + i * skilldict.xCoord * 2;
+			final Double expY = player.posY + i * skilldict.yCoord * 2;
+			final Double expZ = player.posZ + i * skilldict.zCoord * 2;
+			final float expS = 2.0F + 0.2F * i;
 			effect.setCallback(new KCDelayedEffect.ICallback() {			
 				@Override
 				public void onTrigger() {
