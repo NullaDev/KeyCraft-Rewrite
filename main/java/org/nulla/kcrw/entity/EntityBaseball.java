@@ -17,6 +17,8 @@ public class EntityBaseball extends KCEntityThrowable {
 	
 	protected String mSkill = "";
 	
+	protected Vec3 XZVec;
+	
 	protected boolean isExplosive = false;
 	
 	public EntityBaseball(World world) {
@@ -69,15 +71,16 @@ public class EntityBaseball extends KCEntityThrowable {
         } else {
         	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED_BASIC, 0.0F);
         }
+		this.XZVec = Vec3.createVectorHelper(motionX, 0F, motionZ).normalize();
+
 	}
 	
 	@Override
     public void onUpdate() {
 		super.onUpdate();
 		if (mSkill == "rolling") {
-			Vec3 deltaSpeed = Vec3.createVectorHelper(motionX, 0F, motionZ).normalize();
-			this.motionX += deltaSpeed.zCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
-			this.motionZ += deltaSpeed.xCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
+			this.motionX += this.XZVec.zCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
+			this.motionZ += this.XZVec.xCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
 		}
 	}
 
