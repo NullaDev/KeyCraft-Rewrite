@@ -35,6 +35,9 @@ public class EntityBaseball extends KCEntityThrowable {
 		if (skill == "explosion") {
 			this.isExplosive = true;
 		}
+		if (skill == "rolling") {
+			this.velocityDecreaseRate = 1F;
+		}
 	}
 	
 	public EntityBaseball(World world, EntityLivingBase thrower, float width, float height, float gravity) {
@@ -79,8 +82,8 @@ public class EntityBaseball extends KCEntityThrowable {
     public void onUpdate() {
 		super.onUpdate();
 		if (mSkill == "rolling") {
-			this.motionX += this.XZVec.zCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
-			this.motionZ += this.XZVec.xCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
+			this.motionX += this.XZVec.zCoord * Math.cos(this.ticksInAir * Math.PI / 10) * 0.5F;
+			this.motionZ += this.XZVec.xCoord * Math.cos(this.ticksInAir * Math.PI / 10) * 0.5F;
 		}
 	}
 
