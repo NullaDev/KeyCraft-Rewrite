@@ -12,9 +12,9 @@ import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.common.KCDelayedEffect;
 import org.nulla.kcrw.entity.EntityBaseball;
 
-public class SkillExplosiveBaseball extends Skill {
+public class SkillBaseballExplosive extends Skill {
 	
-	public SkillExplosiveBaseball(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillBaseballExplosive(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
 		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/explosive_baseball.png");
 	}

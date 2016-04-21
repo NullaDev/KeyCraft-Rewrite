@@ -23,7 +23,7 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
     protected EntityLivingBase thrower;
     private String throwerName;
     private int ticksInGround;
-    private int ticksInAir;
+    protected int ticksInAir;
     protected float mGravity = 0.03F;
 
     public KCEntityThrowable(World world, float width, float height) {

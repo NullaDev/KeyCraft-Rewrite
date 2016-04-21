@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityBaseball extends KCEntityThrowable {
@@ -13,6 +14,8 @@ public class EntityBaseball extends KCEntityThrowable {
 	protected static final float SPEED_HAS_SKILL = 10.0F;
 	protected static final float DAMAGE_NO_SKILL = 5.0F;
 	protected static final float DAMAGE_HAS_SKILL = 10.0F;
+	
+	protected String mSkill = "";
 	
 	protected boolean isExplosive = false;
 	
@@ -26,6 +29,7 @@ public class EntityBaseball extends KCEntityThrowable {
 	
 	public EntityBaseball(World world, EntityLivingBase thrower, String skill) {
 		this(world, thrower, 0.25F, 0.25F ,0.03F);
+		this.mSkill = skill;
 		if (skill == "explosion") {
 			this.isExplosive = true;
 		}
@@ -65,6 +69,16 @@ public class EntityBaseball extends KCEntityThrowable {
         } else {
         	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED_BASIC, 0.0F);
         }
+	}
+	
+	@Override
+    public void onUpdate() {
+		super.onUpdate();
+		if (mSkill == "rolling") {
+			Vec3 deltaSpeed = Vec3.createVectorHelper(motionX, 0F, motionZ).normalize();
+			this.motionX += deltaSpeed.zCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
+			this.motionZ += deltaSpeed.xCoord * Math.cos(this.ticksInAir * Math.PI / 5) * 0.5F;
+		}
 	}
 
 }

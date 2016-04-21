@@ -25,7 +25,9 @@ public class KCDelayedEffect extends KCSpecialEffect {
 	}
 	
 	public void onTrigger() {
-		Callback.onTrigger();
+		if (Callback != null) {
+			Callback.onTrigger();
+		}
 	}
 	
 	public KCDelayedEffect clone() {
