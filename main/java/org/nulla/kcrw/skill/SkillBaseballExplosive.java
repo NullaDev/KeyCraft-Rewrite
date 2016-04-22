@@ -2,15 +2,13 @@ package org.nulla.kcrw.skill;
 
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.KeyCraft_Rewrite;
-import org.nulla.kcrw.common.KCDelayedEffect;
 import org.nulla.kcrw.entity.EntityBaseball;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillBaseballExplosive extends Skill {
 	

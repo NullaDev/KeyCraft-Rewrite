@@ -5,6 +5,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.nulla.kcrw.client.KCMusicHelper;
 import org.nulla.kcrw.entity.EntityBaseball;
+import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
 import org.nulla.kcrw.event.HandlerChatCheating;
 import org.nulla.kcrw.potion.KCPotion;
 import org.nulla.kcrw.skill.SkillNetwork;
@@ -43,7 +44,8 @@ public class KeyCraft_Rewrite {
 		
 		// 注册实体
 		int modID = 1;
-    	EntityRegistry.registerModEntity(EntityBaseball.class, "baseball", modID++, this, 128, 1, true);
+    	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
+    	EntityRegistry.registerModEntity(EntityAuroraBlast.class, "AuroraBlast", modID++, this, 128, 1, true);
     }
     
     @EventHandler

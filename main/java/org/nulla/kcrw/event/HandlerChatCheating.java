@@ -50,8 +50,8 @@ public class HandlerChatCheating {
             if (!player.worldObj.isRemote) {
                 for (Skill i : Skills.AllSkills) {
                 	i.setSkill(player, true);
-        			SkillNetwork.Channel.sendToServer(SkillNetwork.createSyncSkillPacket(player));
         		}
+    			SkillNetwork.Channel.sendTo(SkillNetwork.createSyncSkillPacket(player), player);
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.cheat.learn")));
             }
         }
