@@ -1,23 +1,22 @@
 package org.nulla.kcrw;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-
-import org.nulla.kcrw.client.KCMusicHelper;
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
-import org.nulla.kcrw.event.HandlerChatCheating;
-import org.nulla.kcrw.potion.KCPotion;
-import org.nulla.kcrw.skill.SkillNetwork;
+import org.nulla.kcrw.potion.KCPotions;
+import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.Skills;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.*;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.creativetab.CreativeTabs;
 
-@Mod(modid = KeyCraft_Rewrite.MODID, name = KeyCraft_Rewrite.MODNAME, version = KeyCraft_Rewrite.VERSION)
+@Mod(modid = KeyCraft_Rewrite.MODID, name = KeyCraft_Rewrite.MODNAME, version = KeyCraft_Rewrite.VERSION, 
+	dependencies="required-after:nullacore")
 public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
@@ -39,9 +38,6 @@ public class KeyCraft_Rewrite {
     	KCItems.InitItems();
     	KCBlocks.InitBlocks();
 		
-		// 注册效果
-		KCPotion.init();
-		
 		// 注册实体
 		int modID = 1;
     	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
@@ -52,15 +48,16 @@ public class KeyCraft_Rewrite {
     public void Init(FMLInitializationEvent event) {
     	proxy.init(event);
     	
-		// 注册聊天作弊
-    	MinecraftForge.EVENT_BUS.register(new HandlerChatCheating());
-    	
 		// 注册网络事件
-		SkillNetwork.getInstance().init();
 		KCNetwork.getInstance().init();	
+    	
+		// 注册技能
+    	org.nulla.kcrw.skill.Skills.initSkills();
+    	for(Skill i : Skills.AllSkills)
+    		System.out.println(i.mName);
 		
-		// 注册音乐tick事件
-		FMLCommonHandler.instance().bus().register(new KCMusicHelper());
+		// 注册效果
+		KCPotions.initPotions();
     }
     
     @EventHandler

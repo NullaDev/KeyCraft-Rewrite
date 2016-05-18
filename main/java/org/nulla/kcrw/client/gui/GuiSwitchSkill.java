@@ -1,12 +1,9 @@
 package org.nulla.kcrw.client.gui;
 
-import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.item.KCItemBase;
-import org.nulla.kcrw.item.crafting.KCRecipe;
-import org.nulla.kcrw.skill.Skill;
-import org.nulla.kcrw.skill.SkillUtils;
-import org.nulla.kcrw.skill.Skills;
+import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.Skills;
+import org.nulla.nullacore.api.skill.SkillUtils;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,13 +1,9 @@
 package org.nulla.kcrw.skill;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
 import org.nulla.kcrw.KeyCraft_Rewrite;
-import org.nulla.kcrw.damage.KCDamageSource;
+import org.nulla.nullacore.api.skill.SkillPassive;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillAuroraAttack extends SkillPassive {
 

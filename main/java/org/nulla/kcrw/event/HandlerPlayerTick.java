@@ -1,13 +1,15 @@
 package org.nulla.kcrw.event;
 
-import org.nulla.kcrw.damage.KCDamageSource;
-import org.nulla.kcrw.item.*;
+import org.nulla.kcrw.item.ItemAuroraArmor;
+import org.nulla.kcrw.item.ItemAuroraSword;
+import org.nulla.kcrw.item.ItemAuroraTool;
 import org.nulla.kcrw.skill.Skills;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.*;
 
 public class HandlerPlayerTick {
 	

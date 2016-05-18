@@ -3,7 +3,6 @@ package org.nulla.kcrw.item;
 import java.util.List;
 
 import org.nulla.kcrw.entity.EntityBaseball;
-import org.nulla.kcrw.skill.Skill;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

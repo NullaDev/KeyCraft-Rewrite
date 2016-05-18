@@ -1,10 +1,10 @@
 [
 {
-  "modid": "KCRw",
+  "modid": "kcrw",
   "name": "KeyCraft Rewrite Ver.",
   "description": "A Minecraft mod especially made for V.A.Key lovers.",
-  "version": "version",
-  "mcversion": "mcversion",
+  "version": "Demo",
+  "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": ["Kanbe Kotori", "xfgryujk", "SalimTerryLi"],

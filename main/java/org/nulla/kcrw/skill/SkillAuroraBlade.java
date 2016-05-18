@@ -1,6 +1,9 @@
 package org.nulla.kcrw.skill;
 
-import java.util.Random;
+import org.nulla.kcrw.KCItems;
+import org.nulla.kcrw.KeyCraft_Rewrite;
+import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.SkillUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,10 +12,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import org.nulla.kcrw.KCItems;
-import org.nulla.kcrw.KCResources;
-import org.nulla.kcrw.KeyCraft_Rewrite;
 
 public class SkillAuroraBlade extends Skill {
 	

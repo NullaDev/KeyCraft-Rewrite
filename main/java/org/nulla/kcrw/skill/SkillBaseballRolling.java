@@ -2,13 +2,14 @@ package org.nulla.kcrw.skill;
 
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.EntityBaseball;
+import org.nulla.nullacore.api.skill.Skill;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillBaseballRolling extends Skill {
 	

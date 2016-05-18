@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nullacore",
+  "name": "Nulla MODs' core",
+  "description": "Front MOD for Nulla-made MODs",
+  "version": "Demo",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Kanbe Kotori", "xfgryujk"],
+  "credits": "Copyright (c) Nulla Development Group, 2014-2016",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

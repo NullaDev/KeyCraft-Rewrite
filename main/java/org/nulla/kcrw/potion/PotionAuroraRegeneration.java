@@ -1,12 +1,13 @@
 package org.nulla.kcrw.potion;
 
-import org.nulla.kcrw.skill.SkillUtils;
+import org.nulla.nullacore.api.potion.NullaPotion;
+import org.nulla.nullacore.api.skill.SkillUtils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class PotionAuroraRegeneration extends KCPotion {
+public class PotionAuroraRegeneration extends NullaPotion {
 
 	public PotionAuroraRegeneration(String name, ResourceLocation icon) {
 		super(name, icon);

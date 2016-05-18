@@ -1,12 +1,8 @@
 package org.nulla.kcrw.client.gui;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
-
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.skill.Skill;
-import org.nulla.kcrw.skill.SkillUtils;
-import org.nulla.kcrw.skill.Skills;
+
+import net.minecraft.client.gui.GuiScreen;
 
 public abstract class KCGuiBase extends GuiScreen {
 	

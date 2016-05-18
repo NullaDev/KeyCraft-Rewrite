@@ -6,6 +6,7 @@ import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.EntityBaseball;
+import org.nulla.nullacore.api.skill.Skill;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

@@ -2,21 +2,21 @@ package org.nulla.kcrw;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.nulla.kcrw.skill.Skill;
-import org.nulla.kcrw.skill.SkillPassive;
-import org.nulla.kcrw.skill.SkillUtils;
+import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.SkillPassive;
+import org.nulla.nullacore.api.skill.SkillUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class KCUtils {
 	
@@ -181,116 +181,11 @@ public class KCUtils {
 	}
 	
 	/** 
-	 * 绘制HUD上的欧若拉条。<BR/>
-	 * width，height代表屏幕的宽高。
-	 */
-	public static void drawAuroraStrip(int width, int height) {
-		
-		initDrawerState();
-
-		width *= 0.95;
-		height *= 0.05;
-		
-		int currentAuroraPoint = SkillUtils.getAuroraPoint(KCUtils.getPlayerCl());
-		int maximumAuroraPoint = SkillUtils.MAX_AURORA_POINT;
-	        
-		int length = Math.min(105 *  currentAuroraPoint / maximumAuroraPoint, 105);
-		
-		GL11.glEnable(GL11.GL_BLEND);
-		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_inside);
-		KCUtils.drawScaledCustomSizeModalRect(width - length - 15, height + 1, 630 - 6 * length, 0, 6 * length + 90, 120, length + 15, 18, 720, 120);
-		
-		KCUtils.getMC().getTextureManager().bindTexture(KCResources.aurora_strip_outside);
-		KCUtils.drawScaledCustomSizeModalRect(width - 120, height, 0, 0, 720, 120, 120, 20, 720, 120);
-		GL11.glDisable(GL11.GL_BLEND);
-	        
-		String info = "Aurora: " + SkillUtils.getAuroraPoint(KCUtils.getPlayerCl()) + " / " + SkillUtils.MAX_AURORA_POINT;
-		FontRenderer fontRenderer = KCUtils.getMC().fontRenderer;
-		int color = 0x7FFFBF;
-		//if (currentAuroraPoint <= MaximumAuroraPoint * 0.25) {color = 0xFF0000;}
-		//else if (currentAuroraPoint <= MaximumAuroraPoint * 0.5) {color = 0xFFFF00;}
-		//else if (currentAuroraPoint > MaximumAuroraPoint) {color = 0x00FF00;}
-		fontRenderer.drawStringWithShadow(info, width - 105, height - 3, color);
-		initDrawerState();
-		getMC().renderEngine.bindTexture(Gui.icons);
-	}
-	
-	/** 
 	 * 初始化（绘制器的）撞钛鸡。
 	 */
 	public static void initDrawerState() {
 		FontRenderer fontRenderer = getMC().fontRenderer;
 		fontRenderer.drawString("", 0, 0, 0xFFFFFF);
-	}
-	
-	/** 
-	 * 绘制HUD上的技能槽。<BR/>
-	 * width，height代表屏幕的宽高。
-	 */
-	public static void drawSkillSlot(int width, int height) {
-		
-		initDrawerState();
-		
-		int widthToDraw = (int) (0.9 * width);
-		int heightToDraw[] = new int[4];
-		heightToDraw[0] = (int) (height * 0.2);
-		heightToDraw[1] = (int) (height * 0.35);
-		heightToDraw[2] = (int) (height * 0.5);
-		heightToDraw[3] = (int) (height * 0.65);
-		
-		String[] SkillButton = new String[4];
-		SkillButton[0] = GameSettings.getKeyDisplayString(KCClientProxy.kbSkill1.getKeyCode());
-		SkillButton[1] = GameSettings.getKeyDisplayString(KCClientProxy.kbSkill2.getKeyCode());
-		SkillButton[2] = "Shift+" + GameSettings.getKeyDisplayString(KCClientProxy.kbSkill1.getKeyCode());
-		SkillButton[3] = "Shift+" + GameSettings.getKeyDisplayString(KCClientProxy.kbSkill2.getKeyCode());
-					
-		GL11.glEnable(GL11.GL_BLEND);
-		Skill skillinslot[] = new Skill[SkillUtils.SKILL_SLOT_SIZE];
-		
-		EntityPlayer player = getPlayerCl();
-		for (int i = 0; i < skillinslot.length; i++) {
-			skillinslot[i] = SkillUtils.getSkillInSlot(player, i);
-			if (skillinslot[i] != null) {
-				//绘制技能图标
-				KCUtils.getMC().getTextureManager().bindTexture(skillinslot[i].mIcon);
-				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-				//绘制熟练度条
-				int exp = 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE;
-				drawRect(widthToDraw + 32, heightToDraw[i] + 32 - exp, 8, exp, 0xFF7FFF7F);
-				//绘制Aurora消耗
-				getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
-				initDrawerState();
-				//绘制CD状态
-				if (!skillinslot[i].checkCD(player)) {
-					int time = (int) (player.worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(player));
-					int length =  32 - 32 * time / skillinslot[i].mCD;
-					drawRect(widthToDraw, heightToDraw[i], 32, length, 0x80000000);
-					initDrawerState();
-				}
-			}
-			
-			if (skillinslot[i] != null && skillinslot[i] instanceof SkillPassive) {
-				SkillPassive toDraw = (SkillPassive) skillinslot[i];
-				if (toDraw.getIsOn(player))
-					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_on);
-				else
-					KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_passive_off);
-				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-			} else {
-				KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_slot);
-				KCUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
-				getfontRenderer().drawStringWithShadow(SkillButton[i], widthToDraw + 2, heightToDraw[i], 0xFF0000);
-				initDrawerState();
-			}
-			
-			KCUtils.getMC().getTextureManager().bindTexture(KCResources.skill_empty_exp);
-			KCUtils.drawScaledCustomSizeModalRect(widthToDraw + 32, heightToDraw[i], 0, 0, 16, 64, 8, 32, 16, 64);
-						
-		}	
-
-		initDrawerState();
-		GL11.glDisable(GL11.GL_BLEND);
-		getMC().renderEngine.bindTexture(Gui.icons);
 	}
 	
 }

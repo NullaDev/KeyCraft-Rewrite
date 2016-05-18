@@ -1,14 +1,13 @@
 package org.nulla.kcrw.event;
 
-import org.nulla.kcrw.damage.KCDamageSource;
 import org.nulla.kcrw.potion.KCPotions;
-import org.nulla.kcrw.skill.*;
+import org.nulla.kcrw.skill.Skills;
+import org.nulla.nullacore.api.damage.NullaDamageSource;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.event.entity.living.*;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class HandlerLivingAttack {
 		
@@ -30,7 +29,7 @@ public class HandlerLivingAttack {
 			//这里直接有判断cd和是否习得了，太棒了
 			if (Skills.SkillAuroraAttack.trigSkill(player)) {
 				event.entityLiving.setLastAttacker(player);
-				event.entityLiving.attackEntityFrom(KCDamageSource.CauseAuroraDamage(player), 20.0F);
+				event.entityLiving.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), 20.0F);
 			}
 		}
 		

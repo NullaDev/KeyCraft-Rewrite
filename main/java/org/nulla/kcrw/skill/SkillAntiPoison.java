@@ -2,13 +2,14 @@ package org.nulla.kcrw.skill;
 
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
-
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.potion.KCPotions;
+import org.nulla.nullacore.api.skill.Skill;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillAntiPoison extends Skill {
 	
