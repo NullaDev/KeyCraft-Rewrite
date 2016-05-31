@@ -2,6 +2,7 @@ package org.nulla.kcrw.event;
 
 import java.util.Random;
 
+import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
 import org.nulla.kcrw.item.ItemAuroraTool;
@@ -12,6 +13,7 @@ import org.nulla.kcrw.skill.SkillsRw;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -86,7 +88,7 @@ public class HandlerPlayerTick {
 		if (player.isPotionActive(KCPotions.auroraRegeneration)) {
 			return;
 		}
-		
+				
 		Random ran = new Random();
 		if (ran.nextFloat() < 1F / (20 * 120)) {
 			if (SkillsRw.SkillAuroraRegeneration.trigSkill(player)) {
@@ -94,6 +96,11 @@ public class HandlerPlayerTick {
 			}
 		}
 		
+	}
+	
+	@SubscribeEvent
+	public void Skill_AuroraShield(PlayerTickEvent event) {
+		event.player.worldObj.spawnEntityInWorld(EntityAuroraShield.create(event.player));	
 	}
 
 }
