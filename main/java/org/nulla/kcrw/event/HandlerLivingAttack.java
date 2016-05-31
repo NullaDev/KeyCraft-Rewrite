@@ -1,7 +1,7 @@
 package org.nulla.kcrw.event;
 
 import org.nulla.kcrw.potion.KCPotions;
-import org.nulla.kcrw.skill.Skills;
+import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -27,7 +27,7 @@ public class HandlerLivingAttack {
 		EntityPlayer player = (EntityPlayer)entity;
 		if (event.source.damageType.equals("player")) {
 			//这里直接有判断cd和是否习得了，太棒了
-			if (Skills.SkillAuroraAttack.trigSkill(player)) {
+			if (SkillsRw.SkillAuroraAttack.trigSkill(player)) {
 				event.entityLiving.setLastAttacker(player);
 				event.entityLiving.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), 20.0F);
 			}

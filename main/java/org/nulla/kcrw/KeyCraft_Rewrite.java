@@ -52,7 +52,7 @@ public class KeyCraft_Rewrite {
 		KCNetwork.getInstance().init();	
     	
 		// 注册技能
-    	org.nulla.kcrw.skill.Skills.initSkills();
+    	org.nulla.kcrw.skill.SkillsRw.initSkills();
     	for(Skill i : Skills.AllSkills)
     		System.out.println(i.mName);
 		

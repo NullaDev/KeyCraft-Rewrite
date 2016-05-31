@@ -35,7 +35,7 @@ public class SkillAuroraBlade extends Skill {
 	/** ����ŷ��������ꪻ� */
 	public static void recycleAurora(EntityPlayer player, double proportion) {
 		if (proportion == 0) {
-			SkillUtils.modifyAuroraPoint(player, (int) (Skills.SkillAuroraBlade.mAuroraCost * 0.5F));
+			SkillUtils.modifyAuroraPoint(player, (int) (SkillsRw.SkillAuroraBlade.mAuroraCost * 0.5F));
 		} else {
 			if (!player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("keycraft.prompt.recyclerate") 

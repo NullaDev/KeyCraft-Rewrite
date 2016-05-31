@@ -1,15 +1,21 @@
 package org.nulla.kcrw.event;
 
+import java.util.Random;
+
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
 import org.nulla.kcrw.item.ItemAuroraTool;
-import org.nulla.kcrw.skill.Skills;
+import org.nulla.kcrw.potion.KCPotions;
+import org.nulla.kcrw.potion.PotionAuroraRegeneration;
+import org.nulla.kcrw.skill.SkillsRw;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 
 public class HandlerPlayerTick {
 	
@@ -55,7 +61,7 @@ public class HandlerPlayerTick {
 			return;
 		}
 		
-		if (Skills.SkillAuroraRepair.trigSkill(player)) {
+		if (SkillsRw.SkillAuroraRepair.trigSkill(player)) {
 			for (int i = 0; i < 4; i++) {
 				if (player.inventory.armorInventory[i] != null) {
 					flag.setItemDamage(Math.max(player.inventory.armorInventory[i].getItemDamage() - 16, 0));
@@ -63,6 +69,31 @@ public class HandlerPlayerTick {
 				}
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public void Skill_AuroraRegeneration(PlayerTickEvent event) {
+		if (event.phase == Phase.END) {
+			return;
+		}
+		
+		EntityPlayer player = event.player;
+		
+		if (player.worldObj.isRemote) {
+			return;
+		}
+		
+		if (player.isPotionActive(KCPotions.auroraRegeneration)) {
+			return;
+		}
+		
+		Random ran = new Random();
+		if (ran.nextFloat() < 1F / (20 * 120)) {
+			if (SkillsRw.SkillAuroraRegeneration.trigSkill(player)) {
+				player.addPotionEffect(new PotionEffect(KCPotions.auroraRegeneration.id, 20));
+			}
+		}
+		
 	}
 
 }

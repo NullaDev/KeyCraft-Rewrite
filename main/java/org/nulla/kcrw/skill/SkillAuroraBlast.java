@@ -1,5 +1,7 @@
 package org.nulla.kcrw.skill;
 
+import java.util.Random;
+
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
 import org.nulla.nullacore.api.skill.Skill;
@@ -25,7 +27,14 @@ public class SkillAuroraBlast extends Skill {
 			return false;
 		}
 		
-		player.worldObj.spawnEntityInWorld(new EntityAuroraBlast(player, 10 * 10));
+		player.worldObj.spawnEntityInWorld(new EntityAuroraBlast(player, 5 * 10 * 2048 / (2048 - getExperience(player))));
+		
+		// 随机事件只在服务器发生
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(20) + 1;
+			modifyExperience(player, exp);
+		}
 		
 		return true;
 	}
