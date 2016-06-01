@@ -2,7 +2,6 @@ package org.nulla.kcrw.event;
 
 import java.util.Random;
 
-import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
 import org.nulla.kcrw.item.ItemAuroraTool;
