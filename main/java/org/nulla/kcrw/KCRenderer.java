@@ -11,6 +11,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class KCRenderer {
 	public static void init() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBaseball.class, new RenderSnowball(KCItems.baseball));//棒球的渲染
-		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraShield.class, new RendererAuroraShield());//棒球的渲染
+		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraShield.class, new RendererAuroraShield());//盾的渲染
 	}
 }

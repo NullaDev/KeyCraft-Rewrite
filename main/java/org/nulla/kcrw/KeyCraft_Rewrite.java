@@ -2,7 +2,9 @@ package org.nulla.kcrw;
 
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
+import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.potion.KCPotions;
+import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.skill.Skill;
 import org.nulla.nullacore.api.skill.Skills;
 
@@ -42,6 +44,7 @@ public class KeyCraft_Rewrite {
 		int modID = 1;
     	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityAuroraBlast.class, "AuroraBlast", modID++, this, 128, 1, true);
+    	EntityRegistry.registerModEntity(EntityAuroraShield.class, "AuroraShield", modID++, this, 128, 1, true);
     }
     
     @EventHandler
@@ -52,9 +55,7 @@ public class KeyCraft_Rewrite {
 		KCNetwork.getInstance().init();	
     	
 		// 注册技能
-    	org.nulla.kcrw.skill.SkillsRw.initSkills();
-    	for(Skill i : Skills.AllSkills)
-    		System.out.println(i.mName);
+    	SkillsRw.initSkills();
 		
 		// 注册效果
 		KCPotions.initPotions();

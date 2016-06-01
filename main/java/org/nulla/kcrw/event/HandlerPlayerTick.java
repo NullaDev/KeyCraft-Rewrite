@@ -63,7 +63,7 @@ public class HandlerPlayerTick {
 			return;
 		}
 		
-		if (SkillsRw.SkillAuroraRepair.trigSkill(player)) {
+		if (SkillsRw.AuroraRepair.trigSkill(player)) {
 			for (int i = 0; i < 4; i++) {
 				if (player.inventory.armorInventory[i] != null) {
 					flag.setItemDamage(Math.max(player.inventory.armorInventory[i].getItemDamage() - 16, 0));
@@ -91,16 +91,11 @@ public class HandlerPlayerTick {
 				
 		Random ran = new Random();
 		if (ran.nextFloat() < 1F / (20 * 120)) {
-			if (SkillsRw.SkillAuroraRegeneration.trigSkill(player)) {
+			if (SkillsRw.AuroraRegeneration.trigSkill(player)) {
 				player.addPotionEffect(new PotionEffect(KCPotions.auroraRegeneration.id, 20));
 			}
 		}
 		
-	}
-	
-	@SubscribeEvent
-	public void Skill_AuroraShield(PlayerTickEvent event) {
-		event.player.worldObj.spawnEntityInWorld(EntityAuroraShield.create(event.player));	
 	}
 
 }

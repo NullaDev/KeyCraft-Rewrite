@@ -2,51 +2,42 @@ package org.nulla.kcrw.entity.effect;
 
 import java.util.HashMap;
 
+import org.nulla.kcrw.entity.EntityHasOwner;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityAuroraShield extends Entity {
+public class EntityAuroraShield extends EntityHasOwner {
 	
-	public EntityLivingBase mOwner;
-	
-	public static HashMap<EntityLivingBase, EntityAuroraShield> map = new HashMap<EntityLivingBase, EntityAuroraShield>();
-	
-	public static EntityAuroraShield create(EntityLivingBase entity) {
-		if (map.get(entity) != null)
-			return map.get(entity);
-		EntityAuroraShield shield = new EntityAuroraShield(entity.worldObj, entity);
-		map.put(entity, shield);
-		return shield;
-	}
-	
-	private EntityAuroraShield(World world, EntityLivingBase owner) {
+	public EntityAuroraShield(World world) {
 		super(world);
-		this.mOwner = owner;
 	}
-
-	@Override
-	protected void entityInit() {
-
+	
+	public EntityAuroraShield(World world, Entity owner) {
+		super(world);
+		this.setOwnerUUID(owner.getUniqueID().toString());
+		this.posX = owner.posX;
+		this.posY = owner.posY;
+		this.posZ = owner.posZ;
+		this.rotationYaw = owner.rotationYaw;
 	}
 	
 	@Override
     public void onUpdate() {
 		super.onUpdate();
-		this.posX = this.mOwner.posX;
-		this.posY = this.mOwner.posY;
-		this.posZ = this.mOwner.posZ;
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-		// TODO Auto-generated method stub	
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-		// TODO Auto-generated method stub
+		
+		Entity owner = this.getOwner();
+		if (owner == null) // 每次玩家UUID会变？
+		{
+			this.setDead();
+			return;
+		}
+		this.posX = owner.posX;
+		this.posY = owner.posY;
+		this.posZ = owner.posZ;
+		this.rotationYaw = owner.rotationYaw;
 	}
 
 }

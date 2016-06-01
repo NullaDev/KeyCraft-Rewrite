@@ -27,7 +27,7 @@ public class HandlerLivingAttack {
 		EntityPlayer player = (EntityPlayer)entity;
 		if (event.source.damageType.equals("player")) {
 			//这里直接有判断cd和是否习得了，太棒了
-			if (SkillsRw.SkillAuroraAttack.trigSkill(player)) {
+			if (SkillsRw.AuroraAttack.trigSkill(player)) {
 				event.entityLiving.setLastAttacker(player);
 				event.entityLiving.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), 20.0F);
 			}
