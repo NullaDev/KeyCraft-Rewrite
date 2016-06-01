@@ -33,17 +33,17 @@ public class RendererAuroraShield extends Render {
         GL11.glColor4b((byte)127, (byte)255, (byte)127, (byte)32); //为什么是基佬紫
         
         tessellator.startDrawingQuads();
-        tessellator.addVertex( 0.5D, -1.6D,  0.5D); // 右下
-        tessellator.addVertex( 0.5D, -1.6D, -0.5D); // 右上
-        tessellator.addVertex(-0.5D, -1.6D,  0.5D); // 左上
-        tessellator.addVertex(-0.5D, -1.6D, -0.5D); // 左下
+        tessellator.addVertex( 0.5D, -1.6D,  0.5D);
+        tessellator.addVertex( 0.5D, -1.6D, -0.5D);
+        tessellator.addVertex(-0.5D, -1.6D, -0.5D);
+        tessellator.addVertex(-0.5D, -1.6D,  0.5D);
         tessellator.draw();
         
         tessellator.startDrawingQuads();
-        tessellator.addVertex( 0.5D, 0.4D,  0.5D); // 右下
-        tessellator.addVertex( 0.5D, 0.4D, -0.5D); // 右上
-        tessellator.addVertex(-0.5D, 0.4D,  0.5D); // 左上
-        tessellator.addVertex(-0.5D, 0.4D, -0.5D); // 左下
+        tessellator.addVertex( 0.5D, 0.4D,  0.5D);
+        tessellator.addVertex( 0.5D, 0.4D, -0.5D);
+        tessellator.addVertex(-0.5D, 0.4D, -0.5D);
+        tessellator.addVertex(-0.5D, 0.4D,  0.5D);
         tessellator.draw();
         
         for (int i = 0; i < 4; ++i) {
