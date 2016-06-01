@@ -29,7 +29,7 @@ public class SkillsRw {
 		AuroraBlast = new SkillAuroraBlast("aurora_blast", 1024, 32, 300 * 20);
 		AuroraRegeneration = new SkillAuroraRegeneration("aurora_blast", 1024, 0, 1 * 20);
 		AuroraRepair = new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);
-		AuroraShield = new SkillAuroraShield("aurora_shield", 1024, 0, 1 * 20);
+		AuroraShield = new SkillAuroraShield("aurora_shield", 1024, 20, 60 * 20);
 		BaseballExplosive = new SkillBaseballExplosive("explosive_baseball", 128, 2, 2 * 20);
 		BaseballRolling = new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
 		SpeedUp = new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);

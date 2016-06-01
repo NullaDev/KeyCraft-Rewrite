@@ -30,7 +30,7 @@ public class RendererAuroraShield extends Render {
         
         Tessellator tessellator = Tessellator.instance;
         
-        GL11.glColor4b((byte)127, (byte)255, (byte)127, (byte)32); //为什么是基佬紫
+        GL11.glColor4f(0.5F, 1F, 0.5F, 0.125F);
         
         tessellator.startDrawingQuads();
         tessellator.addVertex( 0.5D, -1.6D,  0.5D);
