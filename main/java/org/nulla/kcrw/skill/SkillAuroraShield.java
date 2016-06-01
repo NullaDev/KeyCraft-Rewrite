@@ -1,5 +1,7 @@
 package org.nulla.kcrw.skill;
 
+import java.util.UUID;
+
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.nullacore.api.skill.Skill;
@@ -25,9 +27,18 @@ public class SkillAuroraShield extends Skill {
 			return false;
 		}
 		
-		player.worldObj.spawnEntityInWorld(new EntityAuroraShield(player.worldObj, player));
+		EntityAuroraShield entity = new EntityAuroraShield(player.worldObj, player);
+		player.worldObj.spawnEntityInWorld(entity);
+		player.getEntityData().setInteger("AuroraShieldID", entity.getEntityId());
 		
 		return true;
+	}
+	
+	public static EntityAuroraShield getEntityShield(EntityPlayer player) {
+		int id = player.getEntityData().getInteger("AuroraShieldID");
+		if (id == 0)
+			return null;
+		return (EntityAuroraShield)player.worldObj.getEntityByID(id); // 没有UUID取实体的方法？
 	}
 
 }

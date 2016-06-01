@@ -17,9 +17,9 @@ public class EntityAuroraShield extends EntityHasOwner {
 		super(world);
 	}
 	
-	public EntityAuroraShield(World world, Entity owner) {
+	public EntityAuroraShield(World world, EntityPlayer owner) {
 		super(world);
-		this.setOwnerUUID(owner.getUniqueID().toString());
+		this.setOwner(owner);
 		this.posX = owner.posX;
 		this.posY = owner.posY;
 		this.posZ = owner.posZ;
@@ -30,18 +30,15 @@ public class EntityAuroraShield extends EntityHasOwner {
     public void onUpdate() {
 		super.onUpdate();
 		
-		Entity owner = this.getOwner();
-		if (owner == null) { // 每次玩家UUID会变？
+		EntityPlayer owner = this.getOwner();
+		if (owner == null) {
 			this.setDead();
 			return;
 		}
 		
-		if (owner instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) owner;
-			boolean flag = false;
-			if (flag) { //以后再说
-				this.setDead();
-			}
+		boolean flag = false;
+		if (flag) { //以后再说
+			this.setDead();
 		}
 		
 		this.posX = owner.posX;

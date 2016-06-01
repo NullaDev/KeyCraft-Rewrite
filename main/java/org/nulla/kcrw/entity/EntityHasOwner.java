@@ -1,9 +1,8 @@
 package org.nulla.kcrw.entity;
 
-import java.util.UUID;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -16,41 +15,38 @@ public class EntityHasOwner extends Entity implements IEntityOwnable {
 
 	@Override
 	protected void entityInit() {
-        this.dataWatcher.addObject(17, "");
+        this.dataWatcher.addObject(16, "");
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
-        setOwnerUUID(nbt.getString("OwnerUUID"));
+		setOwnerName(nbt.getString("OwnerName"));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
-		nbt.setString("OwnerUUID", this.func_152113_b());
+		nbt.setString("OwnerName", this.func_152113_b());
 	}
 	
-	public void setOwnerUUID(String uuid)
+	public void setOwnerName(String uuid)
     {
-        this.dataWatcher.updateObject(17, uuid);
+        this.dataWatcher.updateObject(16, uuid);
+    }
+	
+	public void setOwner(EntityPlayer player)
+    {
+		setOwnerName(player.getCommandSenderName());
     }
 
-	/** 取拥有者UUID */
+	/** 取拥有者名字 */
 	@Override
 	public String func_152113_b() {
-		return this.dataWatcher.getWatchableObjectString(17);
+		return this.dataWatcher.getWatchableObjectString(16);
 	}
 
 	@Override
-	public Entity getOwner() {
-		try
-        {
-            UUID uuid = UUID.fromString(this.func_152113_b());
-            return uuid == null ? null : this.worldObj.func_152378_a(uuid);
-        }
-        catch (IllegalArgumentException illegalargumentexception)
-        {
-            return null;
-        }
+	public EntityPlayer getOwner() {
+		return this.worldObj.getPlayerEntityByName(this.func_152113_b());
 	}
 
 }
