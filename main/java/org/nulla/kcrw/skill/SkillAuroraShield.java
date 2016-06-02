@@ -10,6 +10,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class SkillAuroraShield extends Skill {
+	
+	public static String[] damageResistible = {"inFire", "onFire", "lava", "arrow", "mob", "player", "thrown"};
+	
+	public static boolean isResistible(String damageType) {
+		for (String i : damageResistible) {
+			if (damageType.equals(i))
+				return true;
+		}
+		return false;
+	}
 
 	public SkillAuroraShield(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);

@@ -1,6 +1,8 @@
 package org.nulla.kcrw.event;
 
+import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.potion.KCPotions;
+import org.nulla.kcrw.skill.SkillAuroraShield;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
@@ -42,6 +44,29 @@ public class HandlerLivingAttack {
 			if (event.source.damageType.equals("magic") && player.isPotionActive(KCPotions.poisonResistance)) {
 				event.setCanceled(true);
 			}
+		}
+		
+	}
+	
+	@SubscribeEvent
+	public void ShieldStatement(LivingAttackEvent event) {
+		if (event.entityLiving instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			EntityAuroraShield shield = SkillAuroraShield.getEntityShield(player);
+			if (shield == null)
+				return;
+			if (!shield.isActive)
+				return;
+			
+			if (SkillAuroraShield.isResistible(event.source.damageType)) {
+				float value = Math.min(event.ammount * 0.8F, shield.mShieldValue);
+				shield.mShieldValue -= value;
+				System.out.println(shield.mShieldValue);
+				event.setCanceled(true);
+				System.out.println(event.source.damageType);
+				player.attackEntityFrom(new NullaDamageSource("shield"), event.ammount - value);
+			}
+			
 		}
 		
 	}
