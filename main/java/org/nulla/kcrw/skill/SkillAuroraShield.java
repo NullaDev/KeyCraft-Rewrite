@@ -1,5 +1,6 @@
 package org.nulla.kcrw.skill;
 
+import java.util.Random;
 import java.util.UUID;
 
 import org.nulla.kcrw.KeyCraft_Rewrite;
@@ -37,9 +38,15 @@ public class SkillAuroraShield extends Skill {
 			return false;
 		}
 		
-		EntityAuroraShield entity = new EntityAuroraShield(player.worldObj, player);
+		EntityAuroraShield entity = new EntityAuroraShield(player.worldObj, player, 16 * 2048 / (2048 - getExperience(player)), 60 * 20);
 		player.worldObj.spawnEntityInWorld(entity);
 		player.getEntityData().setInteger("AuroraShieldID", entity.getEntityId());
+		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(10) + 1;
+			modifyExperience(player, exp);
+		}
 		
 		return true;
 	}

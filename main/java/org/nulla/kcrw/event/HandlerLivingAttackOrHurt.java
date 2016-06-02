@@ -10,8 +10,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class HandlerLivingAttack {
+public class HandlerLivingAttackOrHurt {
 		
 	@SubscribeEvent
 	public void AuroraAttack(LivingAttackEvent event) { // HurtEvent客户端不触发
@@ -49,7 +50,7 @@ public class HandlerLivingAttack {
 	}
 	
 	@SubscribeEvent
-	public void ShieldStatement(LivingAttackEvent event) {
+	public void ShieldStatement(LivingHurtEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			EntityAuroraShield shield = SkillAuroraShield.getEntityShield(player);
@@ -61,10 +62,7 @@ public class HandlerLivingAttack {
 			if (SkillAuroraShield.isResistible(event.source.damageType)) {
 				float value = Math.min(event.ammount * 0.8F, shield.mShieldValue);
 				shield.mShieldValue -= value;
-				System.out.println(shield.mShieldValue);
-				event.setCanceled(true);
-				System.out.println(event.source.damageType);
-				player.attackEntityFrom(new NullaDamageSource("shield"), event.ammount - value);
+				event.ammount -= value;
 			}
 			
 		}

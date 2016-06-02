@@ -3,7 +3,7 @@ package org.nulla.kcrw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.nulla.kcrw.event.HandlerKeyInput;
-import org.nulla.kcrw.event.HandlerLivingAttack;
+import org.nulla.kcrw.event.HandlerLivingAttackOrHurt;
 import org.nulla.kcrw.event.HandlerLivingDeath;
 import org.nulla.kcrw.event.HandlerPlayerTick;
 
@@ -30,7 +30,7 @@ public class KCClientProxy extends KCCommonProxy {
 		// 注册GUI、用户输入事件
 		FMLCommonHandler.instance().bus().register(new HandlerKeyInput());
 		FMLCommonHandler.instance().bus().register(new HandlerPlayerTick());
-		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttack());
+		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttackOrHurt());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingDeath());
 
 		
