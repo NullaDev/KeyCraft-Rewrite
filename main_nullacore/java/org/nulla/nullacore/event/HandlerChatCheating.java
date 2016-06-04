@@ -18,7 +18,6 @@ public class HandlerChatCheating {
 	
 	@SubscribeEvent
     public void Cheating(ServerChatEvent event) {
-		System.out.println("woshisb");
         if(event.message.toLowerCase().equals("kotori")) {
         	event.setCanceled(true);
             EntityPlayerMP player = event.player;

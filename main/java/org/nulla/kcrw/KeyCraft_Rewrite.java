@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 
 @Mod(modid = KeyCraft_Rewrite.MODID, name = KeyCraft_Rewrite.MODNAME, version = KeyCraft_Rewrite.VERSION, 
-	dependencies="required-after:nullacore")
+	dependencies = "required-after:nullacore")
 public class KeyCraft_Rewrite {
 	
 	public static final String MODID = "kcrw";
