@@ -30,7 +30,8 @@ public class RendererAuroraShield extends Render {
         
         Tessellator tessellator = Tessellator.instance;
         
-        GL11.glColor4f(0.5F, 1F, 0.5F, 0.125F);
+        float delta = 0.5F * (float) Math.sin(Math.PI * entity.mRestTick / 60);
+        GL11.glColor4f(0.5F - delta, 1F, 0.5F + delta, 0.125F);
         
         tessellator.startDrawingQuads();
         tessellator.addVertex( 0.5D, -1.6D,  0.5D);

@@ -2,6 +2,7 @@ package org.nulla.kcrw.client.gui;
 
 import org.nulla.kcrw.KCUtils;
 import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.SkillPassive;
 import org.nulla.nullacore.api.skill.Skills;
 import org.nulla.nullacore.api.skill.SkillUtils;
 
@@ -64,6 +65,11 @@ public class GuiSwitchSkill extends KCGuiBase {
 		if (currentState != -1) {
 			for (int i = 0; i < btnOptionalSkill.length; i++) {
 				if (button.equals(btnOptionalSkill[i])) {
+					Skill toChange = SkillUtils.getSkillInSlot(skillOwner, i);
+					if (toChange instanceof SkillPassive) {
+						 if (((SkillPassive) toChange).getIsOn(skillOwner))
+							 toChange.useSkill(skillOwner);
+					}
 					SkillUtils.setSkillInSlot(skillOwner, currentState, optionalSkill[i], true);
 					currentState = -1;
 				}

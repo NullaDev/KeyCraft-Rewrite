@@ -95,7 +95,7 @@ public class HandlerDrawHUD {
 				NullaUtils.drawScaledCustomSizeModalRect(widthToDraw, heightToDraw[i], 0, 0, 64, 64, 32, 32, 64, 64);
 				//绘制熟练度条
 				int exp = 32 * skillinslot[i].getExperience(player) / skillinslot[i].MAX_EXPERIENCE;
-				NullaUtils.drawRect(widthToDraw + 32, heightToDraw[i] + 32 - exp, 8, exp, 0xFF7FFF7F);
+				NullaUtils.drawRect(widthToDraw + 32, heightToDraw[i] + 32 - exp, 4, exp, 0xFF7FFF7F);
 				//绘制Aurora消耗
 				NullaUtils.getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
 				NullaUtils.initDrawerState();

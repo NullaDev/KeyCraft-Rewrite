@@ -10,14 +10,12 @@ public class SkillPassive extends Skill {
 		super(name, auroraRequired, auroraCost, cd);
 	}
 	
-	public boolean getIsOn(EntityPlayer player)
-	{
+	public boolean getIsOn(EntityPlayer player) {
 		return player.getEntityData().getBoolean("SkillIsOn" + mName);
 	}
 	
 	/** 无同步 */
-	protected void setIsOn(EntityPlayer player, boolean isOn)
-	{
+	protected void setIsOn(EntityPlayer player, boolean isOn) {
 		player.getEntityData().setBoolean("SkillIsOn" + mName, isOn);
 	}
 	
