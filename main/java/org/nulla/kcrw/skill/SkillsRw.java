@@ -14,12 +14,13 @@ public class SkillsRw {
 	public static SkillAuroraBlast AuroraBlast;
 	public static SkillAuroraRegeneration AuroraRegeneration;
 	public static SkillAuroraRepair AuroraRepair;
+	public static SkillAuroraShield AuroraShield;
 	public static SkillBaseballExplosive BaseballExplosive;
 	public static SkillBaseballRolling BaseballRolling;
 	public static SkillSpeedUp SpeedUp;
 	public static SkillStrengthUp StrengthUp;
+	public static SkillVibrationWave VibrationWave;
 	public static SkillVisionUp VisionUp;
-	public static SkillAuroraShield AuroraShield;
 
 	public static void initSkills() {
 		AntiFire = new SkillAntiFire("anti_fire", 1024, 16, 60 * 20);
@@ -34,6 +35,7 @@ public class SkillsRw {
 		BaseballRolling = new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
 		SpeedUp = new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		StrengthUp = new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
+		VibrationWave = new SkillVibrationWave("vibration_wave", 1024, 8, 10 * 20);
 		VisionUp = new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
 	}
 	
