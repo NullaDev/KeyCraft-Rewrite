@@ -29,17 +29,18 @@ public class RendererVibrationWave extends Render {
         
         Tessellator tessellator = Tessellator.instance;
         
-        double r = entity.getcurrentRadius();
+        double r = entity.getCurrentRadius();
+        double p = r / entity.getMaxRadius();
         GL11.glColor4f(0.5F, 0.5F, 0.5F, 0.5F);
                 
         for (int i = 0; i < 4; ++i) {
             GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
             GL11.glNormal3f(0.0F, 0.0F, 1.0F);
             tessellator.startDrawingQuads();
-            tessellator.addVertex( r, -1.6D, r); // 右下
-            tessellator.addVertex( r,  0.4D, r); // 右上
-            tessellator.addVertex(-r,  0.4D, r); // 左上
-            tessellator.addVertex(-r, -1.6D, r); // 左下
+            tessellator.addVertex( r, 1D - p, r); // 右下
+            tessellator.addVertex( r, 1D + p, r); // 右上
+            tessellator.addVertex(-r, 1D + p, r); // 左上
+            tessellator.addVertex(-r, 1D - p, r); // 左下
             tessellator.draw();
         }
 
@@ -49,7 +50,7 @@ public class RendererVibrationWave extends Render {
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        GL11.glPopMatrix();        
+        GL11.glPopMatrix();
     }
 
 	@Override

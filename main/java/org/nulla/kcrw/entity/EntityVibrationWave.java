@@ -35,8 +35,12 @@ public class EntityVibrationWave extends EntityHasOwner {
 		}
 	}
 	
-	public float getcurrentRadius() {
+	public float getCurrentRadius() {
 		return this.currentRadius;
+	}
+	
+	public float getMaxRadius() {
+		return this.maxRadius;
 	}
 
 }
