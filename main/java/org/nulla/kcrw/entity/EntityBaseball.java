@@ -20,6 +20,7 @@ public class EntityBaseball extends KCEntityThrowable {
 	protected Vec3 XZVec;
 	
 	protected boolean isExplosive = false;
+	protected boolean isThundering = false;
 	
 	public EntityBaseball(World world) {
         super(world, 0.25f, 0.25F);
@@ -34,6 +35,9 @@ public class EntityBaseball extends KCEntityThrowable {
 		this.mSkill = skill;
 		if (skill == "explosion") {
 			this.isExplosive = true;
+		}
+		if (skill == "thundering") {
+			this.isThundering = true;
 		}
 		if (skill == "rolling") {
 			this.velocityDecreaseRate = 1F;
@@ -57,6 +61,9 @@ public class EntityBaseball extends KCEntityThrowable {
         
         if (this.isExplosive)
         	this.worldObj.createExplosion(thrower, posX, posY, posZ, 5.0F, false);
+        
+        if (this.isThundering)
+        	System.out.println(this.worldObj.thunderingStrength);
         
         if (!this.worldObj.isRemote) {
             this.setDead();
