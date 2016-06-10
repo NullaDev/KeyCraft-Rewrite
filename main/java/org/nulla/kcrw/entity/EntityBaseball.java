@@ -1,6 +1,7 @@
 package org.nulla.kcrw.entity;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -63,7 +64,7 @@ public class EntityBaseball extends KCEntityThrowable {
         	this.worldObj.createExplosion(thrower, posX, posY, posZ, 5.0F, false);
         
         if (this.isThundering)
-        	System.out.println(this.worldObj.thunderingStrength);
+        	this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, posX, posY, posZ));
         
         if (!this.worldObj.isRemote) {
             this.setDead();
