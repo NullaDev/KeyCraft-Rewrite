@@ -27,7 +27,7 @@ public class SkillVibrationWave extends Skill {
 			return false;
 		}
 		
-		player.worldObj.spawnEntityInWorld(new EntityVibrationWave(player, getExperience(player)));
+		player.worldObj.spawnEntityInWorld(new EntityVibrationWave(player));
 		
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {

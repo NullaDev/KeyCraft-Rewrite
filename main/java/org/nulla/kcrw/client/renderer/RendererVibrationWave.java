@@ -18,7 +18,6 @@ public class RendererVibrationWave extends Render {
 	public void doRender(EntityVibrationWave entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {		
 		GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
-        GL11.glRotatef(-entity.rotationYaw, 0.0F, 1.0F, 0.0F);
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);

@@ -37,7 +37,7 @@ public class SkillsRw {
 		BaseballThundering = new SkillBaseballThundering("thundering_baseball", 128, 2, 2 * 20);
 		SpeedUp = new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		StrengthUp = new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
-		VibrationWave = new SkillVibrationWave("vibration_wave", 1024, 8, 10 * 20);
+		VibrationWave = new SkillVibrationWave("vibration_wave", 1024, 8, 1/*0 * 20*/);
 		VisionUp = new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
 	}
 	

@@ -28,9 +28,9 @@ public class EntityHasOwner extends Entity implements IEntityOwnable {
 		nbt.setString("OwnerName", this.func_152113_b());
 	}
 	
-	public void setOwnerName(String uuid)
+	public void setOwnerName(String name)
     {
-        this.dataWatcher.updateObject(16, uuid);
+        this.dataWatcher.updateObject(16, name);
     }
 	
 	public void setOwner(EntityPlayer player)
