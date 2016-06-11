@@ -16,6 +16,7 @@ public class SkillsRw {
 	public static SkillAuroraRepair AuroraRepair;
 	public static SkillAuroraShield AuroraShield;
 	public static SkillBaseballExplosive BaseballExplosive;
+	public static SkillBaseballFalling BaseballFalling;
 	public static SkillBaseballRolling BaseballRolling;
 	public static SkillBaseballThundering BaseballThundering;
 	public static SkillRecover Recover;
@@ -34,6 +35,7 @@ public class SkillsRw {
 		AuroraRepair = new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);
 		AuroraShield = new SkillAuroraShield("aurora_shield", 1024, 20, 60 * 20);
 		BaseballExplosive = new SkillBaseballExplosive("explosive_baseball", 128, 2, 2 * 20);
+		BaseballFalling = new SkillBaseballFalling("falling_baseball", 128, 2, 2 * 20);
 		BaseballRolling = new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
 		BaseballThundering = new SkillBaseballThundering("thundering_baseball", 128, 2, 2 * 20);
 		Recover = new SkillRecover("recover", 512, 8, 10 * 20);
