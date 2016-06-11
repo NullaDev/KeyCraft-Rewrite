@@ -11,6 +11,12 @@ import org.nulla.nullacore.api.skill.Skill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+/** 
+ * 这个技能的中文翻译叫做“蝴蝶喵球”，出自《Little Busters!》游戏中枣铃的扔球必杀技。
+ * “蝴蝶球”这个词并非原创，而是出自同名的棒球术语，指的是棒球在投手的特殊投掷方法下，因为空气动力学作用而显得轨迹飘忽不定。
+ * 因为这个球在原作游戏里我就经常接不住。。所以在满满的恶意下我给这个棒球加了一个连我都控制不了的正弦轨迹。。
+ * 这个球我查了一下wiki，似乎是叫做“スライニャー”，但是拿不太准呢~
+ */
 public class SkillBaseballRolling extends Skill {
 	
 	public SkillBaseballRolling(String name, int auroraRequired, int auroraCost, int cd) {

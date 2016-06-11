@@ -85,8 +85,9 @@ public class EntityVibrationWave extends EntityHasOwner {
 	            	&& entity.boundingBox.minZ > posZ - r + 0.5
 	            	&& entity.boundingBox.maxZ < posZ + r - 0.5)
 	            {
-	            	// 伤害乱写的
-	            	entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), 15.0F);
+	            	float damageBasic = 10F * 2048 / (2048 - SkillsRw.VibrationWave.getExperience(this.getOwner()));
+	            	float p = this.getCurrentRadius() / this.getMaxRadius();
+	            	entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), damageBasic / (1 + 4 * p * p));
 	            }
 	            /*else
 	            {

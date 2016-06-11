@@ -11,6 +11,11 @@ import org.nulla.nullacore.api.skill.Skill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * 这个技能和同一组的棒球系列技能不同，是我生编硬造出来的技能，而非出自《Little Busters!》。
+ * 不过因为落地时能够爆炸造成AOE伤害，还不破坏地形，用起来意外的好用呢。也许这就是MC的世界观吧。
+ * 不过我估计枣铃扔出的球也许真的能造成这种破坏力吧【笑。
+ */
 public class SkillBaseballExplosive extends Skill {
 	
 	public SkillBaseballExplosive(String name, int auroraRequired, int auroraCost, int cd) {

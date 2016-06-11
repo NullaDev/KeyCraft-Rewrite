@@ -18,6 +18,7 @@ public class SkillsRw {
 	public static SkillBaseballExplosive BaseballExplosive;
 	public static SkillBaseballRolling BaseballRolling;
 	public static SkillBaseballThundering BaseballThundering;
+	public static SkillRecover Recover;
 	public static SkillSpeedUp SpeedUp;
 	public static SkillStrengthUp StrengthUp;
 	public static SkillVibrationWave VibrationWave;
@@ -35,6 +36,7 @@ public class SkillsRw {
 		BaseballExplosive = new SkillBaseballExplosive("explosive_baseball", 128, 2, 2 * 20);
 		BaseballRolling = new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
 		BaseballThundering = new SkillBaseballThundering("thundering_baseball", 128, 2, 2 * 20);
+		Recover = new SkillRecover("recover", 512, 8, 10 * 20);
 		SpeedUp = new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		StrengthUp = new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
 		VibrationWave = new SkillVibrationWave("vibration_wave", 1024, 8, 1/*0 * 20*/);
