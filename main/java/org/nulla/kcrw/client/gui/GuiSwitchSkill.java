@@ -48,7 +48,7 @@ public class GuiSwitchSkill extends KCGuiBase {
     		btnOptionalSkill = new GuiButtonImage[optionalSkillNumber];
 
         	for (int i = 0; i < optionalSkillNumber; i++) {
-    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * (i % 8))) - 8, (int)(height * (0.6 + i / 8 * 0.1)), 16, 16, optionalSkill[i].mIcon, true));
+    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * (i % 8))) - 8, (int)(height * (0.5 + i / 8 * 0.1)), 16, 16, optionalSkill[i].mIcon, true));
         	}
         }
     }
