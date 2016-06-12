@@ -6,7 +6,6 @@ import java.util.List;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +31,6 @@ public class EntityVibrationWave extends EntityHasOwner {
 		this.posZ = owner.posZ;
 	}
 	
-
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -71,15 +69,17 @@ public class EntityVibrationWave extends EntityHasOwner {
 		}
 		
 		// 检测波面附近的实体
-		if (this.ticksExisted % 3 == 0)
-		{
+		if (this.ticksExisted % 3 == 0) {
 			float r = getCurrentRadius();
-			List list = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(
+			List list = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(
 					posX - r, posY - 0.5, posZ - r, posX + r, posY + 1.5, posZ + r));
 			Iterator iterator = list.iterator();
-			while (iterator.hasNext())
-	        {
-	            EntityLiving entity = (EntityLiving)iterator.next();
+			while (iterator.hasNext()) {
+				EntityLivingBase entity = (EntityLivingBase)iterator.next();
+				
+				if (entity == this.getOwner())
+					continue;
+				
 	            if (entity.boundingBox.minX > posX - r + 0.5
 	            	&& entity.boundingBox.maxX < posX + r - 0.5
 	            	&& entity.boundingBox.minZ > posZ - r + 0.5
@@ -89,10 +89,6 @@ public class EntityVibrationWave extends EntityHasOwner {
 	            	float p = this.getCurrentRadius() / this.getMaxRadius();
 	            	entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), damageBasic / (1 + 4 * p * p));
 	            }
-	            /*else
-	            {
-	            	System.out.println(entity.getEntityId());
-	            }*/
 	        }
 		}
 	}
