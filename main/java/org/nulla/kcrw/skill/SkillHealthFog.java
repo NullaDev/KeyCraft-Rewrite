@@ -15,6 +15,11 @@ import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 import org.nulla.nullacore.api.skill.Skill;
 
+/**
+ * 技能出自《Rewrite》中津静流的能力。
+ * 其实按照《Rewrite Harvest festa！》的设定来看，静流的治疗能力是对单人的，but who cares。
+ * 不过既然静流的能力是制药工厂，那么就当是把储存的药一口气全都放出来吧233333
+ */
 public class SkillHealthFog extends Skill {
 
 	public SkillHealthFog(String name, int auroraRequired, int auroraCost, int cd) {
