@@ -2,6 +2,7 @@ package org.nulla.kcrw.event;
 
 import java.lang.reflect.Field;
 import java.util.Random;
+import java.util.UUID;
 
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
@@ -15,7 +16,9 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.BaseAttribute;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -107,23 +110,20 @@ public class HandlerPlayerTick {
 		if (player.worldObj.isRemote) {
 			return;
 		}
-		
-		double value = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+
+		IAttributeInstance attr = player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.movementSpeed);
+		double value = attr.getBaseValue();
+		UUID uuid = UUID.randomUUID();
+		AttributeModifier m = new AttributeModifier(uuid, "speed_up_final", 0.2, 1);
 		System.out.println(value);
 		
 		if (SkillsRw.SpeedUpFinal.trigSkill(player) && !SkillsRw.SpeedUpFinal.isOpen(player)) {
-			//player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(value * 20D);
-			try {
-				Field f = BaseAttribute.class.getDeclaredField("defaultValue");
-				f.setAccessible(true);
-				f.set(SharedMonsterAttributes.movementSpeed, 20 * value);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			attr.applyModifier(m);
 			SkillsRw.SpeedUpFinal.setOpen(player, true);
 			System.out.println("on");
 		} else if (!SkillsRw.SpeedUpFinal.trigSkill(player) && SkillsRw.SpeedUpFinal.isOpen(player)) {
-			player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(value * 0.05D);
+			if (attr.getModifier(uuid) != null)
+				attr.removeModifier(m);
 			SkillsRw.SpeedUpFinal.setOpen(player, false);
 			System.out.println("off");
 		}
