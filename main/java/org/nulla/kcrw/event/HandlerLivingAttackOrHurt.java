@@ -42,8 +42,14 @@ public class HandlerLivingAttackOrHurt {
 	public void PoisonCanceller(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (event.source.damageType.equals("magic") && player.isPotionActive(KCPotions.poisonResistance)) {
-				event.setCanceled(true);
+			if (event.source.damageType.equals("magic")) {
+				if (SkillsRw.PoisonImmunity.trigSkill(player) || player.isPotionActive(KCPotions.poisonResistance)){				
+					event.setCanceled(true);
+				}
+			} else if (event.source.isFireDamage()) {
+				if (SkillsRw.FireImmunity.trigSkill(player)){				
+					event.setCanceled(true);
+				}
 			}
 		}
 		

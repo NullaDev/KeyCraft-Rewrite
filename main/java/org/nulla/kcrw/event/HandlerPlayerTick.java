@@ -1,5 +1,6 @@
 package org.nulla.kcrw.event;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 import org.nulla.kcrw.item.ItemAuroraArmor;
@@ -13,6 +14,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.BaseAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -95,6 +98,35 @@ public class HandlerPlayerTick {
 			}
 		}
 		
+	}
+	
+	@SubscribeEvent
+	public void a(PlayerTickEvent event) {
+		EntityPlayer player = event.player;
+		
+		if (player.worldObj.isRemote) {
+			return;
+		}
+		
+		double value = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+		System.out.println(value);
+		
+		if (SkillsRw.SpeedUpFinal.trigSkill(player) && !SkillsRw.SpeedUpFinal.isOpen(player)) {
+			//player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(value * 20D);
+			try {
+				Field f = BaseAttribute.class.getDeclaredField("defaultValue");
+				f.setAccessible(true);
+				f.set(SharedMonsterAttributes.movementSpeed, 20 * value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			SkillsRw.SpeedUpFinal.setOpen(player, true);
+			System.out.println("on");
+		} else if (!SkillsRw.SpeedUpFinal.trigSkill(player) && SkillsRw.SpeedUpFinal.isOpen(player)) {
+			player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(value * 0.05D);
+			SkillsRw.SpeedUpFinal.setOpen(player, false);
+			System.out.println("off");
+		}
 	}
 
 }

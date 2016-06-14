@@ -48,7 +48,9 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        
+        drawRect(0, 0, width, height, 0x7F000000);
+        KCUtils.initDrawerState();
+
         mc.renderEngine.bindTexture(KCResources.gui_kotori_workshop);
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
     	
