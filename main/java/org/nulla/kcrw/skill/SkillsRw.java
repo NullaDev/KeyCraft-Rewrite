@@ -26,6 +26,7 @@ public class SkillsRw {
 	public static SkillSpeedUp SpeedUp;
 	public static SkillSpeedUpFinal SpeedUpFinal;
 	public static SkillStrengthUp StrengthUp;
+	public static SkillStrengthUpFinal StrengthUpFinal;
 	public static SkillVibrationWave VibrationWave;
 	public static SkillVisionUp VisionUp;
 
@@ -49,6 +50,7 @@ public class SkillsRw {
 		SpeedUp = 				new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		SpeedUpFinal = 			new SkillSpeedUpFinal("speed_up_final", 1024, 0, 0);
 		StrengthUp = 			new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
+		StrengthUpFinal = 		new SkillStrengthUpFinal("strength_up_final", 1024, 0, 0);
 		VibrationWave = 		new SkillVibrationWave("vibration_wave", 1024, 8, 10 * 20);
 		VisionUp = 				new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
 	}

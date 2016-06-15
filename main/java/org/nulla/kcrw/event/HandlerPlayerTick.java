@@ -112,20 +112,33 @@ public class HandlerPlayerTick {
 		}
 
 		IAttributeInstance attr = player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.movementSpeed);
-		double value = attr.getBaseValue();
-		UUID uuid = UUID.randomUUID();
-		AttributeModifier m = new AttributeModifier(uuid, "speed_up_final", 0.2, 1);
-		System.out.println(value);
 		
-		if (SkillsRw.SpeedUpFinal.trigSkill(player) && !SkillsRw.SpeedUpFinal.isOpen(player)) {
+		if (SkillsRw.SpeedUpFinal.trigSkill(player) && SkillsRw.SpeedUpFinal.getAttributeUUID(player) == null) {
+			UUID uuid = UUID.randomUUID();
+			AttributeModifier m = new AttributeModifier(uuid, "speed_up_final", 0.4, 1);
 			attr.applyModifier(m);
-			SkillsRw.SpeedUpFinal.setOpen(player, true);
-			System.out.println("on");
-		} else if (!SkillsRw.SpeedUpFinal.trigSkill(player) && SkillsRw.SpeedUpFinal.isOpen(player)) {
+			SkillsRw.SpeedUpFinal.setAttributeUUID(player, uuid);
+			player.stepHeight += 1F;
+		} else if (!SkillsRw.SpeedUpFinal.trigSkill(player) && SkillsRw.SpeedUpFinal.getAttributeUUID(player) != null) {
+			UUID uuid = SkillsRw.SpeedUpFinal.getAttributeUUID(player);
 			if (attr.getModifier(uuid) != null)
-				attr.removeModifier(m);
-			SkillsRw.SpeedUpFinal.setOpen(player, false);
-			System.out.println("off");
+				attr.removeModifier(attr.getModifier(uuid));
+			SkillsRw.SpeedUpFinal.setAttributeUUID(player, null);
+			player.stepHeight -= 1F;
+		}
+		
+		IAttributeInstance attr2 = player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage);
+
+		if (SkillsRw.StrengthUpFinal.trigSkill(player) && SkillsRw.StrengthUpFinal.getAttributeUUID(player) == null) {
+			UUID uuid = UUID.randomUUID();
+			AttributeModifier m = new AttributeModifier(uuid, "strength_up_final", 3, 1);
+			attr2.applyModifier(m);
+			SkillsRw.StrengthUpFinal.setAttributeUUID(player, uuid);
+		} else if (!SkillsRw.StrengthUpFinal.trigSkill(player) && SkillsRw.StrengthUpFinal.getAttributeUUID(player) != null) {
+			UUID uuid = SkillsRw.StrengthUpFinal.getAttributeUUID(player);
+			if (attr2.getModifier(uuid) != null)
+				attr2.removeModifier(attr.getModifier(uuid));
+			SkillsRw.StrengthUpFinal.setAttributeUUID(player, null);
 		}
 	}
 

@@ -9,17 +9,17 @@ import net.minecraft.util.ResourceLocation;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.nullacore.api.skill.SkillPassive;
 
-public class SkillSpeedUpFinal extends SkillPassive {
+public class SkillStrengthUpFinal extends SkillPassive {
 
-	public SkillSpeedUpFinal(String name, int auroraRequired, int auroraCost,
+	public SkillStrengthUpFinal(String name, int auroraRequired, int auroraCost,
 			int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/speed_up_final.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/strength_up_final.png");
 	}
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return SkillsRw.SpeedUp.getExperience(player) >= 1024;
+		return SkillsRw.StrengthUp.getExperience(player) >= 1024;
 	}
 	
 	public UUID getAttributeUUID(EntityPlayer player) {
