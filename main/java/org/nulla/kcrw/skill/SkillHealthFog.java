@@ -4,14 +4,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 
 import org.nulla.kcrw.KeyCraft_Rewrite;
+import org.nulla.kcrw.entity.effect.EntityParticleFX;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 import org.nulla.nullacore.api.skill.Skill;
 
@@ -52,6 +55,14 @@ public class SkillHealthFog extends Skill {
 			Random rand = new Random();
 			int exp = rand.nextInt(5) + 1;
 			modifyExperience(player, exp);
+		}
+		
+		for(int i = 0; i < 32; i++) {
+			Random ran = new Random();
+			Vec3 vec = Vec3.createVectorHelper(8 * ran.nextFloat() - 4, 2 * ran.nextFloat() - 1, 8 * ran.nextFloat() - 4).normalize();
+			EntityParticleFX par = new EntityParticleFX(player.worldObj, player.posX, player.posY, player.posZ, vec);
+			par.setRBGColorF(1F, 0.5F, 0.5F);
+			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
 		
 		return true;

@@ -128,17 +128,14 @@ public class HandlerPlayerTick {
 		}
 		
 		IAttributeInstance attr2 = player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage);
+		double baseValue = attr2.getBaseValue();
 
-		if (SkillsRw.StrengthUpFinal.trigSkill(player) && SkillsRw.StrengthUpFinal.getAttributeUUID(player) == null) {
-			UUID uuid = UUID.randomUUID();
-			AttributeModifier m = new AttributeModifier(uuid, "strength_up_final", 3, 1);
-			attr2.applyModifier(m);
-			SkillsRw.StrengthUpFinal.setAttributeUUID(player, uuid);
-		} else if (!SkillsRw.StrengthUpFinal.trigSkill(player) && SkillsRw.StrengthUpFinal.getAttributeUUID(player) != null) {
-			UUID uuid = SkillsRw.StrengthUpFinal.getAttributeUUID(player);
-			if (attr2.getModifier(uuid) != null)
-				attr2.removeModifier(attr.getModifier(uuid));
-			SkillsRw.StrengthUpFinal.setAttributeUUID(player, null);
+		if (SkillsRw.StrengthUpFinal.trigSkill(player) && !SkillsRw.StrengthUpFinal.getAttributeAdd(player)) {
+			attr2.setBaseValue(baseValue + 3);
+			SkillsRw.StrengthUpFinal.setAttributeAdd(player, true);
+		} else if (!SkillsRw.StrengthUpFinal.trigSkill(player) && SkillsRw.StrengthUpFinal.getAttributeAdd(player)) {
+			attr2.setBaseValue(baseValue - 3);
+			SkillsRw.StrengthUpFinal.setAttributeAdd(player, false);
 		}
 	}
 

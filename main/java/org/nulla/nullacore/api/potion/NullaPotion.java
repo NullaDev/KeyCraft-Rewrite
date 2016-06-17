@@ -14,7 +14,6 @@ public class NullaPotion extends Potion {
 	/** 在PotionUtils初始化，其他模块不要修改！ */
 	public static int nextID;
 	
-	
 	public final ResourceLocation mIcon;
 		
 	public NullaPotion(String name, ResourceLocation icon) {

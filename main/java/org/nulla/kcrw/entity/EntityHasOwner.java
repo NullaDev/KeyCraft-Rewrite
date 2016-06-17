@@ -8,8 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityHasOwner extends Entity implements IEntityOwnable {
 	
-	public EntityHasOwner(World world)
-    {
+	public EntityHasOwner(World world) {
         super(world);
     }
 
@@ -28,13 +27,11 @@ public class EntityHasOwner extends Entity implements IEntityOwnable {
 		nbt.setString("OwnerName", this.func_152113_b());
 	}
 	
-	public void setOwnerName(String name)
-    {
+	public void setOwnerName(String name) {
         this.dataWatcher.updateObject(16, name);
     }
 	
-	public void setOwner(EntityPlayer player)
-    {
+	public void setOwner(EntityPlayer player) {
 		setOwnerName(player.getCommandSenderName());
     }
 

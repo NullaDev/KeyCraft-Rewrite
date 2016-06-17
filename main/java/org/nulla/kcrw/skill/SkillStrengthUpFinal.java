@@ -22,24 +22,18 @@ public class SkillStrengthUpFinal extends SkillPassive {
 		return SkillsRw.StrengthUp.getExperience(player) >= 1024;
 	}
 	
-	public UUID getAttributeUUID(EntityPlayer player) {
-		final String name = "AttributeUUID" + this.mName;
+	public boolean getAttributeAdd(EntityPlayer player) {
+		final String name = "AttributeHassAdd" + this.mName;
 		final NBTTagCompound nbt = player.getEntityData();
 		if (!nbt.hasKey(name))
-			return null;
-		if (nbt.getString(name) == "")
-			return null;
-		return UUID.fromString(nbt.getString(name));
+			return false;
+		return nbt.getBoolean(name);
 	}
 	
-	public void setAttributeUUID(EntityPlayer player, UUID uuid) {
-		final String name = "AttributeUUID" + this.mName;
+	public void setAttributeAdd(EntityPlayer player, boolean add) {
+		final String name = "AttributeHassAdd" + this.mName;
 		final NBTTagCompound nbt = player.getEntityData();
-		if (uuid == null) {
-			nbt.removeTag(name);
-		} else {
-			nbt.setString(name, uuid.toString());
-		}
+		nbt.setBoolean(name, add);
 	}
 	
 }
