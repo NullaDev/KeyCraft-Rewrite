@@ -100,7 +100,7 @@ public class HandlerDrawHUD {
 				NullaUtils.getfontRenderer().drawStringWithShadow(skillinslot[i].mAuroraCost + "", widthToDraw + 2, heightToDraw[i] + 24, 0x000000);
 				NullaUtils.initDrawerState();
 				//绘制CD状态
-				if (!skillinslot[i].checkCD(player)) {
+				if (!skillinslot[i].checkCD(player) && skillinslot[i].mCD != 0) {
 					int time = (int) (player.worldObj.getTotalWorldTime() - skillinslot[i].getLastUseTime(player));
 					int length =  32 - 32 * time / skillinslot[i].mCD;
 					NullaUtils.drawRect(widthToDraw, heightToDraw[i], 32, length, 0x80000000);
