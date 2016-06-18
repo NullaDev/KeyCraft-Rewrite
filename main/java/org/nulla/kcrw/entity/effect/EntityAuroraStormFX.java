@@ -34,6 +34,11 @@ public class EntityAuroraStormFX extends EntityParticleFX {
 			return;
 		}
 		
+		if (!SkillsRw.AuroraStorm.isInSlot(mOwner)) {
+			this.setDead();
+			return;
+		}
+		
 		float b = (float) Math.sin(2 * Math.PI * randomDouble + this.ticksExisted * Math.PI / 10) * 0.5F + 0.5F;
 		this.setRBGColorF(0.5F, 1F, b);
 		
@@ -45,6 +50,8 @@ public class EntityAuroraStormFX extends EntityParticleFX {
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		
+		this.ticksExisted++;
 	}
 
 }

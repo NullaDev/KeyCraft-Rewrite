@@ -29,7 +29,6 @@ public class EntityAuroraStorm extends EntityHasOwner {
 		this.mDPS *= 2048 / (2048 - exp);
 		
 		this.setOwner(owner);
-		System.out.println(owner);
 		this.posX = owner.posX;
 		this.posY = owner.posY;
 		this.posZ = owner.posZ;
@@ -55,17 +54,24 @@ public class EntityAuroraStorm extends EntityHasOwner {
 		
 		if (this.getOwner() == null || !SkillsRw.AuroraStorm.trigSkill(this.getOwner())) {
 			this.setDead();
+			return;
 		}
 		
 		List list = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(
 				posX - 4, posY - 1, posZ - 4, posX + 4, posY + 3, posZ + 4));
 		Iterator iterator = list.iterator();
 		while (iterator.hasNext()) {
-			EntityLivingBase entity = (EntityLivingBase)iterator.next();		
+			EntityLivingBase entity = (EntityLivingBase)iterator.next();
 			if (entity == this.getOwner())
 				continue;
-			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), this.mDPS / 20);	            	
+			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), this.mDPS / 2);	            	
 		}
+		
+		this.posX = this.getOwner().posX;
+		this.posY = this.getOwner().posY;
+		this.posZ = this.getOwner().posZ;
+		
+		System.out.println(this.ticksExisted);
 		
 	}
 

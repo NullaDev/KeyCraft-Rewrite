@@ -80,7 +80,7 @@ public class SkillPassive extends Skill {
 		return true;
 	}
 	
-	protected boolean isInSlot(EntityPlayer player) {
+	public boolean isInSlot(EntityPlayer player) {
 		boolean flag = false;
 		for (int i = 0; i < SkillUtils.SKILL_SLOT_SIZE; i++) {
 			if (SkillUtils.getSkillInSlot(player, i) == this) {
