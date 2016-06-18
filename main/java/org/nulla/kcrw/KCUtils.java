@@ -17,8 +17,11 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Vec3;
 
 public class KCUtils {
+	
+	public static final Vec3 zero = Vec3.createVectorHelper(0, 0, 0);
 	
 	public static Minecraft getMC() {
 		return Minecraft.getMinecraft();

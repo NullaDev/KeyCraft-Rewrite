@@ -42,7 +42,7 @@ public class SkillHealthFog extends Skill {
 		}
 		
 		List list = player.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(
-				player.posX - 4, player.posY - 1, player.posZ - 4, player.posX + 4, player.posY + 1, player.posZ + 4));
+				player.posX - 4, player.posY - 1, player.posZ - 4, player.posX + 4, player.posY + 2, player.posZ + 4));
 		Iterator iterator = list.iterator();
 		while (iterator.hasNext()) {
 			EntityLivingBase entity = (EntityLivingBase)iterator.next();
@@ -59,9 +59,9 @@ public class SkillHealthFog extends Skill {
 		
 		for(int i = 0; i < 32; i++) {
 			Random ran = new Random();
-			Vec3 vec = Vec3.createVectorHelper(8 * ran.nextFloat() - 4, 2 * ran.nextFloat() - 1, 8 * ran.nextFloat() - 4).normalize();
-			EntityParticleFX par = new EntityParticleFX(player.worldObj, player.posX, player.posY, player.posZ, vec);
-			par.setRBGColorF(1F, 0.5F, 0.5F);
+			Vec3 vec = Vec3.createVectorHelper(8 * ran.nextFloat() - 4, 3 * ran.nextFloat() - 1 - player.eyeHeight, 8 * ran.nextFloat() - 4).normalize();
+			EntityParticleFX par = new EntityParticleFX(player.worldObj, player.posX, player.posY + player.eyeHeight, player.posZ, vec);
+			par.setRBGColorF(1F, 0.7F, 0.7F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
 		

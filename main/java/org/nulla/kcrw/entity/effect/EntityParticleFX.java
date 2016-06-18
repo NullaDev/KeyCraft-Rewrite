@@ -14,20 +14,15 @@ import net.minecraft.world.World;
 public class EntityParticleFX extends EntityFX {
 	private static TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 	private static ResourceLocation texture = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/particles/particle.png");
-	private final float PI3 = (float)(Math.PI / 3.0);
-	private final float PI6 = (float)(Math.PI / 6.0);
 
 	public EntityParticleFX(World world, double posX, double posY, double posZ, Vec3 direction) {
 		super(world, posX, posY, posZ);
-		double speed = 0.2D + rand.nextDouble() * 0.2D;
-		direction.rotateAroundY((rand.nextFloat() - 0.5f) * PI3);
-		direction.rotateAroundX((rand.nextFloat() - 0.5f) * PI6);
-		direction.rotateAroundZ((rand.nextFloat() - 0.5f) * PI6);
+		double speed = 0.1D + rand.nextDouble() * 0.1D;
 		setVelocity(direction.xCoord * speed, direction.yCoord * speed, direction.zCoord * speed);
 		this.particleGravity = 0.0f;
 		this.particleAlpha = 1.0f;
 		this.particleScale = 1.0f;
-		this.particleMaxAge = (int)(50f / (this.rand.nextFloat() * 0.75f + 0.25f));
+		this.particleMaxAge = (int)(20f / (this.rand.nextFloat() * 0.5f + 0.5f));
 		this.noClip = true;
 	}
 
