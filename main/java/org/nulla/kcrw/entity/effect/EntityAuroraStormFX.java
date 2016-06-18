@@ -10,10 +10,11 @@ import net.minecraft.world.World;
 
 public class EntityAuroraStormFX extends EntityParticleFX {
 	
-	private final double ran = new Random().nextDouble();
-	private final double spe = Math.PI / 60 + new Random().nextDouble() * Math.PI / 60;
+	private final double randomDouble = new Random().nextDouble();
+	private final double omegle = Math.PI / 60 + new Random().nextDouble() * Math.PI / 60;
+	private final double y;
 	private final double R;
-	private double a;
+	private double rad;
 	private final EntityPlayer mOwner;
 
 	public EntityAuroraStormFX(World world, double posX, double posY, double posZ, EntityPlayer owner) {
@@ -21,25 +22,29 @@ public class EntityAuroraStormFX extends EntityParticleFX {
 		this.particleMaxAge = Integer.MAX_VALUE;
 		this.mOwner = owner;
 
+		y = this.posY - owner.posY;
 		R = Math.sqrt((posX - owner.posX) * (posX - owner.posX) + (posZ - owner.posZ) * (posZ - owner.posZ));
-		a = Math.asin((posX - owner.posX) / R);
+		rad = Math.atan2(this.posY - owner.posY, this.posX - owner.posX);
 	}
 	
 	@Override
 	public void onUpdate() {
-		
 		if (!SkillsRw.AuroraStorm.getIsOn(mOwner)) {
 			this.setDead();
 			return;
 		}
 		
-		float b = (float) Math.sin(2 * Math.PI * ran + this.ticksExisted * Math.PI / 10) * 0.5F + 0.5F;
+		float b = (float) Math.sin(2 * Math.PI * randomDouble + this.ticksExisted * Math.PI / 10) * 0.5F + 0.5F;
 		this.setRBGColorF(0.5F, 1F, b);
 		
-		a += spe;
-		this.motionX = this.mOwner.posX + R * Math.sin(a) - this.posX;
-		this.motionY = 0;
-		this.motionZ = this.mOwner.posZ + R * Math.sin(a) - this.posZ;
+		rad += omegle;
+		this.motionY = this.mOwner.posY - this.posY + y;
+		this.motionX = this.mOwner.posX + R * Math.cos(rad) - this.posX;
+		this.motionZ = this.mOwner.posZ + R * Math.sin(rad) - this.posZ;
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+		this.moveEntity(this.motionX, this.motionY, this.motionZ);
 	}
 
 }

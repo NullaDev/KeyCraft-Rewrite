@@ -1,11 +1,11 @@
 package org.nulla.kcrw.skill;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.effect.EntityAuroraStorm;
 import org.nulla.nullacore.api.skill.SkillPassive;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class SkillAuroraStorm extends SkillPassive {
 
@@ -17,6 +17,7 @@ public class SkillAuroraStorm extends SkillPassive {
 	@Override
 	protected boolean onUse(EntityPlayer player) {
 		boolean isOn = !getIsOn(player);
+		setIsOn(player, isOn);
 		if (isOn) {
 			EntityAuroraStorm entity = new EntityAuroraStorm(player);
 			player.worldObj.spawnEntityInWorld(entity);
@@ -25,7 +26,6 @@ public class SkillAuroraStorm extends SkillPassive {
 			if (getEntityStorm(player) != null)
 				getEntityStorm(player).setDead();
 		}
-		setIsOn(player, isOn);
 		return isOn;
 	}
 	

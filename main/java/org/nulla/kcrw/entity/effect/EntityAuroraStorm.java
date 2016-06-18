@@ -4,17 +4,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-
 import org.nulla.kcrw.entity.EntityHasOwner;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
 public class EntityAuroraStorm extends EntityHasOwner {
 	
@@ -35,26 +33,27 @@ public class EntityAuroraStorm extends EntityHasOwner {
 		this.posX = owner.posX;
 		this.posY = owner.posY;
 		this.posZ = owner.posZ;
-		
-		for(int i = 0; i < 64; i++) {
-			Random ran = new Random();
-			float x = ran.nextFloat() * 8 - 4;
-			float y = ran.nextFloat() * 4 - 1;
-			float z = ran.nextFloat() * 8 - 4;
-			EntityParticleFX par = new EntityAuroraStormFX(this.worldObj, this.posX + x, this.posY + y, this.posZ + z, this.getOwner());
-			Minecraft.getMinecraft().effectRenderer.addEffect(par);
-		}
-		
 	}
 	
 	@Override
     public void onUpdate() {
 		super.onUpdate();
 
-		if (this.worldObj.isRemote)
+		if (this.worldObj.isRemote) {
+			if (this.ticksExisted == 1) {
+				for(int i = 0; i < 64; i++) {
+					Random ran = new Random();
+					float x = ran.nextFloat() * 8 - 4;
+					float y = ran.nextFloat() * 4 - 1;
+					float z = ran.nextFloat() * 8 - 4;
+					EntityParticleFX par = new EntityAuroraStormFX(this.worldObj, this.posX + x, this.posY + y, this.posZ + z, this.getOwner());
+					Minecraft.getMinecraft().effectRenderer.addEffect(par);
+				}
+			}
 			return;
+		}
 		
-		if (!SkillsRw.AuroraStorm.trigSkill(this.getOwner())) {
+		if (this.getOwner() == null || !SkillsRw.AuroraStorm.trigSkill(this.getOwner())) {
 			this.setDead();
 		}
 		
