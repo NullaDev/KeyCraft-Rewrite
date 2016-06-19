@@ -1,7 +1,10 @@
 package org.nulla.kcrw.item.crafting;
 
+import java.util.ArrayList;
+
 import org.nulla.kcrw.KCItems;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 
 public class KCRecipe {
@@ -44,12 +47,29 @@ public class KCRecipe {
 	}
 	
 	public static Item getCraftItemFromNumber(int number) {
-		switch (number) {
-			case 0: return KCItems.peach_juice;
-			case 1: return KCItems.music_player;
-			case 2: return KCItems.aurora_iron_ingot;
-			default: return null;
+		for (Item i : getAllItems()) {
+			if (Item.getIdFromItem(i) == number)
+				return i;
 		}
+		return null;
+	}
+	
+	public static ArrayList<Item> getItemCraftable(EntityPlayer player) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(KCItems.peach_juice);
+		items.add(KCItems.music_player);
+		items.add(KCItems.aurora_iron_ingot);
+		items.add(KCItems.steel_blade);
+		return items;
+	}
+	
+	public static ArrayList<Item> getAllItems() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(KCItems.peach_juice);
+		items.add(KCItems.music_player);
+		items.add(KCItems.aurora_iron_ingot);
+		items.add(KCItems.steel_blade);
+		return items;
 	}
 
 }

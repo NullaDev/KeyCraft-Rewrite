@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockKotoriWorkshop extends KCBlockBase {
 
 	private IIcon blockIconTop;
-	private IIcon blockIconFront;
+	private IIcon blockIconBottom;
 
 	public BlockKotoriWorkshop() {
 		super(Material.iron);
@@ -31,17 +31,15 @@ public class BlockKotoriWorkshop extends KCBlockBase {
     }
 	
 	@SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int p_149691_2_)
-    {
-        return side == 1 ? this.blockIconTop : (side == 0 ? Blocks.planks.getBlockTextureFromSide(side) : (side != 2 && side != 4 ? this.blockIcon : this.blockIconFront));
+    public IIcon getIcon(int side, int p_149691_2_) {
+        return side == 1 ? this.blockIconTop : (side == 0 ? blockIconBottom : this.blockIcon);
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
-    {
+    public void registerBlockIcons(IIconRegister p_149651_1_) {
         this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
         this.blockIconTop = p_149651_1_.registerIcon(this.getTextureName() + "_top");
-        this.blockIconFront = p_149651_1_.registerIcon(this.getTextureName() + "_front");
+        this.blockIconBottom = p_149651_1_.registerIcon(this.getTextureName() + "_bottom");
     }
 
 	

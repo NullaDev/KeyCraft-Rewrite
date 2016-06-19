@@ -2,19 +2,20 @@ itemGroup.kcrw=KeyCraft创造模式物品栏
 
 kcrw.item.intro.peachJuice=粘稠浓厚桃子味果汁，你确定这东西能喝吗。
 
-item.auroraIronIngot.name=Aurora铁
-item.auroraIronHelmet.name=Aurora铁头盔
-item.auroraIronChestPlate.name=Aurora铁胸甲
-item.auroraIronLeggings.name=Aurora铁护腿
-item.auroraIronBoots.name=Aurora铁靴子
-item.auroraIronAxe.name=Aurora铁斧
-item.auroraIronHoe.name=Aurora铁锄
-item.auroraIronPickaxe.name=Aurora铁镐
-item.auroraIronShovel.name=Aurora铁铲
-item.auroraIronSword.name=Aurora铁剑
+item.aurora_iron_ingot.name=Aurora铁
+item.aurora_iron_helmet.name=Aurora铁头盔
+item.aurora_iron_chestplate.name=Aurora铁胸甲
+item.aurora_iron_leggings.name=Aurora铁护腿
+item.aurora_iron_boots.name=Aurora铁靴子
+item.aurora_iron_axe.name=Aurora铁斧
+item.aurora_iron_hoe.name=Aurora铁锄
+item.aurora_iron_pickaxe.name=Aurora铁镐
+item.aurora_iron_shovel.name=Aurora铁铲
+item.aurora_iron_sword.name=Aurora铁剑
 item.baseball.name=棒球
-item.peachJuice.name=粘稠浓厚桃子味
-item.musicPlayer.name=音乐播放器
+item.music_player.name=音乐播放器
+item.peach_juice.name=粘稠浓厚桃子味
+item.steel_blade.name=精制钢剑
 
 tile.KotoriWorkshop.name=小鸟工坊
 

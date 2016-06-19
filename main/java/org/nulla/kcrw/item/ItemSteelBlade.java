@@ -61,7 +61,7 @@ public class ItemSteelBlade extends KCItemBase {
     /** Return 附魔能力 of 这个物品, 大多数情况基于material。 */
     @Override
     public int getItemEnchantability() {
-        return 14;
+        return 5;
     }
 
     /** Return 这个物品能不能续一秒 in an 铁砧。 */
