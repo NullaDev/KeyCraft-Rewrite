@@ -1,25 +1,32 @@
 package org.nulla.kcrw.item;
 
-import com.google.common.collect.Multimap;
+import org.nulla.kcrw.KCItems;
+import org.nulla.nullacore.api.damage.NullaDamageSource;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemSteelBlade extends KCItemBase {
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class ItemSteelBladeVibrating extends KCItemBase {
 	private float damage;
 
-    public ItemSteelBlade() {
+    public ItemSteelBladeVibrating() {
         this.maxStackSize = 1;
+        this.setCreativeTab(null);
         this.setMaxDamage(600);
-        this.damage = 7.0F;
+        this.damage = 17.0F;
     }
 
     @Override
@@ -32,8 +39,8 @@ public class ItemSteelBlade extends KCItemBase {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
-    	stack.damageItem(1, p_77644_3_);
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+    	stack.damageItem(20, attacker);        	
         return true;
     }
 
@@ -41,7 +48,7 @@ public class ItemSteelBlade extends KCItemBase {
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int posX, int posY, int posZ, EntityLivingBase entity) {
         if ((double)block.getBlockHardness(world, posX, posY, posZ) != 0.0D) {
-        	stack.damageItem(2, entity);
+        	stack.damageItem(20, entity);
         }
         return true;
     }
@@ -56,12 +63,6 @@ public class ItemSteelBlade extends KCItemBase {
     @Override
     public boolean func_150897_b(Block block) {
         return block == Blocks.web;
-    }
-
-    /** Return 附魔能力 of 这个物品, 大多数情况基于material。 */
-    @Override
-    public int getItemEnchantability() {
-        return 5;
     }
 
     /** Return 这个物品能不能续一秒 in an 铁砧。 */
@@ -79,5 +80,19 @@ public class ItemSteelBlade extends KCItemBase {
         multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)this.damage, 0));
         return multimap;
     }
+    
+    @Override
+    public void onUpdate(ItemStack stack, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+    	if (stack.getItemDamage() >= this.getMaxDamage())
+    		p_77663_3_.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage()));
+    	else
+    		stack.setItemDamage(stack.getItemDamage() + 1);
+    }
+    
+    @Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		player.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage()));
+	    return stack;
+	}
 
 }

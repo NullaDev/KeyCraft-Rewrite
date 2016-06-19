@@ -44,6 +44,8 @@ public class KCItems {
 	
 	public static Item steel_blade;
 	
+	public static Item steel_blade_vibrating;
+	
 	public static Item aurora_blade;
 	
     public static void InitItems() {
@@ -146,6 +148,11 @@ public class KCItems {
 			.setUnlocalizedName("steel_blade")
 			.setTextureName("kcrw:steel_blade");
     	GameRegistry.registerItem(steel_blade, "steel_blade");
+    	
+    	steel_blade_vibrating = new ItemSteelBladeVibrating()
+    		.setUnlocalizedName("steel_blade_vibrating")
+    		.setTextureName("kcrw:steel_blade_vibrating");
+    	GameRegistry.registerItem(steel_blade_vibrating, "steel_blade_vibrating");
     	
     	aurora_blade = new ItemAuroraBlade()
 			.setUnlocalizedName("aurora_blade")
