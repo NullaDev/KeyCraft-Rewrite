@@ -42,6 +42,8 @@ public class KCItems {
 	
 	public static Item peach_juice;
 	
+	public static Item steel_blade;
+	
 	public static Item aurora_blade;
 	
     public static void InitItems() {
@@ -138,6 +140,12 @@ public class KCItems {
     	GameRegistry.registerItem(peach_juice, "peach_juice");
     	
     	KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "我是光棍", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
+    	
+    	steel_blade = new ItemSteelBlade()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 3)}, 1, 64))
+			.setUnlocalizedName("steel_blade")
+			.setTextureName("kcrw:steel_blade");
+    	GameRegistry.registerItem(steel_blade, "steel_blade");
     	
     	aurora_blade = new ItemAuroraBlade()
 			.setUnlocalizedName("auroraBlade")

@@ -15,6 +15,7 @@ public class ItemAuroraArmor extends ItemArmor {
 	public ItemAuroraArmor(int position) {
 		super(KCMaterials.AuroraIronArmor, 0, position);
 		this.pos = position;
+		this.setCreativeTab(KeyCraft_Rewrite.KCCreativeTab);
 	}
 
 	@Override

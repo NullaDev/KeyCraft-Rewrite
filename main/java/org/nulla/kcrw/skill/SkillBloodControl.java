@@ -11,11 +11,11 @@ import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.nullacore.api.skill.Skill;
 
-public class SkillRecover extends Skill {
+public class SkillBloodControl extends Skill {
 	
-	public SkillRecover(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillBloodControl(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/recover.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/blood_control.png");
 	}
 	
 	@Override

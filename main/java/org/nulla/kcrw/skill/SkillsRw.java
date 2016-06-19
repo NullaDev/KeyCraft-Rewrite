@@ -18,12 +18,12 @@ public class SkillsRw {
 	public static SkillBaseballFalling BaseballFalling;
 	public static SkillBaseballRolling BaseballRolling;
 	public static SkillBaseballThundering BaseballThundering;
+	public static SkillBloodControl BloodControl;
 	public static SkillFireImmunity FireImmunity;
 	public static SkillFireProtection FireProtection;
 	public static SkillHealthFog HealthFog;
 	public static SkillPoisonImmunity PoisonImmunity;
 	public static SkillPoisonProtection PoisonProtection;
-	public static SkillRecover Recover;
 	public static SkillSpeedUp SpeedUp;
 	public static SkillSpeedUpFinal SpeedUpFinal;
 	public static SkillStrengthUp StrengthUp;
@@ -43,12 +43,12 @@ public class SkillsRw {
 		BaseballFalling = 		new SkillBaseballFalling("falling_baseball", 128, 2, 2 * 20);
 		BaseballRolling = 		new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
 		BaseballThundering = 	new SkillBaseballThundering("thundering_baseball", 128, 2, 2 * 20);
+		BloodControl = 			new SkillBloodControl("blood_control", 512, 8, 10 * 20);
 		FireImmunity = 			new SkillFireImmunity("fire_immunity", 1024, 0, 0);
 		FireProtection = 		new SkillFireProtection("fire_protection", 1024, 16, 60 * 20);
 		HealthFog = 			new SkillHealthFog("health_fog", 512, 8, 3 * 20);
 		PoisonImmunity = 		new SkillPoisonImmunity("poison_immunity", 1024, 0, 0);
 		PoisonProtection = 		new SkillPoisonProtection("poison_protection", 1024, 16, 60 * 20);
-		Recover = 				new SkillRecover("recover", 512, 8, 10 * 20);
 		SpeedUp = 				new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		SpeedUpFinal = 			new SkillSpeedUpFinal("speed_up_final", 1024, 0, 0);
 		StrengthUp = 			new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);
