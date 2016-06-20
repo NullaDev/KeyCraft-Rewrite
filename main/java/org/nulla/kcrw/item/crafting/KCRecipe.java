@@ -59,7 +59,8 @@ public class KCRecipe {
 		items.add(KCItems.peach_juice);
 		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
-		items.add(KCItems.steel_blade);
+		items.add(KCItems.steel_blade);		
+		items.add(KCItems.hand_sonic);
 		return items;
 	}
 	
@@ -69,6 +70,7 @@ public class KCRecipe {
 		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
 		items.add(KCItems.steel_blade);
+		items.add(KCItems.hand_sonic);
 		return items;
 	}
 

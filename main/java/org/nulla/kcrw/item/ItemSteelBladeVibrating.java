@@ -94,5 +94,11 @@ public class ItemSteelBladeVibrating extends KCItemBase {
 		player.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage()));
 	    return stack;
 	}
+    
+    @SideOnly(Side.CLIENT)
+	@Override
+    public boolean hasEffect(ItemStack p_77636_1_) {
+        return true;
+    }
 
 }

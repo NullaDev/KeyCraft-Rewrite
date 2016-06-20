@@ -38,6 +38,8 @@ public class KCItems {
     
 	public static Item baseball;
 	
+	public static Item hand_sonic;
+	
 	public static Item music_player;
 	
 	public static Item peach_juice;
@@ -117,6 +119,12 @@ public class KCItems {
 			.setUnlocalizedName("baseball")
 			.setTextureName("kcrw:baseball");
     	GameRegistry.registerItem(baseball, "baseball");
+    	
+    	hand_sonic = new ItemHandSonic()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 4), new ItemStack(KCItems.aurora_iron_ingot, 4), new ItemStack(Blocks.lapis_block, 1)}, 1, 256))
+			.setUnlocalizedName("hand_sonic")
+			.setTextureName("kcrw:hand_sonic");
+    	GameRegistry.registerItem(hand_sonic, "hand_sonic");
     	
     	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))

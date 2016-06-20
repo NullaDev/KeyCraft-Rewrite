@@ -13,6 +13,7 @@ item.aurora_iron_pickaxe.name=Aurora铁镐
 item.aurora_iron_shovel.name=Aurora铁铲
 item.aurora_iron_sword.name=Aurora铁剑
 item.baseball.name=棒球
+item.hand_sonic.name=HandSonicV5
 item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.steel_blade.name=精制钢剑
@@ -34,6 +35,8 @@ kcrw.prompt.cheat.add=增加1k欧若拉点数(作弊)。
 kcrw.prompt.cheat.reset=重置技能点数(作弊)。
 kcrw.prompt.cheat.recover=增加生命(作弊)。
 kcrw.prompt.cheat.learn=学习所有技能(作弊)。
+
+keycraft.prompt.breakblade=你的剑炸了。
 
 kcrw.potion.test=测试效果
 kcrw.potion.auroraRegeneration=Aurora再生
