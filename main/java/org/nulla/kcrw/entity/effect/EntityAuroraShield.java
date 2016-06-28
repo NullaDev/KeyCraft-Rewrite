@@ -1,7 +1,5 @@
 package org.nulla.kcrw.entity.effect;
 
-import java.util.HashMap;
-
 import org.nulla.kcrw.entity.EntityHasOwner;
 import org.nulla.kcrw.skill.SkillsRw;
 
