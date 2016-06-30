@@ -35,7 +35,7 @@ public class SkillsRw {
 
 	public static void initSkills() {
 		AuroraAttack = 			new SkillAuroraAttack("aurora_attack", 512, 1, 1 * 20);
-		AuroraBlade = 			new SkillAuroraBlade("aurora_blade", 1024, 16, 120 * 20);
+		AuroraBlade = 			new SkillAuroraBlade("aurora_blade", 1024, 16, 1 * 20);
 		AuroraBlast = 			new SkillAuroraBlast("aurora_blast", 1024, 32, 3 * 20);
 		AuroraRegeneration = 	new SkillAuroraRegeneration("aurora_blast", 1024, 0, 1 * 20);
 		AuroraRepair = 			new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);

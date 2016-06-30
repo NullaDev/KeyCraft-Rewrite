@@ -6,6 +6,7 @@ import org.nulla.kcrw.event.HandlerKeyInput;
 import org.nulla.kcrw.event.HandlerLivingAttackOrHurt;
 import org.nulla.kcrw.event.HandlerLivingDeath;
 import org.nulla.kcrw.event.HandlerPlayerTick;
+import org.nulla.kcrw.item.ItemAuroraBlade;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -32,6 +33,7 @@ public class KCClientProxy extends KCCommonProxy {
 		FMLCommonHandler.instance().bus().register(new HandlerPlayerTick());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttackOrHurt());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingDeath());
+		MinecraftForge.EVENT_BUS.register(new ItemAuroraBlade());
 
 		
 		//注册KeyBinding

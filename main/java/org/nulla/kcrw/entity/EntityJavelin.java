@@ -16,23 +16,23 @@ import net.minecraft.world.World;
 
 public class EntityJavelin extends KCEntityThrowable {
 
-	protected static final float SPEED_BASIC = 1.0F;
-	protected static final float SPEED_HAS_SKILL = 10.0F;
+	protected static final float SPEED_BASIC = 0.4F;
+	protected static final float SPEED_HAS_SKILL = 2.0F;
 	protected static final float DAMAGE_NO_SKILL = 10.0F;
 	protected static final float DAMAGE_HAS_SKILL = 20.0F;
 	
 	private boolean mHasSkill = false;
 	
 	public EntityJavelin(World world) {
-        super(world, 0.25f, 0.25F);
+        super(world, 0.5f, 0.5F);
     }
 	
 	public EntityJavelin(World world, EntityLivingBase thrower) {
-		this(world, thrower, 0.25F, 0.25F ,0F);
+		this(world, thrower, 0.5F, 0.5F ,0F);
 	}
 	
 	public EntityJavelin(World world, EntityLivingBase thrower, boolean hasSkill) {
-		this(world, thrower, 0.25F, 0.25F ,0F);
+		this(world, thrower, 0.5F, 0.5F ,0F);
 		this.mHasSkill = hasSkill;
 	}
 	
@@ -75,6 +75,7 @@ public class EntityJavelin extends KCEntityThrowable {
 			return;
 		}
 		
+		/*
 		for(int i = 0; i < 4; i++) {
 			Random ran = new Random();
 			Vec3 vec = Vec3.createVectorHelper(-this.motionX, -this.motionY, -this.motionZ).normalize();
@@ -86,6 +87,7 @@ public class EntityJavelin extends KCEntityThrowable {
 			par.setRBGColorF(1F, 0F, 0F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
+		*/
 		
 	}
 

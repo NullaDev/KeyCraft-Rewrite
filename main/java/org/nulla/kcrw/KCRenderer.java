@@ -1,6 +1,7 @@
 package org.nulla.kcrw;
 
 import org.nulla.kcrw.client.renderer.RendererAuroraShield;
+import org.nulla.kcrw.client.renderer.RendererJavelin;
 import org.nulla.kcrw.client.renderer.RendererNull;
 import org.nulla.kcrw.client.renderer.RendererVibrationWave;
 import org.nulla.kcrw.entity.EntityBaseball;
@@ -15,7 +16,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 public class KCRenderer {
 	public static void init() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBaseball.class, new RenderSnowball(KCItems.baseball));//棒球的渲染
-		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderSnowball(KCItems.javelin));//标枪的渲染
+		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RendererJavelin());//标枪的渲染
 		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraShield.class, new RendererAuroraShield());//盾的渲染
 		RenderingRegistry.registerEntityRenderingHandler(EntityVibrationWave.class, new RendererVibrationWave());//震荡波的渲染
 		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraStorm.class, new RendererNull());//风暴的渲染

@@ -2,7 +2,9 @@ package org.nulla.kcrw.item;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
+import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCMaterials;
 import org.nulla.kcrw.skill.SkillAuroraBlade;
 
@@ -55,65 +57,51 @@ public class ItemAuroraBlade extends ItemTool {
 	    return EnumAction.block;
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
-		information.add(StatCollector.translateToLocal("keycraft.item.intro312_1"));
-		information.add(StatCollector.translateToLocal("keycraft.item.intro312_2"));
-	}
-	
-	 /** ÎïÆ·Ëð»µ+1£¬Èç¹û±»ÆÆ»µÔò¸ødebuff */
+	 /** ç äººã€‚ */
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (stack.getItemDamage() >= this.getMaxDamage()) {
-			EntityPlayer player = (EntityPlayer)attacker;
-			SkillAuroraBlade.breakAurora(player);
-			if(!player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("keycraft.prompt.breakblade")));
-		    }	
-		}
-		
 		stack.damageItem(1, attacker);
 		return true;
 	}
 
-	 /** ÎïÆ·Ëð»µ+1£¬Èç¹û±»ÆÆ»µÔò¸ødebuff */
+	 /** ç ä¸œè¥¿ã€‚ */
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, int posX, int posY ,int posZ, EntityLivingBase entity) {
-		if (stack.getItemDamage() >= this.getMaxDamage()) {
-			EntityPlayer player = (EntityPlayer)entity;
-			SkillAuroraBlade.breakAurora(player);
-			if(!player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("keycraft.prompt.breakblade")));
-		    }	
-		}
-		
-		stack.damageItem(1, entity);
+		stack.damageItem(2, entity);
 		return true;
 	}
 	
-	/** ÇÐ»»µ±Ç°ÎïÆ·ºó»ØÊÕÅ·ÈôÀ­ */
+	/** è‡ªåŠ¨æŽ‰è€ä¹…ã€‚ */
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity player, int index, boolean isCurrentItem) {
 		if (player instanceof EntityPlayer && !isCurrentItem) {
 			((EntityPlayer)player).inventory.mainInventory[index] = null;
-			recycle(stack, (EntityPlayer)player);
+			onBladeDead(stack, (EntityPlayer)player);
+			return;
+		}
+		
+		if (stack.getItemDamage() >= this.getMaxDamage()) {
+			onBladeDead(stack, (EntityPlayer)player);
+		} else {
+			if (new Random().nextBoolean())
+				stack.setItemDamage(stack.getItemDamage() + 1);
 		}
 	}
 	
-	/** ¶ªÆúºó»ØÊÕÅ·ÈôÀ­ */
+	/** æ‰”ä¸œè¥¿ã€‚ */
 	@SubscribeEvent
 	public void onDropped(ItemTossEvent event) {
 		if (event.entityItem.getEntityItem().getItem() instanceof ItemAuroraBlade) {
 			event.setCanceled(true);
-			recycle(event.entityItem.getEntityItem(), event.player);
+			onBladeDead(event.entityItem.getEntityItem(), event.player);
 		}
     }
 	
-	public void recycle(ItemStack stack, EntityPlayer player) {
+	public void onBladeDead(ItemStack stack, EntityPlayer player) {
 		if (!player.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("keycraft.prompt.recycleblade")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
 		}
-		SkillAuroraBlade.recycleAurora(player, (double)stack.getItemDamage() / (double)stack.getMaxDamage());
+		SkillAuroraBlade.onBladeDead(player, (double)stack.getItemDamage() / (double)stack.getMaxDamage());
 	}
 
 }

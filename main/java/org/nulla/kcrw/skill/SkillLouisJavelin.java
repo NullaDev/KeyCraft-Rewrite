@@ -3,17 +3,20 @@ package org.nulla.kcrw.skill;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCUtils;
+import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.entity.EntityJavelin;
 import org.nulla.nullacore.api.skill.Skill;
 
-public class SkillLouisJavelin extends Skill{
+public class SkillLouisJavelin extends Skill {
 
 	public SkillLouisJavelin(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/javelin.png");
 	}
 
 	@Override

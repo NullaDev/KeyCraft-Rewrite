@@ -61,6 +61,7 @@ public class KCRecipe {
 		items.add(KCItems.aurora_iron_ingot);
 		items.add(KCItems.steel_blade);		
 		items.add(KCItems.hand_sonic);
+		items.add(KCItems.javelin);
 		return items;
 	}
 	
@@ -71,6 +72,7 @@ public class KCRecipe {
 		items.add(KCItems.aurora_iron_ingot);
 		items.add(KCItems.steel_blade);
 		items.add(KCItems.hand_sonic);
+		items.add(KCItems.javelin);
 		return items;
 	}
 

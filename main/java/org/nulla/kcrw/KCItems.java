@@ -129,7 +129,7 @@ public class KCItems {
     	GameRegistry.registerItem(hand_sonic, "hand_sonic");
     	
     	javelin = new ItemJavelin()
-    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 2), new ItemStack(KCItems.aurora_iron_ingot, 4)}, 1, 256))
+    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 256))
 			.setUnlocalizedName("javelin")
 			.setTextureName("kcrw:javelin");
     	GameRegistry.registerItem(javelin, "javelin");
