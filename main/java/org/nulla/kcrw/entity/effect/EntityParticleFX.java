@@ -25,6 +25,12 @@ public class EntityParticleFX extends EntityFX {
 		this.particleMaxAge = (int)(20f / (this.rand.nextFloat() * 0.5f + 0.5f));
 		this.noClip = true;
 	}
+	
+	public EntityParticleFX(World world, double posX, double posY, double posZ, Vec3 direction, float w, float h) {
+		this(world, posX, posY, posZ, direction);
+		this.height = h;
+		this.width = w;
+	}
 
 	@Override
 	public int getFXLayer() {

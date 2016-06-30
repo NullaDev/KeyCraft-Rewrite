@@ -22,6 +22,7 @@ public class SkillsRw {
 	public static SkillFireImmunity FireImmunity;
 	public static SkillFireProtection FireProtection;
 	public static SkillHealthFog HealthFog;
+	public static SkillLouisJavelin LouisJavelin;
 	public static SkillPoisonImmunity PoisonImmunity;
 	public static SkillPoisonProtection PoisonProtection;
 	public static SkillSpeedUp SpeedUp;
@@ -48,6 +49,7 @@ public class SkillsRw {
 		FireImmunity = 			new SkillFireImmunity("fire_immunity", 1024, 0, 0);
 		FireProtection = 		new SkillFireProtection("fire_protection", 1024, 16, 60 * 20);
 		HealthFog = 			new SkillHealthFog("health_fog", 512, 8, 3 * 20);
+		LouisJavelin = 			new SkillLouisJavelin("louis_javelin", 512, 8, 3 * 20);
 		PoisonImmunity = 		new SkillPoisonImmunity("poison_immunity", 1024, 0, 0);
 		PoisonProtection = 		new SkillPoisonProtection("poison_protection", 1024, 16, 60 * 20);
 		SpeedUp = 				new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
