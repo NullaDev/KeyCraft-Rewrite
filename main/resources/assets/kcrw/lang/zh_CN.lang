@@ -38,8 +38,8 @@ kcrw.prompt.cheat.recover=增加生命(作弊)。
 kcrw.prompt.cheat.learn=学习所有技能(作弊)。
 
 kcrw.prompt.callblade=该战斗了，Aurora！
-kcrw.prompt.breakblade=你的剑炸了。
-kcrw.prompt.recyclerate=你的剑炸了，百分比是
+kcrw.prompt.breakblade=你的剑完全炸了。
+kcrw.prompt.recyclerate=你的剑部分炸了，百分比是
 
 kcrw.potion.test=测试效果
 kcrw.potion.auroraRegeneration=Aurora再生

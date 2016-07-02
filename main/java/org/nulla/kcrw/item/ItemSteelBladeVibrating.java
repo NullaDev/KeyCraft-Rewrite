@@ -1,6 +1,7 @@
 package org.nulla.kcrw.item;
 
 import org.nulla.kcrw.KCItems;
+import org.nulla.kcrw.KCUtils;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
 import net.minecraft.block.Block;
@@ -82,11 +83,17 @@ public class ItemSteelBladeVibrating extends KCItemBase {
     }
     
     @Override
-    public void onUpdate(ItemStack stack, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
-    	if (stack.getItemDamage() >= this.getMaxDamage())
-    		p_77663_3_.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage()));
-    	else
-    		stack.setItemDamage(stack.getItemDamage() + 1);
+    public void onUpdate(ItemStack stack, World p_77663_2_, Entity entity, int p_77663_4_, boolean p_77663_5_) {
+    	if (!(entity instanceof EntityPlayer))
+    		return;
+    	if (stack.getItemDamage() >= this.getMaxDamage()) {
+    		EntityPlayer player = (EntityPlayer)(entity);
+    		int pos = KCUtils.getPosOfStack(player, stack);
+    		if (pos >= 0 && pos < player.inventory.mainInventory.length)
+    			player.inventory.mainInventory[pos] = new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage());
+    	} else {
+        	stack.damageItem(1, (EntityLivingBase) entity);
+    	}
     }
     
     @Override

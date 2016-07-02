@@ -38,8 +38,11 @@ public class SkillAuroraBlade extends Skill {
 			SkillUtils.modifyAuroraPoint(player, (int) (SkillsRw.AuroraBlade.mAuroraCost * 0.5F));
 		} else {
 			if (!player.worldObj.isRemote) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.recyclerate") 
-									  + String.format("%.3f", proportion)));
+				if (proportion < 0.99D)
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.recyclerate") 
+							+ String.format("%.3f", proportion)));
+				else
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
 			}
 			int time = (int)(60 * 20 * proportion);
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, 1));

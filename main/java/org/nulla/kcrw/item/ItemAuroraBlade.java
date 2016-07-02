@@ -98,10 +98,9 @@ public class ItemAuroraBlade extends ItemTool {
     }
 	
 	public void onBladeDead(ItemStack stack, EntityPlayer player) {
-		if (!player.worldObj.isRemote) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
-		}
-		SkillAuroraBlade.onBladeDead(player, (double)stack.getItemDamage() / (double)stack.getMaxDamage());
+		double p = 1D * stack.getItemDamage() / stack.getMaxDamage();
+		SkillAuroraBlade.onBladeDead(player, p);
+		stack.damageItem(1024, player);
 	}
 
 }

@@ -18,6 +18,13 @@ public class SkillLouisJavelin extends Skill {
 		super(name, auroraRequired, auroraCost, cd);
 		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/javelin.png");
 	}
+	
+	@Override
+	public boolean canLearnSkill(EntityPlayer player) {
+		if (!player.getEntityData().hasKey("canLearn" + this.mName))
+			return false;
+		return player.getEntityData().getBoolean("canLearn" + this.mName);
+	}
 
 	@Override
 	protected boolean onUse(EntityPlayer player) {

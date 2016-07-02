@@ -2,6 +2,8 @@ package org.nulla.kcrw.skill;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.player.EntityPlayer;
+
 import org.nulla.nullacore.api.skill.Skill;
 
 /** 声明所有技能 */
@@ -59,6 +61,11 @@ public class SkillsRw {
 		VibrationBlade = 		new SkillVibrationBlade("vibration_blade", 256, 8, 3 * 20);
 		VibrationWave = 		new SkillVibrationWave("vibration_wave", 1024, 8, 10 * 20);
 		VisionUp = 				new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
+	}
+	
+	/** 只对某些技能管用。 */
+	public static void setLearnable(Skill skill, EntityPlayer player, boolean flag) {
+		player.getEntityData().setBoolean("canLearn" + skill.mName, flag);
 	}
 	
 }

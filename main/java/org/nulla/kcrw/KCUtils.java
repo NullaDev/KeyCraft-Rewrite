@@ -191,4 +191,13 @@ public class KCUtils {
 		fontRenderer.drawString("", 0, 0, 0xFFFFFF);
 	}
 	
+	public static int getPosOfStack(EntityPlayer player, ItemStack stack) {
+		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+			if (ItemStack.areItemStacksEqual(player.inventory.mainInventory[i], stack)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 }
