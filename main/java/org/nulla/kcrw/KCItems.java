@@ -88,26 +88,25 @@ public class KCItems {
 			.setUnlocalizedName("aurora_iron_axe")
 			.setTextureName("kcrw:aurora_iron_axe");
     	GameRegistry.registerItem(aurora_iron_axe, "aurora_iron_axe");
-    	KCUtils.addEnchantedRecipe(aurora_iron_axe, Enchantment.efficiency, 2, new Object[] { "AA", "AB", " B" , 'A', aurora_iron_ingot, 'B', Items.stick });
+    	KCUtils.addEnchantedRecipe(aurora_iron_axe, Enchantment.unbreaking, 2, new Object[] { "AA", "AB", " B" , 'A', aurora_iron_ingot, 'B', Items.stick });
 
-    	/*aurora_iron_hoe = new ItemAuroraIronHoe()
-    		.setUnlocalizedName("auroraIronHoe")
+    	aurora_iron_hoe = new ItemAuroraIronHoe()
+    		.setUnlocalizedName("aurora_iron_hoe")
     		.setTextureName("kcrw:aurora_iron_hoe");
-    	GameRegistry.registerItem(aurora_iron_hoe, "AuroraIronHoe");
-    	KCUtils.addEnchantedRecipe(aurora_iron_hoe, Enchantment.looting, 1, new Object[] { "AA", " B", " B" , 'A', aurora_iron_ingot, 'B', Items.stick });
-*/
+    	GameRegistry.registerItem(aurora_iron_hoe, "aurora_iron_hoe");
+    	KCUtils.addEnchantedRecipe(aurora_iron_hoe, Enchantment.unbreaking, 1, new Object[] { "AA", " B", " B" , 'A', aurora_iron_ingot, 'B', Items.stick });
 
     	aurora_iron_pickaxe = new ItemAuroraTool("pickaxe")
 			.setUnlocalizedName("aurora_iron_pickaxe")
 			.setTextureName("kcrw:aurora_iron_pickaxe");
     	GameRegistry.registerItem(aurora_iron_pickaxe, "aurora_iron_pickaxe");
-    	KCUtils.addEnchantedRecipe(aurora_iron_pickaxe, Enchantment.efficiency, 2, new Object[] { "AAA", " B ", " B ", 'A', aurora_iron_ingot, 'B', Items.stick });
+    	KCUtils.addEnchantedRecipe(aurora_iron_pickaxe, Enchantment.unbreaking, 2, new Object[] { "AAA", " B ", " B ", 'A', aurora_iron_ingot, 'B', Items.stick });
 
     	aurora_iron_shovel = new ItemAuroraTool("shovel")
 			.setUnlocalizedName("aurora_iron_shovel")
 			.setTextureName("kcrw:aurora_iron_shovel");
     	GameRegistry.registerItem(aurora_iron_shovel, "aurora_iron_shovel");
-    	KCUtils.addEnchantedRecipe(aurora_iron_shovel, Enchantment.efficiency, 2, new Object[] { "A", "B", "B", 'A', aurora_iron_ingot, 'B', Items.stick });
+    	KCUtils.addEnchantedRecipe(aurora_iron_shovel, Enchantment.unbreaking, 2, new Object[] { "A", "B", "B", 'A', aurora_iron_ingot, 'B', Items.stick });
 
 
     	aurora_iron_sword = new ItemAuroraSword()
@@ -129,7 +128,7 @@ public class KCItems {
     	GameRegistry.registerItem(hand_sonic, "hand_sonic");
     	
     	javelin = new ItemJavelin()
-    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 256))
+    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 32))
 			.setUnlocalizedName("javelin")
 			.setTextureName("kcrw:javelin");
     	GameRegistry.registerItem(javelin, "javelin");

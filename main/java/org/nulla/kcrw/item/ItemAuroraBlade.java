@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCMaterials;
+import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.skill.SkillAuroraBlade;
 
 import com.google.common.collect.Sets;
@@ -100,7 +101,9 @@ public class ItemAuroraBlade extends ItemTool {
 	public void onBladeDead(ItemStack stack, EntityPlayer player) {
 		double p = 1D * stack.getItemDamage() / stack.getMaxDamage();
 		SkillAuroraBlade.onBladeDead(player, p);
-		stack.damageItem(1024, player);
+		int pos = KCUtils.getPosOfStack(player, stack);
+		if (pos >= 0 && pos < player.inventory.mainInventory.length)
+			player.inventory.mainInventory[pos] = null;
 	}
 
 }

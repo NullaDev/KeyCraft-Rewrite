@@ -3,6 +3,7 @@ package org.nulla.kcrw;
 import net.minecraftforge.common.util.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 
 public class KCMaterials {
 	
@@ -11,5 +12,10 @@ public class KCMaterials {
 	
 	public static int[] AuroraIronVar = {3, 8, 6, 3};
 	public static ArmorMaterial AuroraIronArmor = EnumHelper.addArmorMaterial("AuroraIron", 10, AuroraIronVar, 26);
+	
+	public static void init() {
+		AURORA_IRON.setRepairItem(new ItemStack(KCItems.aurora_iron_ingot, 1));
+		AuroraIronArmor.customCraftingMaterial = KCItems.aurora_iron_ingot;
+	}
 
 }

@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class EntityJavelin extends KCEntityThrowable {
 
-	protected static final float SPEED_BASIC = 0.4F;
+	protected static final float SPEED_BASIC = 0.5F;
 	protected static final float SPEED_HAS_SKILL = 2.0F;
-	protected static final float DAMAGE_NO_SKILL = 10.0F;
+	protected static final float DAMAGE_BASIC = 10.0F;
 	protected static final float DAMAGE_HAS_SKILL = 20.0F;
 	
 	private boolean mHasSkill = false;
@@ -44,9 +44,10 @@ public class EntityJavelin extends KCEntityThrowable {
 	protected void onImpact(MovingObjectPosition target) {
         if (target.entityHit != null) {
         	EntityLivingBase thrower = this.getThrower();
-        	if (thrower instanceof EntityPlayer) {
-        		// test
-    			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_NO_SKILL);
+        	if (mHasSkill) {
+    			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_HAS_SKILL);
+        	} else {
+    			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC);
         	}
         }
         if (!this.worldObj.isRemote) {
@@ -71,11 +72,17 @@ public class EntityJavelin extends KCEntityThrowable {
     public void onUpdate() {
 		super.onUpdate();
 		
+		//无技能无粒子效果
+		if (!this.mHasSkill) {
+			return;
+		}
+		
+		//4tick释放一次
 		if (this.ticksExisted % 4 != 0) {
 			return;
 		}
 		
-		/*
+		//释放粒子
 		for(int i = 0; i < 4; i++) {
 			Random ran = new Random();
 			Vec3 vec = Vec3.createVectorHelper(-this.motionX, -this.motionY, -this.motionZ).normalize();
@@ -83,11 +90,10 @@ public class EntityJavelin extends KCEntityThrowable {
 			vec.rotateAroundY(0.1F - 0.2F * ran.nextFloat());
 			vec.rotateAroundZ(0.1F - 0.2F * ran.nextFloat());
 
-			EntityParticleFX par = new EntityParticleFX(this.worldObj, this.posX, this.posY, this.posZ, vec, 0.1F, 0.1F);
+			EntityParticleFX par = new EntityParticleFX(this.worldObj, this.posX, this.posY, this.posZ, vec, 0.1F);
 			par.setRBGColorF(1F, 0F, 0F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
-		*/
 		
 	}
 

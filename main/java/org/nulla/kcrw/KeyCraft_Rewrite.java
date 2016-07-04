@@ -42,6 +42,7 @@ public class KeyCraft_Rewrite {
     	// 注册物品、方块
     	KCItems.InitItems();
     	KCBlocks.InitBlocks();
+    	KCMaterials.init();
 		
 		// 注册实体
 		int modID = 1;
@@ -51,6 +52,7 @@ public class KeyCraft_Rewrite {
     	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityVibrationWave.class, "VibrationWave", modID++, this, 128, 1, true);
+    	
     }
     
     @EventHandler

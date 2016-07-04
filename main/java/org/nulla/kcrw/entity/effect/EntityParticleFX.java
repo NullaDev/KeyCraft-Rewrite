@@ -16,20 +16,18 @@ public class EntityParticleFX extends EntityFX {
 	private static ResourceLocation texture = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/particles/particle.png");
 
 	public EntityParticleFX(World world, double posX, double posY, double posZ, Vec3 direction) {
+		this(world, posX, posY, posZ, direction, 1F);
+	}
+	
+	public EntityParticleFX(World world, double posX, double posY, double posZ, Vec3 direction, float scale) {
 		super(world, posX, posY, posZ);
 		double speed = 0.1D + rand.nextDouble() * 0.1D;
 		setVelocity(direction.xCoord * speed, direction.yCoord * speed, direction.zCoord * speed);
 		this.particleGravity = 0.0f;
 		this.particleAlpha = 1.0f;
-		this.particleScale = 1.0f;
+		this.particleScale = scale;
 		this.particleMaxAge = (int)(20f / (this.rand.nextFloat() * 0.5f + 0.5f));
 		this.noClip = true;
-	}
-	
-	public EntityParticleFX(World world, double posX, double posY, double posZ, Vec3 direction, float w, float h) {
-		this(world, posX, posY, posZ, direction);
-		this.height = h;
-		this.width = w;
 	}
 
 	@Override
