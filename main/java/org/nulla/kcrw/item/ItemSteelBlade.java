@@ -13,6 +13,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * 物品出自《Rewrite》游戏中此花露西娅的佩剑，为钢制，因而才能以快速消耗耐久为代价承受她的能力“超震动”。
+ */
 public class ItemSteelBlade extends KCItemBase {
 	private float damage;
 

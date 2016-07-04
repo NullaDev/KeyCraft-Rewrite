@@ -20,6 +20,9 @@ import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 能力“超震动”发动状态下的钢剑。耐久会快速消耗。右键以取消状态。
+ */
 public class ItemSteelBladeVibrating extends KCItemBase {
 	private float damage;
 

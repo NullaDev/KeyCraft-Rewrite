@@ -54,6 +54,9 @@ public class KCRecipe {
 		return null;
 	}
 	
+	/**
+	 * 获取player能够合成的所有合成。
+	 */
 	public static ArrayList<Item> getItemCraftable(EntityPlayer player) {
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(KCItems.peach_juice);
@@ -66,6 +69,9 @@ public class KCRecipe {
 		return items;
 	}
 	
+	/**
+	 * 获取所有合成。
+	 */
 	public static ArrayList<Item> getAllItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(KCItems.peach_juice);

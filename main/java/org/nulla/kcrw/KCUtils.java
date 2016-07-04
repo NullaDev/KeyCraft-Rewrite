@@ -21,7 +21,8 @@ import net.minecraft.util.Vec3;
 
 public class KCUtils {
 	
-	public static final Vec3 zero = Vec3.createVectorHelper(0, 0, 0);
+	/** 零向量。 */
+	public static final Vec3 zeroVec3 = Vec3.createVectorHelper(0, 0, 0);
 	
 	public static Minecraft getMC() {
 		return Minecraft.getMinecraft();
@@ -50,13 +51,6 @@ public class KCUtils {
 	 */
 	public static boolean isCtrlKeyDown() {
         return Minecraft.isRunningOnMac ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
-    }
-	
-	public static void exchange(Object a, Object b) {
-		Object c;
-		c = a;
-		a = b;
-		b = c;
     }
 	
 	/** 
@@ -130,15 +124,13 @@ public class KCUtils {
     	
         int j1;
 
-        if (x1 < x2)
-        {
+        if (x1 < x2) {
             j1 = x1;
             x1 = x2;
             x2 = j1;
         }
 
-        if (y1 < y2)
-        {
+        if (y1 < y2) {
             j1 = y1;
             y1 = y2;
             y2 = j1;
@@ -191,6 +183,9 @@ public class KCUtils {
 		fontRenderer.drawString("", 0, 0, 0xFFFFFF);
 	}
 	
+	/** 
+	 * 获取玩家身上某一个ItemStack的位置。
+	 */
 	public static int getPosOfStack(EntityPlayer player, ItemStack stack) {
 		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 			if (ItemStack.areItemStacksEqual(player.inventory.mainInventory[i], stack)) {

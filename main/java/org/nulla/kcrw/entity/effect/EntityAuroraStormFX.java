@@ -18,7 +18,7 @@ public class EntityAuroraStormFX extends EntityParticleFX {
 	private final EntityPlayer mOwner;
 
 	public EntityAuroraStormFX(World world, double posX, double posY, double posZ, EntityPlayer owner) {
-		super(world, posX, posY, posZ, KCUtils.zero);
+		super(world, posX, posY, posZ, KCUtils.zeroVec3);
 		this.particleMaxAge = Integer.MAX_VALUE;
 		this.mOwner = owner;
 

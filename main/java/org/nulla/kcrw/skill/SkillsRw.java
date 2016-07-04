@@ -27,6 +27,7 @@ public class SkillsRw {
 	public static SkillLouisJavelin LouisJavelin;
 	public static SkillPoisonImmunity PoisonImmunity;
 	public static SkillPoisonProtection PoisonProtection;
+	public static SkillRibbonTouch RibbonTouch;
 	public static SkillSpeedUp SpeedUp;
 	public static SkillSpeedUpFinal SpeedUpFinal;
 	public static SkillStrengthUp StrengthUp;
@@ -54,6 +55,7 @@ public class SkillsRw {
 		LouisJavelin = 			new SkillLouisJavelin("louis_javelin", 512, 8, 3 * 20);
 		PoisonImmunity = 		new SkillPoisonImmunity("poison_immunity", 1024, 0, 0);
 		PoisonProtection = 		new SkillPoisonProtection("poison_protection", 1024, 16, 60 * 20);
+		RibbonTouch = 			new SkillRibbonTouch("ribbon_touch", 1024, 16, 5 * 20);
 		SpeedUp = 				new SkillSpeedUp("speed_up", 1024, 16, 60 * 20);
 		SpeedUpFinal = 			new SkillSpeedUpFinal("speed_up_final", 1024, 0, 0);
 		StrengthUp = 			new SkillStrengthUp("strength_up", 1024, 16, 60 * 20);

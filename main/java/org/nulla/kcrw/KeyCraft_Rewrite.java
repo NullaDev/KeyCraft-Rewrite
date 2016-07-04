@@ -2,6 +2,7 @@ package org.nulla.kcrw;
 
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.entity.EntityJavelin;
+import org.nulla.kcrw.entity.EntityRibbon;
 import org.nulla.kcrw.entity.EntityVibrationWave;
 import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
 import org.nulla.kcrw.entity.effect.EntityAuroraShield;
@@ -51,6 +52,7 @@ public class KeyCraft_Rewrite {
     	EntityRegistry.registerModEntity(EntityAuroraStorm.class, "AuroraStorm", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", modID++, this, 128, 1, true);
+    	EntityRegistry.registerModEntity(EntityRibbon.class, "Ribbon", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityVibrationWave.class, "VibrationWave", modID++, this, 128, 1, true);
     	
     }
