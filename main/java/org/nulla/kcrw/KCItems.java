@@ -42,6 +42,8 @@ public class KCItems {
 	
 	public static Item javelin;
 	
+	public static Item miracle_ribbon;
+	
 	public static Item music_player;
 	
 	public static Item peach_juice;
@@ -132,6 +134,12 @@ public class KCItems {
 			.setUnlocalizedName("javelin")
 			.setTextureName("kcrw:javelin");
     	GameRegistry.registerItem(javelin, "javelin");
+    	
+    	miracle_ribbon = new ItemMiracleRibbon()
+    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.string, 4)}, 1, 128))
+    		.setUnlocalizedName("miracle_ribbon")
+    		.setTextureName("kcrw:miracle_ribbon");
+    	GameRegistry.registerItem(miracle_ribbon, "miracle_ribbon");
     	
     	music_player = new ItemMusicPlayer()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Blocks.jukebox, 1)}, 1, 128))

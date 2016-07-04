@@ -62,6 +62,7 @@ public class KCRecipe {
 		items.add(KCItems.steel_blade);		
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
+		items.add(KCItems.miracle_ribbon);
 		return items;
 	}
 	
@@ -73,6 +74,7 @@ public class KCRecipe {
 		items.add(KCItems.steel_blade);
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
+		items.add(KCItems.miracle_ribbon);
 		return items;
 	}
 
