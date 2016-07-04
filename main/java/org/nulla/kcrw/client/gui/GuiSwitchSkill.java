@@ -1,5 +1,7 @@
 package org.nulla.kcrw.client.gui;
 
+import java.util.ArrayList;
+
 import org.nulla.kcrw.KCUtils;
 import org.nulla.nullacore.api.skill.Skill;
 import org.nulla.nullacore.api.skill.SkillPassive;
@@ -15,7 +17,7 @@ public class GuiSwitchSkill extends KCGuiBase {
 	
 	private GuiButtonImage btnCurrentSkillSlot[] = new GuiButtonImage[4];
 	private GuiButtonImage btnOptionalSkill[];
-	private Skill[] optionalSkill;
+	private ArrayList<Skill> optionalSkill = new ArrayList<Skill>();
 	
 	private int currentState = -1;
 		 
@@ -38,17 +40,18 @@ public class GuiSwitchSkill extends KCGuiBase {
     	   
         if (currentState != -1) {
         	int optionalSkillNumber = 0;
-        	optionalSkill = new Skill[99];
         	for (Skill i : Skills.AllSkills) {
         		if (i.hasSkill(skillOwner)) {
-        			optionalSkill[optionalSkillNumber++] = i;
+        			optionalSkill.add(i);
+        			optionalSkillNumber++;
         		}
         	}
         	
     		btnOptionalSkill = new GuiButtonImage[optionalSkillNumber];
 
-        	for (int i = 0; i < optionalSkillNumber; i++) {
-    	    	buttonList.add(btnOptionalSkill[i] = new GuiButtonImage(i + 100, (int)(width * (0.28 + 0.06 * (i % 8))) - 8, (int)(height * (0.5 + i / 8 * 0.1)), 16, 16, optionalSkill[i].mIcon, true));
+        	for (Skill i : optionalSkill) {
+        		int num = optionalSkill.indexOf(i);
+    	    	buttonList.add(btnOptionalSkill[num] = new GuiButtonImage(num + 100, (int)(width * (0.28 + 0.06 * (num % 8))) - 8, (int)(height * (0.5 + num / 8 * 0.1)), 16, 16, i.mIcon, true));
         	}
         }
     }
@@ -63,14 +66,14 @@ public class GuiSwitchSkill extends KCGuiBase {
     @Override
 	protected void actionPerformed(GuiButtonImage button) {
 		if (currentState != -1) {
-			for (int i = 0; i < btnOptionalSkill.length; i++) {
-				if (button.equals(btnOptionalSkill[i])) {
-					Skill toChange = SkillUtils.getSkillInSlot(skillOwner, i);
+			for (GuiButtonImage i : btnOptionalSkill) {
+				if (button.equals(i)) {
+					Skill toChange = SkillUtils.getSkillInSlot(skillOwner, currentState);
 					if (toChange instanceof SkillPassive) {
 						 if (((SkillPassive) toChange).getIsOn(skillOwner))
 							 toChange.useSkill(skillOwner);
 					}
-					SkillUtils.setSkillInSlot(skillOwner, currentState, optionalSkill[i], true);
+					SkillUtils.setSkillInSlot(skillOwner, currentState, optionalSkill.get(i.id - 100), true);
 					currentState = -1;
 				}
 			}
@@ -81,6 +84,7 @@ public class GuiSwitchSkill extends KCGuiBase {
 				currentState = i;
 			}
 		}
+		
 		refresh();
 	}
     
@@ -90,6 +94,13 @@ public class GuiSwitchSkill extends KCGuiBase {
     @Override
     public boolean doesGuiPauseGame() {
         return false;
+    }
+    
+    @Override
+    public void refresh() {
+    	buttonList.clear();
+    	optionalSkill.clear();
+    	this.initGui();
     }
 
 }
