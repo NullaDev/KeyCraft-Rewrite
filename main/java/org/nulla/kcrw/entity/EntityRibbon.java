@@ -3,6 +3,7 @@ package org.nulla.kcrw.entity;
 import java.util.Random;
 
 import org.nulla.kcrw.entity.effect.EntityParticleFX;
+import org.nulla.nullacore.api.damage.NullaDamageSource;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,10 +17,9 @@ import net.minecraft.world.World;
 
 public class EntityRibbon extends KCEntityThrowable {
 
-	protected static final float SPEED = 0.5F;
+	protected static final float SPEED = 2.0F;
 	protected static final float DAMAGE = 5.0F;
-	
-		
+			
 	public EntityRibbon(World world) {
         super(world, 0.2f, 0.2F);
         this.setOrigPos(this.posX, this.posY, this.posZ);
@@ -36,8 +36,21 @@ public class EntityRibbon extends KCEntityThrowable {
         this.setOrigPos(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
         this.resetLocationAndSpeed();
         this.ignoreFrustumCheck = true;
+        this.age = 100;
+        this.mGravity = gravity;
 
     }
+	
+	public EntityRibbon(World world, EntityPlayer thrower, double px, double py, double pz) {
+        super(world, thrower, 1F, 1F, 0F);
+        this.resetLocationAndSpeed();
+        this.setPosition(px, py, pz);
+        this.addVelocity(0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble());
+        this.setOrigPos(px, py, pz);       
+        this.ignoreFrustumCheck = true;
+        this.age = 100;
+        this.mGravity = 0F;
+	}
 	
 	@Override
 	protected void entityInit() {
@@ -47,15 +60,13 @@ public class EntityRibbon extends KCEntityThrowable {
         this.dataWatcher.addObject(19, Float.valueOf(0.0F));
 	}
 	
-	public void setOrigPos(double x, double y, double z)
-	{
+	public void setOrigPos(double x, double y, double z) {
 		this.dataWatcher.updateObject(17, Float.valueOf((float)x));
 		this.dataWatcher.updateObject(18, Float.valueOf((float)y));
 		this.dataWatcher.updateObject(19, Float.valueOf((float)z));
 	}
 	
-	public Vec3 getOrigPos()
-	{
+	public Vec3 getOrigPos() {
 		return Vec3.createVectorHelper(this.dataWatcher.getWatchableObjectFloat(17), 
 				this.dataWatcher.getWatchableObjectFloat(18), 
 				this.dataWatcher.getWatchableObjectFloat(19));
@@ -64,7 +75,7 @@ public class EntityRibbon extends KCEntityThrowable {
 	protected void onImpact(MovingObjectPosition target) {
         if (target.entityHit != null) {
         	EntityPlayer thrower = this.getOwner();
-    		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE);
+    		target.entityHit.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(thrower), DAMAGE);
         }
         if (!this.worldObj.isRemote) {
             this.setDead();

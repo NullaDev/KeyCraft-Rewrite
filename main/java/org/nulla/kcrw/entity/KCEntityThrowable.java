@@ -28,6 +28,7 @@ public abstract class KCEntityThrowable extends EntityHasOwner implements IProje
     protected int ticksInAir;
     protected float mGravity = 0.03F;
     protected float velocityDecreaseRate = 0.99F;
+    public int age = 1200;
 
     public KCEntityThrowable(World world, float width, float height) {
         super(world);
@@ -217,7 +218,7 @@ public abstract class KCEntityThrowable extends EntityHasOwner implements IProje
         this.setPosition(this.posX, this.posY, this.posZ);
         if (this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ <= 0.0064F)
         	this.setDead();
-        if (this.ticksInAir >= 1200)
+        if (this.ticksInAir >= this.age)
         	this.setDead();
     }
 

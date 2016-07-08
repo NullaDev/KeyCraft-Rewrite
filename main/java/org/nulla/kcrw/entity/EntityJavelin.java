@@ -38,6 +38,7 @@ public class EntityJavelin extends KCEntityThrowable {
 	public EntityJavelin(World world, EntityPlayer thrower, float width, float height, float gravity) {
         super(world, thrower, width, height, gravity);
         this.resetLocationAndSpeed();
+        this.age = 200;
     }
 	
 	protected void onImpact(MovingObjectPosition target) {
