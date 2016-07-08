@@ -70,9 +70,7 @@ public class EntityAuroraStorm extends EntityHasOwner {
 		this.posX = this.getOwner().posX;
 		this.posY = this.getOwner().posY;
 		this.posZ = this.getOwner().posZ;
-		
-		System.out.println(this.ticksExisted);
-		
+				
 	}
 
 }

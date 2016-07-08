@@ -51,7 +51,6 @@ public class EntityParticleFX extends EntityFX {
 		float f12 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)delta - interpPosY);
 		float f13 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)delta - interpPosZ);
 		tessellator.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha);
-		tessellator.setBrightness(1);
 		tessellator.addVertexWithUV((double)(f11 - rotationX * scale - rotationYZ * scale), (double)(f12 - rotationXZ * scale), (double)(f13 - rotationZ * scale - rotationXY * scale), (double)f7, (double)f9);
 		tessellator.addVertexWithUV((double)(f11 - rotationX * scale + rotationYZ * scale), (double)(f12 + rotationXZ * scale), (double)(f13 - rotationZ * scale + rotationXY * scale), (double)f7, (double)f8);
 		tessellator.addVertexWithUV((double)(f11 + rotationX * scale + rotationYZ * scale), (double)(f12 + rotationXZ * scale), (double)(f13 + rotationZ * scale + rotationXY * scale), (double)f6, (double)f8);

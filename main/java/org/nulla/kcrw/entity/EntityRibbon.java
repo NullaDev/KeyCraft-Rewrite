@@ -45,7 +45,6 @@ public class EntityRibbon extends KCEntityThrowable {
         super(world, thrower, 1F, 1F, 0F);
         this.resetLocationAndSpeed();
         this.setPosition(px, py, pz);
-        this.addVelocity(0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble());
         this.setOrigPos(px, py, pz);       
         this.ignoreFrustumCheck = true;
         this.age = 100;
@@ -89,6 +88,15 @@ public class EntityRibbon extends KCEntityThrowable {
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED, 0.0F);
+	}
+	
+	public void resetSpeed() {
+		EntityPlayer thrower = this.getOwner();
+		Vec3 d = Vec3.createVectorHelper(this.posX - thrower.posX, this.posY - thrower.getEyeHeight() - thrower.posY, this.posZ - thrower.posZ).normalize();
+        this.motionX = d.xCoord;
+        this.motionZ = d.zCoord;
+        this.motionY = d.yCoord;
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED, 0.0F);
 	}
 

@@ -45,7 +45,9 @@ public class SkillKagariCannon extends Skill {
 			px += 2 * ran.nextDouble() - 1D;
 			py += 2 * ran.nextDouble() - 1D;
 			pz += 2 * ran.nextDouble() - 1D;
-			player.worldObj.spawnEntityInWorld(new EntityRibbon(player.worldObj, player, px, py, pz));
+			EntityRibbon ribbon = new EntityRibbon(player.worldObj, player, px, py, pz);
+			ribbon.addVelocity(0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble(), 0.2F * new Random().nextDouble());
+			player.worldObj.spawnEntityInWorld(ribbon);
 		}
 		
 		return true;

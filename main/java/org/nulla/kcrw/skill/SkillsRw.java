@@ -25,6 +25,7 @@ public class SkillsRw {
 	public static SkillFireProtection FireProtection;
 	public static SkillHealthFog HealthFog;
 	public static SkillKagariCannon KagariCannon;
+	public static SkillKagariStrafe KagariStrafe;
 	public static SkillLouisJavelin LouisJavelin;
 	public static SkillPoisonImmunity PoisonImmunity;
 	public static SkillPoisonProtection PoisonProtection;
@@ -54,6 +55,7 @@ public class SkillsRw {
 		FireProtection = 		new SkillFireProtection("fire_protection", 1024, 16, 60 * 20);
 		HealthFog = 			new SkillHealthFog("health_fog", 512, 8, 3 * 20);
 		KagariCannon = 			new SkillKagariCannon("kagari_cannon", 1024, 16, 5 * 20);
+		KagariStrafe = 			new SkillKagariStrafe("kagari_strafe", 1024, 16, 5 * 20);
 		LouisJavelin = 			new SkillLouisJavelin("louis_javelin", 512, 8, 3 * 20);
 		PoisonImmunity = 		new SkillPoisonImmunity("poison_immunity", 1024, 0, 0);
 		PoisonProtection = 		new SkillPoisonProtection("poison_protection", 1024, 16, 60 * 20);
