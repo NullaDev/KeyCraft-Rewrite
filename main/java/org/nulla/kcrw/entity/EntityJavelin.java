@@ -6,7 +6,6 @@ import org.nulla.kcrw.entity.effect.EntityParticleFX;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -27,23 +26,23 @@ public class EntityJavelin extends KCEntityThrowable {
         super(world, 0.5f, 0.5F);
     }
 	
-	public EntityJavelin(World world, EntityLivingBase thrower) {
+	public EntityJavelin(World world, EntityPlayer thrower) {
 		this(world, thrower, 0.5F, 0.5F ,0F);
 	}
 	
-	public EntityJavelin(World world, EntityLivingBase thrower, boolean hasSkill) {
+	public EntityJavelin(World world, EntityPlayer thrower, boolean hasSkill) {
 		this(world, thrower, 0.5F, 0.5F ,0F);
 		this.mHasSkill = hasSkill;
 	}
 	
-	public EntityJavelin(World world, EntityLivingBase thrower, float width, float height, float gravity) {
+	public EntityJavelin(World world, EntityPlayer thrower, float width, float height, float gravity) {
         super(world, thrower, width, height, gravity);
         this.resetLocationAndSpeed();
     }
 	
 	protected void onImpact(MovingObjectPosition target) {
         if (target.entityHit != null) {
-        	EntityLivingBase thrower = this.getThrower();
+        	EntityLivingBase thrower = this.getOwner();
         	if (mHasSkill) {
     			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_HAS_SKILL);
         	} else {
@@ -57,6 +56,7 @@ public class EntityJavelin extends KCEntityThrowable {
 	
     // 重新设置位置和速度
 	protected void resetLocationAndSpeed() {
+		EntityPlayer thrower = this.getOwner();
         this.setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));

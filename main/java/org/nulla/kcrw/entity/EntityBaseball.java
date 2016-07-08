@@ -1,6 +1,5 @@
 package org.nulla.kcrw.entity;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -27,11 +26,11 @@ public class EntityBaseball extends KCEntityThrowable {
         super(world, 0.25f, 0.25F);
     }
 	
-	public EntityBaseball(World world, EntityLivingBase thrower) {
+	public EntityBaseball(World world, EntityPlayer thrower) {
 		this(world, thrower, 0.25F, 0.25F ,0.03F);
 	}
 	
-	public EntityBaseball(World world, EntityLivingBase thrower, String skill) {
+	public EntityBaseball(World world, EntityPlayer thrower, String skill) {
 		this(world, thrower, 0.25F, 0.25F ,0.03F);
 		this.mSkill = skill;
 		if (skill == "explosion")
@@ -48,14 +47,14 @@ public class EntityBaseball extends KCEntityThrowable {
 		
 	}
 	
-	public EntityBaseball(World world, EntityLivingBase thrower, float width, float height, float gravity) {
+	public EntityBaseball(World world, EntityPlayer thrower, float width, float height, float gravity) {
         super(world, thrower, width, height, gravity);
         this.resetLocationAndSpeed();
     }
 	
 	protected void onImpact(MovingObjectPosition target) {
+    	EntityPlayer thrower = this.getOwner();
         if (target.entityHit != null) {
-        	EntityLivingBase thrower = this.getThrower();
         	if (thrower instanceof EntityPlayer) {
         		if (this.mSkill == "falling" || this.mSkill == "rolling")
         			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_NO_SKILL);
@@ -79,6 +78,7 @@ public class EntityBaseball extends KCEntityThrowable {
 	
     // 重新设置位置和速度
 	protected void resetLocationAndSpeed() {
+    	EntityPlayer thrower = this.getOwner();
         this.setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));

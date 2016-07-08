@@ -2,16 +2,21 @@ package org.nulla.kcrw.entity;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public abstract class KCEntityThrowable extends Entity implements IProjectile {
+public abstract class KCEntityThrowable extends EntityHasOwner implements IProjectile {
 	
     private int tileX = -1;
     private int tileY = -1;
@@ -19,9 +24,6 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
     private Block field_145785_f;
     protected boolean inGround;
     public int throwableShake;
-    /** 扔出Entity的生物 */
-    protected EntityLivingBase thrower;
-    private String throwerName;
     private int ticksInGround;
     protected int ticksInAir;
     protected float mGravity = 0.03F;
@@ -31,8 +33,6 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
         super(world);
         this.setSize(width, height);
     }
-
-    protected void entityInit() {}
 
     /**
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
@@ -45,9 +45,9 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
         return distance < d1 * d1;
     }
 
-    public KCEntityThrowable(World world, EntityLivingBase thrower, float width, float height, float gravity) {
+    public KCEntityThrowable(World world, EntityPlayer thrower, float width, float height, float gravity) {
         super(world);
-        this.thrower = thrower;
+        this.setOwner((EntityPlayer)thrower);
         this.setSize(width, height);
         this.mGravity = gravity;
         this.setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
@@ -139,7 +139,7 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
             Entity entity = null;
             List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
-            EntityLivingBase entitylivingbase = this.getThrower();
+            EntityPlayer entitylivingbase = this.getOwner();
 
             for (int j = 0; j < list.size(); ++j) {
                 Entity entity1 = (Entity)list.get(j);
@@ -238,47 +238,30 @@ public abstract class KCEntityThrowable extends Entity implements IProjectile {
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound nbt) {
+    	super.writeEntityToNBT(nbt);
     	nbt.setShort("xTile", (short)this.tileX);
     	nbt.setShort("yTile", (short)this.tileY);
     	nbt.setShort("zTile", (short)this.tileZ);
     	nbt.setByte("inTile", (byte)Block.getIdFromBlock(this.field_145785_f));
     	nbt.setByte("shake", (byte)this.throwableShake);
     	nbt.setByte("inGround", (byte)(this.inGround ? 1 : 0));
-
-        if ((this.throwerName == null || this.throwerName.length() == 0) && this.thrower != null && this.thrower instanceof EntityPlayer) {
-            this.throwerName = this.thrower.getCommandSenderName();
-        }
-
-        nbt.setString("ownerName", this.throwerName == null ? "" : this.throwerName);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     public void readEntityFromNBT(NBTTagCompound nbt) {
+    	super.readEntityFromNBT(nbt);
         this.tileX = nbt.getShort("xTile");
         this.tileY = nbt.getShort("yTile");
         this.tileZ = nbt.getShort("zTile");
         this.field_145785_f = Block.getBlockById(nbt.getByte("inTile") & 255);
         this.throwableShake = nbt.getByte("shake") & 255;
         this.inGround = nbt.getByte("inGround") == 1;
-        this.throwerName = nbt.getString("ownerName");
-
-        if (this.throwerName != null && this.throwerName.length() == 0) {
-            this.throwerName = null;
-        }
     }
 
     @SideOnly(Side.CLIENT)
     public float getShadowSize() {
         return 0.0F;
-    }
-
-    public EntityLivingBase getThrower() {
-        if (this.thrower == null && this.throwerName != null && this.throwerName.length() > 0) {
-            this.thrower = this.worldObj.getPlayerEntityByName(this.throwerName);
-        }
-
-        return this.thrower;
     }
 }
