@@ -15,4 +15,12 @@ public class Skills {
 		return null;
 	}
 	
+	public static Skill getSkill(int skillID) {
+		for (Skill i : AllSkills) {
+			if (i.mID == skillID)
+				return i;
+		}
+		return null;
+	}
+	
 }

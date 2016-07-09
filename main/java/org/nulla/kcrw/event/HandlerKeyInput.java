@@ -1,6 +1,7 @@
 package org.nulla.kcrw.event;
 
 import org.nulla.kcrw.*;
+import org.nulla.kcrw.client.gui.GuiLearnSkill;
 import org.nulla.kcrw.client.gui.GuiSwitchSkill;
 import org.nulla.kcrw.skill.*;
 
@@ -19,6 +20,10 @@ public class HandlerKeyInput {
 		
 		if (KCClientProxy.kbSwitchSkill.isPressed()) {
 			KCUtils.getMC().displayGuiScreen(new GuiSwitchSkill(KCUtils.getMC().currentScreen, player));
+		}
+		
+		if (KCClientProxy.kbLearnSkill.isPressed()) {
+			KCUtils.getMC().displayGuiScreen(new GuiLearnSkill(KCUtils.getMC().currentScreen, player));
 		}
 	}
 

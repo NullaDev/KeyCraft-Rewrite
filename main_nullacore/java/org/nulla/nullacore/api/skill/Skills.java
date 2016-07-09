@@ -1,4 +1,4 @@
-package org.nulla.nullacore.api.skill;
+﻿package org.nulla.nullacore.api.skill;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,14 @@ public class Skills {
 	public static Skill getSkill(String skillName) {
 		for (Skill i : AllSkills) {
 			if (i.mName == skillName)
+				return i;
+		}
+		return null;
+	}
+	
+	public static Skill getSkill(int skillID) {
+		for (Skill i : AllSkills) {
+			if (i.mID == skillID)
 				return i;
 		}
 		return null;

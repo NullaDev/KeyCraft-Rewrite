@@ -19,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 /* 注册只在客户端发生的事件 */
 public class KCClientProxy extends KCCommonProxy {
 	
+	public static final KeyBinding kbLearnSkill = new KeyBinding("kcrw.key.skill4", Keyboard.KEY_C, "kcrw.key.keytitle");
 	public static final KeyBinding kbSwitchSkill = new KeyBinding("kcrw.key.skill3", Keyboard.KEY_V, "kcrw.key.keytitle");
 	
 	@Override
@@ -37,6 +38,7 @@ public class KCClientProxy extends KCCommonProxy {
 
 		
 		//注册KeyBinding
+		ClientRegistry.registerKeyBinding(kbLearnSkill);
 		ClientRegistry.registerKeyBinding(kbSwitchSkill);
 		
 		// 注册渲染器
