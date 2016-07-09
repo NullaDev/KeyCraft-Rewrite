@@ -1,8 +1,12 @@
 package org.nulla.kcrw.entity.effect;
 
+import java.util.Random;
+
+import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.skill.SkillUtils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,8 +50,8 @@ public class EntityAuroraBlast extends EntityEffect {
         if (this.worldObj.isRemote)
         	return;
         
-        if ((this.ticksExisted - 9) % 10 == 0) // 10tick一次
-        {
+        // 10tick一次
+        if ((this.ticksExisted - 9) % 10 == 0) {
         	int i = (this.ticksExisted - 9) / 10;
         	Vec3 direct = this.getLookVec();
         	Double expX = this.posX + i * direct.xCoord * 2;
@@ -59,8 +63,13 @@ public class EntityAuroraBlast extends EntityEffect {
 				expS += 2048F / (2048 - SkillsRw.AuroraBlast.getExperience(player));
 			}
         	worldObj.createExplosion(this.mUser, expX, expY, expZ, expS, true);
-        	System.out.println(expS);
-        }
+        	//释放粒子
+    		for(int j = 0; j < 16; j++) {
+    			EntityParticleFX par = new EntityParticleFX(this.worldObj, expX, expY, expZ, Vec3.createVectorHelper(2 * new Random().nextFloat() - 1, 2 * new Random().nextFloat() - 1, 2 * new Random().nextFloat() - 1).normalize(), 1F);
+    			par.setRBGColorF(0.5F, 1F, new Random().nextFloat());
+    			Minecraft.getMinecraft().effectRenderer.addEffect(par);
+    		}        
+    	}
     }
 
 	@Override
