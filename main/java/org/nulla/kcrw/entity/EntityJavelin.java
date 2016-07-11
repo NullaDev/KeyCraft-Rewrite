@@ -27,11 +27,11 @@ public class EntityJavelin extends KCEntityThrowable {
     }
 	
 	public EntityJavelin(World world, EntityPlayer thrower) {
-		this(world, thrower, 0.5F, 0.5F ,0F);
+		this(world, thrower, 0.5F, 0.5F ,0.01F);
 	}
 	
 	public EntityJavelin(World world, EntityPlayer thrower, boolean hasSkill) {
-		this(world, thrower, 0.5F, 0.5F ,0F);
+		this(world, thrower, 0.5F, 0.5F, hasSkill ? 0F : 0.01F);
 		this.mHasSkill = hasSkill;
 	}
 	

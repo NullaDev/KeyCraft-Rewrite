@@ -29,7 +29,7 @@ public class SkillAuroraShield extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return true;
+		return false;
 	}
 	
 	@Override

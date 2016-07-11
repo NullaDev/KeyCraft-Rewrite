@@ -55,7 +55,7 @@ public class GuiKotoriWorkshop extends KCGuiBase {
         KCUtils.initDrawerState();
 
         mc.renderEngine.bindTexture(KCResources.gui_kotori_workshop);
-        KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
+        KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1366, 768, width, height, 1366, 768);
     	
         super.drawScreen(par1, par2, par3);
                 

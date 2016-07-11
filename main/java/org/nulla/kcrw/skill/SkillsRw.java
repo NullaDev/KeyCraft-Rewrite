@@ -19,6 +19,7 @@ public class SkillsRw {
 	public static SkillBaseballExplosive BaseballExplosive;
 	public static SkillBaseballFalling BaseballFalling;
 	public static SkillBaseballRolling BaseballRolling;
+	public static SkillBaseballShooting BaseballShooting;
 	public static SkillBaseballThundering BaseballThundering;
 	public static SkillBloodControl BloodControl;
 	public static SkillFireImmunity FireImmunity;
@@ -49,6 +50,7 @@ public class SkillsRw {
 		BaseballExplosive = 	new SkillBaseballExplosive("explosive_baseball", 128, 2, 2 * 20);
 		BaseballFalling = 		new SkillBaseballFalling("falling_baseball", 128, 2, 2 * 20);
 		BaseballRolling = 		new SkillBaseballRolling("rolling_baseball", 128, 2, 2 * 20);
+		BaseballShooting = 		new SkillBaseballShooting("shooting_baseball", 128, 2, 2 * 20);
 		BaseballThundering = 	new SkillBaseballThundering("thundering_baseball", 128, 2, 2 * 20);
 		BloodControl = 			new SkillBloodControl("blood_control", 512, 8, 10 * 20);
 		FireImmunity = 			new SkillFireImmunity("fire_immunity", 1024, 0, 0);

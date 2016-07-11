@@ -26,7 +26,7 @@ public class SkillBaseballRolling extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return true;
+		return SkillsRw.BaseballShooting.getExperience(player) >= 512;
 	}
 	
 	@Override

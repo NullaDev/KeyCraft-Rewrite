@@ -1,5 +1,7 @@
 package org.nulla.kcrw.entity;
 
+import java.util.Random;
+
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -11,9 +13,10 @@ import net.minecraft.world.World;
 public class EntityBaseball extends KCEntityThrowable {
 
 	protected static final float SPEED_BASIC = 2.0F;
-	protected static final float SPEED_HAS_SKILL = 10.0F;
-	protected static final float DAMAGE_NO_SKILL = 5.0F;
-	protected static final float DAMAGE_HAS_SKILL = 10.0F;
+	protected static final float SPEED_SHOOTING = 5.0F;
+	
+	protected static final float DAMAGE_BASIC = 5.0F;
+	protected static final float DAMAGE_SHOOTING = 8.0F;
 	
 	protected String mSkill = "";
 	
@@ -56,12 +59,16 @@ public class EntityBaseball extends KCEntityThrowable {
     	EntityPlayer thrower = this.getOwner();
         if (target.entityHit != null) {
         	if (thrower instanceof EntityPlayer) {
-        		if (this.mSkill == "falling" || this.mSkill == "rolling")
-        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_NO_SKILL);
+        		if (this.mSkill == "falling")
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + ticksInAir / 10);
+        		else if (this.mSkill == "rolling")
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + 5 * new Random().nextFloat());
+        		else if (this.mSkill == "shooting")
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_SHOOTING);
         		else
-            		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_HAS_SKILL);
+            		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC);
         	} else {
-        		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower == null ? this : thrower), DAMAGE_NO_SKILL);
+        		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower == null ? this : thrower), DAMAGE_BASIC);
         	}
         }
         
@@ -83,8 +90,8 @@ public class EntityBaseball extends KCEntityThrowable {
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
-        if (thrower instanceof EntityPlayer) {
-        	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED_BASIC, 0.0F);
+        if (thrower instanceof EntityPlayer && this.mSkill == "shooting") {
+        	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED_SHOOTING, 0.0F);
         } else {
         	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, SPEED_BASIC, 0.0F);
         }

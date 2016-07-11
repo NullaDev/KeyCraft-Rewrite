@@ -11,22 +11,21 @@ import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.nullacore.api.skill.Skill;
 
-/** 
- * 这个技能原本叫做“ライジングニャットボール”，出自《Little Busters!》游戏中枣铃的扔球必杀技。
- * 如果直接翻译成中文的话的话，应该叫做ライジング（升）ニャット（猫）ボール（球），其实和雷没有什么关系啦~
- * 然而由于澄空汉化组的误翻，导致“雷神喵喵球”这个翻译反而成了知名度最高的称呼。。
- * 所以大概就这样吧。
+/**
+ * 妈的就是喷射球啦。。就是速度灰常快的球而且很好中啦。。具体我他妈懒得考证了。。
  */
-public class SkillBaseballThundering extends Skill {
+public class SkillBaseballShooting extends Skill {
 	
-	public SkillBaseballThundering(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillBaseballShooting(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/thundering_baseball.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/shooting_baseball.png");
 	}
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return SkillsRw.BaseballShooting.getExperience(player) >= 512;
+		if (!player.getEntityData().hasKey("canLearn" + this.mName))
+			return false;
+		return player.getEntityData().getBoolean("canLearn" + this.mName);
 	}
 	
 	@Override
@@ -45,7 +44,7 @@ public class SkillBaseballThundering extends Skill {
 
 		player.worldObj.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
 
-		player.worldObj.spawnEntityInWorld(new EntityBaseball(player.worldObj, player, "thundering"));
+		player.worldObj.spawnEntityInWorld(new EntityBaseball(player.worldObj, player, "shooting"));
 		
 		return true;
 	}
