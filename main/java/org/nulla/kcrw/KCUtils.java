@@ -118,6 +118,16 @@ public class KCUtils {
 		}
 	}
 	
+	public static void drawLine(int x0, int y0, int x1, int y1, float width) {
+		GL11.glColor3f(0, 0, 0);
+		GL11.glLineWidth(width);
+		GL11.glBegin(GL11.GL_LINES);
+		GL11.glVertex2f(x0, y0);
+		GL11.glVertex2f(x1, y1);
+		GL11.glEnd();
+	}
+
+	
     public static void drawRect(int x1, int y1, int width, int height, int color) {
     	int x2 = x1 + width;
     	int y2 = y1 + height;

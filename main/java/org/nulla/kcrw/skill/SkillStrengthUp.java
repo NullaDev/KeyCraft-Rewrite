@@ -27,6 +27,9 @@ public class SkillStrengthUp extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
+		if (SkillsRw.StrengthUp.hasSkill(player)) {
+			return false;
+		}
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, time, 1));
 		// 随机事件只在服务器发生

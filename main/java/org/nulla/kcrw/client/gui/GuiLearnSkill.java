@@ -8,6 +8,7 @@ import org.nulla.nullacore.api.skill.Skill;
 import org.nulla.nullacore.api.skill.Skills;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiLearnSkill extends KCGuiBase {
@@ -28,12 +29,13 @@ public class GuiLearnSkill extends KCGuiBase {
 
     @Override
     public void initGui() {
+    	SkillLearningHelper.init();
 		buttonList.add(btnChooseReturn = new GuiButtonImage(128, (int)(width * 0.48 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_return, false));
 
 		if (currentState.equals("CHOOSE")) {
         	addSkillButton();
         } else if (currentSkill != null) {
-    		buttonList.add(btnLearnSkill = new GuiButtonImage(256, (int)(width * 0.32 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_craft, false));
+    		buttonList.add(btnLearnSkill = new GuiButtonImage(256, (int)(width * 0.4), (int)(height * 0.7), 32, 32, KCResources.btn_ensure, false));
     	}
     	     
     }
@@ -44,7 +46,18 @@ public class GuiLearnSkill extends KCGuiBase {
         KCUtils.initDrawerState();
 
         mc.renderEngine.bindTexture(KCResources.gui_learn_skill);
-        KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1280, 1200, width, height, 1280, 1200);
+        KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1366, 768, width, height, 1366, 768);
+        
+        if (this.currentState == "CHOOSE") {
+        	for (Skill i : Skills.AllSkills) {
+        		if (SkillLearningHelper.canFind(i, this.learner) && SkillLearningHelper.getPreSkill(i) != null) {
+        			for (Skill j : SkillLearningHelper.getPreSkill(i)) {
+        				//
+        		        KCUtils.initDrawerState();
+        			}
+        		}
+        	}
+		}
     	
         super.drawScreen(par1, par2, par3);
                 
@@ -67,7 +80,8 @@ public class GuiLearnSkill extends KCGuiBase {
     	} else {
     		for (GuiButtonImage i : btnSkill) {
     			if (button.equals(i)) {
-    				currentSkill = Skills.getSkill(i.id - 500);
+    				this.currentSkill = Skills.getSkill(i.id - 500);
+    				this.currentState = "LEARN";
     			}
     		}
     	}
@@ -77,8 +91,8 @@ public class GuiLearnSkill extends KCGuiBase {
     private void addSkillButton() {
     	int pos = 0;
     	for (Skill i : Skills.AllSkills) {
-    		if (i.canLearnSkill(learner)) {
-    			btnSkill.add(new GuiButtonImage(i.mID + 500, (int)(width * 0.15 + pos % 3 * 36), (int)(height * 0.4 + pos / 3 * 36), 32, 32, i.mIcon, true));
+    		if (SkillLearningHelper.canFind(i, this.learner)) {
+    			btnSkill.add(new GuiButtonImage(i.mID + 500, (int)(width * SkillLearningHelper.getSkillPosX(i)), (int)(height * SkillLearningHelper.getSkillPosY(i)), 16, 16, i.mIcon, true));
     			pos++;
     		}
     	}

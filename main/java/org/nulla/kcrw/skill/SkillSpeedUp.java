@@ -25,7 +25,7 @@ public class SkillSpeedUp extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
-		if (SkillsRw.SpeedUpFinal.trigSkill(player)) {
+		if (SkillsRw.SpeedUpFinal.hasSkill(player)) {
 			return false;
 		}
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));

@@ -23,7 +23,7 @@ public class SkillVibrationWave extends Skill {
 
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return SkillsRw.VibrationWave.hasSkill(player);
+		return SkillsRw.VibrationBlade.getExperience(player) >= 512;
 	}
 	
 	@Override
