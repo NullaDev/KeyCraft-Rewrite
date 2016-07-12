@@ -47,20 +47,26 @@ public class GuiLearnSkill extends KCGuiBase {
 
         mc.renderEngine.bindTexture(KCResources.gui_learn_skill);
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1366, 768, width, height, 1366, 768);
+        KCUtils.initDrawerState();
+        
+        super.drawScreen(par1, par2, par3);
         
         if (this.currentState == "CHOOSE") {
         	for (Skill i : Skills.AllSkills) {
         		if (SkillLearningHelper.canFind(i, this.learner) && SkillLearningHelper.getPreSkill(i) != null) {
         			for (Skill j : SkillLearningHelper.getPreSkill(i)) {
-        				//
+        				int x0 = (int) (width * SkillLearningHelper.getSkillPosX(i));
+        				int y0 = (int) (height * SkillLearningHelper.getSkillPosY(i));
+        				int x1 = (int) (width * SkillLearningHelper.getSkillPosX(j));
+        				int y1 = (int) (height * SkillLearningHelper.getSkillPosY(j));
+        				KCUtils.drawLine(x0, y0, x1, y1, 0.5F, 1F, 0.5F, 4F);
+        				System.out.println("draw line from " + x0 + "," + y0 + " to " + x1 + "," + y1);
         		        KCUtils.initDrawerState();
         			}
         		}
         	}
 		}
-    	
-        super.drawScreen(par1, par2, par3);
-                
+    	                
 		if (this.currentState == "LEARN") {
 
 		}
@@ -89,11 +95,9 @@ public class GuiLearnSkill extends KCGuiBase {
 	}
     
     private void addSkillButton() {
-    	int pos = 0;
     	for (Skill i : Skills.AllSkills) {
     		if (SkillLearningHelper.canFind(i, this.learner)) {
-    			btnSkill.add(new GuiButtonImage(i.mID + 500, (int)(width * SkillLearningHelper.getSkillPosX(i)), (int)(height * SkillLearningHelper.getSkillPosY(i)), 16, 16, i.mIcon, true));
-    			pos++;
+    			btnSkill.add(new GuiButtonImage(i.mID + 500, (int)(width * SkillLearningHelper.getSkillPosX(i)) - 8, (int)(height * SkillLearningHelper.getSkillPosY(i)) - 8, 16, 16, i.mIcon, true));
     		}
     	}
     	buttonList.addAll(btnSkill);

@@ -18,9 +18,12 @@ public class SkillLearningHelper {
 	
 	public static void init() {
 		posHelper.clear();
-		posHelper.put(SkillsRw.VisionUp, new CO2D(0.15, 0.5));
-		posHelper.put(SkillsRw.SpeedUp, new CO2D(0.2, 0.5));
-		posHelper.put(SkillsRw.StrengthUp, new CO2D(0.25, 0.5));
+		posHelper.put(SkillsRw.VisionUp, new CO2D(0.2, 0.5));
+		posHelper.put(SkillsRw.SpeedUp, new CO2D(0.25, 0.5));
+		posHelper.put(SkillsRw.StrengthUp, new CO2D(0.3, 0.5));
+		posHelper.put(SkillsRw.SpeedUpFinal, new CO2D(0.25, 0.4));
+		posHelper.put(SkillsRw.StrengthUpFinal, new CO2D(0.3, 0.4));
+		posHelper.put(SkillsRw.AuroraBlast, new CO2D(0.5, 0.5));
 		
 		PreLearnHelper.put(SkillsRw.SpeedUpFinal, new ArrayList<Skill>() {
 			{add(SkillsRw.SpeedUp);}

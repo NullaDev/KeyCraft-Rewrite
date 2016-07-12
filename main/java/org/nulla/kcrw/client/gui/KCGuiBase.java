@@ -13,9 +13,7 @@ public abstract class KCGuiBase extends GuiScreen {
     }
 
     @Override
-    public void initGui() {
-    	
-    }
+    public abstract void initGui();
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
@@ -25,9 +23,7 @@ public abstract class KCGuiBase extends GuiScreen {
         KCUtils.initDrawerState();      
     }
     
-	protected void actionPerformed(GuiButtonImage button) {
-
-	}
+	protected abstract void actionPerformed(GuiButtonImage button);
     
     @Override
     protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_) {
