@@ -21,9 +21,7 @@ public class SkillLouisJavelin extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		if (!player.getEntityData().hasKey("canLearn" + this.mName))
-			return false;
-		return player.getEntityData().getBoolean("canLearn" + this.mName);
+		return SkillsRw.BaseballShooting.getExperience(player) >= 128;
 	}
 
 	@Override

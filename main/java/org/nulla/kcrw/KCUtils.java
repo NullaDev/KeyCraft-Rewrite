@@ -119,12 +119,14 @@ public class KCUtils {
 	}
 	
 	public static void drawLine(int x0, int y0, int x1, int y1, float R, float G, float B, float width) {
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(R, G, B);
 		GL11.glLineWidth(width);
 		GL11.glBegin(GL11.GL_LINES);
 		GL11.glVertex2f(x0, y0);
 		GL11.glVertex2f(x1, y1);
 		GL11.glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
 	

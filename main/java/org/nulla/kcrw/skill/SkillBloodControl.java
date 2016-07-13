@@ -19,6 +19,13 @@ public class SkillBloodControl extends Skill {
 	}
 	
 	@Override
+	public boolean canLearnSkill(EntityPlayer player) {
+		return SkillsRw.SpeedUp.getExperience(player) >= 128
+			&& SkillsRw.StrengthUp.getExperience(player) >= 128
+			&& SkillsRw.VisionUp.getExperience(player) >= 128;
+	}
+	
+	@Override
 	public boolean onUse(EntityPlayer player) {
 		int time = 20 * 2 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.regeneration.id, time, 1));

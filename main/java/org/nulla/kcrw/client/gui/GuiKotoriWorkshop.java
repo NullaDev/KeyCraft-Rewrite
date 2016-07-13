@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.nulla.kcrw.KCNetwork;
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;
+import org.nulla.kcrw.event.EventPlayerCraftKCItem;
 import org.nulla.kcrw.item.KCItemBase;
 import org.nulla.kcrw.item.crafting.KCRecipe;
 import org.nulla.nullacore.api.skill.SkillUtils;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.MinecraftForge;
 
 public class GuiKotoriWorkshop extends KCGuiBase {
 	
@@ -124,7 +126,6 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     		for (GuiButtonImage i : btnCraft) {
     			if (button.equals(i)) {
     				currentCraftItem = (KCItemBase) Item.getItemById(i.id);
-    				//System.out.println(currentCraftItem);
     			}
     		}
     	}
@@ -159,19 +160,27 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     	if (output == null)
     		return;
     	
-    	if (player.worldObj.isRemote)
-        	KCNetwork.Channel.sendToServer(KCNetwork.createCraftPacket(output));
-    	
     	for (int i = 0; i < 3; i++) {
     		ItemStack craftItemStack[] = new ItemStack[3];
 			craftItemStack[i] = output.getRecipe().getCraftItemStack(i);
 			if (craftItemStack[i] != null) {
+				//如果合成失败因为没有同步东西会还回来
 				KCUtils.minusNumberOfItemInPlayer(player, craftItemStack[i].getItem(), craftItemStack[i].stackSize);
 			}
     	}
-    	SkillUtils.modifyAuroraPoint(player, -1 * output.getRecipe().getAuroraRequired());
+    	
+    	//防止合成品放不进玩家背包导致合成失败
     	ItemStack stack = new ItemStack(output, output.getRecipe().getProductAmount());
-    	player.inventory.addItemStackToInventory(stack);
+    	if (player.inventory.addItemStackToInventory(stack)) {
+        	SkillUtils.modifyAuroraPoint(player, -1 * output.getRecipe().getAuroraRequired());        	
+        	if (player.worldObj.isRemote) {
+            	KCNetwork.Channel.sendToServer(KCNetwork.createCraftPacket(output));
+        	} else {
+        		EventPlayerCraftKCItem event = new EventPlayerCraftKCItem(player, output);
+        		MinecraftForge.EVENT_BUS.post(event);
+        	}
+    	}
+    	
     }
     
     public static void craft(Item output, EntityPlayer player) {

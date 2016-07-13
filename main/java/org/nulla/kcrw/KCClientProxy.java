@@ -5,6 +5,7 @@ import org.lwjgl.opengl.Display;
 import org.nulla.kcrw.event.HandlerKeyInput;
 import org.nulla.kcrw.event.HandlerLivingAttackOrHurt;
 import org.nulla.kcrw.event.HandlerLivingDeath;
+import org.nulla.kcrw.event.HandlerPlayerCraftKCItem;
 import org.nulla.kcrw.event.HandlerPlayerTick;
 import org.nulla.kcrw.item.ItemAuroraBlade;
 
@@ -35,6 +36,7 @@ public class KCClientProxy extends KCCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttackOrHurt());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingDeath());
 		MinecraftForge.EVENT_BUS.register(new ItemAuroraBlade());
+    	MinecraftForge.EVENT_BUS.register(new HandlerPlayerCraftKCItem());
 
 		
 		//注册KeyBinding

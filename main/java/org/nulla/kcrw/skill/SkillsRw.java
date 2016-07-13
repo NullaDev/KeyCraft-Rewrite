@@ -42,7 +42,7 @@ public class SkillsRw {
 	public static void initSkills() {
 		AuroraAttack = 			new SkillAuroraAttack("aurora_attack", 512, 1, 1 * 20);
 		AuroraBlade = 			new SkillAuroraBlade("aurora_blade", 1024, 16, 1 * 20);
-		AuroraBlast = 			new SkillAuroraBlast("aurora_blast", 1024, 32, 3 * 20);
+		AuroraBlast = 			new SkillAuroraBlast("aurora_blast", 1024, 32, 150 * 20);
 		AuroraRegeneration = 	new SkillAuroraRegeneration("aurora_blast", 1024, 0, 1 * 20);
 		AuroraRepair = 			new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);
 		AuroraShield = 			new SkillAuroraShield("aurora_shield", 1024, 20, 60 * 20);
@@ -69,11 +69,6 @@ public class SkillsRw {
 		VibrationBlade = 		new SkillVibrationBlade("vibration_blade", 256, 8, 3 * 20);
 		VibrationWave = 		new SkillVibrationWave("vibration_wave", 1024, 8, 10 * 20);
 		VisionUp = 				new SkillVisionUp("vision_up", 1024, 16, 60 * 20);
-	}
-	
-	/** 只对某些技能管用。 */
-	public static void setLearnable(Skill skill, EntityPlayer player, boolean flag) {
-		player.getEntityData().setBoolean("canLearn" + skill.mName, flag);
 	}
 	
 }

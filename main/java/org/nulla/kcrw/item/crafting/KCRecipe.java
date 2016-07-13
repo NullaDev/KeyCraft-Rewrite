@@ -59,6 +59,7 @@ public class KCRecipe {
 	 */
 	public static ArrayList<Item> getItemCraftable(EntityPlayer player) {
 		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(KCItems.baseball);
 		items.add(KCItems.peach_juice);
 		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
@@ -74,6 +75,7 @@ public class KCRecipe {
 	 */
 	public static ArrayList<Item> getAllItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(KCItems.baseball);
 		items.add(KCItems.peach_juice);
 		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
