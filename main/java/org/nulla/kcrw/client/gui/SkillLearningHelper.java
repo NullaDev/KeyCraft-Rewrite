@@ -17,7 +17,8 @@ public class SkillLearningHelper {
 	private static HashMap<Skill, CO2D> posHelper = new HashMap<Skill, CO2D>();
 	
 	private static HashMap<Skill, ArrayList<Skill>> PreLearnHelper = new HashMap<Skill, ArrayList<Skill>>();
-
+	
+	private static ArrayList<Skill> SkillsFindSpecially = new ArrayList<Skill>();
 	
 	public static void init() {
 		posHelper.clear();
@@ -35,7 +36,18 @@ public class SkillLearningHelper {
 		posHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.8));
 		posHelper.put(SkillsRw.BloodControl, new CO2D(0.4, 0.5));
 		posHelper.put(SkillsRw.AuroraBlade, new CO2D(0.5, 0.5));
-		
+		posHelper.put(SkillsRw.FireProtection, new CO2D(0.5, 0.2));
+		posHelper.put(SkillsRw.PoisonProtection, new CO2D(0.5, 0.3));
+	
+		SkillsFindSpecially.clear();
+		SkillsFindSpecially.add(SkillsRw.FireProtection);
+		SkillsFindSpecially.add(SkillsRw.PoisonProtection);
+		SkillsFindSpecially.add(SkillsRw.HealthFog);
+
+		PreLearnHelper.clear();
+		PreLearnHelper.put(SkillsRw.VisionUp, null);
+		PreLearnHelper.put(SkillsRw.SpeedUp, null);
+		PreLearnHelper.put(SkillsRw.StrengthUp, null);
 		PreLearnHelper.put(SkillsRw.SpeedUpFinal, new ArrayList<Skill>() {
 			{add(SkillsRw.SpeedUp);}
 		});
@@ -75,6 +87,9 @@ public class SkillLearningHelper {
 		PreLearnHelper.put(SkillsRw.AuroraBlade, new ArrayList<Skill>() {
 			{add(SkillsRw.BloodControl);}
 		});
+		
+		PreLearnHelper.put(SkillsRw.FireProtection, null);
+		PreLearnHelper.put(SkillsRw.PoisonProtection, null);
 
 	}
 	
@@ -107,11 +122,21 @@ public class SkillLearningHelper {
 		}
 		*/
 		
+		if (SkillsFindSpecially.contains(skill)) {
+			if (!getFindInfo(player, skill)) {
+				System.out.println(skill.mName + "x");
+				return false;
+			}
+		}
+		
 		if (skill.canLearnSkill(player))
 			return true;
 		
 		if (!PreLearnHelper.containsKey(skill))
 			return false;
+		
+		if (PreLearnHelper.get(skill) == null)
+			return true;
 		
 		for (Skill i : PreLearnHelper.get(skill)) {
 			if (!i.hasSkill(player))
@@ -136,6 +161,18 @@ public class SkillLearningHelper {
 	public static boolean getPlayerCraftInfo(EntityPlayer player, Item item) {
 		System.out.println(player.getEntityData().toString());
 		String name = "hasCraftItem" + Item.getIdFromItem(item);
+		if (!player.getEntityData().hasKey(name))
+			return false;
+		return player.getEntityData().getBoolean(name);
+	}
+	
+	public static void findSkill(EntityPlayer player, Skill skill, boolean flag) {
+		String name = "hasFind" + skill.mID;
+		player.getEntityData().setBoolean(name, flag);
+	}
+	
+	public static boolean getFindInfo(EntityPlayer player, Skill skill) {
+		String name = "hasFind" + skill.mID;
 		if (!player.getEntityData().hasKey(name))
 			return false;
 		return player.getEntityData().getBoolean(name);

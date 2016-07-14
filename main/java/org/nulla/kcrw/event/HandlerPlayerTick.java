@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Random;
 import java.util.UUID;
 
+import org.nulla.kcrw.client.gui.SkillLearningHelper;
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
 import org.nulla.kcrw.item.ItemAuroraTool;
@@ -104,7 +105,7 @@ public class HandlerPlayerTick {
 	}
 	
 	@SubscribeEvent
-	public void a(PlayerTickEvent event) {
+	public void attributeModifier(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		
 		if (player.worldObj.isRemote) {
@@ -137,6 +138,24 @@ public class HandlerPlayerTick {
 			attr2.setBaseValue(baseValue - 3);
 			SkillsRw.StrengthUpFinal.setAttributeAdd(player, false);
 		}
+	}
+	
+	@SubscribeEvent
+	public void skillFinder(PlayerTickEvent event) {
+		EntityPlayer player = event.player;
+		
+		if (player.worldObj.isRemote) {
+			return;
+		}
+		
+		if (player.isPotionActive(Potion.poison)) {
+			SkillLearningHelper.findSkill(player, SkillsRw.PoisonProtection, true);
+		}
+		
+		if (player.isBurning()) {
+			SkillLearningHelper.findSkill(player, SkillsRw.FireProtection, true);
+		}
+		
 	}
 
 }
