@@ -47,4 +47,12 @@ kcrw.potion.test=测试效果
 kcrw.potion.auroraRegeneration=Aurora再生
 kcrw.potion.poisonResistance=抗毒
 
+kcrw.skill.name=技能名称
+kcrw.skill.learned=已经习得该技能。
+kcrw.skill.aurora_cost=使用需要的Aurora
+kcrw.skill.aurora_require=学习需要的Aurora
+kcrw.skill.experience=当前技能熟练度
+kcrw.skill.aurora_blade.name=Aurora之剑
+kcrw.skill.aurora_blast.name=Aurora爆裂
+
 death.attack.Aurora=%1$s 在与Aurora的战斗中惨败。

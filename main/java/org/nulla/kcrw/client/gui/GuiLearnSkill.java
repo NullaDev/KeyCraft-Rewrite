@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import org.nulla.kcrw.KCResources;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.nullacore.api.skill.Skill;
+import org.nulla.nullacore.api.skill.SkillUtils;
 import org.nulla.nullacore.api.skill.Skills;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 
 public class GuiLearnSkill extends KCGuiBase {
 
@@ -30,7 +32,7 @@ public class GuiLearnSkill extends KCGuiBase {
     @Override
     public void initGui() {
     	SkillLearningHelper.init();
-		buttonList.add(btnChooseReturn = new GuiButtonImage(128, (int)(width * 0.48 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_return, false));
+		buttonList.add(btnChooseReturn = new GuiButtonImage(128, (int)(width * 0.7 - 16), (int)(height * 0.25 - 16), 32, 32, KCResources.btn_end, false));
 
 		if (currentState.equals("CHOOSE")) {
         	addSkillButton();
@@ -64,12 +66,53 @@ public class GuiLearnSkill extends KCGuiBase {
         	}
 		}
         
-        super.drawScreen(par1, par2, par3);
-    	                
-		if (this.currentState == "LEARN") {
-
+        if (this.currentState == "LEARN" && currentSkill != null) {
+            mc.renderEngine.bindTexture(currentSkill.mIcon);
+        	KCUtils.drawScaledCustomSizeModalRect((int)(width * 0.2) - 16, (int)(height * 0.45) - 16, 0, 0, 64, 64, 32, 32, 64, 64);
+        	KCUtils.initDrawerState();
+        	drawLearnState();
 		}
+        
+        super.drawScreen(par1, par2, par3);
 		
+    }
+    
+    private void drawLearnState() {
+    	//技能名称
+    	String name = StatCollector.translateToLocal("kcrw.skill.name") + ": " + StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".name");
+    	this.fontRendererObj.drawStringWithShadow(name, (int)(width * 0.2) + 20, (int)(height * 0.45) - 12, 0x000000);
+    	this.fontRendererObj.drawStringWithShadow("skill: " + currentSkill.mName, (int)(width * 0.2) + 20, (int)(height * 0.45) + 4, 0x000000);
+    	KCUtils.initDrawerState();
+
+    	//技能前置
+    	int color = 0xFF0000;
+    	if (currentSkill.hasSkill(learner) || currentSkill.canLearnSkill(learner))
+    		color = 0x00FF00;
+    	String learnState = StatCollector.translateToLocal("kcrw.skill.learned");
+    	if (!currentSkill.hasSkill(learner))
+    		learnState = StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".need");
+    	this.fontRendererObj.drawStringWithShadow(learnState, (int)(width * 0.2) - 16, (int)(height * 0.55), color);
+    	KCUtils.initDrawerState();
+    	
+    	//技能消耗
+    	if (currentSkill.hasSkill(learner)) {
+    		String info = StatCollector.translateToLocal("kcrw.skill.aurora_cost") + ": " + currentSkill.mAuroraCost + "/" + SkillUtils.getAuroraPoint(learner);
+    		color = currentSkill.mAuroraCost <= SkillUtils.getAuroraPoint(learner)? 0x00FF00 : 0xFF0000;
+    		fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.65), color);
+    	} else {
+    		String info = StatCollector.translateToLocal("kcrw.skill.aurora_require") + ": " + currentSkill.mAuroraRequired + "/" + SkillUtils.getAuroraPoint(learner);
+    		color = currentSkill.mAuroraRequired <= SkillUtils.getAuroraPoint(learner)? 0x00FF00 : 0xFF0000;
+    		fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.65), color);
+    	}
+    	KCUtils.initDrawerState();
+		
+    	//技能熟练度
+    	if (currentSkill.hasSkill(learner)) {
+    		String info = StatCollector.translateToLocal("kcrw.skill.experience") + ": " + currentSkill.getExperience(learner)/1024F;
+    		fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.75), 0x00000);
+    	}
+    	KCUtils.initDrawerState();
+
     }
     
     @Override
