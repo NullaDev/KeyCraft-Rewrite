@@ -20,9 +20,7 @@ public class SkillRibbonTouch extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		if (!player.getEntityData().hasKey("canLearn" + this.mName))
-			return false;
-		return player.getEntityData().getBoolean("canLearn" + this.mName);
+		return true;
 	}
 
 	@Override

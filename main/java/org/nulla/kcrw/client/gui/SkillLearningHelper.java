@@ -35,14 +35,23 @@ public class SkillLearningHelper {
 		posHelper.put(SkillsRw.BaseballThundering, new CO2D(0.3, 0.75));
 		posHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.8));
 		posHelper.put(SkillsRw.BloodControl, new CO2D(0.4, 0.5));
-		posHelper.put(SkillsRw.AuroraBlade, new CO2D(0.5, 0.5));
-		posHelper.put(SkillsRw.FireProtection, new CO2D(0.5, 0.2));
-		posHelper.put(SkillsRw.PoisonProtection, new CO2D(0.5, 0.3));
+		posHelper.put(SkillsRw.AuroraBlade, new CO2D(0.45, 0.5));
+		posHelper.put(SkillsRw.FireProtection, new CO2D(0.45, 0.4));
+		posHelper.put(SkillsRw.FireImmunity, new CO2D(0.4, 0.4));
+		posHelper.put(SkillsRw.PoisonProtection, new CO2D(0.55, 0.4));
+		posHelper.put(SkillsRw.PoisonImmunity, new CO2D(0.6, 0.4));
+		posHelper.put(SkillsRw.AuroraShield, new CO2D(0.5, 0.5));
+		posHelper.put(SkillsRw.RibbonTouch, new CO2D(0.8, 0.4));
+		posHelper.put(SkillsRw.KagariCannon, new CO2D(0.75, 0.4));
+		posHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
 	
 		SkillsFindSpecially.clear();
 		SkillsFindSpecially.add(SkillsRw.FireProtection);
 		SkillsFindSpecially.add(SkillsRw.PoisonProtection);
 		SkillsFindSpecially.add(SkillsRw.HealthFog);
+		SkillsFindSpecially.add(SkillsRw.BaseballShooting);
+		SkillsFindSpecially.add(SkillsRw.RibbonTouch);
+		SkillsFindSpecially.add(SkillsRw.LouisJavelin);
 
 		PreLearnHelper.clear();
 		PreLearnHelper.put(SkillsRw.VisionUp, null);
@@ -90,6 +99,27 @@ public class SkillLearningHelper {
 		
 		PreLearnHelper.put(SkillsRw.FireProtection, null);
 		PreLearnHelper.put(SkillsRw.PoisonProtection, null);
+		PreLearnHelper.put(SkillsRw.RibbonTouch, null);
+		
+		PreLearnHelper.put(SkillsRw.AuroraShield, new ArrayList<Skill>() {
+			{add(SkillsRw.AuroraBlade);add(SkillsRw.FireProtection);add(SkillsRw.PoisonProtection);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.FireImmunity, new ArrayList<Skill>() {
+			{add(SkillsRw.FireProtection);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.PoisonImmunity, new ArrayList<Skill>() {
+			{add(SkillsRw.PoisonProtection);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.KagariCannon, new ArrayList<Skill>() {
+			{add(SkillsRw.RibbonTouch);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.KagariStrafe, new ArrayList<Skill>() {
+			{add(SkillsRw.RibbonTouch);}
+		});
 
 	}
 	
@@ -109,24 +139,9 @@ public class SkillLearningHelper {
 		if (skill.hasSkill(player))
 			return true;
 		
-		/*
-		if (skill.mID == SkillsRw.BaseballShooting.mID) {
-			if (!getPlayerCraftInfo(player, KCItems.baseball))
-				return false;
-		} else if (skill.mID == SkillsRw.RibbonTouch.mID) {
-			if (!getPlayerCraftInfo(player, KCItems.miracle_ribbon))
-				return false;
-		} else if (skill.mID == SkillsRw.VibrationBlade.mID) {
-			if (!getPlayerCraftInfo(player, KCItems.steel_blade))
-				return false;
-		}
-		*/
-		
 		if (SkillsFindSpecially.contains(skill)) {
-			if (!getFindInfo(player, skill)) {
-				System.out.println(skill.mName + "x");
+			if (!getFindInfo(player, skill))
 				return false;
-			}
 		}
 		
 		if (skill.canLearnSkill(player))
@@ -152,26 +167,17 @@ public class SkillLearningHelper {
 		return PreLearnHelper.get(skill);
 	}
 	
-	public static void setPlayerCraftInfo(EntityPlayer player, Item item, boolean flag) {
-		String name = "hasCraftItem" + Item.getIdFromItem(item);
-		player.getEntityData().setBoolean(name, flag);
-		System.out.println("set");
-	}
-	
-	public static boolean getPlayerCraftInfo(EntityPlayer player, Item item) {
-		System.out.println(player.getEntityData().toString());
-		String name = "hasCraftItem" + Item.getIdFromItem(item);
-		if (!player.getEntityData().hasKey(name))
-			return false;
-		return player.getEntityData().getBoolean(name);
-	}
-	
 	public static void findSkill(EntityPlayer player, Skill skill, boolean flag) {
 		String name = "hasFind" + skill.mID;
 		player.getEntityData().setBoolean(name, flag);
 	}
 	
 	public static boolean getFindInfo(EntityPlayer player, Skill skill) {
+		if (player.worldObj.isRemote) {
+			System.out.println("client");
+		} else {
+			System.out.println("server");
+		}
 		String name = "hasFind" + skill.mID;
 		if (!player.getEntityData().hasKey(name))
 			return false;

@@ -173,12 +173,10 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     	ItemStack stack = new ItemStack(output, output.getRecipe().getProductAmount());
     	if (player.inventory.addItemStackToInventory(stack)) {
         	SkillUtils.modifyAuroraPoint(player, -1 * output.getRecipe().getAuroraRequired());        	
-        	if (player.worldObj.isRemote) {
+        	if (player.worldObj.isRemote)
             	KCNetwork.Channel.sendToServer(KCNetwork.createCraftPacket(output));
-        	} else {
-        		EventPlayerCraftKCItem event = new EventPlayerCraftKCItem(player, output);
-        		MinecraftForge.EVENT_BUS.post(event);
-        	}
+        	EventPlayerCraftKCItem event = new EventPlayerCraftKCItem(player, output);
+    		MinecraftForge.EVENT_BUS.post(event);
     	}
     	
     }

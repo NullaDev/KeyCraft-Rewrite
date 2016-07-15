@@ -35,7 +35,7 @@ public class SkillStrengthUp extends Skill {
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();
-			int exp = rand.nextInt(1000) + 1;
+			int exp = rand.nextInt(10) + 1;
 			modifyExperience(player, exp);
 		}
 		player.worldObj.playSoundAtEntity(player, KCResources.sound_aurora.toString(), 1.0f, 1.0f);

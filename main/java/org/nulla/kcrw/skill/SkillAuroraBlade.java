@@ -1,5 +1,7 @@
 package org.nulla.kcrw.skill;
 
+import java.util.Random;
+
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.nullacore.api.skill.Skill;
@@ -21,13 +23,22 @@ public class SkillAuroraBlade extends Skill {
 	}
 	
 	@Override
+	public boolean canLearnSkill(EntityPlayer player) {
+		return SkillsRw.BloodControl.getExperience(player) >= 128;
+	}
+	
+	@Override
 	public boolean onUse(EntityPlayer player) {
 		ItemStack held = player.getHeldItem();
 		if (held == null) {
 			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.aurora_blade, 1));
 			if (!player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.callblade")));
-    		}	
+    		} else {
+    			Random rand = new Random();
+    			int exp = rand.nextInt(20) + 1;
+    			modifyExperience(player, exp);
+    		}
     	}
 		return false;
 	}

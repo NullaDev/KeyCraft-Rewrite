@@ -39,6 +39,13 @@ public class SkillBaseballShooting extends Skill {
 				return false;
 			}
 		}
+		
+		// 随机事件只在服务器发生
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(1000) + 1;
+			modifyExperience(player, exp);
+		}
 
 		player.worldObj.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
 

@@ -144,10 +144,6 @@ public class HandlerPlayerTick {
 	public void skillFinder(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		
-		if (player.worldObj.isRemote) {
-			return;
-		}
-		
 		if (player.isPotionActive(Potion.poison)) {
 			SkillLearningHelper.findSkill(player, SkillsRw.PoisonProtection, true);
 		}
