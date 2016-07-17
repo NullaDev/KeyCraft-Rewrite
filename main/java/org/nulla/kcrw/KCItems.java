@@ -54,7 +54,15 @@ public class KCItems {
 	
 	public static Item aurora_blade;
 	
+	public static Item black_dog_spawner;
+
+	
     public static void InitItems() {
+    	
+    	black_dog_spawner = new ItemBlackDogSpawner()
+    		.setUnlocalizedName("black_dog_spawner")
+    		.setTextureName("kcrw:black_dog_spawner");
+    	GameRegistry.registerItem(black_dog_spawner, "black_dog_spawner");
     	
     	aurora_iron_ingot = new ItemAuroraIronIngot()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 16))

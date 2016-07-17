@@ -20,6 +20,7 @@ item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
+item.black_dog_spawner.name=黑狗生成器
 
 tile.KotoriWorkshop.name=小鸟工坊
 
@@ -54,5 +55,17 @@ kcrw.skill.aurora_require=学习需要的Aurora
 kcrw.skill.experience=当前技能熟练度
 kcrw.skill.aurora_blade.name=Aurora之剑
 kcrw.skill.aurora_blast.name=Aurora爆裂
+kcrw.skill.aurora_regeneration.name=Aurora再生
+kcrw.skill.aurora_storm.name=Aurora风暴
+kcrw.skill.fire_protection.name=火焰防护
+kcrw.skill.fire_immunity.name=火焰免疫
+kcrw.skill.kagari_cannon.name=kagari☆主炮
+kcrw.skill.kagari_strafe.name=kagari☆扫射
+kcrw.skill.poison_protection.name=毒性防护
+kcrw.skill.poison_immunity.name=毒性免疫
+kcrw.skill.ribbon_touch.name=丝带之触
+kcrw.skill.speed_up.name=强化速度
+kcrw.skill.strength_up.name=强化力量
+kcrw.skill.vision_up.name=强化视力
 
-death.attack.Aurora=%1$s 在与Aurora的战斗中惨败。
+death.attack.Aurora=%1$s 被Aurora撕成了碎片。

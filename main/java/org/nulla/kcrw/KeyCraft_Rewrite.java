@@ -7,6 +7,7 @@ import org.nulla.kcrw.entity.EntityVibrationWave;
 import org.nulla.kcrw.entity.effect.EntityAuroraBlast;
 import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.entity.effect.EntityAuroraStorm;
+import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
 import org.nulla.kcrw.potion.KCPotions;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.skill.Skill;
@@ -55,6 +56,8 @@ public class KeyCraft_Rewrite {
     	EntityRegistry.registerModEntity(EntityRibbon.class, "Ribbon", modID++, this, 128, 1, true);
     	EntityRegistry.registerModEntity(EntityVibrationWave.class, "VibrationWave", modID++, this, 128, 1, true);
     	
+    	EntityRegistry.registerModEntity(EntityBlackDog.class, "BlackDog", modID++, this, 128, 1, true);
+	
     }
     
     @EventHandler

@@ -37,7 +37,8 @@ public class GuiLearnSkill extends KCGuiBase {
 		if (currentState.equals("CHOOSE")) {
         	addSkillButton();
         } else if (currentSkill != null) {
-    		buttonList.add(btnLearnSkill = new GuiButtonImage(256, (int)(width * 0.4), (int)(height * 0.7), 32, 32, KCResources.btn_ensure, false));
+        	if (!currentSkill.hasSkill(learner))
+        		buttonList.add(btnLearnSkill = new GuiButtonImage(256, (int)(width * 0.3) - 32, (int)(height * 0.8) - 8, 64, 16, KCResources.btn_skill_learn, false));
     	}
     	     
     }

@@ -1,4 +1,4 @@
-package org.nulla.kcrw.entity;
+package org.nulla.kcrw.entity.entityliving;
 
 import org.nulla.nullacore.api.skill.SkillUtils;
 
