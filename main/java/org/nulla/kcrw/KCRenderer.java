@@ -12,8 +12,10 @@ import org.nulla.kcrw.entity.EntityVibrationWave;
 import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.entity.effect.EntityAuroraStorm;
 import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
-import org.nulla.kcrw.entity.entityliving.ModelBlackDog;
+import org.nulla.kcrw.entity.entityliving.EntityRedDog;
+import org.nulla.kcrw.entity.entityliving.ModelDog;
 import org.nulla.kcrw.entity.entityliving.RendererBlackDog;
+import org.nulla.kcrw.entity.entityliving.RendererRedDog;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -27,7 +29,8 @@ public class KCRenderer {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraStorm.class, new RendererNull());//风暴的渲染
 		RenderingRegistry.registerEntityRenderingHandler(EntityRibbon.class, new RendererRibbon());
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, new RendererBlackDog(new ModelBlackDog(), 0.7F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, new RendererBlackDog(new ModelDog(), 0.7F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRedDog.class, new RendererRedDog(new ModelDog(), 0.7F));
 
 	}
 }

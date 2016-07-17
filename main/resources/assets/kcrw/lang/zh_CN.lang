@@ -20,7 +20,7 @@ item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
-item.black_dog_spawner.name=黑狗生成器
+item.dog_spawner.name=狗狗生成器
 
 tile.KotoriWorkshop.name=小鸟工坊
 

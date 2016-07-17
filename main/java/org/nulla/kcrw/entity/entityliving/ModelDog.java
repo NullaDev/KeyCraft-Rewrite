@@ -3,10 +3,11 @@ package org.nulla.kcrw.entity.entityliving;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
-public class ModelBlackDog extends ModelBase
+public class ModelDog extends ModelBase
 {
     /** main box for the wolf head */
     public ModelRenderer wolfHeadMain;
@@ -25,7 +26,7 @@ public class ModelBlackDog extends ModelBase
     /** The wolf's mane */
     ModelRenderer wolfMane;
 
-    public ModelBlackDog() {
+    public ModelDog() {
         float f = 0.0F;
         float f1 = 13.5F;
         this.wolfHeadMain = new ModelRenderer(this, 0, 0);
@@ -81,7 +82,7 @@ public class ModelBlackDog extends ModelBase
     @Override
     public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_)
     {
-        EntityBlackDog entitywolf = (EntityBlackDog)p_78086_1_;
+        EntityLiving entitywolf = (EntityLiving)p_78086_1_;
 
             this.wolfTail.rotateAngleY = MathHelper.cos(p_78086_2_ * 0.6662F) * 1.4F * p_78086_3_;
 
