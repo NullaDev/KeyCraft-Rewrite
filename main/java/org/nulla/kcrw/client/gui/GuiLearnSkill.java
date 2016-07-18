@@ -81,8 +81,8 @@ public class GuiLearnSkill extends KCGuiBase {
     private void drawLearnState() {
     	//技能名称
     	String name = StatCollector.translateToLocal("kcrw.skill.name") + ": " + StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".name");
-    	this.fontRendererObj.drawStringWithShadow(name, (int)(width * 0.2) + 20, (int)(height * 0.45) - 12, 0x000000);
-    	this.fontRendererObj.drawStringWithShadow("skill: " + currentSkill.mName, (int)(width * 0.2) + 20, (int)(height * 0.45) + 4, 0x000000);
+    	this.fontRendererObj.drawStringWithShadow(name, (int)(width * 0.2) + 20, (int)(height * 0.45) - 12, 0xFFFFFF);
+    	this.fontRendererObj.drawStringWithShadow("skill: " + currentSkill.mName, (int)(width * 0.2) + 20, (int)(height * 0.45) + 4, 0xFFFFFF);
     	KCUtils.initDrawerState();
 
     	//技能前置
@@ -110,9 +110,21 @@ public class GuiLearnSkill extends KCGuiBase {
     	//技能熟练度
     	if (currentSkill.hasSkill(learner)) {
     		String info = StatCollector.translateToLocal("kcrw.skill.experience") + ": " + currentSkill.getExperience(learner)/1024F;
-    		fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.75), 0x00000);
+    		fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.75), 0xFFFFFF);
     	}
     	KCUtils.initDrawerState();
+    	
+        //绘制一条竖线
+    	int shang = (int)(height * 0.35);
+        int xia = (int)(height * 0.85);
+        int zhong = (int)(width * 0.48);
+        
+        drawRect(zhong, shang, zhong + 1, xia, 0xFFFFFFFF);      
+        KCUtils.initDrawerState();
+        
+        //绘制技能说明
+		String info = StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".info");
+		KCUtils.drawStringWithShadow(fontRendererObj, info, (int)(width * 0.5), (int)(height * 0.4), 0xFFFFFF);
 
     }
     

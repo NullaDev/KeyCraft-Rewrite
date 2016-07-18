@@ -27,7 +27,6 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 	private GuiButtonImage btnChooseDecompose;
 	private GuiButtonImage btnChooseReturn;
 	private GuiButtonImage btnEnsureCraft;
-	//private GuiButtonImage btnCraft[] = new GuiButtonImage[99];
 	private ArrayList<GuiButtonImage> btnCraft = new ArrayList<GuiButtonImage>();
 	
 	private KCItemBase currentCraftItem = null;

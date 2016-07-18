@@ -207,4 +207,18 @@ public class KCUtils {
 		return -1;
 	}
 	
+	public static void drawStringWithShadow(FontRenderer renderer, String info, int width, int height, int color) {
+		String current = "";
+		int num = 0;
+		for (int i = 0; i < info.length() ; i++) {
+			if (info.charAt(i) == '^') {
+				renderer.drawStringWithShadow(current, width, height + 12 * num++, color);
+				current = "";
+			} else {
+				current += info.charAt(i);
+			}
+			renderer.drawStringWithShadow(current, width, height + 12 * num, color);
+		}
+	}
+	
 }

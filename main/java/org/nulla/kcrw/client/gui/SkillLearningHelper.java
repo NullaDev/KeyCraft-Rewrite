@@ -14,40 +14,42 @@ import org.nulla.nullacore.api.skill.Skill;
 
 public class SkillLearningHelper {
 	
-	private static HashMap<Skill, CO2D> posHelper = new HashMap<Skill, CO2D>();
+	private static HashMap<Skill, CO2D> skillPosHelper = new HashMap<Skill, CO2D>();
 	
 	private static HashMap<Skill, ArrayList<Skill>> PreLearnHelper = new HashMap<Skill, ArrayList<Skill>>();
 	
 	private static ArrayList<Skill> SkillsFindSpecially = new ArrayList<Skill>();
 	
 	public static void init() {
-		posHelper.clear();
-		posHelper.put(SkillsRw.VisionUp, new CO2D(0.25, 0.5));
-		posHelper.put(SkillsRw.SpeedUp, new CO2D(0.25, 0.4));
-		posHelper.put(SkillsRw.StrengthUp, new CO2D(0.25, 0.6));
-		posHelper.put(SkillsRw.SpeedUpFinal, new CO2D(0.2, 0.4));
-		posHelper.put(SkillsRw.StrengthUpFinal, new CO2D(0.2, 0.6));
-		posHelper.put(SkillsRw.BaseballShooting, new CO2D(0.3, 0.65));
-		posHelper.put(SkillsRw.BaseballFalling, new CO2D(0.35, 0.6));
-		posHelper.put(SkillsRw.BaseballRolling, new CO2D(0.35, 0.7));
-		posHelper.put(SkillsRw.BaseballExplosive, new CO2D(0.3, 0.75));
-		posHelper.put(SkillsRw.BaseballThundering, new CO2D(0.25, 0.75));
-		posHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.7));
-		posHelper.put(SkillsRw.BloodControl, new CO2D(0.35, 0.5));
-		posHelper.put(SkillsRw.AuroraBlade, new CO2D(0.4, 0.5));
-		posHelper.put(SkillsRw.AuroraAttack, new CO2D(0.4, 0.6));
-		posHelper.put(SkillsRw.FireProtection, new CO2D(0.4, 0.4));
-		posHelper.put(SkillsRw.FireImmunity, new CO2D(0.35, 0.4));
-		posHelper.put(SkillsRw.PoisonProtection, new CO2D(0.5, 0.4));
-		posHelper.put(SkillsRw.PoisonImmunity, new CO2D(0.55, 0.4));
-		posHelper.put(SkillsRw.AuroraShield, new CO2D(0.45, 0.5));
-		posHelper.put(SkillsRw.AuroraBlast, new CO2D(0.45, 0.6));
-		posHelper.put(SkillsRw.AuroraStorm, new CO2D(0.45, 0.7));
-		posHelper.put(SkillsRw.RibbonTouch, new CO2D(0.8, 0.4));
-		posHelper.put(SkillsRw.KagariCannon, new CO2D(0.75, 0.4));
-		posHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
-		posHelper.put(SkillsRw.VibrationBlade, new CO2D(0.8, 0.75));
-		posHelper.put(SkillsRw.VibrationWave, new CO2D(0.8, 0.65));
+		skillPosHelper.clear();
+		skillPosHelper.put(SkillsRw.VisionUp, new CO2D(0.25, 0.5));
+		skillPosHelper.put(SkillsRw.SpeedUp, new CO2D(0.25, 0.4));
+		skillPosHelper.put(SkillsRw.StrengthUp, new CO2D(0.25, 0.6));
+		skillPosHelper.put(SkillsRw.SpeedUpFinal, new CO2D(0.2, 0.4));
+		skillPosHelper.put(SkillsRw.StrengthUpFinal, new CO2D(0.2, 0.6));
+		skillPosHelper.put(SkillsRw.BaseballShooting, new CO2D(0.3, 0.65));
+		skillPosHelper.put(SkillsRw.BaseballFalling, new CO2D(0.35, 0.6));
+		skillPosHelper.put(SkillsRw.BaseballRolling, new CO2D(0.35, 0.7));
+		skillPosHelper.put(SkillsRw.BaseballExplosive, new CO2D(0.3, 0.75));
+		skillPosHelper.put(SkillsRw.BaseballThundering, new CO2D(0.25, 0.75));
+		skillPosHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.7));
+		skillPosHelper.put(SkillsRw.BloodControl, new CO2D(0.35, 0.5));
+		skillPosHelper.put(SkillsRw.AuroraBlade, new CO2D(0.4, 0.5));
+		skillPosHelper.put(SkillsRw.AuroraAttack, new CO2D(0.4, 0.6));
+		skillPosHelper.put(SkillsRw.FireProtection, new CO2D(0.4, 0.4));
+		skillPosHelper.put(SkillsRw.FireImmunity, new CO2D(0.35, 0.4));
+		skillPosHelper.put(SkillsRw.PoisonProtection, new CO2D(0.5, 0.4));
+		skillPosHelper.put(SkillsRw.PoisonImmunity, new CO2D(0.55, 0.4));
+		skillPosHelper.put(SkillsRw.AuroraShield, new CO2D(0.45, 0.5));
+		skillPosHelper.put(SkillsRw.AuroraBlast, new CO2D(0.45, 0.6));
+		skillPosHelper.put(SkillsRw.AuroraStorm, new CO2D(0.45, 0.7));
+		skillPosHelper.put(SkillsRw.AuroraRegeneration, new CO2D(0.5, 0.5));
+		skillPosHelper.put(SkillsRw.RibbonTouch, new CO2D(0.8, 0.4));
+		skillPosHelper.put(SkillsRw.KagariCannon, new CO2D(0.75, 0.4));
+		skillPosHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
+		skillPosHelper.put(SkillsRw.VibrationBlade, new CO2D(0.8, 0.75));
+		skillPosHelper.put(SkillsRw.VibrationWave, new CO2D(0.8, 0.65));
+		skillPosHelper.put(SkillsRw.HealthFog, new CO2D(0.6, 0.65));
 
 		SkillsFindSpecially.clear();
 		SkillsFindSpecially.add(SkillsRw.FireProtection);
@@ -118,6 +120,10 @@ public class SkillLearningHelper {
 			{add(SkillsRw.AuroraShield);}
 		});
 		
+		PreLearnHelper.put(SkillsRw.AuroraRegeneration, new ArrayList<Skill>() {
+			{add(SkillsRw.AuroraShield);}
+		});
+		
 		PreLearnHelper.put(SkillsRw.AuroraStorm, new ArrayList<Skill>() {
 			{add(SkillsRw.AuroraBlast);}
 		});
@@ -145,14 +151,14 @@ public class SkillLearningHelper {
 	}
 	
 	public static double getSkillPosX(Skill skill) {
-		if (posHelper.containsKey(skill))
-			return posHelper.get(skill).mx;
+		if (skillPosHelper.containsKey(skill))
+			return skillPosHelper.get(skill).mx;
 		return 0;
 	}
 	
 	public static double getSkillPosY(Skill skill) {
-		if (posHelper.containsKey(skill))
-			return posHelper.get(skill).my;
+		if (skillPosHelper.containsKey(skill))
+			return skillPosHelper.get(skill).my;
 		return 0;
 	}
 	
