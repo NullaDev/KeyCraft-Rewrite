@@ -1,10 +1,8 @@
 package org.nulla.kcrw;
 
-import org.nulla.kcrw.client.renderer.RendererAuroraShield;
-import org.nulla.kcrw.client.renderer.RendererJavelin;
-import org.nulla.kcrw.client.renderer.RendererNull;
-import org.nulla.kcrw.client.renderer.RendererRibbon;
-import org.nulla.kcrw.client.renderer.RendererVibrationWave;
+import org.nulla.kcrw.client.model.*;
+import org.nulla.kcrw.client.renderer.*;
+import org.nulla.kcrw.client.renderer.entity.*;
 import org.nulla.kcrw.entity.EntityBaseball;
 import org.nulla.kcrw.entity.EntityJavelin;
 import org.nulla.kcrw.entity.EntityRibbon;
@@ -13,9 +11,6 @@ import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.entity.effect.EntityAuroraStorm;
 import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
 import org.nulla.kcrw.entity.entityliving.EntityRedDog;
-import org.nulla.kcrw.entity.entityliving.ModelDog;
-import org.nulla.kcrw.entity.entityliving.RendererBlackDog;
-import org.nulla.kcrw.entity.entityliving.RendererRedDog;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.renderer.entity.RenderSnowball;
