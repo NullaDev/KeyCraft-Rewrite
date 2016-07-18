@@ -23,7 +23,7 @@ public class RendererBlackDog extends RenderLiving {
 	
 	protected float handleRotationFloat(EntityLivingBase par1, float par2)
     {
-        return 90;
+        return (0.65F - (6.0F - par1.getHealth()) * 0.07F) * (float)Math.PI;
     }
 
 }
