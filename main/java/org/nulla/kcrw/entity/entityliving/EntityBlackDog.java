@@ -11,17 +11,11 @@ public class EntityBlackDog extends EntityMob {
 	public EntityBlackDog(World world) {
 		super(world);
 		this.setSize(1F, 1F);
-		
-		this.experienceValue = 20;
-	}
-	
-	protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(3.0D);
-    }
+		this.experienceValue = 20;
+	}
 	
 	public EntityBlackDog(World world, double posX, double posY, double posZ) {
 		this(world);
