@@ -11,11 +11,16 @@ public class EntityRedDog extends EntityMob {
 	public EntityRedDog(World world) {
 		super(world);
 		this.setSize(1F, 1F);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(4.0D);
 		this.experienceValue = 40;
 	}
+
+	protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(4.0D);
+    }
 	
 	public EntityRedDog(World world, double posX, double posY, double posZ) {
 		this(world);

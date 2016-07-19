@@ -124,7 +124,6 @@ public class GuiLearnSkill extends KCGuiBase {
         
         //绘制技能说明
 		String info = StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".info");
-		//String info = "a\r\nb\rc\nd";
 		KCUtils.drawStringWithShadow(fontRendererObj, info, (int)(width * 0.5), (int)(height * 0.4), 0xFFFFFF);
 
     }
