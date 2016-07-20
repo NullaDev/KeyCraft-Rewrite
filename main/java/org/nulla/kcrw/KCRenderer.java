@@ -24,8 +24,8 @@ public class KCRenderer {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAuroraStorm.class, new RendererNull());//风暴的渲染
 		RenderingRegistry.registerEntityRenderingHandler(EntityRibbon.class, new RendererRibbon());
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, new RendererBlackDog(new ModelDog(), 0.7F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityRedDog.class, new RendererRedDog(new ModelDog(), 0.7F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, new RendererBlackDog(new ModelDog(), 0.6F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRedDog.class, new RendererRedDog(new ModelDog(), 0.6F));
 
 	}
 }

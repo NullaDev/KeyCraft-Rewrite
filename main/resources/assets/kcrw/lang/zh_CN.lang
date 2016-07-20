@@ -20,6 +20,7 @@ item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
+item.aurora_blade.name=Aurora光剑
 item.dog_spawner.name=狗狗生成器
 
 tile.KotoriWorkshop.name=小鸟工坊
@@ -96,8 +97,8 @@ kcrw.skill.blood_control.info=血液控制
 kcrw.skill.fire_protection.info=火焰防护
 kcrw.skill.fire_immunity.info=火焰免疫
 kcrw.skill.health_fog.info=治疗之雾
-kcrw.skill.kagari_cannon.info=kagari☆主炮
-kcrw.skill.kagari_strafe.info=kagari☆扫射
+kcrw.skill.kagari_cannon.info=超级kagari☆主炮发射！^【喂你卖什么萌啊
+kcrw.skill.kagari_strafe.info=超级kagari☆一齐扫射！^【喂你卖什么萌啊
 kcrw.skill.louis_javelin.info=路易斯之枪
 kcrw.skill.poison_protection.info=毒性防护
 kcrw.skill.poison_immunity.info=毒性免疫
@@ -106,7 +107,7 @@ kcrw.skill.speed_up.info=强化速度
 kcrw.skill.speed_up_final.info=终极强化速度
 kcrw.skill.strength_up.info=强化力量
 kcrw.skill.strength_up_final.info=终极强化力量
-kcrw.skill.vibration_blade.info=震动斩
+kcrw.skill.vibration_blade.info=使剑极速震动以造成高伤害。^由于极速震动对载体的破坏，^请使用特制的钢剑。^【不信你用别的剑试试
 kcrw.skill.vibration_wave.info=震动波
 kcrw.skill.vision_up.info=强化视力
 

@@ -1,8 +1,10 @@
 package org.nulla.kcrw.skill;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -33,6 +35,9 @@ public class SkillVibrationBlade extends Skill {
 			return false;
 		} else if (held.getItem() == KCItems.steel_blade) {
 			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade_vibrating, 1, held.getItemDamage()));
+			return true;	
+    	} else if (held.getItem() instanceof ItemSword) {
+			player.setCurrentItemOrArmor(0, null);
 			return true;	
     	}
 		return false;
