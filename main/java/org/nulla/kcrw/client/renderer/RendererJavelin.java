@@ -20,8 +20,8 @@ public class RendererJavelin extends Render {
         GL11.glTranslated(x, y, z);
         //原点移到实体中心
         GL11.glTranslatef(0.0F, entity.height / 2.0F, 0.0F);
-        GL11.glRotatef(entity.prevRotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(entity.prevRotationPitch, 0.0F, 0.0F, 1.0F);
+        GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(entity.rotationPitch, 0.0F, 0.0F, 1.0F);
         
         Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

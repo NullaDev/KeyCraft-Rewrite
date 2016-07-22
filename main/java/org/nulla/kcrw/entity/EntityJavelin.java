@@ -33,6 +33,9 @@ public class EntityJavelin extends KCEntityThrowable {
 	public EntityJavelin(World world, EntityPlayer thrower, boolean hasSkill) {
 		this(world, thrower, 0.5F, 0.5F, hasSkill ? 0F : 0.01F);
 		this.mHasSkill = hasSkill;
+		if (hasSkill) {
+			this.velocityDecreaseRate = 1.01F;
+		}
 	}
 	
 	public EntityJavelin(World world, EntityPlayer thrower, float width, float height, float gravity) {
@@ -94,6 +97,11 @@ public class EntityJavelin extends KCEntityThrowable {
 			EntityParticleFX par = new EntityParticleFX(this.worldObj, this.posX, this.posY, this.posZ, vec, 0.5F);
 			par.setRBGColorF(1F, 0F, 0F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
+		}
+		
+		if (this.mHasSkill) {
+			double motionXZ = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+			this.rotationPitch = (float) Math.atan(this.motionY / motionXZ);
 		}
 		
 	}
