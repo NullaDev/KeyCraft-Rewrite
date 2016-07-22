@@ -31,6 +31,8 @@ public class GuiLearnSkill extends KCGuiBase {
 
     @Override
     public void initGui() {
+    	buttonList.clear();
+    	btnSkill.clear();
     	SkillLearningHelper.init();
 		buttonList.add(btnChooseReturn = new GuiButtonImage(128, (int)(width * 0.7 - 16), (int)(height * 0.25 - 16), 32, 32, KCResources.btn_end, false));
 
