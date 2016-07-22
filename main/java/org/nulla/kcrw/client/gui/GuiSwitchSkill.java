@@ -28,6 +28,7 @@ public class GuiSwitchSkill extends KCGuiBase {
 
     @Override
     public void initGui() {
+    	buttonList.clear();
     	Skill[] skillsInSlot = new Skill[4];
     	for (int i = 0; i < 4; i++) {
     		skillsInSlot[i] = SkillUtils.getSkillInSlot(skillOwner, i);

@@ -26,7 +26,7 @@ public class RendererJavelin extends Render {
         Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
-        float f10 = 0.05625F;
+        float f10 = 0.5625F;
         GL11.glScalef(f10, f10, f10);
         for (int i = 0; i < 4; ++i)
         {

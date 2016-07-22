@@ -91,7 +91,7 @@ public class EntityJavelin extends KCEntityThrowable {
 			vec.rotateAroundY(0.1F - 0.2F * ran.nextFloat());
 			vec.rotateAroundZ(0.1F - 0.2F * ran.nextFloat());
 
-			EntityParticleFX par = new EntityParticleFX(this.worldObj, this.posX, this.posY, this.posZ, vec, 0.1F);
+			EntityParticleFX par = new EntityParticleFX(this.worldObj, this.posX, this.posY, this.posZ, vec, 0.5F);
 			par.setRBGColorF(1F, 0F, 0F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
