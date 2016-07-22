@@ -38,6 +38,9 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 
     @Override
     public void initGui() {
+    	buttonList.clear();
+    	btnCraft.clear();
+    	
 		buttonList.add(btnChooseCraft = new GuiButtonImage(128, (int)(width * 0.32 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_craft, false));
 		buttonList.add(btnChooseDecompose = new GuiButtonImage(129, (int)(width * 0.40 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_decompose, false));
 		buttonList.add(btnChooseReturn = new GuiButtonImage(130, (int)(width * 0.48 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_return, false));
