@@ -37,7 +37,7 @@ public class SkillVibrationWave extends Skill {
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();
-			int exp = rand.nextInt(5) + 1;
+			int exp = rand.nextInt(20) + 1;
 			modifyExperience(player, exp);
 		}
 		

@@ -1,5 +1,7 @@
 package org.nulla.kcrw.skill;
 
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -35,9 +37,19 @@ public class SkillVibrationBlade extends Skill {
 			return false;
 		} else if (held.getItem() == KCItems.steel_blade) {
 			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade_vibrating, 1, held.getItemDamage()));
+			if (!player.worldObj.isRemote) {
+				Random rand = new Random();
+				int exp = rand.nextInt(10) + 1;
+				modifyExperience(player, exp);
+			}
 			return true;	
     	} else if (held.getItem() instanceof ItemSword) {
 			player.setCurrentItemOrArmor(0, null);
+			if (!player.worldObj.isRemote) {
+				Random rand = new Random();
+				int exp = rand.nextInt(10) + 1;
+				modifyExperience(player, exp);
+			}
 			return true;	
     	}
 		return false;

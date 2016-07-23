@@ -30,17 +30,24 @@ public class SkillKagariCannon extends Skill {
 		}
 		
 		if (!player.capabilities.isCreativeMode) {
-			if (KCUtils.getNumberOfItemInPlayer(player, KCItems.miracle_ribbon) >= 8) {
-				KCUtils.minusNumberOfItemInPlayer(player, KCItems.miracle_ribbon, 8);
+			if (KCUtils.getNumberOfItemInPlayer(player, KCItems.miracle_ribbon) >= 4) {
+				KCUtils.minusNumberOfItemInPlayer(player, KCItems.miracle_ribbon, 4);
 			} else {
 				return false;
 			}
+		}
+		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(20) + 1;
+			modifyExperience(player, exp);
 		}
 
 		double px = player.posX;
 		double py = player.posY + player.getEyeHeight();
 		double pz = player.posZ;
-		for (int i = 0; i < 8; i++) {
+		int num = 8192 / (2048 - this.getExperience(player));
+		for (int i = 0; i < num; i++) {
 			Random ran = new Random();
 			px += 2 * ran.nextDouble() - 1D;
 			py += 2 * ran.nextDouble() - 1D;

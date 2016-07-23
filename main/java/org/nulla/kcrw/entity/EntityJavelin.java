@@ -3,6 +3,7 @@ package org.nulla.kcrw.entity;
 import java.util.Random;
 
 import org.nulla.kcrw.entity.effect.EntityParticleFX;
+import org.nulla.kcrw.skill.SkillsRw;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +19,7 @@ public class EntityJavelin extends KCEntityThrowable {
 	protected static final float SPEED_BASIC = 0.5F;
 	protected static final float SPEED_HAS_SKILL = 2.0F;
 	protected static final float DAMAGE_BASIC = 10.0F;
-	protected static final float DAMAGE_HAS_SKILL = 20.0F;
+	protected static final float DAMAGE_HAS_SKILL = 15.0F;
 	
 	private boolean mHasSkill = false;
 	
@@ -48,7 +49,8 @@ public class EntityJavelin extends KCEntityThrowable {
         if (target.entityHit != null) {
         	EntityLivingBase thrower = this.getOwner();
         	if (mHasSkill) {
-    			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_HAS_SKILL);
+        		float extra = 10240F / (2048 - SkillsRw.LouisJavelin.getExperience(getOwner()));
+    			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_HAS_SKILL + extra);
         	} else {
     			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC);
         	}

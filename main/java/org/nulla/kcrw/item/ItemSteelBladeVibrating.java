@@ -1,7 +1,10 @@
 package org.nulla.kcrw.item;
 
+import java.util.Random;
+
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCUtils;
+import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
 import net.minecraft.block.Block;
@@ -95,7 +98,9 @@ public class ItemSteelBladeVibrating extends KCItemBase {
     		if (pos >= 0 && pos < player.inventory.mainInventory.length)
     			player.inventory.mainInventory[pos] = new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage());
     	} else {
-        	stack.damageItem(1, (EntityLivingBase) entity);
+    		float p = 2048 / (2048 - SkillsRw.AuroraBlade.getExperience((EntityPlayer) entity));
+			if (new Random().nextFloat() < p)
+				stack.damageItem(1, (EntityLivingBase) entity);
     	}
     }
     

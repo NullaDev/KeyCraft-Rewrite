@@ -36,6 +36,12 @@ public class SkillRibbonTouch extends Skill {
 				return false;
 			}
 		}
+		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(10) + 1;
+			modifyExperience(player, exp);
+		}
 
 		player.worldObj.spawnEntityInWorld(new EntityRibbon(player.worldObj, player));
 		

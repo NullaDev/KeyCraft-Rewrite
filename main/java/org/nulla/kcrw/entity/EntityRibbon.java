@@ -3,6 +3,7 @@ package org.nulla.kcrw.entity;
 import java.util.Random;
 
 import org.nulla.kcrw.entity.effect.EntityParticleFX;
+import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
 import net.minecraft.client.Minecraft;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 public class EntityRibbon extends KCEntityThrowable {
 
 	protected static final float SPEED = 2.0F;
-	protected static final float DAMAGE = 5.0F;
+	protected static final float DAMAGE = 10.0F;
 			
 	public EntityRibbon(World world) {
         super(world, 0.2f, 0.2F);
@@ -74,7 +75,8 @@ public class EntityRibbon extends KCEntityThrowable {
 	protected void onImpact(MovingObjectPosition target) {
         if (target.entityHit != null) {
         	EntityPlayer thrower = this.getOwner();
-    		target.entityHit.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(thrower), DAMAGE);
+        	float extra = 10240F / (2048 - SkillsRw.RibbonTouch.getExperience(getOwner()));
+    		target.entityHit.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(thrower), DAMAGE + extra);
         }
         if (!this.worldObj.isRemote) {
             this.setDead();

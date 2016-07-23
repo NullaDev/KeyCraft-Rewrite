@@ -37,21 +37,26 @@ public class SkillKagariStrafe extends Skill {
 				return false;
 			}
 		}
+		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(20) + 1;
+			modifyExperience(player, exp);
+		}
 
 		double px = player.posX;
 		double py = player.posY + player.getEyeHeight();
 		double pz = player.posZ;
 		
 		ArrayList<EntityRibbon> toAdd = new ArrayList<EntityRibbon>();
-
-		toAdd.add(new EntityRibbon(player.worldObj, player, px - 2, py, pz));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px + 2, py, pz));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px, py, pz - 2));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px, py, pz + 2));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px - 1.4, py, pz - 1.4));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px - 1.4, py, pz + 1.4));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px + 1.4, py, pz - 1.4));
-		toAdd.add(new EntityRibbon(player.worldObj, player, px + 1.4, py, pz + 1.4));
+		
+		int num = 16384 / (2048 - this.getExperience(player));
+		double ran = 2 * Math.PI * new Random().nextDouble();
+		
+		for (int i = 0; i < num; i++) {
+			double angle = 2 * Math.PI / num * i + ran;
+			toAdd.add(new EntityRibbon(player.worldObj, player, px + 2 * Math.cos(angle), py, pz + 2 * Math.sin(angle)));
+		}
 
 		for (EntityRibbon i : toAdd) {
 			i.resetSpeed();
