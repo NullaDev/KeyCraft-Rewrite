@@ -27,13 +27,16 @@ public class SkillBloodControl extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
+		if (player.isPotionActive(Potion.regeneration)) {
+			return false;
+		}
 		int time = 20 * 2 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.regeneration.id, time, 1));
 		player.heal(2F * 2048 / (2048 - getExperience(player)));
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();
-			int exp = rand.nextInt(1000) + 1;
+			int exp = rand.nextInt(10) + 1;
 			modifyExperience(player, exp);
 		}
 		player.worldObj.playSoundAtEntity(player, KCResources.sound_aurora.toString(), 1.0f, 1.0f);

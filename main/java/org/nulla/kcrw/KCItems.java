@@ -191,4 +191,14 @@ public class KCItems {
 			.setCreativeTab(null);
     	GameRegistry.registerItem(aurora_blade, "aurora_blade");
     }
+    
+    public static boolean canFix(Item item) {
+    	if (item instanceof ItemAuroraTool)
+    		return true;
+    	if (item instanceof ItemAuroraBlade)
+    		return true;
+    	if (item instanceof ItemHandSonic)
+    		return true;
+    	return false;
+    }
 }

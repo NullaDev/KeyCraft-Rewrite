@@ -25,6 +25,9 @@ public class SkillFireProtection extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
+		if (player.isPotionActive(Potion.fireResistance)) {
+			return false;
+		}
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, time));
 		// 随机事件只在服务器发生

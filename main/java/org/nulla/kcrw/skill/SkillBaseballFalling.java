@@ -41,6 +41,12 @@ public class SkillBaseballFalling extends Skill {
 				return false;
 			}
 		}
+		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(10) + 1;
+			modifyExperience(player, exp);
+		}
 
 		player.worldObj.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
 

@@ -8,6 +8,7 @@ import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCMaterials;
 import org.nulla.kcrw.KCUtils;
 import org.nulla.kcrw.skill.SkillAuroraBlade;
+import org.nulla.kcrw.skill.SkillsRw;
 
 import com.google.common.collect.Sets;
 
@@ -74,17 +75,23 @@ public class ItemAuroraBlade extends ItemTool {
 	
 	/** 自动掉耐久。 */
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity player, int index, boolean isCurrentItem) {
-		if (player instanceof EntityPlayer && !isCurrentItem) {
-			((EntityPlayer)player).inventory.mainInventory[index] = null;
-			onBladeDead(stack, (EntityPlayer)player);
+	public void onUpdate(ItemStack stack, World world, Entity entity, int index, boolean isCurrentItem) {
+		if (!(entity instanceof EntityPlayer))
+			return;
+		
+		EntityPlayer player = (EntityPlayer) entity;
+		
+		if (!isCurrentItem) {
+			player.inventory.mainInventory[index] = null;
+			onBladeDead(stack, player);
 			return;
 		}
 		
 		if (stack.getItemDamage() >= this.getMaxDamage()) {
 			onBladeDead(stack, (EntityPlayer)player);
 		} else {
-			if (new Random().nextBoolean())
+			float p = 2048 / (2048 - SkillsRw.AuroraBlade.getExperience(player));
+			if (new Random().nextFloat() < p)
 				stack.setItemDamage(stack.getItemDamage() + 1);
 		}
 	}

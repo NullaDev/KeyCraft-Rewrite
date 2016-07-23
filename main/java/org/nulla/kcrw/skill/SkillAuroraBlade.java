@@ -45,22 +45,16 @@ public class SkillAuroraBlade extends Skill {
 	
 	/** 当剑爆了的时候，调用此方法。 */
 	public static void onBladeDead(EntityPlayer player, double proportion) {
-		if (proportion == 0) {
-			SkillUtils.modifyAuroraPoint(player, (int) (SkillsRw.AuroraBlade.mAuroraCost * 0.5F));
-		} else {
-			if (!player.worldObj.isRemote) {
-				if (proportion < 0.99D)
-					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.recyclerate") 
-							+ String.format("%.3f", proportion)));
-				else
-					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
-			}
-			int time = (int)(60 * 20 * proportion);
-			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, 1));
-			player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, time, 3));
-			player.addPotionEffect(new PotionEffect(Potion.confusion.id, time));
-			player.addPotionEffect(new PotionEffect(Potion.weakness.id, time, 3));
+		if (!player.worldObj.isRemote) {
+			if (proportion < 0.99D)
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.recyclerate") + String.format("%.3f", proportion)));
+			else
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
 		}
+		int time = (int)(20 * 20 * proportion);
+		player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, 1));
+		player.addPotionEffect(new PotionEffect(Potion.confusion.id, time));
+		player.addPotionEffect(new PotionEffect(Potion.weakness.id, time, 1));
 	}
 	
 	/** 当剑完全爆了的时候，调用此方法。 */

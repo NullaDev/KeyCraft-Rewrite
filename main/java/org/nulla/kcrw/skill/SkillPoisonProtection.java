@@ -8,6 +8,7 @@ import org.nulla.kcrw.potion.KCPotions;
 import org.nulla.nullacore.api.skill.Skill;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
@@ -25,6 +26,9 @@ public class SkillPoisonProtection extends Skill {
 	
 	@Override
 	public boolean onUse(EntityPlayer player) {
+		if (player.isPotionActive(KCPotions.poisonResistance)) {
+			return false;
+		}
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(KCPotions.poisonResistance.id, time));
 		// 随机事件只在服务器发生

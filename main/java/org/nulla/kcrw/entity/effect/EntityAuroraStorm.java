@@ -57,6 +57,12 @@ public class EntityAuroraStorm extends EntityHasOwner {
 			return;
 		}
 		
+		if (!this.getOwner().worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(1);
+			SkillsRw.AuroraStorm.modifyExperience(this.getOwner(), exp);
+		}
+		
 		List list = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(
 				posX - 4, posY - 1, posZ - 4, posX + 4, posY + 3, posZ + 4));
 		Iterator iterator = list.iterator();

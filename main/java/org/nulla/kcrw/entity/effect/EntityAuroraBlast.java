@@ -16,22 +16,22 @@ import net.minecraft.world.World;
 
 public class EntityAuroraBlast extends EntityEffect {
 	
-	private int livingTime = 0;
+	private int livingTime = 50;
 	private Entity mUser = this;
 
 	public EntityAuroraBlast(World world) {
 		super(world);
 	}
 
-	public EntityAuroraBlast(World world, double x, double y, double z, float yaw, float pitch, int livingTime) {
+	public EntityAuroraBlast(World world, double x, double y, double z, float yaw, float pitch) {
 		this(world);
 		this.setPositionAndRotation(x, y, z, yaw, pitch);
-		this.livingTime = livingTime;
 	}
 	
-	public EntityAuroraBlast(Entity user, int livingTime) {
-		this(user.worldObj, user.posX, user.posY, user.posZ, user.rotationYaw, user.rotationPitch, livingTime);
+	public EntityAuroraBlast(EntityPlayer user) {
+		this(user.worldObj, user.posX, user.posY, user.posZ, user.rotationYaw, user.rotationPitch);
 		this.mUser = user;
+		this.livingTime = 5 * 10 * 2048 / (2048 - SkillsRw.AuroraBlast.getExperience(user));
 	}
 	
 	public Vec3 getLookVec() {

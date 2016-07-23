@@ -1,5 +1,7 @@
 package org.nulla.kcrw.event;
 
+import java.util.Random;
+
 import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.potion.KCPotions;
 import org.nulla.kcrw.skill.SkillAuroraShield;
@@ -31,8 +33,12 @@ public class HandlerLivingAttackOrHurt {
 		if (event.source.damageType.equals("player")) {
 			//这里直接有判断cd和是否习得了，太棒了
 			if (SkillsRw.AuroraAttack.trigSkill(player)) {
+				float damage = 4096F / (2048 - SkillsRw.AuroraAttack.getExperience(player));
 				event.entityLiving.setLastAttacker(player);
-				event.entityLiving.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), 20.0F);
+				event.entityLiving.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), damage);
+				Random rand = new Random();
+    			int exp = rand.nextInt(2);
+    			SkillsRw.AuroraAttack.modifyExperience(player, exp);
 			}
 		}
 		

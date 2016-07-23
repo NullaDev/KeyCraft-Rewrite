@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Random;
 import java.util.UUID;
 
+import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.client.gui.SkillLearningHelper;
 import org.nulla.kcrw.item.ItemAuroraArmor;
 import org.nulla.kcrw.item.ItemAuroraSword;
@@ -32,9 +33,9 @@ public class HandlerPlayerTick {
 		if (event.phase == Phase.END) {
 			return;
 		}
-		
+				
 		EntityPlayer player = event.player;
-		
+	
 		if (player.worldObj.isRemote) {
 			return;
 		}
@@ -58,7 +59,7 @@ public class HandlerPlayerTick {
 				if (player.inventory.mainInventory[i] != null) {
 					ItemStack stack = player.inventory.mainInventory[i];
 					if (stack.getItemDamage() != 0) {
-						if (stack.getItem() instanceof ItemAuroraTool || stack.getItem() instanceof ItemAuroraSword)
+						if (KCItems.canFix(stack.getItem()))
 							flag = player.inventory.mainInventory[i];
 					}
 				}
@@ -70,12 +71,12 @@ public class HandlerPlayerTick {
 		}
 		
 		if (SkillsRw.AuroraRepair.trigSkill(player)) {
-			for (int i = 0; i < 4; i++) {
-				if (player.inventory.armorInventory[i] != null) {
-					flag.setItemDamage(Math.max(player.inventory.armorInventory[i].getItemDamage() - 16, 0));
-					return;
-				}
-			}
+			int num = 16384 / (2048 - SkillsRw.AuroraRepair.getExperience(player));
+			flag.setItemDamage(Math.max(flag.getItemDamage() - num, 0));
+			Random rand = new Random();
+			int exp = rand.nextInt(2);
+			SkillsRw.AuroraRepair.modifyExperience(player, exp);
+			return;
 		}
 	}
 	
@@ -96,9 +97,13 @@ public class HandlerPlayerTick {
 		}
 				
 		Random ran = new Random();
-		if (ran.nextFloat() < 1F / (20 * 120)) {
+		if (ran.nextFloat() < 1F / (20 * 60)) {
 			if (SkillsRw.AuroraRegeneration.trigSkill(player)) {
-				player.addPotionEffect(new PotionEffect(KCPotions.auroraRegeneration.id, 20));
+				int time = 65536 / (2048 - SkillsRw.AuroraRegeneration.getExperience(player));
+				player.addPotionEffect(new PotionEffect(KCPotions.auroraRegeneration.id, time));
+				Random rand = new Random();
+				int exp = rand.nextInt(2);
+				SkillsRw.AuroraRegeneration.modifyExperience(player, exp);
 			}
 		}
 		

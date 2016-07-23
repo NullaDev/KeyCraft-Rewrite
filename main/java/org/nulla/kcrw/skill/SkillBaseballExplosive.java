@@ -34,6 +34,12 @@ public class SkillBaseballExplosive extends Skill {
 			return false;
 		}
 		
+		if (!player.worldObj.isRemote) {
+			Random rand = new Random();
+			int exp = rand.nextInt(10) + 1;
+			modifyExperience(player, exp);
+		}
+		
 		if (!player.capabilities.isCreativeMode) {
 			if (KCUtils.getNumberOfItemInPlayer(player, KCItems.baseball) >= 1) {
 				KCUtils.minusNumberOfItemInPlayer(player, KCItems.baseball, 1);

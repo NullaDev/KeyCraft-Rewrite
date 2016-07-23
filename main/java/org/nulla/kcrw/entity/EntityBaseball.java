@@ -2,6 +2,8 @@ package org.nulla.kcrw.entity;
 
 import java.util.Random;
 
+import org.nulla.kcrw.skill.SkillsRw;
+
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -67,21 +69,26 @@ public class EntityBaseball extends KCEntityThrowable {
     	EntityPlayer thrower = this.getOwner();
         if (target.entityHit != null) {
         	if (thrower instanceof EntityPlayer) {
-        		if (this.mSkill == "falling")
-        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + ticksInAir / 10);
-        		else if (this.mSkill == "rolling")
-        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + 5 * new Random().nextFloat());
-        		else if (this.mSkill == "shooting")
-        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_SHOOTING);
-        		else
+        		if (this.mSkill == "falling") {
+            		float extra = 2048F / (2048 - SkillsRw.BaseballFalling.getExperience(thrower));
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + extra * ticksInAir / 10);
+        		} else if (this.mSkill == "rolling") {
+            		float extra = 2048F / (2048 - SkillsRw.BaseballRolling.getExperience(thrower));
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC + extra * 5 * new Random().nextFloat());
+        		} else if (this.mSkill == "shooting") {
+            		float extra = 4096F / (2048 - SkillsRw.BaseballShooting.getExperience(thrower));
+        			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_SHOOTING + extra);
+        		} else
             		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), DAMAGE_BASIC);
         	} else {
         		target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower == null ? this : thrower), DAMAGE_BASIC);
         	}
         }
         
-        if (this.isExplosive)
-        	this.worldObj.createExplosion(thrower, posX, posY, posZ, 5.0F, false);
+        if (this.isExplosive) {
+    		float extra = 2048F / (2048 - SkillsRw.BaseballExplosive.getExperience(thrower));
+        	this.worldObj.createExplosion(thrower, posX, posY, posZ, 3.0F * extra, false);
+        }
         
         if (this.isThundering)
         	this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, posX, posY, posZ));

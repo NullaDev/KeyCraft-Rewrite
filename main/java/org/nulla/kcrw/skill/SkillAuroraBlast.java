@@ -27,7 +27,7 @@ public class SkillAuroraBlast extends Skill {
 			return false;
 		}
 		
-		player.worldObj.spawnEntityInWorld(new EntityAuroraBlast(player, 5 * 10 * 2048 / (2048 - getExperience(player))));
+		player.worldObj.spawnEntityInWorld(new EntityAuroraBlast(player));
 		
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {

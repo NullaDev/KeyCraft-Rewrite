@@ -28,8 +28,12 @@ public class SkillSpeedUp extends Skill {
 		if (SkillsRw.SpeedUpFinal.hasSkill(player)) {
 			return false;
 		}
+		if (player.isPotionActive(Potion.moveSpeed) && player.isPotionActive(Potion.jump)) {
+			return false;
+		}
 		int time = 20 * 30 * 2048 / (2048 - getExperience(player));
 		player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, time, 1));
+		player.addPotionEffect(new PotionEffect(Potion.jump.id, time, 1));
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
 			Random rand = new Random();

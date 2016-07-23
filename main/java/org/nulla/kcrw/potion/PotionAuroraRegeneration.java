@@ -28,7 +28,7 @@ public class PotionAuroraRegeneration extends NullaPotion {
 	@Override
 	public boolean isReady(int p_76397_1_, int p_76397_2_) {
 		int k;
-		k = 20 >> p_76397_2_;
+		k = 10 >> p_76397_2_;
 		return k > 0 ? p_76397_1_ % k == 0 : true;
 	}
 	
