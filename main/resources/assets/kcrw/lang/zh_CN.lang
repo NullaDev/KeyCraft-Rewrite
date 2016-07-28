@@ -1,6 +1,8 @@
 itemGroup.kcrw=KeyCraft创造模式物品栏
 
-kcrw.item.intro.peachJuice=粘稠浓厚桃子味果汁，你确定这东西能喝吗。
+kcrw.item.intro.peachjuice=粘稠浓厚桃子味果汁，你确定这东西能喝吗。
+kcrw.item.intro.pizzajam=特殊制作，甜到发腻的披萨酱，吃一瓶饱一天。
+
 
 item.aurora_iron_ingot.name=Aurora铁
 item.aurora_iron_helmet.name=Aurora铁头盔
@@ -18,6 +20,7 @@ item.javelin.name=标枪
 item.miracle_ribbon.name=奇迹丝带
 item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
+item.pizza_jam.name=秘制披萨酱
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
 item.aurora_blade.name=Aurora光剑

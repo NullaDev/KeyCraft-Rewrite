@@ -48,6 +48,8 @@ public class KCItems {
 	
 	public static Item peach_juice;
 	
+	public static Item pizza_jam;
+	
 	public static Item steel_blade;
 	
 	public static Item steel_blade_vibrating;
@@ -172,8 +174,24 @@ public class KCItems {
     		.setTextureName("kcrw:peach_juice");
     	GameRegistry.registerItem(peach_juice, "peach_juice");
     	
-    	KCUtils.addEnchantedNamedRecipe(new ItemStack(Items.stick, 1), Enchantment.knockback, 99, "我是光棍", new Object[] { " A ", "ABA", " A " , 'A', Blocks.piston, 'B', Items.stick });
-    	
+    	pizza_jam = new ItemFoodKC(10)
+			.setCallback(new ItemFoodKC.ICallback() {
+				@Override
+				public void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
+					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 30 * 20));
+					player.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 240 * 20));
+				}
+				@Override
+				public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
+					information.add(StatCollector.translateToLocal("kcrw.item.intro.pizzajam"));
+				}
+			})
+			.setAlwaysEdible()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.sugar, 32), new ItemStack(Items.porkchop, 1), new ItemStack(Items.slime_ball, 2)} , 1, 16))
+			.setUnlocalizedName("pizza_jam")
+			.setTextureName("kcrw:pizza_jam");
+    	GameRegistry.registerItem(pizza_jam, "pizza_jam");
+    	    	
     	steel_blade = new ItemSteelBlade()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 3)}, 1, 64))
 			.setUnlocalizedName("steel_blade")

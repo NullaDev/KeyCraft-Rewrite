@@ -75,7 +75,7 @@ public class EntityRibbon extends KCEntityThrowable {
 	protected void onImpact(MovingObjectPosition target) {
         if (target.entityHit != null) {
         	EntityPlayer thrower = this.getOwner();
-        	float extra = 10240F / (2048 - SkillsRw.RibbonTouch.getExperience(getOwner()));
+        	float extra = thrower == null? 0 : 10240F / (2048 - SkillsRw.RibbonTouch.getExperience(getOwner()));
     		target.entityHit.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(thrower), DAMAGE + extra);
         }
         if (!this.worldObj.isRemote) {

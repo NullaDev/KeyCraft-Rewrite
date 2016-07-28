@@ -67,6 +67,7 @@ public class KCRecipe {
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
 		items.add(KCItems.miracle_ribbon);
+		items.add(KCItems.pizza_jam);
 		return items;
 	}
 	
@@ -83,6 +84,7 @@ public class KCRecipe {
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
 		items.add(KCItems.miracle_ribbon);
+		items.add(KCItems.pizza_jam);
 		return items;
 	}
 
