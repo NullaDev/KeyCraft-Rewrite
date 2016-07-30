@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityRedDog extends EntityMob {
+public class EntityRedDog extends EntityMob implements EntityWithAurora {
 
 	public EntityRedDog(World world) {
 		super(world);
@@ -36,5 +36,15 @@ public class EntityRedDog extends EntityMob {
 	public float getEyeHeight() {
         return this.height * 0.8F;
     }
+
+	@Override
+	public int getOnDeathDropAuroraPoint() {
+		return 15;
+	}
+
+	@Override
+	public int getOnSpawnNeededAuroraPoint() {
+		return 15;
+	}
 
 }
