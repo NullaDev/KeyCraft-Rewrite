@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityRedDog extends EntityMob implements EntityWithAurora {
+public class EntityRedDog extends KCEntityMob {
 
 	public EntityRedDog(World world) {
 		super(world);
