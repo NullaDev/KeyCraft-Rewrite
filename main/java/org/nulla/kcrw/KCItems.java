@@ -38,6 +38,8 @@ public class KCItems {
     
 	public static Item baseball;
 	
+	public static Item dog_spawner;
+	
 	public static Item hand_sonic;
 	
 	public static Item javelin;
@@ -54,17 +56,11 @@ public class KCItems {
 	
 	public static Item steel_blade_vibrating;
 	
+	public static Item sth_sticky;
+	
 	public static Item aurora_blade;
 	
-	public static Item dog_spawner;
-
-	
     public static void InitItems() {
-    	
-    	dog_spawner = new ItemDogSpawner()
-    		.setUnlocalizedName("dog_spawner")
-    		.setTextureName("kcrw:dog_spawner");
-    	GameRegistry.registerItem(dog_spawner, "dog_spawner");
     	
     	aurora_iron_ingot = new ItemAuroraIronIngot()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 1)}, 1, 16))
@@ -120,7 +116,6 @@ public class KCItems {
     	GameRegistry.registerItem(aurora_iron_shovel, "aurora_iron_shovel");
     	KCUtils.addEnchantedRecipe(aurora_iron_shovel, Enchantment.unbreaking, 2, new Object[] { "A", "B", "B", 'A', aurora_iron_ingot, 'B', Items.stick });
 
-
     	aurora_iron_sword = new ItemAuroraSword()
 			.setUnlocalizedName("aurora_iron_sword")
 			.setTextureName("kcrw:aurora_iron_sword");
@@ -132,6 +127,11 @@ public class KCItems {
 			.setUnlocalizedName("baseball")
 			.setTextureName("kcrw:baseball");
     	GameRegistry.registerItem(baseball, "baseball");
+    	   	
+    	dog_spawner = new ItemDogSpawner()
+    		.setUnlocalizedName("dog_spawner")
+    		.setTextureName("kcrw:dog_spawner");
+    	GameRegistry.registerItem(dog_spawner, "dog_spawner");
     	
     	hand_sonic = new ItemHandSonic()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 4), new ItemStack(KCItems.aurora_iron_ingot, 4), new ItemStack(Blocks.lapis_block, 1)}, 1, 256))
@@ -169,7 +169,7 @@ public class KCItems {
 				}
     		})
     		.setAlwaysEdible()
-    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.slime_ball, 4), new ItemStack(Items.apple, 1)} , 4, 10))
+    		.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(KCItems.sth_sticky, 2), new ItemStack(Items.apple, 1)} , 1, 10))
     		.setUnlocalizedName("peach_juice")
     		.setTextureName("kcrw:peach_juice");
     	GameRegistry.registerItem(peach_juice, "peach_juice");
@@ -187,7 +187,7 @@ public class KCItems {
 				}
 			})
 			.setAlwaysEdible()
-			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.sugar, 32), new ItemStack(Items.porkchop, 1), new ItemStack(Items.slime_ball, 2)} , 1, 16))
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.sugar, 32), new ItemStack(Items.porkchop, 1), new ItemStack(KCItems.sth_sticky, 1)} , 1, 16))
 			.setUnlocalizedName("pizza_jam")
 			.setTextureName("kcrw:pizza_jam");
     	GameRegistry.registerItem(pizza_jam, "pizza_jam");
@@ -203,6 +203,12 @@ public class KCItems {
     		.setTextureName("kcrw:steel_blade_vibrating");
     	GameRegistry.registerItem(steel_blade_vibrating, "steel_blade_vibrating");
     	
+    	sth_sticky = new ItemSthSticky()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.slime_ball, 1)}, 1, 16))
+			.setUnlocalizedName("sth_sticky")
+			.setTextureName("kcrw:sth_sticky");
+    	GameRegistry.registerItem(sth_sticky, "sth_sticky");
+    	
     	aurora_blade = new ItemAuroraBlade()
 			.setUnlocalizedName("aurora_blade")
 			.setTextureName("kcrw:aurora_blade")
@@ -214,6 +220,8 @@ public class KCItems {
     	if (item instanceof ItemAuroraTool)
     		return true;
     	if (item instanceof ItemAuroraBlade)
+    		return true;
+    	if (item instanceof ItemAuroraArmor)
     		return true;
     	if (item instanceof ItemHandSonic)
     		return true;

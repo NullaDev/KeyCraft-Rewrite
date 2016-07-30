@@ -64,7 +64,7 @@ public class GuiButtonImage extends Gui {
             
             if (this.hasFrame) {
             	//按钮背景
-            	drawRect(posX, posY, posX + width, posY + height, 0xFF8C6238);
+            	drawRect(posX, posY, posX + width, posY + height, 0xFF7F3F00);
             
             	//按钮边框
             	drawRect(posX, posY, posX + width, posY + 1, 0xFF000000);

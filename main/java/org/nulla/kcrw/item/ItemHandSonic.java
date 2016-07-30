@@ -1,5 +1,7 @@
 package org.nulla.kcrw.item;
 
+import java.util.List;
+
 import org.nulla.kcrw.KCItems;
 
 import com.google.common.collect.Multimap;
@@ -16,6 +18,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemHandSonic extends KCItemBase {
@@ -107,5 +110,10 @@ public class ItemHandSonic extends KCItemBase {
     			living.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 5 * 20));
     	}
     }
+    
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
+		information.add(StatCollector.translateToLocal("kcrw.item.intro.handsonic"));
+	}
 
 }

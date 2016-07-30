@@ -21,15 +21,18 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 	
 	private EntityPlayer crafter;
 	
-	private String currentState = "CRAFT";
+	private String currentState = "ITEM";
 
-	private GuiButtonImage btnChooseCraft;
-	private GuiButtonImage btnChooseDecompose;
+	private GuiButtonImage btnChooseItem;
+	private GuiButtonImage btnChooseMonster;
 	private GuiButtonImage btnChooseReturn;
 	private GuiButtonImage btnEnsureCraft;
+	private GuiButtonImage btnNextPage;
+	private GuiButtonImage btnPreviousPage;
 	private ArrayList<GuiButtonImage> btnCraft = new ArrayList<GuiButtonImage>();
 	
 	private KCItemBase currentCraftItem = null;
+	private int currentItemPage = 0;
 	 
     public GuiKotoriWorkshop(GuiScreen parent, EntityPlayer player) {
          super(parent);
@@ -41,15 +44,23 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     	buttonList.clear();
     	btnCraft.clear();
     	
-		buttonList.add(btnChooseCraft = new GuiButtonImage(128, (int)(width * 0.32 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_craft, false));
-		buttonList.add(btnChooseDecompose = new GuiButtonImage(129, (int)(width * 0.40 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_decompose, false));
-		buttonList.add(btnChooseReturn = new GuiButtonImage(130, (int)(width * 0.48 - 16), (int)(height * 0.13 - 16), 32, 32, KCResources.btn_workshop_return, false));
+		buttonList.add(btnChooseItem = new GuiButtonImage(128, (int)(width * 0.32 - 16), (int)(height * 0.13 - 8), 32, 16, KCResources.btn_workshop_empty, false));
+		buttonList.add(btnChooseMonster = new GuiButtonImage(129, (int)(width * 0.40 - 16), (int)(height * 0.13 - 8), 32, 16, KCResources.btn_workshop_empty, false));
+		buttonList.add(btnChooseReturn = new GuiButtonImage(130, (int)(width * 0.48 - 16), (int)(height * 0.13 - 8), 32, 16, KCResources.btn_workshop_empty, false));
 
     	if (currentCraftItem != null) {
     		buttonList.add(btnEnsureCraft = new GuiButtonImage(256, (int)(width * 0.42 + 10), (int)(height * 0.2 + 145), 16, 16, KCResources.btn_workshop_ensure, false));
     	}
-        if (currentState.equals("CRAFT")) {
+        if (currentState.equals("ITEM")) {
         	addCraftButton();
+        	
+        	if (KCRecipe.getItemCraftable(crafter).size() / 9 > currentItemPage) {
+        		buttonList.add(btnNextPage = new GuiButtonImage(131, (int)(width * 0.4 - 8), (int)(height * 0.3 - 8), 16, 16, KCResources.btn_workshop_next, false));
+        	}
+        	
+        	if (currentItemPage > 0) {
+        		buttonList.add(btnPreviousPage = new GuiButtonImage(132, (int)(width * 0.35 - 8), (int)(height * 0.3 - 8), 16, 16, KCResources.btn_workshop_previous, false));
+        	}
         }
     }
 
@@ -62,9 +73,14 @@ public class GuiKotoriWorkshop extends KCGuiBase {
         KCUtils.drawScaledCustomSizeModalRect(0, 0, 0, 0, 1366, 768, width, height, 1366, 768);
     	
         super.drawScreen(par1, par2, par3);
-                
+        
+		this.drawCenteredString(fontRendererObj, StatCollector.translateToLocal("kcrw.gui.craftitem"), (int)(width * 0.32), (int)(height * 0.13 - 4), 0xFFFFFF);
+		this.drawCenteredString(fontRendererObj, StatCollector.translateToLocal("kcrw.gui.craftmonster"), (int)(width * 0.40), (int)(height * 0.13 - 4), 0xFFFFFF);
+		this.drawCenteredString(fontRendererObj, StatCollector.translateToLocal("kcrw.gui.return"), (int)(width * 0.48), (int)(height * 0.13 - 4), 0xFFFFFF);
+        KCUtils.initDrawerState();       
+		
         //绘制合成界面
-        if (currentState.equals("CRAFT")) {
+        if (currentState.equals("ITEM")) {
         	//绘制边框
             int shang = (int)(height * 0.2);
             int xia = (int)(height * 0.85);
@@ -109,17 +125,24 @@ public class GuiKotoriWorkshop extends KCGuiBase {
 
         		KCUtils.initDrawerState();
         	}
+        } else if (currentState.equals("MONSTER")) {
+        	KCUtils.drawStringWithShadow(fontRendererObj, StatCollector.translateToLocal("kcrw.gui.monster"), (int)(width * 0.16), (int)(height * 0.4), 0xFF0000);
+            KCUtils.initDrawerState();
         }
     }
     
     @Override
 	protected void actionPerformed(GuiButtonImage button) {
-    	if (button.equals(btnChooseCraft)) {
-    		currentState = "CRAFT";
-    	} else if (button.equals(btnChooseDecompose)) {
-    		currentState = "DECOMPOSE";
+    	if (button.equals(btnChooseItem)) {
+    		currentState = "ITEM";
+    	} else if (button.equals(btnChooseMonster)) {
+    		currentState = "MONSTER";
     	} else if (button.equals(btnChooseReturn)) {
     		mc.displayGuiScreen(getParentScreen());
+    	} else if (button.equals(btnNextPage)) {
+    		currentItemPage++;
+    	} else if (button.equals(btnPreviousPage)) {
+    		currentItemPage--;
     	} else if (button.equals(btnEnsureCraft)) {
 			if (isEnough(0) && isEnough(1) && isEnough(2)) {
 				craft(currentCraftItem, crafter);
@@ -136,7 +159,11 @@ public class GuiKotoriWorkshop extends KCGuiBase {
     
     private void addCraftButton() {
     	int pos = 0;
-    	for (Item i : KCRecipe.getItemCraftable(crafter)) {
+    	ArrayList<Item> list = KCRecipe.getItemCraftable(crafter);
+    	for (Item i : list) {
+    		if (list.indexOf(i) / 9 != this.currentItemPage) {
+    			continue;
+    		}
     		int id = Item.getIdFromItem(i);
         	btnCraft.add(new GuiButtonImage(id, (int)(width * 0.15 + pos % 3 * 36), (int)(height * 0.4 + pos / 3 * 36), 32, 32, KCResources.getResourcebyID(id), true));
         	pos++;

@@ -1,8 +1,10 @@
 itemGroup.kcrw=KeyCraft创造模式物品栏
 
+kcrw.item.intro.handsonic=一把不寻常的手刃，neta自某作品。
+kcrw.item.intro.miracle_ribbon=通常缠绕于键手上的，奇迹般闪耀着的丝带。
 kcrw.item.intro.peachjuice=粘稠浓厚桃子味果汁，你确定这东西能喝吗。
 kcrw.item.intro.pizzajam=特殊制作，甜到发腻的披萨酱，吃一瓶饱一天。
-
+kcrw.item.intro.sth_sticky=一坨黏黏糊糊的不明物质，合成用。
 
 item.aurora_iron_ingot.name=Aurora铁
 item.aurora_iron_helmet.name=Aurora铁头盔
@@ -15,6 +17,7 @@ item.aurora_iron_pickaxe.name=Aurora铁镐
 item.aurora_iron_shovel.name=Aurora铁铲
 item.aurora_iron_sword.name=Aurora铁剑
 item.baseball.name=棒球
+item.dog_spawner.name=狗狗生成器
 item.hand_sonic.name=HandSonicV5
 item.javelin.name=标枪
 item.miracle_ribbon.name=奇迹丝带
@@ -23,8 +26,8 @@ item.peach_juice.name=粘稠浓厚桃子味
 item.pizza_jam.name=秘制披萨酱
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
+item.sth_sticky.name=某种黏糊糊的东西
 item.aurora_blade.name=Aurora光剑
-item.dog_spawner.name=狗狗生成器
 
 tile.KotoriWorkshop.name=小鸟工坊
 
@@ -34,10 +37,14 @@ kcrw.key.skill2=使用技能1/3
 kcrw.key.skill3=切换技能格
 kcrw.key.skill4=技能学习
 
+kcrw.gui.craftitem=物品
+kcrw.gui.craftmonster=魔物
+kcrw.gui.return=返回
 kcrw.gui.currentCraftItem=当前合成物品
 kcrw.gui.currentCraftItemAmount=每次合成数量
 kcrw.gui.currentCraftItemInBag=已拥有数量
 kcrw.gui.needs=需要
+kcrw.gui.monster=中国北京，中国北京，最菜的MOD制作组，NullaDev倒闭了！^王八蛋组员SalimTerryLi吃喝嫖赌，欠下了3.5亿行代码，带着他的私活跑了。^我们没有没有办法，拿着半成品顶界面。^SalimTerryLi王八蛋，你不是人，我们辛辛苦苦等你等了大半年，^你不码代码，你还我血汗钱，还我血汗钱！
 
 kcrw.prompt.cheat.add=增加1k欧若拉点数(作弊)。
 kcrw.prompt.cheat.reset=重置技能点数(作弊)。
@@ -54,6 +61,8 @@ kcrw.potion.poisonResistance=抗毒
 
 kcrw.skill.name=技能名称
 kcrw.skill.learned=已经习得该技能。
+kcrw.skill.can_learn=当前可以学习该技能。
+kcrw.skill.cant_learn=当前熟练度不足以学习该技能。
 kcrw.skill.aurora_cost=使用需要的Aurora
 kcrw.skill.aurora_require=学习需要的Aurora
 kcrw.skill.experience=当前技能熟练度

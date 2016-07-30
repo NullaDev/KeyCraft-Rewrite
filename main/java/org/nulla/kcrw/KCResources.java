@@ -10,10 +10,10 @@ public class KCResources {
 	public static ResourceLocation gui_kotori_workshop = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/gui/gui_kotori_workshop.png");
 	public static ResourceLocation gui_learn_skill = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/gui/gui_learn_skill.png");
 	
-	public static ResourceLocation btn_workshop_craft = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_craft.png");
-	public static ResourceLocation btn_workshop_decompose = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_decompose.png");
+	public static ResourceLocation btn_workshop_empty = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_empty.png");
+	public static ResourceLocation btn_workshop_next = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_next.png");
+	public static ResourceLocation btn_workshop_previous = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_previous.png");
 	public static ResourceLocation btn_workshop_ensure = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_ensure.png");
-	public static ResourceLocation btn_workshop_return = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_workshop_return.png");
 	public static ResourceLocation btn_end = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/end.png");
 
 	public static ResourceLocation btn_skill_learn = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/btn_skill_learn.png");

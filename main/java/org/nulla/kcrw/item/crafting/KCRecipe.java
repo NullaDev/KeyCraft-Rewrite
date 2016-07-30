@@ -59,15 +59,16 @@ public class KCRecipe {
 	 */
 	public static ArrayList<Item> getItemCraftable(EntityPlayer player) {
 		ArrayList<Item> items = new ArrayList<Item>();
-		items.add(KCItems.baseball);
-		items.add(KCItems.peach_juice);
-		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
-		items.add(KCItems.steel_blade);		
+		items.add(KCItems.baseball);
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
 		items.add(KCItems.miracle_ribbon);
+		items.add(KCItems.music_player);
+		items.add(KCItems.peach_juice);
 		items.add(KCItems.pizza_jam);
+		items.add(KCItems.steel_blade);	
+		items.add(KCItems.sth_sticky);
 		return items;
 	}
 	
@@ -76,15 +77,16 @@ public class KCRecipe {
 	 */
 	public static ArrayList<Item> getAllItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
-		items.add(KCItems.baseball);
-		items.add(KCItems.peach_juice);
-		items.add(KCItems.music_player);
 		items.add(KCItems.aurora_iron_ingot);
-		items.add(KCItems.steel_blade);
+		items.add(KCItems.baseball);
 		items.add(KCItems.hand_sonic);
 		items.add(KCItems.javelin);
 		items.add(KCItems.miracle_ribbon);
+		items.add(KCItems.music_player);
+		items.add(KCItems.peach_juice);
 		items.add(KCItems.pizza_jam);
+		items.add(KCItems.steel_blade);	
+		items.add(KCItems.sth_sticky);
 		return items;
 	}
 

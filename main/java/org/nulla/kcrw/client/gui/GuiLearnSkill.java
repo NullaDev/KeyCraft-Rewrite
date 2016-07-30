@@ -81,6 +81,8 @@ public class GuiLearnSkill extends KCGuiBase {
     }
     
     private void drawLearnState() {
+    	int color;
+    	
     	//技能名称
     	String name = StatCollector.translateToLocal("kcrw.skill.name") + ": " + StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".name");
     	this.fontRendererObj.drawStringWithShadow(name, (int)(width * 0.2) + 20, (int)(height * 0.45) - 12, 0xFFFFFF);
@@ -88,14 +90,19 @@ public class GuiLearnSkill extends KCGuiBase {
     	KCUtils.initDrawerState();
 
     	//技能前置
-    	int color = 0xFF0000;
-    	if (currentSkill.hasSkill(learner) || currentSkill.canLearnSkill(learner))
+    	if (currentSkill.hasSkill(learner)) {
+    		String info = StatCollector.translateToLocal("kcrw.skill.learned");
     		color = 0x00FF00;
-    	String learnState = StatCollector.translateToLocal("kcrw.skill.learned");
-    	if (!currentSkill.hasSkill(learner))
-    		learnState = StatCollector.translateToLocal("kcrw.skill." + currentSkill.mName + ".need");
-    	this.fontRendererObj.drawStringWithShadow(learnState, (int)(width * 0.2) - 16, (int)(height * 0.55), color);
-    	KCUtils.initDrawerState();
+    		this.fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.55), color);
+    	} else {
+    		String info;
+    		if (currentSkill.canLearnSkill(learner))
+    			info = StatCollector.translateToLocal("kcrw.skill.can_learn");
+    		else
+    			info = StatCollector.translateToLocal("kcrw.skill.cant_learn");
+    		this.fontRendererObj.drawStringWithShadow(info, (int)(width * 0.2) - 16, (int)(height * 0.55), currentSkill.canLearnSkill(learner)? 0x00FF00 : 0xFF0000);
+    	}
+		KCUtils.initDrawerState();
     	
     	//技能消耗
     	if (currentSkill.hasSkill(learner)) {

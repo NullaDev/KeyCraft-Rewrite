@@ -25,10 +25,6 @@ public class ItemAuroraSword extends KCItemBase {
         this.damage = 4.0F + material.getDamageVsEntity();
     }
 
-    public float func_150931_i() {
-        return this.material.getDamageVsEntity();
-    }
-
     @Override
     public float func_150893_a(ItemStack p_150893_1_, Block block) {
         if (block == Blocks.web) {

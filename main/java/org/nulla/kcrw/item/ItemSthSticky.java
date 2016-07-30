@@ -8,7 +8,7 @@ import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemMiracleRibbon extends KCItemBase {
+public class ItemSthSticky extends KCItemBase {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -18,7 +18,7 @@ public class ItemMiracleRibbon extends KCItemBase {
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
-		information.add(StatCollector.translateToLocal("kcrw.item.intro.miracle_ribbon"));
+		information.add(StatCollector.translateToLocal("kcrw.item.intro.sth_sticky"));
 	}
 
 }
