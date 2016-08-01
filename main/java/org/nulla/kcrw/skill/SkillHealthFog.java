@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -41,14 +42,22 @@ public class SkillHealthFog extends Skill {
 			return false;
 		}
 		
-		List list = player.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(
-				player.posX - 4, player.posY - 1, player.posZ - 4, player.posX + 4, player.posY + 2, player.posZ + 4));
-		Iterator iterator = list.iterator();
-		while (iterator.hasNext()) {
-			EntityLivingBase entity = (EntityLivingBase)iterator.next();
-            entity.addPotionEffect(new PotionEffect(Potion.heal.id, 1, 1));
-            System.out.println(entity);
-        }
+		Entity targetCl = Minecraft.getMinecraft().pointedEntity;
+		Entity targetSr = player.worldObj.getEntityByID(targetCl.getEntityId());
+		EntityLivingBase flag = player;
+		
+		if (targetSr != null && targetSr instanceof EntityLivingBase) {
+			System.out.println(targetSr.worldObj.isRemote);
+			EntityLivingBase entity = (EntityLivingBase) targetSr;
+			entity.addPotionEffect(new PotionEffect(Potion.heal.id, 1, 1));
+			flag = entity;
+		} else {
+			if (player.getHealth() < player.getMaxHealth()) {
+				player.addPotionEffect(new PotionEffect(Potion.heal.id, 1, 1));
+			} else {
+				return false;
+			}
+		}
 		
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {
@@ -59,8 +68,8 @@ public class SkillHealthFog extends Skill {
 		
 		for(int i = 0; i < 32; i++) {
 			Random ran = new Random();
-			Vec3 vec = Vec3.createVectorHelper(8 * ran.nextFloat() - 4, 3 * ran.nextFloat() - 1 - player.eyeHeight, 8 * ran.nextFloat() - 4).normalize();
-			EntityParticleFX par = new EntityParticleFX(player.worldObj, player.posX, player.posY + player.eyeHeight, player.posZ, vec);
+			Vec3 vec = Vec3.createVectorHelper(2 * ran.nextFloat() - 1, 1, 2 * ran.nextFloat() - 1).normalize();
+			EntityParticleFX par = new EntityParticleFX(flag.worldObj, flag.posX, flag.posY, flag.posZ, vec);
 			par.setRBGColorF(1F, 0.7F, 0.7F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}

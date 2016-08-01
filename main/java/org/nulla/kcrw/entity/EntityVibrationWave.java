@@ -6,8 +6,10 @@ import java.util.List;
 import org.nulla.kcrw.skill.SkillsRw;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 
+import net.minecraft.block.BlockGlass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -68,6 +70,10 @@ public class EntityVibrationWave extends EntityHasOwner {
 			this.setDead();
 		}
 		
+		if (this.isDead) {
+			return;
+		}
+		
 		// 检测波面附近的实体
 		if (this.ticksExisted % 3 == 0) {
 			float r = getCurrentRadius();
@@ -80,16 +86,19 @@ public class EntityVibrationWave extends EntityHasOwner {
 				if (entity == this.getOwner())
 					continue;
 				
-	            if (entity.boundingBox.minX > posX - r + 0.5
-	            	&& entity.boundingBox.maxX < posX + r - 0.5
-	            	&& entity.boundingBox.minZ > posZ - r + 0.5
-	            	&& entity.boundingBox.maxZ < posZ + r - 0.5)
+				/*
+	            if (entity.boundingBox.minX > posX - r + 0.6
+	            	&& entity.boundingBox.maxX < posX + r - 0.6
+	            	&& entity.boundingBox.minZ > posZ - r + 0.6
+	            	&& entity.boundingBox.maxZ < posZ + r - 0.6)
 	            {
+	            */
 	            	float damageBasic = 10F * 2048 / (2048 - SkillsRw.VibrationWave.getExperience(this.getOwner()));
 	            	float p = this.getCurrentRadius() / this.getMaxRadius();
 	            	entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(this.getOwner()), damageBasic / (1 + 4 * p * p));
-	            }
+	            //}
 	        }
+			
 		}
 	}
 

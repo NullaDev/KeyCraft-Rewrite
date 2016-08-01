@@ -2,6 +2,8 @@ package org.nulla.kcrw.skill;
 
 import java.util.Random;
 
+import net.minecraft.block.BlockGlass;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -39,6 +41,19 @@ public class SkillVibrationWave extends Skill {
 			Random rand = new Random();
 			int exp = rand.nextInt(20) + 1;
 			modifyExperience(player, exp);
+		}
+		
+		if (!player.worldObj.isRemote) {
+			float r = 4.0f * 2048.0f / (2048.0f - this.getExperience(player));
+			for (int x = (int) (player.posX - r); x <= (int) (player.posX + r); x++) {
+				for (int y = (int) (player.posY - 1); y <= (int) (player.posY + 1); y++) {
+					for (int z = (int) (player.posZ - r); z <= (int) (player.posZ + r); z++) {
+						if(player.worldObj.getBlock(x, y, z).getMaterial() == Material.glass) {
+							player.worldObj.setBlockToAir(x, y, z);
+						}
+					}
+				}
+			}
 		}
 		
 		return true;

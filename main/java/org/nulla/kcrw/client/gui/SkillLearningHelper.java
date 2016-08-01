@@ -101,11 +101,11 @@ public class SkillLearningHelper {
 		});
 		
 		PreLearnHelper.put(SkillsRw.AuroraBlade, new ArrayList<Skill>() {
-			{add(SkillsRw.BloodControl);}
+			{add(SkillsRw.AuroraAttack);}
 		});
 		
 		PreLearnHelper.put(SkillsRw.AuroraAttack, new ArrayList<Skill>() {
-			{add(SkillsRw.AuroraBlade);}
+			{add(SkillsRw.BloodControl);}
 		});
 		
 		PreLearnHelper.put(SkillsRw.FireProtection, null);

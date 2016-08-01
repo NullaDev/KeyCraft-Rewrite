@@ -24,7 +24,7 @@ public class SkillAuroraBlade extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return SkillsRw.BloodControl.getExperience(player) >= 128;
+		return SkillsRw.AuroraAttack.getExperience(player) >= 128;
 	}
 	
 	@Override
