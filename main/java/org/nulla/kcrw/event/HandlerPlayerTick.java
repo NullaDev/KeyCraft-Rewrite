@@ -158,7 +158,7 @@ public class HandlerPlayerTick {
 		}
 		
 		if (player.isPotionActive(Potion.heal)) {
-			SkillLearningHelper.findSkill(player, SkillsRw.HealthFog, true);
+			SkillLearningHelper.findSkill(player, SkillsRw.FogCured, true);
 		}
 		
 	}

@@ -11,7 +11,7 @@ public class EntityTreeGuard extends KCEntityMob {
 
 	public EntityTreeGuard(World world) {
 		super(world);
-		this.setSize(0.5F, 0.5F);
+		this.setSize(1F, 1F);
 		this.experienceValue = 20;
 	}
 	

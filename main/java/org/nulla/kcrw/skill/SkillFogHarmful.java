@@ -15,11 +15,11 @@ import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.effect.EntityParticleFX;
 import org.nulla.nullacore.api.skill.Skill;
 
-public class SkillDamageFog extends Skill {
+public class SkillFogHarmful extends Skill {
 
-	public SkillDamageFog(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillFogHarmful(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/damage_fog.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/harmful_fog.png");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class SkillDamageFog extends Skill {
 			Random ran = new Random();
 			Vec3 vec = Vec3.createVectorHelper(2 * ran.nextFloat() - 1, 1, 2 * ran.nextFloat() - 1).normalize();
 			EntityParticleFX par = new EntityParticleFX(flag.worldObj, flag.posX, flag.posY, flag.posZ, vec);
-			par.setRBGColorF(1F, 0.7F, 0.7F);
+			par.setRBGColorF(1F, 0F, 1F);
 			Minecraft.getMinecraft().effectRenderer.addEffect(par);
 		}
 		

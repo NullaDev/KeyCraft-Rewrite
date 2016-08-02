@@ -50,12 +50,14 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
 		skillPosHelper.put(SkillsRw.VibrationBlade, new CO2D(0.8, 0.75));
 		skillPosHelper.put(SkillsRw.VibrationWave, new CO2D(0.8, 0.65));
-		skillPosHelper.put(SkillsRw.HealthFog, new CO2D(0.6, 0.65));
+		skillPosHelper.put(SkillsRw.FogCured, new CO2D(0.6, 0.65));
+		skillPosHelper.put(SkillsRw.FogHarmful, new CO2D(0.65, 0.65));
 
 		SkillsFindSpecially.clear();
 		SkillsFindSpecially.add(SkillsRw.BaseballShooting);
 		SkillsFindSpecially.add(SkillsRw.FireProtection);
-		SkillsFindSpecially.add(SkillsRw.HealthFog);
+		SkillsFindSpecially.add(SkillsRw.FogCured);
+		SkillsFindSpecially.add(SkillsRw.FogHarmful);
 		SkillsFindSpecially.add(SkillsRw.LouisJavelin);
 		SkillsFindSpecially.add(SkillsRw.PoisonProtection);
 		SkillsFindSpecially.add(SkillsRw.RibbonTouch);

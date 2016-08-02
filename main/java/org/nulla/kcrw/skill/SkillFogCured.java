@@ -24,11 +24,11 @@ import org.nulla.nullacore.api.skill.Skill;
  * 能够瞬间治疗一个人，虽然原作设定对半魔物是无效的，但是我懒得写啦。
  * 能够伤害僵尸这一点也是我口胡的。
  */
-public class SkillHealthFog extends Skill {
+public class SkillFogCured extends Skill {
 
-	public SkillHealthFog(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillFogCured(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/health_fog.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/cured_fog.png");
 	}
 
 	@Override
