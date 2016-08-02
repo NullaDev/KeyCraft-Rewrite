@@ -11,8 +11,10 @@ import org.nulla.kcrw.entity.effect.EntityAuroraShield;
 import org.nulla.kcrw.entity.effect.EntityAuroraStorm;
 import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
 import org.nulla.kcrw.entity.entityliving.EntityRedDog;
+import org.nulla.kcrw.entity.entityliving.EntityTreeGuard;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 
 public class KCRenderer {
@@ -26,6 +28,7 @@ public class KCRenderer {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, new RendererBlackDog(new ModelDog(), 0.6F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRedDog.class, new RendererRedDog(new ModelDog(), 0.6F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTreeGuard.class, new RendererTreeGuard(new ModelTree(), 0.6F));
 
 	}
 }

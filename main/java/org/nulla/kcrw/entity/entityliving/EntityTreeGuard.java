@@ -1,36 +1,35 @@
 package org.nulla.kcrw.entity.entityliving;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityBlackDog extends KCEntityMob {
+public class EntityTreeGuard extends KCEntityMob {
 
-	public EntityBlackDog(World world) {
+	public EntityTreeGuard(World world) {
 		super(world);
-		this.setSize(1F, 1F);
-		
+		this.setSize(0.5F, 0.5F);
 		this.experienceValue = 20;
 	}
 	
-	protected void applyEntityAttributes()
-    {
+	protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
     }
 	
-	public EntityBlackDog(World world, double posX, double posY, double posZ) {
+	public EntityTreeGuard(World world, double posX, double posY, double posZ) {
 		this(world);
 		this.setPosition(posX, posY, posZ);
 	}
 	
 	@Override
 	protected Item getDropItem() {
-        return Items.chicken;
+        return Item.getItemFromBlock(Blocks.log);
     }
 	
 	@Override

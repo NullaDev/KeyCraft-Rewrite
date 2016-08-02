@@ -157,6 +157,10 @@ public class HandlerPlayerTick {
 			SkillLearningHelper.findSkill(player, SkillsRw.FireProtection, true);
 		}
 		
+		if (player.isPotionActive(Potion.heal)) {
+			SkillLearningHelper.findSkill(player, SkillsRw.HealthFog, true);
+		}
+		
 	}
 
 }

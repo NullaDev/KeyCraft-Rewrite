@@ -34,8 +34,8 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.BaseballThundering, new CO2D(0.25, 0.75));
 		skillPosHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.7));
 		skillPosHelper.put(SkillsRw.BloodControl, new CO2D(0.35, 0.5));
-		skillPosHelper.put(SkillsRw.AuroraBlade, new CO2D(0.4, 0.5));
-		skillPosHelper.put(SkillsRw.AuroraAttack, new CO2D(0.4, 0.6));
+		skillPosHelper.put(SkillsRw.AuroraBlade, new CO2D(0.4, 0.6));
+		skillPosHelper.put(SkillsRw.AuroraAttack, new CO2D(0.4, 0.5));
 		skillPosHelper.put(SkillsRw.FireProtection, new CO2D(0.4, 0.4));
 		skillPosHelper.put(SkillsRw.FireImmunity, new CO2D(0.35, 0.4));
 		skillPosHelper.put(SkillsRw.PoisonProtection, new CO2D(0.5, 0.4));
@@ -53,12 +53,12 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.HealthFog, new CO2D(0.6, 0.65));
 
 		SkillsFindSpecially.clear();
-		SkillsFindSpecially.add(SkillsRw.FireProtection);
-		SkillsFindSpecially.add(SkillsRw.PoisonProtection);
-		SkillsFindSpecially.add(SkillsRw.HealthFog);
 		SkillsFindSpecially.add(SkillsRw.BaseballShooting);
-		SkillsFindSpecially.add(SkillsRw.RibbonTouch);
+		SkillsFindSpecially.add(SkillsRw.FireProtection);
+		SkillsFindSpecially.add(SkillsRw.HealthFog);
 		SkillsFindSpecially.add(SkillsRw.LouisJavelin);
+		SkillsFindSpecially.add(SkillsRw.PoisonProtection);
+		SkillsFindSpecially.add(SkillsRw.RibbonTouch);
 
 		PreLearnHelper.clear();
 		PreLearnHelper.put(SkillsRw.VisionUp, null);
@@ -114,7 +114,7 @@ public class SkillLearningHelper {
 		PreLearnHelper.put(SkillsRw.VibrationBlade, null);
 		
 		PreLearnHelper.put(SkillsRw.AuroraShield, new ArrayList<Skill>() {
-			{add(SkillsRw.AuroraBlade);add(SkillsRw.FireProtection);add(SkillsRw.PoisonProtection);}
+			{add(SkillsRw.AuroraAttack);add(SkillsRw.FireProtection);add(SkillsRw.PoisonProtection);}
 		});
 		
 		PreLearnHelper.put(SkillsRw.AuroraBlast, new ArrayList<Skill>() {

@@ -17,13 +17,16 @@ item.aurora_iron_pickaxe.name=Aurora铁镐
 item.aurora_iron_shovel.name=Aurora铁铲
 item.aurora_iron_sword.name=Aurora铁剑
 item.baseball.name=棒球
-item.dog_spawner.name=狗狗生成器
 item.hand_sonic.name=HandSonicV5
 item.javelin.name=标枪
 item.miracle_ribbon.name=奇迹丝带
 item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.pizza_jam.name=秘制披萨酱
+item.spawner_black_dog.name=黑狗生成器
+item.spawner_red_dog.name=红狗生成器
+item.spawner_tree_guard.name=木人生成器
+
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
 item.sth_sticky.name=某种黏糊糊的东西

@@ -17,8 +17,8 @@ public class EntityRedDog extends KCEntityMob {
 	protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(25.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(4.0D);
     }
 	

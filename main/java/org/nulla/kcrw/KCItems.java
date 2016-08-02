@@ -17,6 +17,10 @@ import net.minecraft.potion.*;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
+import org.nulla.kcrw.entity.entityliving.EntityRedDog;
+import org.nulla.kcrw.entity.entityliving.EntityTreeGuard;
+
 public class KCItems {
 	
 	public static final ArrayList<Item> items = new ArrayList<Item>();
@@ -37,9 +41,7 @@ public class KCItems {
     public static Item aurora_iron_hoe;
     
 	public static Item baseball;
-	
-	public static Item dog_spawner;
-	
+		
 	public static Item hand_sonic;
 	
 	public static Item javelin;
@@ -51,6 +53,10 @@ public class KCItems {
 	public static Item peach_juice;
 	
 	public static Item pizza_jam;
+	
+	public static Item spawner_black_dog;
+	public static Item spawner_red_dog;
+	public static Item spawner_tree_guard;
 	
 	public static Item steel_blade;
 	
@@ -127,11 +133,6 @@ public class KCItems {
 			.setUnlocalizedName("baseball")
 			.setTextureName("kcrw:baseball");
     	GameRegistry.registerItem(baseball, "baseball");
-    	   	
-    	dog_spawner = new ItemDogSpawner()
-    		.setUnlocalizedName("dog_spawner")
-    		.setTextureName("kcrw:dog_spawner");
-    	GameRegistry.registerItem(dog_spawner, "dog_spawner");
     	
     	hand_sonic = new ItemHandSonic()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 4), new ItemStack(KCItems.aurora_iron_ingot, 4), new ItemStack(Blocks.lapis_block, 1)}, 1, 256))
@@ -191,6 +192,21 @@ public class KCItems {
 			.setUnlocalizedName("pizza_jam")
 			.setTextureName("kcrw:pizza_jam");
     	GameRegistry.registerItem(pizza_jam, "pizza_jam");
+    	
+    	spawner_black_dog = new ItemMobSpawner(EntityBlackDog.class)
+			.setUnlocalizedName("spawner_black_dog")
+			.setTextureName("kcrw:spawner_black_dog");
+    	GameRegistry.registerItem(spawner_black_dog, "spawner_black_dog");
+    	
+    	spawner_red_dog = new ItemMobSpawner(EntityRedDog.class)
+			.setUnlocalizedName("spawner_red_dog")
+			.setTextureName("kcrw:spawner_red_dog");
+    	GameRegistry.registerItem(spawner_red_dog, "spawner_red_dog");
+    	
+    	spawner_tree_guard = new ItemMobSpawner(EntityTreeGuard.class)
+			.setUnlocalizedName("spawner_tree_guard")
+			.setTextureName("kcrw:spawner_tree_guard");
+    	GameRegistry.registerItem(spawner_tree_guard, "spawner_tree_guard");
     	    	
     	steel_blade = new ItemSteelBlade()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 3)}, 1, 64))
