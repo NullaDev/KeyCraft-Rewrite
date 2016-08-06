@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import org.nulla.kcrw.entity.entityliving.EntityBlackDog;
 import org.nulla.kcrw.entity.entityliving.EntityRedDog;
 import org.nulla.kcrw.entity.entityliving.EntityTreeGuard;
+import org.nulla.kcrw.entity.entityliving.EntityTreeProducer;
 
 public class KCItems {
 	
@@ -57,6 +58,7 @@ public class KCItems {
 	public static Item spawner_black_dog;
 	public static Item spawner_red_dog;
 	public static Item spawner_tree_guard;
+	public static Item spawner_tree_producer;
 	
 	public static Item steel_blade;
 	
@@ -207,6 +209,11 @@ public class KCItems {
 			.setUnlocalizedName("spawner_tree_guard")
 			.setTextureName("kcrw:spawner_tree_guard");
     	GameRegistry.registerItem(spawner_tree_guard, "spawner_tree_guard");
+    	
+    	spawner_tree_producer = new ItemMobSpawner(EntityTreeProducer.class)
+		.setUnlocalizedName("spawner_tree_producer")
+		.setTextureName("kcrw:spawner_tree_guard");
+	GameRegistry.registerItem(spawner_tree_producer, "spawner_tree_producer");
     	    	
     	steel_blade = new ItemSteelBlade()
 			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.iron_ingot, 3)}, 1, 64))
