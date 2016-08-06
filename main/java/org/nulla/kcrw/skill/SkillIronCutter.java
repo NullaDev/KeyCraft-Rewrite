@@ -5,21 +5,25 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 
 import org.nulla.kcrw.KeyCraft_Rewrite;
 import org.nulla.kcrw.entity.effect.EntityParticleFX;
+import org.nulla.nullacore.api.damage.NullaDamageSource;
 import org.nulla.nullacore.api.skill.Skill;
 
-public class SkillFogHarmful extends Skill {
+public class SkillIronCutter extends Skill {
 
-	public SkillFogHarmful(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillIronCutter(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/harmful_fog.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/iron_cutter.png");
 	}
 
 	@Override
@@ -39,22 +43,25 @@ public class SkillFogHarmful extends Skill {
 		if (targetCl != null) {
 			targetSr = player.worldObj.getEntityByID(targetCl.getEntityId());
 		}
-				
-		int value = (int) (new Random().nextFloat() * 1536 / (1536 - this.getExperience(player)));
+		
+		float base = (float) player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+		float extra = new Random().nextFloat() * 4096 / (2048 - this.getExperience(player));
 		
 		if (targetSr instanceof EntityLivingBase) {
 			EntityLivingBase entity = (EntityLivingBase) targetSr;
-			entity.addPotionEffect(new PotionEffect(Potion.harm.id, 1, value));
-			for(int i = 0; i < 32; i++) {
-				Random ran = new Random();
-				Vec3 vec = Vec3.createVectorHelper(2 * ran.nextFloat() - 1, 1, 2 * ran.nextFloat() - 1).normalize();
-				EntityParticleFX par = new EntityParticleFX(entity.worldObj, entity.posX, entity.posY, entity.posZ, vec);
-				par.setRBGColorF(1F, 0F, 1F);
-				Minecraft.getMinecraft().effectRenderer.addEffect(par);
+			if (entity instanceof EntitySlime) {
+				base = Math.min(base / 5, entity.getHealth() - 0.1F);
+				extra = 0F;
 			}
-			
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), base);
+			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), extra);
+			player.setPosition(entity.posX, entity.posY, entity.posZ);
 		} else {
 			return false;
+		}
+				
+		if (player.getHeldItem() != null) {
+			player.getHeldItem().damageItem(16, player);
 		}
 		
 		// 随机事件只在服务器发生

@@ -10,7 +10,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -30,13 +29,12 @@ public class EntityTreeProducer extends KCEntityAnimal {
         this.tasks.addTask(7, new EntityAILookIdle(this));
 	}
 	
-	public boolean isAIEnabled()
-    {
+	@Override
+	public boolean isAIEnabled() {
         return true;
     }
 	
-	protected void applyEntityAttributes()
-    {
+	protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0005D);
@@ -44,9 +42,8 @@ public class EntityTreeProducer extends KCEntityAnimal {
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextProduce <= 0)
-        {
-            this.dropItem(Items.apple, this.rand.nextInt(3));
+		if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextProduce <= 0) {
+            this.dropItem(Item.getItemFromBlock(Blocks.log), this.rand.nextInt(3));
             this.timeUntilNextProduce = this.rand.nextInt(2000) + 2000;
         }
 	}
@@ -76,8 +73,8 @@ public class EntityTreeProducer extends KCEntityAnimal {
 		return new EntityTreeProducer(this.worldObj);
 	}
 	
-	protected Item getDropItem()
-    {
-        return Items.apple;//谁来告诉我木头是哪个Item...
+	@Override
+	protected Item getDropItem() {
+        return Item.getItemFromBlock(Blocks.log);
     }
 }

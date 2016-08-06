@@ -26,6 +26,7 @@ public class SkillsRw {
 	public static SkillFireProtection FireProtection;
 	public static SkillFogCured FogCured;
 	public static SkillFogHarmful FogHarmful;
+	public static SkillIronCutter IronCutter;
 	public static SkillKagariCannon KagariCannon;
 	public static SkillKagariStrafe KagariStrafe;
 	public static SkillLouisJavelin LouisJavelin;
@@ -58,6 +59,7 @@ public class SkillsRw {
 		FireProtection = 		new SkillFireProtection("fire_protection", 1024, 16, 60 * 20);
 		FogCured = 				new SkillFogCured("cure_fog", 512, 8, 10 * 20);
 		FogHarmful = 			new SkillFogHarmful("harmful_fog", 512, 8, 10 * 20);
+		IronCutter = 			new SkillIronCutter("iron_cutter", 1024, 24, 2 * 20);
 		KagariCannon = 			new SkillKagariCannon("kagari_cannon", 1024, 64, 20 * 20);
 		KagariStrafe = 			new SkillKagariStrafe("kagari_strafe", 1024, 64, 20 * 20);
 		LouisJavelin = 			new SkillLouisJavelin("louis_javelin", 512, 8, 10 * 20);
