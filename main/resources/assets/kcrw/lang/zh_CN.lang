@@ -26,6 +26,7 @@ item.pizza_jam.name=秘制披萨酱
 item.spawner_black_dog.name=黑狗生成器
 item.spawner_red_dog.name=红狗生成器
 item.spawner_tree_guard.name=木人生成器
+item.spawner_tree_producer.name=树妖生产者生成器
 
 item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
@@ -47,7 +48,7 @@ kcrw.gui.currentCraftItem=当前合成物品
 kcrw.gui.currentCraftItemAmount=每次合成数量
 kcrw.gui.currentCraftItemInBag=已拥有数量
 kcrw.gui.needs=需要
-kcrw.gui.monster=中国北京，中国北京，最菜的MOD制作组，NullaDev倒闭了！^王八蛋组员SalimTerryLi吃喝嫖赌，欠下了3.5亿行代码，带着他的私活跑了。^我们没有没有办法，拿着半成品顶界面。^SalimTerryLi王八蛋，你不是人，我们辛辛苦苦等你等了大半年，^你不码代码，你还我血汗钱，还我血汗钱！
+kcrw.gui.monster=中国北京，中国北京，最菜的MOD制作组，NullaDev倒闭了！^王八蛋组员SalimTerryLi吃喝嫖赌，欠下了3.5亿行代码，带着他的私活跑了。^我们没有没有办法，拿着半成品顶界面。^SalimTerryLi王八蛋，你不是人，我们辛辛苦苦等你等了大半年，^你不码代码，你还我血汗钱，还我血汗钱！ 
 
 kcrw.prompt.cheat.add=增加1k欧若拉点数(作弊)。
 kcrw.prompt.cheat.reset=重置技能点数(作弊)。
