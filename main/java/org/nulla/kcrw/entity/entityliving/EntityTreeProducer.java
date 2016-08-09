@@ -74,13 +74,23 @@ public class EntityTreeProducer extends KCEntityAnimal {
             this.dropItem(Item.getItemFromBlock(Blocks.log), this.rand.nextInt(3));
             this.timeUntilNextProduce = this.rand.nextInt(1000) + 1000;
         }
+		if(this.fleeingTick!=0)
+		{
+			System.out.println("hit");
+			this.fleeingTick=0;
+			timeUntilNextProduce=2000+timeUntilNextProduce;
+		}
 	}
 	
-	protected void attackEntity(Entity par1, float par2)
+	@Override
+	protected void updateEntityActionState()
 	{
-		super.attackEntity(par1, par2);
-		this.hasAttacked=false;
-		timeUntilNextProduce=2000+timeUntilNextProduce;
+		if(this.fleeingTick!=0)
+		{
+			this.fleeingTick=0;
+			this.updateWanderPath();
+			timeUntilNextProduce=2000+timeUntilNextProduce;
+		}
 	}
 	
 	@Override
