@@ -50,19 +50,7 @@ public class KeyCraft_Rewrite {
     	KCMaterials.init();
 		
 		// 注册实体
-		int modID = 1;
-    	EntityRegistry.registerModEntity(EntityAuroraBlast.class, "AuroraBlast", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityAuroraShield.class, "AuroraShield", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityAuroraStorm.class, "AuroraStorm", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityBaseball.class, "Baseball", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityRibbon.class, "Ribbon", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityVibrationWave.class, "VibrationWave", modID++, this, 128, 1, true);
-    	
-    	EntityRegistry.registerModEntity(EntityBlackDog.class, "BlackDog", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityRedDog.class, "RedDog", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityTreeGuard.class, "TreeGuard", modID++, this, 128, 1, true);
-    	EntityRegistry.registerModEntity(EntityTreeProducer.class, "TreeGuard", modID++, this, 128, 1, true);
+    	KCEntities.initEntities(this);
 	
     }
     

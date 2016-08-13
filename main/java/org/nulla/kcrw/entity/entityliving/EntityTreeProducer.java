@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -76,9 +77,8 @@ public class EntityTreeProducer extends KCEntityAnimal {
         }
 		if(this.fleeingTick!=0)
 		{
-			System.out.println("hit");
 			this.fleeingTick=0;
-			timeUntilNextProduce=2000+timeUntilNextProduce;
+			timeUntilNextProduce=1000+timeUntilNextProduce;
 		}
 	}
 	
@@ -121,5 +121,17 @@ public class EntityTreeProducer extends KCEntityAnimal {
 	@Override
 	protected Item getDropItem() {
         return Item.getItemFromBlock(Blocks.log);
+    }
+	
+	public void writeEntityToNBT(NBTTagCompound p_70014_1_)
+    {
+        super.writeEntityToNBT(p_70014_1_);
+        p_70014_1_.setInteger("timeUntilNextProduce", this.timeUntilNextProduce);
+    }
+
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
+    {
+        super.readEntityFromNBT(p_70037_1_);
+        this.timeUntilNextProduce = p_70037_1_.getInteger("timeUntilNextProduce");
     }
 }
