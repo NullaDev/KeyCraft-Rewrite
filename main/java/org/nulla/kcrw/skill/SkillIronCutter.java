@@ -28,7 +28,7 @@ public class SkillIronCutter extends Skill {
 
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return true;
+		return SkillsRw.VibrationWave.getExperience(player) >= 256;
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class SkillIronCutter extends Skill {
 		}
 		
 		float base = (float) player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-		float extra = new Random().nextFloat() * 4096 / (2048 - this.getExperience(player));
+		float extra = new Random().nextFloat() * 1024 / (2048 - this.getExperience(player));
 		
 		if (targetSr instanceof EntityLivingBase) {
 			EntityLivingBase entity = (EntityLivingBase) targetSr;
@@ -54,8 +54,9 @@ public class SkillIronCutter extends Skill {
 				extra = 0F;
 			}
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), base);
-			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), extra);
-			player.setPosition(entity.posX, entity.posY, entity.posZ);
+			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), base * extra);
+			Minecraft.getMinecraft().thePlayer.setVelocity(entity.posX - player.posX, entity.posY - player.posY, entity.posZ - player.posZ);
+
 		} else {
 			return false;
 		}

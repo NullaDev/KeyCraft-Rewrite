@@ -50,6 +50,7 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
 		skillPosHelper.put(SkillsRw.VibrationBlade, new CO2D(0.8, 0.75));
 		skillPosHelper.put(SkillsRw.VibrationWave, new CO2D(0.8, 0.65));
+		skillPosHelper.put(SkillsRw.IronCutter, new CO2D(0.75, 0.65));
 		skillPosHelper.put(SkillsRw.FogCured, new CO2D(0.6, 0.65));
 		skillPosHelper.put(SkillsRw.FogHarmful, new CO2D(0.65, 0.65));
 
@@ -151,8 +152,12 @@ public class SkillLearningHelper {
 			{add(SkillsRw.RibbonTouch);}
 		});
 		
-		PreLearnHelper.put(SkillsRw.VibrationBlade, new ArrayList<Skill>() {
-			{add(SkillsRw.VibrationWave);}
+		PreLearnHelper.put(SkillsRw.VibrationWave, new ArrayList<Skill>() {
+			{add(SkillsRw.VibrationBlade);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.IronCutter, new ArrayList<Skill>() {
+			{add(SkillsRw.VibrationBlade);}
 		});
 
 	}
