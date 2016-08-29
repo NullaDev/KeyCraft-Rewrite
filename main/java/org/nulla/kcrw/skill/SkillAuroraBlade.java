@@ -39,6 +39,7 @@ public class SkillAuroraBlade extends Skill {
     			int exp = rand.nextInt(20) + 1;
     			modifyExperience(player, exp);
     		}
+			return true;
     	}
 		return false;
 	}
@@ -51,7 +52,7 @@ public class SkillAuroraBlade extends Skill {
 			else
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.breakblade")));
 		}
-		int time = (int)(20 * 20 * proportion);
+		int time = (int)(10 * 20 * proportion);
 		player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, 1));
 		player.addPotionEffect(new PotionEffect(Potion.confusion.id, time));
 		player.addPotionEffect(new PotionEffect(Potion.weakness.id, time, 1));

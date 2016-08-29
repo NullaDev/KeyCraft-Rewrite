@@ -45,12 +45,12 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.AuroraStorm, new CO2D(0.45, 0.7));
 		skillPosHelper.put(SkillsRw.AuroraRegeneration, new CO2D(0.5, 0.5));
 		skillPosHelper.put(SkillsRw.AuroraRepair, new CO2D(0.55, 0.5));
-		skillPosHelper.put(SkillsRw.RibbonTouch, new CO2D(0.8, 0.4));
+		skillPosHelper.put(SkillsRw.RibbonTouch, new CO2D(0.8, 0.45));
 		skillPosHelper.put(SkillsRw.KagariCannon, new CO2D(0.75, 0.4));
-		skillPosHelper.put(SkillsRw.KagariStrafe, new CO2D(0.8, 0.5));
+		skillPosHelper.put(SkillsRw.KagariStrafe, new CO2D(0.75, 0.5));
 		skillPosHelper.put(SkillsRw.VibrationBlade, new CO2D(0.8, 0.75));
 		skillPosHelper.put(SkillsRw.VibrationWave, new CO2D(0.8, 0.65));
-		skillPosHelper.put(SkillsRw.IronCutter, new CO2D(0.75, 0.65));
+		skillPosHelper.put(SkillsRw.IronCutter, new CO2D(0.75, 0.75));
 		skillPosHelper.put(SkillsRw.FogCured, new CO2D(0.6, 0.65));
 		skillPosHelper.put(SkillsRw.FogHarmful, new CO2D(0.65, 0.65));
 

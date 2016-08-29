@@ -19,6 +19,10 @@ import org.nulla.kcrw.entity.effect.EntityParticleFX;
 import org.nulla.nullacore.api.damage.NullaDamageSource;
 import org.nulla.nullacore.api.skill.Skill;
 
+/**
+ * 《Rewrite》中江坂宗源大叔的得意技能斩铁剑，将简单的劈斩发挥到极致，据说无数人（魔物？）都曾死于此招之下。
+ * 然而对软的东西相当无力，据说切不开魔芋。
+ */
 public class SkillIronCutter extends Skill {
 
 	public SkillIronCutter(String name, int auroraRequired, int auroraCost, int cd) {
@@ -55,7 +59,10 @@ public class SkillIronCutter extends Skill {
 			}
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), base);
 			entity.attackEntityFrom(NullaDamageSource.CauseAuroraDamage(player), base * extra);
-			Minecraft.getMinecraft().thePlayer.setVelocity(entity.posX - player.posX, entity.posY - player.posY, entity.posZ - player.posZ);
+			double vx = 0.2D * (entity.posX - player.posX);
+			double vy = 0.2D * (entity.posY - player.posY + 2D);
+			double vz = 0.2D * (entity.posZ - player.posZ);
+			Minecraft.getMinecraft().thePlayer.setVelocity(vx, vy, vz);
 
 		} else {
 			return false;
