@@ -12,6 +12,7 @@ public class SkillsRw {
 	public static SkillAuroraAttack AuroraAttack;
 	public static SkillAuroraBlade AuroraBlade;
 	public static SkillAuroraBlast AuroraBlast;
+	public static SkillAuroraFoguBlade AuroraFoguBlade;
 	public static SkillAuroraRegeneration AuroraRegeneration;
 	public static SkillAuroraRepair AuroraRepair;
 	public static SkillAuroraShield AuroraShield;
@@ -45,6 +46,7 @@ public class SkillsRw {
 		AuroraAttack = 			new SkillAuroraAttack("aurora_attack", 512, 1, 1 * 20);
 		AuroraBlade = 			new SkillAuroraBlade("aurora_blade", 1024, 32, 1 * 20);
 		AuroraBlast = 			new SkillAuroraBlast("aurora_blast", 1024, 64, 150 * 20);
+		AuroraFoguBlade =		new SkillAuroraFoguBlade("aurora_fogu_blade", 1024, 128, 90 * 20);
 		AuroraRegeneration = 	new SkillAuroraRegeneration("aurora_regeneration", 1024, 0, 1 * 20);
 		AuroraRepair = 			new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);
 		AuroraShield = 			new SkillAuroraShield("aurora_shield", 1024, 20, 60 * 20);
@@ -57,7 +59,7 @@ public class SkillsRw {
 		BloodControl = 			new SkillBloodControl("blood_control", 512, 32, 60 * 20);
 		FireImmunity = 			new SkillFireImmunity("fire_immunity", 1024, 0, 0);
 		FireProtection = 		new SkillFireProtection("fire_protection", 1024, 16, 60 * 20);
-		FogCured = 				new SkillFogCured("cure_fog", 512, 8, 10 * 20);
+		FogCured = 				new SkillFogCured("cured_fog", 512, 8, 10 * 20);
 		FogHarmful = 			new SkillFogHarmful("harmful_fog", 512, 8, 10 * 20);
 		IronCutter = 			new SkillIronCutter("iron_cutter", 1024, 24, 2 * 20);
 		KagariCannon = 			new SkillKagariCannon("kagari_cannon", 1024, 64, 20 * 20);

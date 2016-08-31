@@ -35,6 +35,7 @@ public class SkillLearningHelper {
 		skillPosHelper.put(SkillsRw.LouisJavelin, new CO2D(0.2, 0.7));
 		skillPosHelper.put(SkillsRw.BloodControl, new CO2D(0.35, 0.5));
 		skillPosHelper.put(SkillsRw.AuroraBlade, new CO2D(0.4, 0.6));
+		skillPosHelper.put(SkillsRw.AuroraFoguBlade, new CO2D(0.4, 0.7));
 		skillPosHelper.put(SkillsRw.AuroraAttack, new CO2D(0.4, 0.5));
 		skillPosHelper.put(SkillsRw.FireProtection, new CO2D(0.4, 0.4));
 		skillPosHelper.put(SkillsRw.FireImmunity, new CO2D(0.35, 0.4));
@@ -105,6 +106,10 @@ public class SkillLearningHelper {
 		
 		PreLearnHelper.put(SkillsRw.AuroraBlade, new ArrayList<Skill>() {
 			{add(SkillsRw.AuroraAttack);}
+		});
+		
+		PreLearnHelper.put(SkillsRw.AuroraFoguBlade, new ArrayList<Skill>() {
+			{add(SkillsRw.AuroraBlade);}
 		});
 		
 		PreLearnHelper.put(SkillsRw.AuroraAttack, new ArrayList<Skill>() {

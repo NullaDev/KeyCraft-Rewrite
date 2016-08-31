@@ -23,12 +23,12 @@ import org.nulla.nullacore.api.skill.Skill;
 
 /**
  * 出自《Rewrite Harvest festa!》中灰太狼在战胜御堂后获得的技能“オーロラ＋フォゴ剣”。
- * 在原作中伤害很高，所以在这里给了物伤、魔伤和火伤的混合伤害。可惜对下界抗火生物相性很差啊。
+ * 在原作中伤害很高，所以在这里给了物伤、魔伤和火伤的混合伤害。可惜对下界生物（毕竟抗火）效果很差啊。
  * 然而毕竟是Aurora剑发动的技能，所以会崩掉手里的剑。。【大概
  */
-public class AuroraFoguBlade extends Skill {
+public class SkillAuroraFoguBlade extends Skill {
 	
-	public AuroraFoguBlade(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillAuroraFoguBlade(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
 		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/aurora_fogu_blade.png");
 	}
