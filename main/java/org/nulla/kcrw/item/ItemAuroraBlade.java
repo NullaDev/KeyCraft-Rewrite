@@ -7,7 +7,7 @@ import java.util.Random;
 import org.nulla.kcrw.KCItems;
 import org.nulla.kcrw.KCMaterials;
 import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.skill.SkillAuroraBlade;
+import org.nulla.kcrw.skill.SkillAuroraSolidification;
 import org.nulla.kcrw.skill.SkillsRw;
 
 import com.google.common.collect.Sets;
@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 
 public class ItemAuroraBlade extends ItemTool {
 	
-	public static final HashSet<String> HARVESTABLE = Sets.newHashSet("axe", "pickaxe", "shovel");
+	public static final HashSet<String> HARVESTABLE = Sets.newHashSet("axe", "shovel");
 	
 	public ItemAuroraBlade() {
 		super(4.0f, KCMaterials.AuroraBlade, new HashSet());
@@ -90,7 +90,7 @@ public class ItemAuroraBlade extends ItemTool {
 		if (stack.getItemDamage() >= this.getMaxDamage()) {
 			onBladeDead(stack, (EntityPlayer)player);
 		} else {
-			float p = 2048 / (2048 - SkillsRw.AuroraBlade.getExperience(player));
+			float p = 2048 / (2048 - SkillsRw.AuroraSolidification.getExperience(player));
 			if (new Random().nextFloat() < p)
 				stack.setItemDamage(stack.getItemDamage() + 1);
 		}
@@ -107,7 +107,7 @@ public class ItemAuroraBlade extends ItemTool {
 	
 	public void onBladeDead(ItemStack stack, EntityPlayer player) {
 		double p = 1D * stack.getItemDamage() / stack.getMaxDamage();
-		SkillAuroraBlade.onBladeDead(player, p);
+		SkillAuroraSolidification.onBladeDead(player, p);
 		int pos = KCUtils.getPosOfStack(player, stack);
 		if (pos >= 0 && pos < player.inventory.mainInventory.length)
 			player.inventory.mainInventory[pos] = null;

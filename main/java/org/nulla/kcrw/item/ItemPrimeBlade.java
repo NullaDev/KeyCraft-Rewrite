@@ -1,39 +1,36 @@
 package org.nulla.kcrw.item;
 
-import java.util.Random;
-
-import org.nulla.kcrw.KCItems;
-import org.nulla.kcrw.KCUtils;
-import org.nulla.kcrw.skill.SkillsRw;
-import org.nulla.nullacore.api.damage.NullaDamageSource;
+import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.nulla.kcrw.KCMaterials;
 
 import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-/**
- * 能力“超震动”发动状态下的钢剑。耐久会快速消耗。右键以取消状态。
- */
-public class ItemSteelBladeVibrating extends KCItemBase {
-	private float damage;
+public class ItemPrimeBlade extends KCItemBase {
+    private float damage;
+    private final ToolMaterial material;
 
-    public ItemSteelBladeVibrating() {
+    public ItemPrimeBlade() {
+        this.material = ToolMaterial.STONE;
         this.maxStackSize = 1;
-        this.setCreativeTab(null);
-        this.setMaxDamage(600);
-        this.damage = 17.0F;
+        this.setMaxDamage(material.getMaxUses());
+        this.damage = 4.0F + material.getDamageVsEntity();
     }
 
     @Override
@@ -41,13 +38,14 @@ public class ItemSteelBladeVibrating extends KCItemBase {
         if (block == Blocks.web) {
             return 15.0F;
         } else {
-            return 1.0F;
+            Material material = block.getMaterial();
+            return material != Material.plants && material != Material.vine && material != Material.coral && material != Material.leaves && material != Material.gourd ? 1.0F : 1.5F;
         }
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-    	stack.damageItem(20, attacker);        	
+    public boolean hitEntity(ItemStack stack, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
+    	stack.damageItem(1, p_77644_3_);
         return true;
     }
 
@@ -55,7 +53,7 @@ public class ItemSteelBladeVibrating extends KCItemBase {
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int posX, int posY, int posZ, EntityLivingBase entity) {
         if ((double)block.getBlockHardness(world, posX, posY, posZ) != 0.0D) {
-        	stack.damageItem(20, entity);
+        	stack.damageItem(2, entity);
         }
         return true;
     }
@@ -67,15 +65,46 @@ public class ItemSteelBladeVibrating extends KCItemBase {
         return true;
     }
 
+    /**
+     * returns the action that specifies what animation to play when the items is being used
+     */
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.block;
+    }
+
+    /**
+     * How long it takes to use or consume an item
+     */
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return 72000;
+    }
+
+    /**
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     */
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        return stack;
+    }
+
     @Override
     public boolean func_150897_b(Block block) {
         return block == Blocks.web;
     }
 
+    /** Return 附魔能力 of 这个物品, 大多数情况基于material。 */
+    @Override
+    public int getItemEnchantability() {
+        return this.material.getEnchantability();
+    }
+
     /** Return 这个物品能不能续一秒 in an 铁砧。 */
     @Override
     public boolean getIsRepairable(ItemStack p_82789_1_, ItemStack p_82789_2_) {
-        ItemStack mat = new ItemStack(Items.iron_ingot ,1);
+        ItemStack mat = this.material.getRepairItemStack();
         if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, p_82789_2_, false)) return true;
         return super.getIsRepairable(p_82789_1_, p_82789_2_);
     }
@@ -89,31 +118,8 @@ public class ItemSteelBladeVibrating extends KCItemBase {
     }
     
     @Override
-    public void onUpdate(ItemStack stack, World p_77663_2_, Entity entity, int p_77663_4_, boolean p_77663_5_) {
-    	if (!(entity instanceof EntityPlayer))
-    		return;
-    	if (stack.getItemDamage() >= this.getMaxDamage()) {
-    		EntityPlayer player = (EntityPlayer)(entity);
-    		int pos = KCUtils.getPosOfStack(player, stack);
-    		if (pos >= 0 && pos < player.inventory.mainInventory.length)
-    			player.inventory.mainInventory[pos] = new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage());
-    	} else {
-    		float p = 2048 / (2048 - SkillsRw.AuroraSolidification.getExperience((EntityPlayer) entity));
-			if (new Random().nextFloat() < p)
-				stack.damageItem(1, (EntityLivingBase) entity);
-    	}
-    }
-    
-    @Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		player.setCurrentItemOrArmor(0, new ItemStack(KCItems.steel_blade, 1, stack.getItemDamage()));
-	    return stack;
+	public void addInformation(ItemStack stack, EntityPlayer player, List information, boolean p_77624_4_) {
+		information.add(StatCollector.translateToLocal("kcrw.item.intro.prime_blade"));
 	}
     
-    @SideOnly(Side.CLIENT)
-	@Override
-    public boolean hasEffect(ItemStack p_77636_1_) {
-        return true;
-    }
-
 }

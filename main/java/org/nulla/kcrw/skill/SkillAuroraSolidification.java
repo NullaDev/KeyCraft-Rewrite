@@ -15,11 +15,16 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class SkillAuroraBlade extends Skill {
+/**
+ * 将Aurora在体外凝结成物理上存在的东西，灰太狼招牌技能。
+ * 由于新加入了Aurora极光爪，现在的技能名字叫Aurora“solidification（固化）”，而不是以前的Aurora“Blade”。
+ * 顺便说一句，Aurora“Blade”应该翻译成极光“刃”而不是“剑”。。
+ */
+public class SkillAuroraSolidification extends Skill {
 	
-	public SkillAuroraBlade(String name, int auroraRequired, int auroraCost, int cd) {
+	public SkillAuroraSolidification(String name, int auroraRequired, int auroraCost, int cd) {
 		super(name, auroraRequired, auroraCost, cd);
-		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/aurora_blade.png");
+		this.mIcon = new ResourceLocation(KeyCraft_Rewrite.MODID, "textures/icons/skills/aurora_solidification.png");
 	}
 	
 	@Override
@@ -31,7 +36,8 @@ public class SkillAuroraBlade extends Skill {
 	public boolean onUse(EntityPlayer player) {
 		ItemStack held = player.getHeldItem();
 		if (held == null) {
-			player.setCurrentItemOrArmor(0, new ItemStack(KCItems.aurora_blade, 1));
+			ItemStack stack = getExperience(player) >= 512 ? new ItemStack(KCItems.aurora_blade, 1) : new ItemStack(KCItems.aurora_claw, 1);
+			player.setCurrentItemOrArmor(0, stack);
 			if (!player.worldObj.isRemote) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("kcrw.prompt.callblade")));
     		} else {

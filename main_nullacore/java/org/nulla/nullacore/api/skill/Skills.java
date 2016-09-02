@@ -1,4 +1,4 @@
-﻿package org.nulla.nullacore.api.skill;
+package org.nulla.nullacore.api.skill;
 
 import java.util.ArrayList;
 

@@ -35,7 +35,7 @@ public class SkillAuroraFoguBlade extends Skill {
 	
 	@Override
 	public boolean canLearnSkill(EntityPlayer player) {
-		return SkillsRw.AuroraBlade.getExperience(player) >= 256;
+		return SkillsRw.AuroraSolidification.getExperience(player) >= 512;
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public class SkillAuroraFoguBlade extends Skill {
 		player.setCurrentItemOrArmor(0, null);
 		
 		//蹦剑
-		SkillsRw.AuroraBlade.onBladeDead(player, 1);
+		SkillsRw.AuroraSolidification.onBladeDead(player, 1);
 		
 		// 随机事件只在服务器发生
 		if (!player.worldObj.isRemote) {

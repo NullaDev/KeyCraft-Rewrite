@@ -10,12 +10,12 @@ import org.nulla.nullacore.api.skill.Skill;
 public class SkillsRw {
 	
 	public static SkillAuroraAttack AuroraAttack;
-	public static SkillAuroraBlade AuroraBlade;
 	public static SkillAuroraBlast AuroraBlast;
 	public static SkillAuroraFoguBlade AuroraFoguBlade;
 	public static SkillAuroraRegeneration AuroraRegeneration;
 	public static SkillAuroraRepair AuroraRepair;
 	public static SkillAuroraShield AuroraShield;
+	public static SkillAuroraSolidification AuroraSolidification;
 	public static SkillAuroraStorm AuroraStorm;
 	public static SkillBaseballExplosive BaseballExplosive;
 	public static SkillBaseballFalling BaseballFalling;
@@ -44,12 +44,12 @@ public class SkillsRw {
 
 	public static void initSkills() {
 		AuroraAttack = 			new SkillAuroraAttack("aurora_attack", 512, 1, 1 * 20);
-		AuroraBlade = 			new SkillAuroraBlade("aurora_blade", 1024, 32, 1 * 20);
 		AuroraBlast = 			new SkillAuroraBlast("aurora_blast", 1024, 64, 150 * 20);
 		AuroraFoguBlade =		new SkillAuroraFoguBlade("aurora_fogu_blade", 1024, 128, 90 * 20);
 		AuroraRegeneration = 	new SkillAuroraRegeneration("aurora_regeneration", 1024, 0, 1 * 20);
 		AuroraRepair = 			new SkillAuroraRepair("aurora_repair", 128, 1, 1 * 20);
 		AuroraShield = 			new SkillAuroraShield("aurora_shield", 1024, 20, 60 * 20);
+		AuroraSolidification = 	new SkillAuroraSolidification("aurora_solidification", 1024, 32, 1 * 20);
 		AuroraStorm = 			new SkillAuroraStorm("aurora_storm", 1024, 1, 1);
 		BaseballExplosive = 	new SkillBaseballExplosive("explosive_baseball", 128, 5, 5 * 20);
 		BaseballFalling = 		new SkillBaseballFalling("falling_baseball", 128, 2, 2 * 20);

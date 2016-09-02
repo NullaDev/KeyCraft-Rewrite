@@ -82,13 +82,12 @@ public class SkillNetwork
 	 * 在从末地通关回到主世界时也会调用PlayerEvent.Clone和PlayerRespawnEvent，而不会调用PlayerChangedDimensionEvent
 	 */
 	@SubscribeEvent
-	public void onClone(PlayerEvent.Clone event)
-	{
+	public void onClone(PlayerEvent.Clone event) {
 		final EntityPlayer _old = event.original;
 		final EntityPlayer _new = event.entityPlayer;
 
-		// 设置新玩家欧若拉点数，切换世界点数不变，死亡减10
-		final int newAuroraPoint = event.wasDeath ? Math.max(SkillUtils.getAuroraPoint(_old) - 10, 0) : SkillUtils.getAuroraPoint(_old);
+		// 设置新玩家欧若拉点数，切换世界点数不变，死亡减512
+		final int newAuroraPoint = event.wasDeath ? Math.max(SkillUtils.getAuroraPoint(_old) - 512, 0) : SkillUtils.getAuroraPoint(_old);
 		_new.getEntityData().setInteger("AuroraPoint", newAuroraPoint);
 		
 		// 克隆技能、CD、经验、开启

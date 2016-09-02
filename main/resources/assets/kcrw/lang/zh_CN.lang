@@ -5,6 +5,7 @@ kcrw.item.intro.miracle_ribbon=通常缠绕于键手上的，奇迹般闪耀着�
 kcrw.item.intro.peachjuice=粘稠浓厚桃子味果汁，你确定这东西能喝吗。
 kcrw.item.intro.pizzajam=特殊制作，甜到发腻的披萨酱，吃一瓶饱一天。
 kcrw.item.intro.sth_sticky=一坨黏黏糊糊的不明物质，合成用。
+kcrw.item.intro.prime_blade=21天html/css从入门到精通(逃
 
 item.aurora_iron_ingot.name=Aurora铁
 item.aurora_iron_helmet.name=Aurora铁头盔
@@ -23,6 +24,7 @@ item.miracle_ribbon.name=奇迹丝带
 item.music_player.name=音乐播放器
 item.peach_juice.name=粘稠浓厚桃子味
 item.pizza_jam.name=秘制披萨酱
+item.prime_blade.name=PrimeBlade(首领之刃?)
 item.spawner_black_dog.name=黑狗生成器
 item.spawner_red_dog.name=红狗生成器
 item.spawner_tree_guard.name=木人生成器
@@ -32,6 +34,7 @@ item.steel_blade.name=精制钢剑
 item.steel_blade_vibrating.name=极速震动的精制钢剑
 item.sth_sticky.name=某种黏糊糊的东西
 item.aurora_blade.name=Aurora光剑
+item.aurora_claw.name=Aurora光爪
 
 tile.KotoriWorkshop.name=小鸟工坊
 
@@ -72,11 +75,11 @@ kcrw.skill.aurora_require=学习需要的Aurora
 kcrw.skill.experience=当前技能熟练度
 
 kcrw.skill.aurora_attack.name=Aurora攻击
-kcrw.skill.aurora_blade.name=Aurora光剑
 kcrw.skill.aurora_blast.name=Aurora爆裂
 kcrw.skill.aurora_fogu_blade.name=福古之剑
 kcrw.skill.aurora_regeneration.name=Aurora再生
 kcrw.skill.aurora_shield.name=Aurora护盾
+kcrw.skill.aurora_solidification.name=Aurora固化
 kcrw.skill.aurora_storm.name=Aurora风暴
 kcrw.skill.explosive_baseball.name=爆炸球
 kcrw.skill.falling_baseball.name=下坠球
@@ -104,7 +107,7 @@ kcrw.skill.vibration_wave.name=震动波
 kcrw.skill.vision_up.name=强化视力
 
 kcrw.skill.aurora_attack.info=将Aurora附加在武器或工具上，^每当你造成伤害时，^都将附加一定值的Aurora伤害。
-kcrw.skill.aurora_blade.info=将Aurora外放形成剑型，^砍瓜切菜都很好用;^然而由于要消耗大量Aurora，^在收回剑时会获得一定的负面buff。
+kcrw.skill.aurora_solidification.info=将Aurora外放并固化，^形成爪型或剑型武器(熟练后);^然而由于要消耗大量Aurora，^在收回武器时会获得一定的负面buff。
 kcrw.skill.aurora_blast.info=将大团不稳定的Aurora释放，^Aurora团将沿路产生若干次爆炸。
 kcrw.skill.aurora_fogu_blade.info=调用魔物福古的力量，^将其增幅在Aurora光剑上并斩出，^造成物理、魔法和火焰的混合伤害，^同时崩坏自己的Aurora光剑。
 kcrw.skill.aurora_regeneration.info=根据从生命恢复中获得的经验，^你总结出一种恢复Aurora的方法。^但是其效率不忍直视。

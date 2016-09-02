@@ -8,6 +8,7 @@ import org.nulla.kcrw.event.HandlerLivingDeath;
 import org.nulla.kcrw.event.HandlerPlayerCraftKCItem;
 import org.nulla.kcrw.event.HandlerPlayerTick;
 import org.nulla.kcrw.item.ItemAuroraBlade;
+import org.nulla.kcrw.item.ItemAuroraClaw;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -36,8 +37,8 @@ public class KCClientProxy extends KCCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingAttackOrHurt());
 		MinecraftForge.EVENT_BUS.register(new HandlerLivingDeath());
 		MinecraftForge.EVENT_BUS.register(new ItemAuroraBlade());
+		MinecraftForge.EVENT_BUS.register(new ItemAuroraClaw());
     	MinecraftForge.EVENT_BUS.register(new HandlerPlayerCraftKCItem());
-
 		
 		//注册KeyBinding
 		ClientRegistry.registerKeyBinding(kbLearnSkill);

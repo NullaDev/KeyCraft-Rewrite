@@ -55,6 +55,8 @@ public class KCItems {
 	
 	public static Item pizza_jam;
 	
+	public static Item prime_blade;
+	
 	public static Item spawner_black_dog;
 	public static Item spawner_red_dog;
 	public static Item spawner_tree_guard;
@@ -67,6 +69,7 @@ public class KCItems {
 	public static Item sth_sticky;
 	
 	public static Item aurora_blade;
+	public static Item aurora_claw;
 	
     public static void InitItems() {
     	
@@ -195,6 +198,12 @@ public class KCItems {
 			.setTextureName("kcrw:pizza_jam");
     	GameRegistry.registerItem(pizza_jam, "pizza_jam");
     	
+    	prime_blade = new ItemPrimeBlade()
+			.setRecipe(new KCRecipe(new ItemStack[]{new ItemStack(Items.stick, 2), new ItemStack(Items.poisonous_potato, 2)}, 1, 32))
+			.setUnlocalizedName("prime_blade")
+			.setTextureName("kcrw:prime_blade");
+    	GameRegistry.registerItem(prime_blade, "prime_blade");
+    	
     	spawner_black_dog = new ItemMobSpawner(EntityBlackDog.class)
 			.setUnlocalizedName("spawner_black_dog")
 			.setTextureName("kcrw:spawner_black_dog");
@@ -237,6 +246,12 @@ public class KCItems {
 			.setTextureName("kcrw:aurora_blade")
 			.setCreativeTab(null);
     	GameRegistry.registerItem(aurora_blade, "aurora_blade");
+    	
+    	aurora_claw = new ItemAuroraClaw()
+			.setUnlocalizedName("aurora_claw")
+			.setTextureName("kcrw:aurora_claw")
+			.setCreativeTab(null);
+    	GameRegistry.registerItem(aurora_claw, "aurora_claw");
     }
     
     public static boolean canFix(Item item) {

@@ -18,6 +18,8 @@ public class HandlerPlayerCraftKCItem {
 			skill = SkillsRw.LouisJavelin;
 		} else if (event.kcitem == KCItems.miracle_ribbon) {
 			skill = SkillsRw.RibbonTouch;
+		} else if (event.kcitem == KCItems.steel_blade) {
+			skill = SkillsRw.VibrationBlade;
 		}
 		
 		if (skill == null) {
